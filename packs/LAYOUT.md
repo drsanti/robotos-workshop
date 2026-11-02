@@ -10,6 +10,8 @@ Assembled drop shape (same tree as git + filled `code/`):
 robotos-workshop/          # zip root OR git checkout + code/ filled
   SETUP.md
   README.md
+  .vscode/                 # VS Code: robotos on terminal PATH
+  scripts/                 # start-here, start-bridge, run
   docs/
   labs/
     mw/  wh/  hw/
@@ -18,7 +20,7 @@ robotos-workshop/          # zip root OR git checkout + code/ filled
     OS_ARCH.txt               # optional stamp
     robotos-v0.3.0-<os-arch>/
     robotos-0.3.0-*.whl       # ship only the OS you need per class
-    robotos-sim-v0.1.0-<os-arch>/   # when available (WH labs)
+    robotos-sim-v0.1.0-<os-arch>/   # Win + Mac shipped
 ```
 
 Prefer **per-OS ZIPs** for students (one OS folder + one wheel + one sim), not a mega-archive of all three.
@@ -78,6 +80,8 @@ chmod +x code/robotos-v*/bin/robotos \
 
 `assemble.sh` restores `+x` while staging; students may still need the commands above after re-zip. Documented in SETUP troubleshooting and per-OS NOTES.
 
-Commit the OS packs you teach under `code/` (today: windows-x64). Keep `drops/`
-and `packs/*.zip` gitignored. Edit COM/`cu`/`ttyACM` in class `code/NOTES.txt`
-only if the room uses fixed ports.
+Commit the OS packs you teach under `code/` (windows-x64 + macos-arm64). Keep
+`drops/` and `packs/*.zip` gitignored. Edit COM/`cu`/`ttyACM` in class
+`code/NOTES.txt` only if the room uses fixed ports. After editing
+`packs/NOTES.<os>.txt`, re-run assemble (or copy to `code/NOTES.txt`) so the
+student drop matches.

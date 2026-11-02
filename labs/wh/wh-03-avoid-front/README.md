@@ -28,6 +28,9 @@ flowchart LR
 
 ## Run
 
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+
+
 Workshop root; PATH + `.venv`.
 
 ### Windows (PowerShell)

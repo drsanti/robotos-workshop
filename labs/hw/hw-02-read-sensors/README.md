@@ -37,6 +37,9 @@ flowchart LR
 
 ## Practice
 
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd hw-02 <starter>` (Windows) or `./scripts/run hw-02 <starter>` (macOS/Linux). Starters: `imu_watch / board_watch`. List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+
+
 ### IMU (needs IMU cap — often `ws28p`)
 
 **Windows (PowerShell)**

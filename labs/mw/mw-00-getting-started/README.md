@@ -11,7 +11,9 @@ Prove the CLI works on your machine before writing any Python.
 
 ## Prerequisites
 
-Complete [`SETUP.md`](../../../SETUP.md) (PATH + venv + wheel). Keep that terminal open.
+Complete [`SETUP.md`](../../../SETUP.md) (PATH + venv + wheel), or run
+`scripts/start-here` once and open a **VS Code** terminal. Keep PATH + venv
+active for the commands below.
 
 ## Practice
 

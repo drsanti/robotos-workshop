@@ -28,6 +28,9 @@ flowchart LR
 
 ## Practice
 
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd mw-03 <starter>` (Windows) or `./scripts/run mw-03 <starter>` (macOS/Linux). Starters: `cycle_server / cycle_client`. List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+
+
 ### Terminal A — server
 
 **Windows (PowerShell)**

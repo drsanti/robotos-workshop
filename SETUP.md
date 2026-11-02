@@ -21,6 +21,10 @@ You can skip most of the copy-paste PATH/venv lines below when using that flow.
 Replace `YOUR_WORKSHOP_DIR` below with the folder where you unzipped this drop  
 (example Windows: `C:\robotos-workshop` — **not** an instructor’s `D:\CODE\…` path).
 
+**Lab runners:** after PATH + venv (or `scripts\start-here.cmd`), prefer  
+`scripts\run.cmd wh-01` / `./scripts/run wh-01` instead of long `python labs\…` paths.  
+See [`scripts/README.md`](scripts/README.md).
+
 ## 1. Unpack
 
 Unzip so you see:
@@ -28,12 +32,14 @@ Unzip so you see:
 ```text
 robotos-workshop/
   SETUP.md
+  scripts/                          # start-here, start-bridge, run
+  .vscode/                          # robotos on VS Code terminal PATH
   docs/
   labs/
   code/
     robotos-v0.3.0-<os>-<arch>/     # CLI + libs
     robotos-0.3.0-*.whl             # Python SDK (this OS)
-    robotos-sim-v<ver>-<os>-<arch>/ # desktop sim (when shipped)
+    robotos-sim-v<ver>-<os>-<arch>/ # desktop sim (Win + Mac shipped)
     NOTES.txt
 ```
 
@@ -54,6 +60,8 @@ robotos version
 ```
 
 PATH lasts only for **this** window — new window → run PATH lines again.
+In a **VS Code** terminal opened on this folder, skip the `$env:PATH = …` line
+(`.vscode/settings.json` already prepends `code/.../bin`).
 
 ### Linux x64
 
@@ -161,7 +169,8 @@ cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 robotos topic list
-python labs\wh\wh-01-drive-twist\starter\drive_forward.py
+scripts\run.cmd wh-01
+# or: python labs\wh\wh-01-drive-twist\starter\drive_forward.py
 ```
 
 ### Linux x64 (bash)
@@ -171,7 +180,8 @@ cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 robotos topic list
-python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+./scripts/run wh-01
+# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
 ```
 
 ### macOS Apple Silicon (bash)
@@ -181,10 +191,11 @@ cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 robotos topic list
-python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+./scripts/run wh-01
+# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
 ```
 
-**Expect:** `topic list` shows `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan` (not `no topics announced`). Then `drive_forward.py` moves the robot ~1 m.
+**Expect:** `topic list` shows `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan` (not `no topics announced`). Then WH-01 moves the robot ~1 m.
 
 Optional:
 
@@ -221,7 +232,8 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 $env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
 .\.venv\Scripts\Activate.ps1
 robotos topic echo /robot/01/sys/board --count 3
-python labs\hw\hw-01-caps-probe\starter\caps_probe.py
+scripts\run.cmd hw-01
+# or: python labs\hw\hw-01-caps-probe\starter\caps_probe.py
 ```
 
 Override port with `--port COM17` (or your USB Serial Device) if auto-detect fails.
@@ -258,7 +270,8 @@ export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 source .venv/bin/activate
 robotos topic echo /robot/01/sys/board --count 3
-python labs/hw/hw-01-caps-probe/starter/caps_probe.py
+./scripts/run hw-01
+# or: python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 ```
 
 ### macOS Apple Silicon — Terminal B (labs)
@@ -269,7 +282,8 @@ export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 source .venv/bin/activate
 robotos topic echo /robot/01/sys/board --count 3
-python labs/hw/hw-01-caps-probe/starter/caps_probe.py
+./scripts/run hw-01
+# or: python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 ```
 
 **Linux serial permission:** `sudo usermod -aG dialout $USER` then **log out and back in**.  
@@ -280,7 +294,9 @@ Always run HW-01 (caps) before LED/IMU labs.
 
 | Symptom | Check |
 |---------|--------|
-| `robotos` not found | PATH to `code/robotos-v*/bin` in **this** terminal; `chmod +x` on Linux/macOS |
+| `robotos` not found | PATH to `code/robotos-v*/bin` in **this** terminal; or reopen VS Code after unpack (`.vscode` settings); `chmod +x` on Linux/macOS |
+| `scripts\run` / `./scripts/run` fails | cwd must be workshop root (`SETUP.md` next to `labs/`); activate `.venv` first |
+
 | `Activate.ps1` blocked | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
 | wheel “not supported” | Wrong OS wheel — `win_amd64` / `macosx` / linux / `py3-none-any` |
 | `python` not found (Unix) | Use `python3` / activate `.venv` |

@@ -45,6 +45,9 @@ sequenceDiagram
 
 Leave this terminal open.
 
+> **Preferred:** double-click `scripts\start-bridge.cmd` (Windows) or run
+> `./scripts/start-bridge.sh` (macOS/Linux). Manual fences below if a TA asks.
+
 ### Windows (PowerShell)
 
 ```powershell

@@ -8,16 +8,27 @@ serial-bridge: code/robotos-v0.3.0-linux-x64/bin/serial-bridge
 Contract:   P0 warehouse 2026-11-02 + HW board labs
 
 Use bash. Full SETUP: SETUP.md · Ebook: docs/ebook/chapters/ch00-setup-your-machine.md
+Helpers: scripts/README.md  (start-here / start-bridge / run)
 
-If code/robotos-sim-v0.1.0-linux-x64/ is missing from this zip, skip WH labs (MW/HW still OK).
+Class focus is Windows + macOS. Linux sim is often NOT in the zip —
+if code/robotos-sim-v0.1.0-linux-x64/ is missing, skip WH labs (MW/HW still OK).
 
 ---------------------------------------------------------------------------
-A) Middleware / warehouse (no board)
+A) Preferred helpers (when scripts/ is present)
+---------------------------------------------------------------------------
+  ./scripts/start-here.sh          # PATH + venv + wheel (+ sim if present)
+  ./scripts/run list
+  ./scripts/run wh-01              # WH — only if sim shipped
+  ./scripts/start-bridge.sh        # HW — leave open
+  ./scripts/run hw-01
+
+---------------------------------------------------------------------------
+B) Middleware / warehouse (manual)
 ---------------------------------------------------------------------------
 Env (optional TCP peer):
   export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 
-PATH (each new terminal):
+PATH (each new terminal, unless start-here already set it):
   export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
   chmod +x code/robotos-v0.3.0-linux-x64/bin/robotos \
            code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2>/dev/null || true
@@ -36,10 +47,11 @@ Python:
 
 Smoke:
   robotos topic list
-  python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+  ./scripts/run wh-01
+  # or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
 
 ---------------------------------------------------------------------------
-B) ESP32-S3 board (HW labs) — serial-bridge
+C) ESP32-S3 board (HW labs) — serial-bridge
 ---------------------------------------------------------------------------
 Prereq: board flashed; USB attached.
 Serial permission: sudo usermod -aG dialout $USER  then log out/in.
@@ -47,6 +59,8 @@ Self-check: groups | grep dialout ; ls -l /dev/ttyACM*
 Do not sudo serial-bridge to paper over permissions.
 
 1) Terminal A — bridge (leave open):
+     ./scripts/start-bridge.sh
+   Or manual:
      cd <robotos-workshop>
      export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
      export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
@@ -60,7 +74,8 @@ Do not sudo serial-bridge to paper over permissions.
      export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
      source .venv/bin/activate
      robotos topic echo /robot/01/sys/board --count 3
-     python labs/hw/hw-01-caps-probe/starter/caps_probe.py
+     ./scripts/run hw-01
+     # or: python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 
 Troubleshooting:
   - Permission denied on /dev/ttyACM* → dialout + re-login

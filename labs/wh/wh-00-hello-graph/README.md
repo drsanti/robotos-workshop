@@ -6,13 +6,14 @@ Confirm pack tools see the same graph as **robotos-sim**.
 
 ## Prerequisites
 
-- [`SETUP.md`](../../../SETUP.md) complete (PATH + venv)  
+- [`SETUP.md`](../../../SETUP.md) complete (PATH + venv), or `scripts/start-here` once  
 - Sim launched and **Connected** (**Native**) — see SETUP §4  
 - Ebook: [`ch01-graph-nodes-topics.md`](../../../docs/ebook/chapters/ch01-graph-nodes-topics.md)
 
 ## Steps
 
-Workshop root; PATH active in this terminal.
+Workshop root; PATH active in this terminal (VS Code new terminal after
+`scripts/start-here` is enough — no starter script for WH-00).
 
 ### Windows (PowerShell)
 

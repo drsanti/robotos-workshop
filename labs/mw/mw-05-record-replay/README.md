@@ -16,6 +16,9 @@ Record `/machine/01/sensor/imu` from MW-01’s publisher, inspect, optionally re
 
 ## Practice
 
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+
+
 1. Terminal A — publisher (workshop root, PATH + venv):
 
 **Windows:** `python labs\mw\mw-01-pub-sub\starter\sim_sensor.py`  

@@ -21,7 +21,8 @@ Exact CLI flags follow your pack — check `robotos --help` / `NOTES.txt`.
 ## Typical flow
 
 1. Sim Connected (Native / External).  
-2. Terminal A — start WH-03 or WH-05.  
+2. Terminal A — start WH-03 or WH-05 (`scripts\run.cmd wh-03` / `wh-05`, or
+   `./scripts/run …`).  
 3. Terminal B — record:
 
 ### Windows (PowerShell)

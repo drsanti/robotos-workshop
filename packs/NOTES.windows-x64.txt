@@ -7,18 +7,36 @@ robotos-sim: code/robotos-sim-v0.1.0-windows-x64/robotos-sim.exe
 serial-bridge: code/robotos-v0.3.0-windows-x64/bin/serial-bridge.exe
 Contract:   P0 warehouse 2026-11-02 + HW board labs
 
-Use PowerShell (not Git Bash — it rewrites /robot/... paths).
-Full SETUP: SETUP.md · Ebook setup: docs/ebook/chapters/ch00-setup-your-machine.md
+Open this folder in **VS Code**. Prefer helpers under scripts\ (not Git Bash —
+it rewrites /robot/... paths).
+
+Full SETUP: SETUP.md · Ebook: docs/ebook/chapters/ch00-setup-your-machine.md
 
 ---------------------------------------------------------------------------
-A) Middleware / warehouse (no board)
+A) Fast path (recommended)
+---------------------------------------------------------------------------
+1) Once: double-click  scripts\start-here.cmd
+   (creates .venv, installs wheel, starts sim)
+2) VS Code → Terminal → New Terminal
+3) Smoke:
+     robotos topic list
+     scripts\run.cmd wh-01
+4) Board labs: double-click scripts\start-bridge.cmd (leave open), then
+     scripts\run.cmd hw-01
+
+List labs:  scripts\run.cmd list
+
+---------------------------------------------------------------------------
+B) Manual PowerShell (optional)
 ---------------------------------------------------------------------------
 Env (optional TCP peer):
   $env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
 
-Sim (WH labs):
+PATH (each new PowerShell — skip in VS Code terminal):
+  $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+
+Sim:
   Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe
-  (or double-click robotos-sim.exe). Auto External+Native+Connect.
 
 Python:
   python -m venv .venv
@@ -26,33 +44,24 @@ Python:
   python -m pip install -U pip
   python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
 
-PATH (each new terminal):
-  $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
-
 Smoke:
   robotos topic list
-  python labs\wh\wh-01-drive-twist\starter\drive_forward.py
+  scripts\run.cmd wh-01
+  # or: python labs\wh\wh-01-drive-twist\starter\drive_forward.py
 
 ---------------------------------------------------------------------------
-B) ESP32-S3 board (HW labs) — serial-bridge
+C) ESP32-S3 board — serial-bridge
 ---------------------------------------------------------------------------
 Prereq: board flashed; USB attached.
 
-1) Terminal A — bridge (leave open):
-     cd <robotos-workshop>
-     $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
-     $env:ROBOTOS_LISTEN = "tcp/0.0.0.0:7447"
-     serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
-   Or pin: --port COM7
+1) Prefer: scripts\start-bridge.cmd
+   Or pin port: serial-bridge --port COM17 --baud 921600 --robot-id 01 --cmd-topic all
    List: Get-CimInstance Win32_SerialPort | Select-Object DeviceID,Name
+   If --port auto skips USB: --probe-settle-ms 2000 --probe-ms 5000
 
-2) Terminal B — labs:
-     cd <robotos-workshop>
-     $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+2) Labs terminal (VS Code or start-here):
      $env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
-     .\.venv\Scripts\Activate.ps1
-     robotos topic echo /robot/01/sys/board --count 3
-     python labs\hw\hw-01-caps-probe\starter\caps_probe.py
+     scripts\run.cmd hw-01
 
 Troubleshooting:
   - Port busy → close serial monitor / other bridge

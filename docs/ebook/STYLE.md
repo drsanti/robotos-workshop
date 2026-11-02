@@ -10,6 +10,8 @@ also receive a polished online ebook.
 | Location | Role |
 |----------|------|
 | `SETUP.md` | Fast path for class day (must stay accurate; link into ebook Ch.0) |
+| `scripts/` | Student helpers: `start-here`, `start-bridge`, `run` — prefer these in day-1 / lab “Run” sections |
+| `.vscode/` | Class VS Code: `robotos` on terminal PATH |
 | `docs/theory/*` | Instructor short lecture cards — index [`docs/theory/README.md`](../theory/README.md); depth lives in ebook chapters |
 | `docs/ebook/chapters/` | **Canonical student chapters** (ebook source) |
 | `labs/{mw,wh,hw}/*/README.md` | Lab procedure (ebook “Lab sheets”); must meet quality bar |
@@ -78,6 +80,14 @@ Call out OS-only steps in admonitions:
 > **macOS only:** System Settings → Privacy → allow `robotos-sim`…
 
 > **Linux only:** `sudo usermod -aG dialout $USER` then re-login for serial.
+
+## Lab / smoke command preference
+
+1. Prefer `scripts\run.cmd <lab-id>` / `./scripts/run <lab-id>` in “Run” / smoke
+   fences (workshop root). Keep a `# or: python labs/…/starter/….py` fallback.
+2. Prefer `scripts/start-here` and `scripts/start-bridge` over repeating full
+   PATH + venv + sim/bridge paste for day-1.
+3. Class default IDE is **VS Code**; do not assume Cursor.
 
 ## Code walkthrough rules
 

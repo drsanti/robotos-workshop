@@ -17,6 +17,9 @@ Drive an approximate square using timed `linear.x` / `angular.z` segments; compa
 
 ## Run
 
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+
+
 ### Windows (PowerShell)
 
 ```powershell

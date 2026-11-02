@@ -30,7 +30,8 @@ sys.path.insert(0, str(_root))
 Then: `from labs.common.wait import wait_for_message` (etc.).
 
 Primary run: from workshop root  
-`python labs/wh/wh-01-drive-twist/starter/drive_forward.py`
+`scripts\run.cmd wh-01` / `./scripts/run wh-01`  
+(or `python labs/wh/wh-01-drive-twist/starter/drive_forward.py`)
 
 ## What belongs here
 

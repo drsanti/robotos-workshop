@@ -66,6 +66,11 @@ export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ```
 
+> **Preferred runner** (workshop root): pick the starter name —
+> `scripts\run.cmd mw-01 sim_sensor` / `mw-01 monitor` (Windows) or
+> `./scripts/run mw-01 sim_sensor` (macOS/Linux). You still need **two**
+> terminals (publisher + subscriber).
+
 ### Terminal A — publisher (leave running)
 
 **Windows (PowerShell)**

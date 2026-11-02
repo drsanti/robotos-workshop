@@ -143,21 +143,18 @@ sequenceDiagram
 
 ## 5. Hands-on — Windows (PowerShell)
 
-Assumes Chapter 0 PATH + venv + sim connected.
+Assumes Chapter 0 PATH + venv + sim connected (or `scripts\start-here.cmd` already done).
 
 ```powershell
 cd C:\robotos-workshop
+# VS Code terminal: skip PATH line — .vscode settings already add it
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
-```
-
-Open a **second** PowerShell, same PATH + venv, run:
-
-```powershell
-python .\labs\wh\wh-01-drive-twist\starter\drive_forward.py
+scripts\run.cmd wh-01
+# or: python .\labs\wh\wh-01-drive-twist\starter\drive_forward.py
 ```
 
 Watch the sim: the robot should move, then stop.
@@ -173,7 +170,9 @@ source .venv/bin/activate
 
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
-python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+./scripts/run wh-01
+# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+
 ```
 
 ---

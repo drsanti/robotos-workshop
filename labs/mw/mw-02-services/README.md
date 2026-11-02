@@ -27,6 +27,9 @@ flowchart LR
 
 ## Practice
 
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd mw-02 <starter>` (Windows) or `./scripts/run mw-02 <starter>` (macOS/Linux). Starters: `echo_server / client`. List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+
+
 ### Terminal A — server
 
 **Windows (PowerShell)**

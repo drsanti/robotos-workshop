@@ -25,6 +25,9 @@ Publish actuator commands and see/hear the effect.
 
 ## Practice
 
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd hw-03 <starter>` (Windows) or `./scripts/run hw-03 <starter>` (macOS/Linux). Starters: `led_fx / wave_play`. List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+
+
 **LED** (caps LED — often `es3c28p`; **no** on many `ws28p`):
 
 ### Windows (PowerShell)

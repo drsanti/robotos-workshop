@@ -45,6 +45,14 @@ Assembled under `drops/` (gitignored):
 
 Maya WH-01/ch02 ignore-bootstrap wording landed same day.
 
+## 2026-11-02 student helpers + docs
+
+| Item | Status |
+|------|--------|
+| `scripts/start-here`, `start-bridge`, `run` (+ `.vscode` PATH) | **Shipped** in tree |
+| Docs prefer helpers: README, SETUP, ch00/ch01, NOTES.*, lab sheets | **Updated** |
+| Re-zip student drops after this doc pass | Optional (instructor) |
+
 ## 2026-11-02 windows-x64 HW (board on desk)
 
 Host: Windows 11 · board **ws28p** on **COM17** · `serial-bridge --port COM17 --baud 921600 --cmd-topic all` · `ROBOTOS_LISTEN=tcp/0.0.0.0:7447`

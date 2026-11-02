@@ -21,6 +21,9 @@ Treat button/touch as **events on topics**, not host-side GPIO polling.
 
 ## Practice
 
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+
+
 ### Windows (PowerShell)
 
 ```powershell

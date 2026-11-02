@@ -51,6 +51,7 @@ Class-day `SETUP.md` + lab READMEs still need to catch up.
 5. ~~**P2.1:** Mac + Windows sim packs~~ **done** (2026-11-02); Linux deferred  
 
 6. Optional: refresh Windows student zip after doc clusters; deepen lab sheets only if new persona FAIL  
+7. ~~Student helpers (`scripts/start-here`, `start-bridge`, `run`) + VS Code PATH~~ **done** (2026-11-02); docs synced (README/SETUP/ch00/NOTES/labs)  
 
 
 
@@ -77,6 +78,7 @@ Do **not** block current ebook P0/P1 on these.
 - **Theory instructor cards** (`docs/theory/01`–`14` + `README.md`) upgraded to lecture-card bar — Maya/Kenji/Aisha reviews 2026-11-02  
 - Per-OS NOTES + `assemble.sh` / `-OsArch` auto-pick; Windows student zip refreshed 2026-11-02  
 - **`labs/common` helpers** (settle / wait / twist / scan / caps / idle) + WH/HW starter refactor; MW left short; ebook walkthroughs synced 2026-11-02  
+- **`scripts/` helpers** + `.vscode` PATH; preferred `run` in lab sheets / SETUP / ch00 / NOTES (2026-11-02)  
 
 
 
