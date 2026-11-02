@@ -38,7 +38,7 @@ Class-day `SETUP.md` + lab READMEs still need to catch up.
 
 | ID | Action |
 |----|--------|
-| P2.1 | macOS sim + smoke **done** (2026-11-02); **Windows sim rebuild** still needed for badge + `cmd_vel` poll; Linux deferred — playbook: [`robotos-sim/docs/workshop-bundle-building.md`](../../../robotos-sim/docs/workshop-bundle-building.md) |
+| P2.1 | macOS + **Windows** sim packs shipped (2026-11-02); Linux deferred — playbook: [`robotos-sim/docs/workshop-bundle-building.md`](../../../robotos-sim/docs/workshop-bundle-building.md) |
 | P2.2 | ~~`assemble.sh` + execute-bit docs~~ **done** (`packs/assemble.sh`, `LAYOUT.md`) |
 | P2.3 | ~~Re-run persona skill~~ polish 2026-11-02: Kenji/Aisha **PASS**; Maya **PARTIAL**→plain-English WH-01 + ch02; EPUB Mermaid notes (`PUBLISHING.md` / `build-epub.ps1`) |
 
@@ -48,7 +48,7 @@ Class-day `SETUP.md` + lab READMEs still need to catch up.
 2. ~~P0.6 dual-OS lab fences~~ **done**; ~~P0.5 per-OS NOTES~~ **done** (`packs/NOTES.{windows-x64,macos-arm64,linux-x64}.txt` + assemble auto-pick)  
 3. ~~P1.3 core lab sheets~~ **done**; ~~P1.1 chapters~~ **done**; ~~theory cards~~ **done** (2026-11-02)  
 4. ~~P2.2 `assemble.sh` + execute-bit docs~~ **done**  
-5. **P2.1:** Mac done → **rebuild Windows sim next**; Linux deferred  
+5. ~~**P2.1:** Mac + Windows sim packs~~ **done** (2026-11-02); Linux deferred  
 
 6. Optional: refresh Windows student zip after doc clusters; deepen lab sheets only if new persona FAIL  
 

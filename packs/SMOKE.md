@@ -16,14 +16,16 @@ Host: Apple Silicon Mac · packs in `code/`
 
 Notes: First `tauri build` DMG hit `hdiutil … Resource busy` (`.app` still good). Rebuild afternoon: full `.app`+DMG OK; transport badges fixed; Native `cmd_vel` poll (`426e23b`) so WH-01 moves. Stale `any` wheel refreshed with geometry/nav. WH-05 steering sign fixed in starter (`c59ece9`).
 
-## Windows next (agent on Windows PC)
+## 2026-11-02 windows-x64
 
-| Check | Expect |
+Host: Windows 11 x64 · packs in `code/` · sim rebuilt from `robotos-sim` `529c8b4` (+ badge/`cmd_vel` poll)
+
+| Check | Result |
 |-------|--------|
-| Pull `robotos-sim` + `robotos-workshop` `main` | includes `426e23b` / WH-05 fix |
-| `npm run tauri:build` → replace `code/robotos-sim-v0.1.0-windows-x64/` | new exe |
-| WH-01 `drive_forward.py` | robot moves ~1 m; Log `native cmd ←` |
-| Badge / Session transport | **NATIVE** not hardcoded MOCK |
+| `npm run tauri:build` → replace `code/robotos-sim-v0.1.0-windows-x64/` | **PASS** (exe+MSI+NSIS) |
+| Sim launches; topics `/robot/01/cmd_vel|odom|scan` | **PASS** |
+| WH-01 `drive_forward.py` | **PASS** (odom x≈3.01 after ~1 m from spawn; 100 cmds) |
+| Badge / Session transport | **PASS** (Native path; topics live without MOCK-only scene) |
 
 ## 2026-11-02 macos follow-ups
 
