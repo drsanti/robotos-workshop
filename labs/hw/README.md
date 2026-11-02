@@ -24,3 +24,15 @@ Firmware images (instructor flash; students usually get a preflashed board):
 ## Lab order
 
 `hw-00` → `hw-01` → `hw-02` … → `hw-07` (see [`docs/lab-outline.md`](../../docs/lab-outline.md)).
+
+## Optional: board Wi‑Fi
+
+Not graded. With `scripts/start-bridge` running (Windows pack includes `wifi-cfg.exe`):
+
+```text
+scripts\wifi-cfg.cmd --enable
+scripts\wifi-cfg.cmd --ssid YOUR_SSID --pass YOUR_PASSWORD --connect tcp/PC_LAN_IP:7447
+scripts\run.cmd hw-02 board_watch
+```
+
+Details: `code/NOTES.txt` section D · rebuild: `cargo build --release -p serial-bridge --bin wifi-cfg`.

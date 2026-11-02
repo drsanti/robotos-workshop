@@ -48,6 +48,16 @@ Student path (no env typing — `run` sets `ROBOTOS_CONNECT` for `hw-*`):
 | If `--port auto` skips the board | `serial-bridge --port COMx --baud 921600 --robot-id 01 --cmd-topic all` |
 | Wi‑Fi / other | — |
 
+## Optional — board Wi‑Fi (not graded)
+
+Windows pack includes `wifi-cfg`. Bridge running, then:
+
+```text
+scripts\wifi-cfg.cmd --ssid YOUR_SSID --pass YOUR_PASSWORD --connect tcp/PC_LAN_IP:7447
+```
+
+Use the PC LAN IP (`ipconfig`), not `127.0.0.1`. Status: `scripts\run.cmd hw-02 board_watch`.
+
 ## Tracks order
 
 **MW → WH → HW** unless you say otherwise. No graded arm / car / drone labs this term.

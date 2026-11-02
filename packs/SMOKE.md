@@ -66,6 +66,14 @@ Handout: [`CLASS-HANDOUT.md`](CLASS-HANDOUT.md).
 
 Notes: With warehouse sim still bound on `:7447`, `ROBOTOS_CONNECT=tcp/127.0.0.1:7447` can hit the **sim** instead of the bridge — topic list shows only WH topics and `hw-01` waits forever. Class tip: **close sim before start-bridge** (handout). `--port auto` still flaky on this host; pin `COM17` when needed.
 
+## 2026-11-02 — wifi-cfg in Windows pack
+
+| Item | Status |
+|------|--------|
+| `code/.../bin/wifi-cfg.exe` + `scripts/wifi-cfg.cmd` | **Shipped** |
+| NOTES §D + handout / `labs/hw/README` | **Updated** |
+| macOS/Linux `wifi-cfg` binary | Not in pack yet — build on that OS when needed |
+
 ### macOS parity checklist (run on a Mac before class)
 
 - [ ] Unzip `robotos-workshop-macos-arm64-20261102.zip`  

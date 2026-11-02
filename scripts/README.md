@@ -9,7 +9,7 @@ All day-1 shortcuts live here (not in the workshop root).
 | [`start-here.sh`](start-here.sh) / [`start-here.command`](start-here.command) | macOS / Linux | Same idea in Terminal / Finder |
 | [`start-bridge.sh`](start-bridge.sh) | macOS / Linux | Board bridge |
 | [`run.cmd`](run.cmd) / [`run`](run) / [`run.py`](run.py) | All | Run a lab by short id: `scripts\run.cmd wh-01` |
-
+| [`wifi-cfg.cmd`](wifi-cfg.cmd) | Windows | Optional: push SSID/password + zenoh `--connect` (needs `start-bridge`) |
 ## Class flow (VS Code)
 
 1. Open the **workshop root** folder in VS Code.  

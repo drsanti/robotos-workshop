@@ -31,6 +31,7 @@ Prefer **per-OS ZIPs** for students (one OS folder + one wheel + one sim), not a
 |----------|--------|
 | `robotos-v*` + wheel | `robotos` — [`docs/workshop-bundle-building.md`](../../robotos/docs/workshop-bundle-building.md) |
 | `serial-bridge[.exe]` | `cargo build --release -p serial-bridge` → `robotos-v*/bin/` (HW labs) |
+| `wifi-cfg[.exe]` | `cargo build --release -p serial-bridge --bin wifi-cfg` → same `bin/` (optional board Wi‑Fi) |
 | `robotos-sim-v*` | Private https://github.com/drsanti/robotos-sim — build on target OS; Win+Mac shipped in this repo `code/` |
 | Curriculum | this repo |
 | `NOTES.txt` | `packs/NOTES.windows-x64.txt` / `NOTES.macos-arm64.txt` / `NOTES.linux-x64.txt` |

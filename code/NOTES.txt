@@ -5,6 +5,7 @@ OS/arch:    windows-x64
 robotos:    v0.3.0
 robotos-sim: code/robotos-sim-v0.1.0-windows-x64/robotos-sim.exe
 serial-bridge: code/robotos-v0.3.0-windows-x64/bin/serial-bridge.exe
+wifi-cfg:   code/robotos-v0.3.0-windows-x64/bin/wifi-cfg.exe
 Contract:   P0 warehouse 2026-11-02 + HW board labs
 
 Open this folder in **VS Code**. Prefer helpers under scripts\ (not Git Bash —
@@ -72,6 +73,21 @@ Troubleshooting:
   - no topics → bridge down or ROBOTOS_CONNECT missing
   - Actuator no-op → forgot --cmd-topic all
   - ExecutionPolicy on Activate.ps1 → Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+---------------------------------------------------------------------------
+D) Board Wi‑Fi (optional / advanced — not a graded lab)
+---------------------------------------------------------------------------
+Bridge must be running with --cmd-topic all. Creds persist in board NVS.
+
+  scripts\wifi-cfg.cmd --enable
+  scripts\wifi-cfg.cmd --ssid YOUR_SSID --pass YOUR_PASSWORD --connect tcp/PC_LAN_IP:7447
+
+Use the PC's LAN IP (ipconfig), not 127.0.0.1 — the board joins Wi‑Fi and
+opens zenoh to that host. Check: scripts\run.cmd hw-02 board_watch
+  (expect ip=… and eventually zenoh=True)
+
+  --reconnect   retry stored creds
+  --disable     turn Wi‑Fi off
 
 Support:
   instructor
