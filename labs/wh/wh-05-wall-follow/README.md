@@ -41,9 +41,15 @@ Too far from wall → forward + turn **toward** wall.
 Too close → turn **away**.  
 Front blocked → hard turn / spin away from wall side.
 
-Start near a rack aisle (Reset leaves you in open floor at ~2 m, 2 m — drive
-toward a brown shelf first, or the side ranger stays at max range and steering
-saturates into a circle).
+**Setup:** Sim **Reset** should seat you in the aisle west of the first rack
+(right ranger ~0.7 m, heading up the aisle). Use **External**, then run the
+default **right** wall command. Status prints `follow` when locked; `seek-no-wall`
+means that side is free — if it notes “wall on the OTHER side”, flip `--side`
+or Manual-reseat.
+
+```powershell
+python labs\wh\wh-05-wall-follow\starter\wall_follow.py --target 0.7 --k 1.0
+```
 
 ## Run
 
@@ -72,9 +78,12 @@ Lap a shelf aisle ≥60 s without tunneling or spinning forever.
 
 | Symptom | Fix |
 |---------|-----|
+| Spins / circles in open | Drive to a rack aisle first; watch for `seek-no-wall` in the status line |
+| Status shows side ≈ 3.0 | No wall on that side — wrong `--side` or still in open floor |
 | Oscillates | Lower `--k` |
 | Leaves wall | Raise `--k` / check `--side` |
 | Hits corners | `--front-stop` too small |
+| `front-avoid` forever | Point down the aisle, not into the rack |
 
 ## Done when
 

@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-"""Lab 05 — simple right-wall follower (tune gains in the warehouse).
+"""Lab 05 — simple wall follower (tune gains in the warehouse).
 
     python labs/wh/wh-05-wall-follow/starter/wall_follow.py
+    python labs/wh/wh-05-wall-follow/starter/wall_follow.py --side left --target 0.7 --k 0.8
+
+Sim Reset should place you in the aisle west of the first rack (right ~0.7 m).
+If status shows the wall on the other side, flip --side or re-seat with Manual.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 import argparse
+import math
 import sys
 import time
 
@@ -34,6 +39,13 @@ TOPIC_CMD = "/robot/01/cmd_vel"
 TOPIC_SCAN = "/robot/01/scan"
 RATE_HZ = 20.0
 
+# Side free if reading missing or near ranger max (3 m sides / 4 m front).
+NO_WALL_M = 2.5
+
+
+def _finite(x: float) -> float:
+    return x if math.isfinite(x) else float("inf")
+
 
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
@@ -46,34 +58,70 @@ def main() -> None:
 
     scan = LatestScan()
     side_i = 0 if args.side == "right" else 2
-    sign = 1.0 if args.side == "right" else -1.0  # +wz turns left
+    other_i = 2 if args.side == "right" else 0
+    # +wz turns left (CCW). Right-wall: too far → −wz (turn toward wall).
+    sign = 1.0 if args.side == "right" else -1.0
 
     with robotos.Node("lab05_wall") as node:
         pub = node.create_publisher(TOPIC_CMD, Twist)
         sub = node.create_subscriber(TOPIC_SCAN, LaserScan)
         scan.attach(sub)
         settle()
-        print(f"wall-follow side={args.side} target={args.target} — Ctrl-C")
+        print(
+            f"wall-follow side={args.side} target={args.target} k={args.k} — Ctrl-C\n"
+            f"Reset sim into the rack aisle, External mode, then run. "
+            f"Status prints every 0.5 s."
+        )
         period = 1.0 / RATE_HZ
+        last_log = 0.0
+        warned_other = False
         try:
             while True:
-                front = scan.front
-                side = scan.ranges[side_i]
+                front = _finite(scan.front)
+                side = _finite(scan.ranges[side_i])
+                other = _finite(scan.ranges[other_i])
+                now = time.monotonic()
+
                 if front < args.front_stop:
-                    # Spin away from the followed wall (into the aisle).
-                    cmd = make_twist(wz=sign * 0.9)
+                    mode = "front-avoid"
+                    wz = sign * 0.9
+                    cmd = make_twist(wz=wz)
+                elif side >= NO_WALL_M:
+                    mode = "seek-no-wall"
+                    # Mild turn toward the follow side; do not saturate into circles.
+                    wz = -sign * 0.2
+                    cmd = make_twist(vx=args.vx, wz=wz)
+                    if (
+                        not warned_other
+                        and other < 1.2
+                        and math.isfinite(other)
+                    ):
+                        print(
+                            f"\nnote: wall on the OTHER side "
+                            f"({('left' if args.side == 'right' else 'right')}≈{other:.2f} m) "
+                            f"— try --side {('left' if args.side == 'right' else 'right')} "
+                            f"or Manual-reseat parallel to the rack.\n"
+                        )
+                        warned_other = True
                 else:
-                    # err>0 → too close; err<0 → too far.
-                    # +wz = turn left. Right-wall: too far → turn right (−wz).
+                    mode = "follow"
                     err = args.target - side
                     wz = sign * (args.k * err)
                     wz = max(-1.2, min(1.2, wz))
                     cmd = make_twist(vx=args.vx, wz=wz)
+
                 pub.publish(cmd)
+
+                if now - last_log >= 0.5:
+                    last_log = now
+                    print(
+                        f"{mode:14s}  R={scan.right:5.2f}  F={front:5.2f}  "
+                        f"L={scan.left:5.2f}  side={side:5.2f}  wz={wz:+5.2f}"
+                    )
                 time.sleep(period)
         except KeyboardInterrupt:
             pub.publish(zero_twist())
-            print("\nstopped")
+            print("stopped")
 
 
 if __name__ == "__main__":
