@@ -71,11 +71,15 @@ Watch the sim: robot should move ~1 m forward, then stop.
 
 ## Code walkthrough (`drive_forward.py`)
 
+**Ignore the short block at the top** that looks for `SETUP.md` — it only helps
+Python find this workshop folder. **Do not edit it. Do not open `labs\common\`.**
+Your job is the publish loop and the CLI flags below.
+
 | Piece | Why |
 |-------|-----|
-| Block that finds `SETUP.md` | Lets Python import `labs.common` — **do not edit**; run from workshop root |
+| Top block (finds `SETUP.md`) | **Ignore / do not edit** — run from workshop root |
 | `Twist` schema + `TOPIC` | Typed contract — not free-form JSON |
-| `settle()` / `make_twist` / `zero_twist()` | Shared helpers (`labs.common`) — brief wait / build Twist; **do not open that folder** |
+| `settle` / `make_twist` / `zero_twist` | Shared helpers — brief wait / build Twist; **leave them alone** |
 | Loop @ 20 Hz | **Stays in this file** — commands must keep arriving |
 | Final `zero_twist()` | Explicit stop (good habit even with timeout) |
 | `--vx` / `--wz` / `--seconds` | Change motion without editing source |

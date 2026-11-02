@@ -29,13 +29,14 @@ Prefer **per-OS ZIPs** for students (one OS folder + one wheel + one sim), not a
 |----------|--------|
 | `robotos-v*` + wheel | `robotos` — [`docs/workshop-bundle-building.md`](../../robotos/docs/workshop-bundle-building.md) |
 | `serial-bridge[.exe]` | `cargo build --release -p serial-bridge` → `robotos-v*/bin/` (HW labs) |
-| `robotos-sim-v*` | **On target OS** from private https://github.com/drsanti/robotos-sim — [`workshop-bundle-building.md`](../../robotos-sim/docs/workshop-bundle-building.md) (P2.1 deferred until Mac/Linux builds) |
+| `robotos-sim-v*` | Private https://github.com/drsanti/robotos-sim — build on target OS; Win+Mac shipped in this repo `code/` |
 | Curriculum | this repo |
 | `NOTES.txt` | `packs/NOTES.windows-x64.txt` / `NOTES.macos-arm64.txt` / `NOTES.linux-x64.txt` |
 
-## P2.1 deferred (Mac / Linux sim)
+## OS packs
 
-Skip building sim on Windows. When ready: Mac → `macos-arm64` only; Linux/CI → `linux-x64`. Docs already fence “missing sim → skip WH”.
+Class focus: **windows-x64** + **macos-arm64** (both in `code/`). Linux sim deferred.
+Rebuild a sim pack only after new sim fixes (see robotos-sim building playbook).
 
 ## Assemble
 

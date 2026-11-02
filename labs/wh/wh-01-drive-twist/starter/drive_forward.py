@@ -16,7 +16,7 @@ import argparse
 import sys
 import time
 
-# Workshop root on sys.path before importing labs.common (do not edit)
+# --- ignore this block (finds workshop root). Do not edit. ---
 _root = Path(__file__).resolve().parent
 while _root != _root.parent and not (_root / "SETUP.md").is_file():
     _root = _root.parent
@@ -26,11 +26,12 @@ if not (_root / "SETUP.md").is_file():
         "(the one that contains SETUP.md and labs/)."
     )
 sys.path.insert(0, str(_root))
+# --- end ignore ---
 
 import robotos
 from robotos.messages.robotos.geometry.v1.geometry_pb2 import Twist
 
-# Shared helpers — do not edit labs/common
+# Shared helpers — do not open or edit labs/common/
 from labs.common.node_util import settle
 from labs.common.twist import make_twist, zero_twist
 

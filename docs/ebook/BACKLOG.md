@@ -40,7 +40,7 @@ Class-day `SETUP.md` + lab READMEs still need to catch up.
 |----|--------|
 | P2.1 | macOS + **Windows** sim packs shipped (2026-11-02); Linux deferred — playbook: [`robotos-sim/docs/workshop-bundle-building.md`](../../../robotos-sim/docs/workshop-bundle-building.md) |
 | P2.2 | ~~`assemble.sh` + execute-bit docs~~ **done** (`packs/assemble.sh`, `LAYOUT.md`) |
-| P2.3 | ~~Re-run persona skill~~ polish 2026-11-02: Kenji/Aisha **PASS**; Maya **PARTIAL**→plain-English WH-01 + ch02; EPUB Mermaid notes (`PUBLISHING.md` / `build-epub.ps1`) |
+| P2.3 | ~~Re-run persona skill~~ polish 2026-11-02: Kenji/Aisha **PASS**; Maya WH-01/ch02 “ignore top block / don’t open labs/common” **done**; EPUB Mermaid notes (`PUBLISHING.md` / `build-epub.ps1`) |
 
 ## Suggested work order
 

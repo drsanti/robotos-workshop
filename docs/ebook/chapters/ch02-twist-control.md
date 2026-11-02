@@ -75,14 +75,18 @@ Follow [`labs/wh/wh-01-drive-twist/README.md`](../../../labs/wh/wh-01-drive-twis
 
 ## 7. Code walkthrough
 
-See `labs/wh/wh-01-drive-twist/starter/drive_forward.py`:
+See `labs/wh/wh-01-drive-twist/starter/drive_forward.py`.
+
+**Ignore the short top block** that finds `SETUP.md`. Do **not** open or edit
+`labs/common/` — shared helpers live there for every lab; your lesson is the
+publish loop.
 
 | Piece | Role |
 |-------|------|
-| Block that finds `SETUP.md` | So `labs.common` imports work — do not edit |
+| Top block (finds `SETUP.md`) | **Ignore / do not edit** |
 | `--vx` / `--wz` / `--seconds` | Experiment without editing source |
 | `RATE_HZ = 20` | Stay well above timeout |
-| `settle()` / `make_twist` | Short wait + build Twist (`labs.common`; do not edit) |
+| `settle` / `make_twist` | Short wait + build Twist — leave helpers alone |
 | Timed `for` publish loop | Stays in starter — the lesson |
 | Final `zero_twist()` | Explicit stop |
 
