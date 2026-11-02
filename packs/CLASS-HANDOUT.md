@@ -56,7 +56,7 @@ Windows pack includes `wifi-cfg`. Bridge running, then:
 scripts\wifi-cfg.cmd --ssid YOUR_SSID --pass YOUR_PASSWORD --connect tcp/PC_LAN_IP:7447
 ```
 
-Use the PC LAN IP (`ipconfig`), not `127.0.0.1`. Status: `scripts\run.cmd hw-02 board_watch`.
+Use the PC LAN IP (`ipconfig`), not `127.0.0.1`. On Windows, set the Wi‑Fi profile to **Private** and allow inbound TCP **7447** if `zenoh` stays false. Status: `scripts\run.cmd hw-02 board_watch` → `state=3` / `zenoh=True`.
 
 ## Tracks order
 

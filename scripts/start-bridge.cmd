@@ -12,6 +12,9 @@ if not exist "%ROBOTOS_BIN%\serial-bridge.exe" (
   exit /b 1
 )
 set "Path=%ROBOTOS_BIN%;%Path%"
+rem Listen-only: a leftover ROBOTOS_CONNECT in this window can pin the
+rem session to localhost and block board Wi-Fi zenoh clients.
+set "ROBOTOS_CONNECT="
 set "ROBOTOS_LISTEN=tcp/0.0.0.0:7447"
 
 echo.
@@ -24,6 +27,9 @@ echo.
 echo  Default: --port auto. If it fails:
 echo    serial-bridge --port COM17 --baud 921600 --robot-id 01 --cmd-topic all
 echo  ^(use your USB Serial Device COM number from Device Manager^)
+echo.
+echo  Board Wi-Fi zenoh: wifi-cfg --connect tcp/PC_LAN_IP:7447
+echo  ^(ipconfig — not 127.0.0.1. Wi-Fi profile Private + allow TCP 7447.^)
 echo.
 
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all --probe-settle-ms 2000 --probe-ms 5000
