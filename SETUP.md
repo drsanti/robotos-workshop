@@ -125,7 +125,10 @@ Do **not** install a `win_amd64` wheel on Linux/macOS. If `ls code/*.whl` shows 
 
 ## 4. Start warehouse sim
 
-**Pack honesty:** WH labs need `code/robotos-sim-v*/` for **your** OS. If that folder is **missing** from your zip (common for early linux-x64 / macos-arm64 drops), **skip WH** for now — do **MW** and **HW** instead, or use a lab Windows box that has the sim. MW/HW do not require the desktop sim.
+**Pack honesty:** WH labs need `code/robotos-sim-v*/` for **your** OS.
+Windows x64 and macOS arm64 sims ship in this drop. If your zip is **Linux-only**
+or the sim folder is missing, **skip WH** and do **MW** / **HW** instead.
+MW/HW do not require the desktop sim.
 
 When the sim **is** present:
 
