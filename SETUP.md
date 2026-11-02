@@ -2,11 +2,13 @@
 
 Week03-style: activate **your OS** folder under `code/`, install the matching wheel, then labs.
 
-**Prefer one-click?** On Windows double-click [`start-here.cmd`](start-here.cmd)
-(and [`start-bridge.cmd`](start-bridge.cmd) for board labs). On macOS use
-[`start-here.command`](start-here.command) / [`start-bridge.sh`](start-bridge.sh).
-Those scripts set PATH, create `.venv`, install the wheel, and start the sim —
-you can skip most of the copy-paste below on day 1.
+**VS Code class workflow:** open this folder in VS Code, then once double-click
+[`start-here.cmd`](start-here.cmd) (venv + wheel + sim). New VS Code terminals
+already have `robotos` on PATH. Board labs: [`start-bridge.cmd`](start-bridge.cmd)
+in a second window. macOS: [`start-here.command`](start-here.command) /
+[`start-bridge.sh`](start-bridge.sh).
+
+You can skip most of the copy-paste PATH/venv lines below when using that flow.
 
 **New to terminals?** Full guide:  
 [`docs/ebook/chapters/ch00-setup-your-machine.md`](docs/ebook/chapters/ch00-setup-your-machine.md)  

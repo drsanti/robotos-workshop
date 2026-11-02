@@ -10,20 +10,29 @@ shipped yet.
 
 ## Students — start here
 
-**Not comfortable with the command line?** Use the helper scripts (recommended):
+Class machines use **VS Code**. Open **this folder** as the workspace
+(`File → Open Folder…` → the `robotos-workshop` folder).
 
-| OS | What to do |
-|----|------------|
-| **Windows** | Double-click [`start-here.cmd`](start-here.cmd) — sets PATH, creates `.venv` + installs the wheel the first time, starts the sim, opens a ready terminal |
-| **Windows + board (HW)** | Also double-click [`start-bridge.cmd`](start-bridge.cmd) in a **second** window and leave it open |
-| **macOS** | Double-click [`start-here.command`](start-here.command) (or run `./start-here.sh` in Terminal). Board: `./start-bridge.sh` in a second Terminal |
+### Recommended (Windows + VS Code)
 
-Then type: `robotos topic list` — you should see `/robot/01/cmd_vel`, `odom`, `scan`.
+1. **Once per machine:** double-click [`start-here.cmd`](start-here.cmd)  
+   — creates `.venv`, installs the wheel, starts the warehouse sim.  
+   You can close that cmd window afterward if you prefer VS Code.
+2. In VS Code: **Terminal → New Terminal**.  
+   `robotos` is already on PATH (workspace settings). If VS Code asks you to
+   pick a Python interpreter, choose `.venv`.
+3. Check: `robotos topic list` → `/robot/01/cmd_vel`, `odom`, `scan`.
+4. **Board labs (HW):** double-click [`start-bridge.cmd`](start-bridge.cmd) and
+   leave that window open; keep using the VS Code terminal for Python labs.
 
-Full manual steps (and troubleshooting): [`SETUP.md`](SETUP.md) · ebook [Ch.0](docs/ebook/chapters/ch00-setup-your-machine.md).  
-If you open this folder in **Cursor / VS Code**, a new integrated terminal already has `robotos` on PATH (see `.vscode/settings.json`); still run `start-here.cmd` once for `.venv` + sim, or activate `.venv` yourself.
+| OS | Helper |
+|----|--------|
+| **Windows** | [`start-here.cmd`](start-here.cmd) · HW: [`start-bridge.cmd`](start-bridge.cmd) |
+| **macOS** | [`start-here.command`](start-here.command) / `./start-here.sh` · HW: `./start-bridge.sh` |
 
-### Windows quick smoke (manual)
+Full manual steps: [`SETUP.md`](SETUP.md) · ebook [Ch.0](docs/ebook/chapters/ch00-setup-your-machine.md).
+
+### Windows quick smoke (manual PowerShell — optional)
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -32,7 +41,8 @@ Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe
 robotos topic list   # expect /robot/01/cmd_vel|odom|scan
 ```
 
-PATH is **per terminal** — new window → run the PATH line again, or double-click `start-here.cmd`. Do **not** restart the sim every time.
+In a **VS Code** terminal you usually **skip** the `$env:PATH = …` line (settings
+already add it). Do **not** restart the sim every time you open a terminal.
 
 ### macOS quick smoke (manual)
 
