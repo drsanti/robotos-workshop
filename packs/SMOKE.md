@@ -33,3 +33,14 @@ Host: Windows 11 x64 · packs in `code/` · sim rebuilt from `robotos-sim` `529c
 |------|--------|
 | WH-05 wall-follow (after steering fix) | **PASS** (manual) |
 | macOS `serial-bridge` in CLI pack | **PASS** — `code/robotos-v0.3.0-macos-arm64/bin/serial-bridge` |
+
+## 2026-11-02 class zips
+
+Assembled under `drops/` (gitignored):
+
+| Zip | Notes |
+|-----|-------|
+| `robotos-workshop-windows-x64-20261102.zip` | CLI + win wheel + sim + serial-bridge `--port auto` |
+| `robotos-workshop-macos-arm64-20261102.zip` | CLI + `py3-none-any` wheel + sim + Mac serial-bridge |
+
+Maya WH-01/ch02 ignore-bootstrap wording landed same day.
