@@ -52,6 +52,10 @@ Smoke:
 ---------------------------------------------------------------------------
 C) ESP32-S3 board — serial-bridge
 ---------------------------------------------------------------------------
+Boards: es3c28p (LED+mic, caps~0x33) | ws28p (IMU+RTC, caps~0x3c, no LED/mic)
+Flash: hardware-interface-workshop/firmware-prebuilt/{es3c28p|ws28p}/
+Always run HW-01 and follow caps (labs/hw/README.md).
+
 Prereq: board flashed; USB attached.
 
 1) Prefer: scripts\start-bridge.cmd

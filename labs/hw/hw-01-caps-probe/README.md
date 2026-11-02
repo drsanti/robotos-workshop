@@ -67,7 +67,13 @@ python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 - `CAPS_BITS` table lives in `labs.common.caps` — **yes/no print loop stays in the starter**  
 - Prints `hw_model`, `fw_version`, `caps=0x..`
 
-## Expected output (example ws28p)
+## Expected output
+
+Class has **two** SKUs — flash
+`hardware-interface-workshop/firmware-prebuilt/{es3c28p|ws28p}/` to match the
+hardware (see [`labs/hw/README.md`](../README.md)).
+
+**`ws28p`** (IMU + RTC; no LED/mic) — example:
 
 ```text
 waiting for /robot/01/sys/board ...
@@ -79,6 +85,9 @@ hw_model=ws28p uuid=… fw=robotos-fw/0.3.0 caps=0x3c
   [yes] BATT -> board_watch
   [yes] BTN  -> touch_watch / keys
 ```
+
+**`es3c28p`** (LED + mic; no IMU/RTC) — expect `hw_model=es3c28p`, `caps≈0x33`,
+LED/MIC **yes**, IMU/RTC **no**.
 
 ## Troubleshooting
 

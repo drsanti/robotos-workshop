@@ -28,20 +28,29 @@ Middleware ideas (pub/sub, params, bags) become tangible when the publisher is *
 
 Do **not** set both `ROBOTOS_LISTEN` and `ROBOTOS_CONNECT` to the same endpoint in one process — you can create a self-connect mess. Bridge listens; student tools connect.
 
-### 2.2 Capabilities (`caps`)
+### 2.2 Two board SKUs + capabilities (`caps`)
 
-Variants share a board family but not the same peripherals. `BoardInfo.caps` is a bitfield:
+This workshop supports **two** ESP32-S3 products. Firmware bins live in the
+sibling hardware-interface drop (instructors flash; students get preflashed
+boards):
+
+| `hw_model` | Prebuilt | Typical `caps` | Has |
+|------------|----------|----------------|-----|
+| **`es3c28p`** | `hardware-interface-workshop/firmware-prebuilt/es3c28p/` | `≈ 0x33` | LED + mic (+ keys/batt) |
+| **`ws28p`** | `hardware-interface-workshop/firmware-prebuilt/ws28p/` | `≈ 0x3c` | IMU + RTC (+ keys/batt; **no** LED/mic) |
+
+`BoardInfo.caps` is a bitfield — always probe with HW-01 before actuator labs:
 
 | Bit | Name | Example lab |
 |-----|------|-------------|
-| `0x01` | LED | HW-03 `led_fx` |
-| `0x02` | MIC | stretch / `mic_dump` |
-| `0x04` | IMU | HW-02 `imu_watch` |
-| `0x08` | RTC | time sync |
-| `0x10` | BATT | HW-02 `board_watch` |
-| `0x20` | BTN | HW-05 touch/keys |
+| `0x01` | LED | HW-03 `led_fx` (`es3c28p`) |
+| `0x02` | MIC | stretch / `mic_dump` (`es3c28p`) |
+| `0x04` | IMU | HW-02 `imu_watch` (`ws28p`) |
+| `0x08` | RTC | time sync (`ws28p`) |
+| `0x10` | BATT | HW-02 `board_watch` (both) |
+| `0x20` | BTN | HW-05 touch/keys (both) |
 
-Example: `ws28p` often reports `caps=0x3c` → IMU+RTC+BATT+BTN, **no** LED/MIC. Always run HW-01 before LED labs.
+Track index: [`labs/hw/README.md`](../../../labs/hw/README.md).
 
 ### 2.3 Read vs command
 

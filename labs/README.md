@@ -4,7 +4,7 @@
 |--------|-------|------|
 | [`mw/`](mw/) | Middleware | `mw-00` … `mw-06` |
 | [`wh/`](wh/) | Warehouse sim | `wh-00` … `wh-08` |
-| [`hw/`](hw/) | ESP32-S3 board | `hw-00` … `hw-07` |
+| [`hw/`](hw/) | ESP32-S3 board (`es3c28p` / `ws28p`) | `hw-00` … `hw-07` — see [`hw/README.md`](hw/README.md) |
 | [`common/`](common/) | Shared helpers | Plumbing only — **do not edit** |
 
 Content map: [`docs/lab-outline.md`](../docs/lab-outline.md).  

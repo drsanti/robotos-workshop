@@ -56,6 +56,10 @@ Requires MW fluency with topics (at least MW-00/01) before WH-00.
 Host Python/CLI ↔ board on the robotos graph (serial-bridge / pack NOTES).  
 Firmware is **preflashed**; students do not build IDF in these labs.
 
+**Board SKUs:** **`es3c28p`** (Ternion — LED+mic) and **`ws28p`** (Waveshare — IMU+RTC).  
+Prebuilt bins: `hardware-interface-workshop/firmware-prebuilt/es3c28p/` and
+`…/ws28p/`. Caps differ — see [`labs/hw/README.md`](../labs/hw/README.md).
+
 | Concept | Theory | Practice lab |
 |---------|--------|--------------|
 | Board as a node | [`theory/14-board-on-graph.md`](theory/14-board-on-graph.md) | [`labs/hw/hw-00-board-connect`](../labs/hw/hw-00-board-connect/) |

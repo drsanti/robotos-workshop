@@ -213,6 +213,15 @@ Ebook backlog / QA: [`docs/ebook/BACKLOG.md`](docs/ebook/BACKLOG.md).
 
 ## 7. ESP32-S3 board (HW labs)
 
+**Two board variants** (flash the matching prebuilt folder — do not mix):
+
+| Board | Firmware | Typical caps | Notes |
+|-------|----------|--------------|-------|
+| `es3c28p` | `hardware-interface-workshop/firmware-prebuilt/es3c28p/` | `≈ 0x33` | LED + mic |
+| `ws28p` | `hardware-interface-workshop/firmware-prebuilt/ws28p/` | `≈ 0x3c` | IMU + RTC; no LED/mic |
+
+Students run **HW-01** and follow caps. Track overview: [`labs/hw/README.md`](labs/hw/README.md).
+
 Full copy-paste: [`code/NOTES.txt`](code/NOTES.txt) section B (must match **your** OS pack). Short form:
 
 ### Windows — Terminal A (bridge)

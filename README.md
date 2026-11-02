@@ -79,7 +79,7 @@ Typical order if your instructor does not specify otherwise: **MW → WH → HW*
 |-------|------|--------|
 | **MW** | `mw-00` … `mw-06` | Middleware patterns on the laptop graph |
 | **WH** | `wh-00` … `wh-08` | Warehouse sim on `/robot/01/*` |
-| **HW** | `hw-00` … `hw-07` | ESP32-S3: probe, sense, actuate, params, bag, closed loop |
+| **HW** | `hw-00` … `hw-07` | ESP32-S3 (`es3c28p` / `ws28p`): probe, sense, actuate, params, bag, closed loop — [`labs/hw/README.md`](labs/hw/README.md) |
 
 Each concept has a short theory note and a practice lab
 ([`docs/lab-outline.md`](docs/lab-outline.md)).

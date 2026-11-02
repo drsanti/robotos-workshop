@@ -19,7 +19,7 @@ Students can: place MCU + `serial-bridge` + CLI as three graph pieces; assign **
    - Labs / `robotos` / starters: `ROBOTOS_CONNECT=tcp/127.0.0.1:7447`.  
    - Never set both to the same endpoint in one process (self-connect mess).  
 4. **Heartbeat topic:** `/robot/01/sys/board` carries `BoardInfo` (`hw_model`, `fw_version`, **`caps`**). Empty `topic list` with a powered board ⇒ bridge not up, wrong connect, or firmware quiet — not “Zenoh is dead.”  
-5. **Caps first:** bitfield of peripherals; probe (HW-01) before LED/wave labs. Pointer only — full table in ebook §2.2 / HW-01. Typical bits: `0x01` LED, `0x02` MIC, `0x04` IMU, `0x08` RTC, `0x10` BATT, `0x20` BTN. Example: `ws28p` often `0x3c` → no LED/MIC.  
+5. **Two SKUs + caps first:** `es3c28p` (Ternion — LED+mic, `caps≈0x33`) vs `ws28p` (Waveshare — IMU+RTC, `caps≈0x3c`, no LED/mic). Prebuilt: `hardware-interface-workshop/firmware-prebuilt/{es3c28p,ws28p}/`. Probe HW-01 before LED/IMU labs. Bits: `0x01` LED, `0x02` MIC, `0x04` IMU, `0x08` RTC, `0x10` BATT, `0x20` BTN.  
 6. **Read vs command:** subscribe sensors (`…/sensor/imu`, `…/sys/board`); publish actuators. Bridge needs `--cmd-topic all` for LED/wave/params.  
 7. **Linux one-liner (not a SETUP dump):** USB open fails with *Permission denied* → `sudo usermod -aG dialout $USER`, then **log out/in**. Device node is `/dev/ttyACM*` (or `ttyUSB*`), not `COMx`. Prefer `chmod +x` on `serial-bridge` if unzip stripped the bit. Full PATH/pack steps live in SETUP / NOTES — don’t re-teach the whole install here.
 

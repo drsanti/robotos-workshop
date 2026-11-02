@@ -24,6 +24,16 @@ Or clone the GitHub repo (already includes `code/` packs for Win + Mac).
 
 ## Board labs (HW)
 
+**Two SKUs** (flash the matching folder; do not mix bins):
+
+| Board | Prebuilt firmware | Typical caps | Class focus |
+|-------|-------------------|--------------|-------------|
+| **`es3c28p`** (Ternion) | `hardware-interface-workshop/firmware-prebuilt/es3c28p/` | `≈ 0x33` | LED + mic (+ keys/batt/wave) |
+| **`ws28p`** (Waveshare) | `hardware-interface-workshop/firmware-prebuilt/ws28p/` | `≈ 0x3c` | IMU + RTC (+ keys/batt/wave; **no** LED/mic) |
+
+Students: run **HW-01** and follow caps — LED labs need `es3c28p`; IMU labs need `ws28p`.  
+Details: [`labs/hw/README.md`](../labs/hw/README.md).
+
 1. Prefer **closing the warehouse sim** first (avoids port `7447` fighting the bridge).  
 2. Plug USB → **Windows:** `scripts\start-bridge.cmd` · **macOS:** `./scripts/start-bridge.sh`  
 3. Leave bridge window open.  
@@ -33,6 +43,7 @@ Or clone the GitHub repo (already includes `code/` packs for Win + Mac).
 
 | Item | Value |
 |------|--------|
+| Board SKU today | `es3c28p` / `ws28p` / mixed |
 | USB Serial COM / `cu.*` | e.g. `COM17` (Device Manager / System Information) |
 | If `--port auto` skips the board | `serial-bridge --port COMx --baud 921600 --robot-id 01 --cmd-topic all` |
 | Wi‑Fi / other | — |
