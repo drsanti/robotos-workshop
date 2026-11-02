@@ -8,9 +8,10 @@ packs/dist/
 drops/
 .venv/
 venv/
+*.zip
 
-# Student `code/` packs ARE committed — clone must be self-contained.
-# (Windows packs ship today; add macos/linux trees when built.)
+# Student `code/` packs ARE committed — clone must be self-contained
+# (windows-x64 + macos-arm64 today; add linux-x64 when built).
 
 # Native libs outside code/ (smoke leftovers, accidental copies)
 *.exe
@@ -26,6 +27,7 @@ venv/
 
 # Python / OS
 __pycache__/
+*.pyc
 .DS_Store
 Thumbs.db
 *.log

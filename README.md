@@ -2,7 +2,8 @@
 
 Closed-source **lab packs** and **theory + practice** curriculum for robotos.
 
-**Content goal:** middleware concepts, warehouse-sim autonomy, **and ESP32-S3 board labs** (read sensors + command actuators) — instructor owns scheduling.
+**Students only need this folder** — `code/` ships prebuilt CLI, wheel(s), and
+warehouse sim. Do **not** clone `robotos` or `robotos-sim` source for class labs.
 
 ## Contents
 
@@ -18,7 +19,18 @@ Closed-source **lab packs** and **theory + practice** curriculum for robotos.
 | [`labs/wh/`](labs/wh/) | Warehouse labs (`wh-00` … `wh-08`) |
 | [`labs/hw/`](labs/hw/) | ESP32-S3 board labs (`hw-00` … `hw-07`) |
 | [`packs/`](packs/) | Maintainer assemble recipe — [`packs/LAYOUT.md`](packs/LAYOUT.md) |
-| [`code/`](code/) | **Shipped packs** (CLI, wheel, sim) — required; clone is self-contained |
+| [`code/`](code/) | **Shipped packs** — required; clone is self-contained |
+
+```text
+code/
+  NOTES.txt
+  robotos-v0.3.0-windows-x64/
+  robotos-0.3.0-py3-none-win_amd64.whl
+  robotos-sim-v0.1.0-windows-x64/
+  robotos-v0.3.0-macos-arm64/
+  robotos-sim-v0.1.0-macos-arm64/
+  # linux-x64 + matching wheels when built
+```
 
 ## Tracks
 
@@ -32,18 +44,26 @@ Format: theory note → practice lab for each concept ([`docs/lab-outline.md`](d
 
 ## Students
 
-Clone (or unzip) this repo and follow [`SETUP.md`](SETUP.md). You only need this
-folder — `code/` already has the Windows CLI pack, wheel, and warehouse sim.
-Mac/Linux `code/` trees are added when those packs are built (WH may be
-Windows-only until then; MW/HW still work with a matching CLI+wheel).
+Clone (or unzip) this repo and follow [`SETUP.md`](SETUP.md) for **your** OS.
+
+### macOS quick smoke
+
+```bash
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+open ./code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
+# Gatekeeper first launch: right-click → Open if blocked
+robotos topic list   # expect /robot/01/cmd_vel|odom|scan
+```
+
+Install the matching wheel from `code/*.whl` (Windows: `win_amd64`; macOS wheel
+added when packaged — until then use the Mac wheel from the instructor if
+`SETUP.md` names one).
 
 ## Maintainer / agents
 
-- Keep `code/` self-contained for the OS you teach; do not ship a docs-only tree
+- Keep `code/` self-contained for every OS you teach; do not ship a docs-only tree
 - Optional class zip: [`packs/LAYOUT.md`](packs/LAYOUT.md) + `packs/assemble.ps1`
-- **Build Mac/Linux warehouse sim packs (P2.1):** follow sibling
-  [`robotos-sim/docs/workshop-bundle-building.md`](../robotos-sim/docs/workshop-bundle-building.md)
-  (Mac → `macos-arm64` only; Linux/CI → `linux-x64`; do not cross-build Tauri)
+- Sim builds: [`robotos-sim/docs/workshop-bundle-building.md`](../robotos-sim/docs/workshop-bundle-building.md)
 - CLI + wheels: [`robotos/docs/workshop-bundle-building.md`](../robotos/docs/workshop-bundle-building.md)
 - Smoke log: [`packs/SMOKE.md`](packs/SMOKE.md)
 
