@@ -27,6 +27,16 @@ Host: Windows 11 x64 · packs in `code/` · sim rebuilt from `robotos-sim` `529c
 | WH-01 `drive_forward.py` | **PASS** (odom x≈3.01 after ~1 m from spawn; 100 cmds) |
 | Badge / Session transport | **PASS** (Native path; topics live without MOCK-only scene) |
 
+## 2026-11-02 windows-x64 night refresh
+
+Host: Windows 11 x64 · `robotos-sim` `91d4b72` (Phase 2 UX, L/R, START, aisle spawn)
+
+| Check | Result |
+|-------|--------|
+| `npm run tauri:build` → stage exe+MSI+NSIS into `code/robotos-sim-v0.1.0-windows-x64/` | **PASS** |
+| Workshop WH-05 starter seek/diagnostics | **PASS** (committed `67d1a82`) |
+| WH-05 aisle lap smoke | **manual** — Reset → External → `wall_follow.py --side right --target 0.7 --k 0.6` |
+
 ## 2026-11-02 macos follow-ups
 
 | Item | Status |

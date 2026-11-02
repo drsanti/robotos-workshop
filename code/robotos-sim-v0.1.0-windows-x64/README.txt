@@ -6,4 +6,8 @@ Run:  double-click robotos-sim.exe
 Optional installers under installers/.
 Warehouse teaching contract: /robot/01/cmd_vel|odom|scan
 Connect: Native → External → Connect (or follow SETUP.md).
-Rebuilt 2026-11-02: transport badge + Native cmd_vel poll (WH-01 moves).
+
+Rebuilt 2026-11-02 night:
+  - Phase 2 UX (Learner Status, Scene HUD, Plan cam, lab presets)
+  - Warehouse L/R handedness + START marker
+  - Reset spawn in rack aisle (WH-05 ready)
