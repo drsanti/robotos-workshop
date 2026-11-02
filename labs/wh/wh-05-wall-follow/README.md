@@ -22,6 +22,19 @@ Follow a wall using the three rangers (default: **right** wall).
 - If front `ranges[1]` close → turn away (same idea as WH-03).  
 - Continuous publish so timeout does not kill you.
 
+## Starter defaults
+
+| Flag | Default | Role |
+|------|---------|------|
+| `--side` | `right` | Wall to follow (`left` / `right`) |
+| `--target` | `0.7` | Desired side range [m] |
+| `--front-stop` | `0.55` | Front range → spin away [m] |
+| `--vx` | `0.18` | Cruise speed [m/s] |
+| `--k` | `1.2` | Steering gain on range error |
+
+`wz ≈ side_sign × k × (target − side_range)`, clamped to ±1.2 rad/s.  
+Oscillates → lower `--k` (try `0.8`). Leaves wall → raise `--k` or check `--side`.
+
 ## Hint
 
 Too far from wall → forward + turn **toward** wall.  
@@ -45,7 +58,7 @@ python labs\wh\wh-05-wall-follow\starter\wall_follow.py --side left --target 0.7
 
 ```bash
 python labs/wh/wh-05-wall-follow/starter/wall_follow.py
-python labs/wh/wh-05-wall-follow/starter/wall_follow.py --side left --target 0.7 --k 1.0
+python labs/wh/wh-05-wall-follow/starter/wall_follow.py --side left --target 0.7 --k 0.8
 ```
 
 ## Expected behavior
