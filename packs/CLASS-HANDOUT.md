@@ -8,8 +8,8 @@
 
 | OS | Drop (local `drops/`, gitignored) |
 |----|-----------------------------------|
-| Windows x64 | `robotos-workshop-windows-x64-20261102.zip` |
-| macOS Apple Silicon | `robotos-workshop-macos-arm64-20261102.zip` |
+| Windows x64 | `robotos-workshop-windows-x64-20261102-1702.zip` |
+| macOS Apple Silicon | `robotos-workshop-macos-arm64-20261102-1702.zip` |
 
 Or clone the GitHub repo (already includes `code/` packs for Win + Mac).
 

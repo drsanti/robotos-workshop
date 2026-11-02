@@ -59,7 +59,7 @@ Handout: [`CLASS-HANDOUT.md`](CLASS-HANDOUT.md).
 
 | Check | Result |
 |-------|--------|
-| Assemble Win + Mac from in-repo `code/` → `drops/*-20261102.zip` | **PASS** (~71 MB each; includes `scripts/`, `.vscode/`) |
+| Assemble Win + Mac from in-repo `code/` → `drops/*-20261102-1702.zip` | **PASS** (~74 / ~67 MB; includes `scripts/`, `.vscode/`, Wi‑Fi zenoh notes) |
 | `robotos topic list` (sim) shows cmd_vel/odom/scan | **PASS** |
 | `scripts\run.cmd wh-01` | **PASS** (100 cmds + zero) |
 | HW: bridge on **COM17** + `ROBOTOS_CONNECT` + `scripts\run.cmd hw-01` | **PASS** (`ws28p` caps=`0x3c`) after **closing sim** |
