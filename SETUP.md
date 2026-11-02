@@ -2,10 +2,15 @@
 
 Week03-style: activate **your OS** folder under `code/`, install the matching wheel, then labs.
 
-**New to terminals?** Start with the full guide:  
+**Prefer one-click?** On Windows double-click [`start-here.cmd`](start-here.cmd)
+(and [`start-bridge.cmd`](start-bridge.cmd) for board labs). On macOS use
+[`start-here.command`](start-here.command) / [`start-bridge.sh`](start-bridge.sh).
+Those scripts set PATH, create `.venv`, install the wheel, and start the sim —
+you can skip most of the copy-paste below on day 1.
+
+**New to terminals?** Full guide:  
 [`docs/ebook/chapters/ch00-setup-your-machine.md`](docs/ebook/chapters/ch00-setup-your-machine.md)  
 (how to open PowerShell/Terminal, diagrams, ExecutionPolicy, Gatekeeper).
-
 - **MW labs:** CLI + Python (sim optional).  
 - **WH labs:** also start warehouse desktop sim (section 4).  
 - **HW labs:** board + serial-bridge (section 7); sim not required.

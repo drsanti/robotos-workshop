@@ -10,18 +10,20 @@ shipped yet.
 
 ## Students — start here
 
-1. Follow [`SETUP.md`](SETUP.md) for your OS  
-   (new to terminals? ebook [Ch.0 — setup](docs/ebook/chapters/ch00-setup-your-machine.md)).
-2. Put `code/robotos-v0.3.0-<your-os>/bin` on `PATH`, create a venv, install the
-   matching wheel from `code/`:
-   - Windows: `robotos-0.3.0-py3-none-win_amd64.whl`
-   - macOS: `robotos-0.3.0-py3-none-any.whl` (Apple Silicon native lib)
-3. Warehouse (WH) labs: start the sim for your OS, then connect as SETUP describes.
-4. Smoke: `robotos topic list` should list `/robot/01/cmd_vel`, `odom`, and `scan`.
-5. Open labs under `labs/mw`, `labs/wh`, or `labs/hw` as your instructor assigns —
-   with ebook chapters in [`docs/ebook/chapters/`](docs/ebook/chapters/).
+**Not comfortable with the command line?** Use the helper scripts (recommended):
 
-### Windows quick smoke
+| OS | What to do |
+|----|------------|
+| **Windows** | Double-click [`start-here.cmd`](start-here.cmd) — sets PATH, creates `.venv` + installs the wheel the first time, starts the sim, opens a ready terminal |
+| **Windows + board (HW)** | Also double-click [`start-bridge.cmd`](start-bridge.cmd) in a **second** window and leave it open |
+| **macOS** | Double-click [`start-here.command`](start-here.command) (or run `./start-here.sh` in Terminal). Board: `./start-bridge.sh` in a second Terminal |
+
+Then type: `robotos topic list` — you should see `/robot/01/cmd_vel`, `odom`, `scan`.
+
+Full manual steps (and troubleshooting): [`SETUP.md`](SETUP.md) · ebook [Ch.0](docs/ebook/chapters/ch00-setup-your-machine.md).  
+If you open this folder in **Cursor / VS Code**, a new integrated terminal already has `robotos` on PATH (see `.vscode/settings.json`); still run `start-here.cmd` once for `.venv` + sim, or activate `.venv` yourself.
+
+### Windows quick smoke (manual)
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -30,7 +32,9 @@ Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe
 robotos topic list   # expect /robot/01/cmd_vel|odom|scan
 ```
 
-### macOS quick smoke
+PATH is **per terminal** — new window → run the PATH line again, or double-click `start-here.cmd`. Do **not** restart the sim every time.
+
+### macOS quick smoke (manual)
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -66,7 +70,9 @@ Each concept has a short theory note and a practice lab
 
 | Path | For students |
 |------|----------------|
-| [`SETUP.md`](SETUP.md) | PATH, wheel, sim, serial-bridge |
+| [`start-here.cmd`](start-here.cmd) / [`start-here.sh`](start-here.sh) | One-click lab terminal (PATH + venv + sim) |
+| [`start-bridge.cmd`](start-bridge.cmd) / [`start-bridge.sh`](start-bridge.sh) | Second window for board `serial-bridge` |
+| [`SETUP.md`](SETUP.md) | PATH, wheel, sim, serial-bridge (full manual) |
 | [`docs/ebook/`](docs/ebook/) | Ebook chapters (start at Ch.0) |
 | [`labs/mw/`](labs/mw/), [`labs/wh/`](labs/wh/), [`labs/hw/`](labs/hw/) | Lab sheets + starters |
 | [`code/`](code/) | Prebuilt CLI, wheels, sim |

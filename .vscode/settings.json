@@ -1,0 +1,11 @@
+{
+  "terminal.integrated.env.windows": {
+    "Path": "${workspaceFolder}\\code\\robotos-v0.3.0-windows-x64\\bin;${env:Path}"
+  },
+  "terminal.integrated.env.osx": {
+    "PATH": "${workspaceFolder}/code/robotos-v0.3.0-macos-arm64/bin:${env:PATH}"
+  },
+  "terminal.integrated.env.linux": {
+    "PATH": "${workspaceFolder}/code/robotos-v0.3.0-linux-x64/bin:${env:PATH}"
+  }
+}

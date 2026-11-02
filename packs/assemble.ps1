@@ -48,8 +48,19 @@ if (Test-Path $OutDir) {
 New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
 Write-Host "Staging curriculum → $OutDir"
 
-foreach ($name in @("README.md", "SETUP.md", ".gitignore")) {
-  Copy-Item (Join-Path $RepoRoot $name) (Join-Path $OutDir $name) -Force
+foreach ($name in @(
+  "README.md", "SETUP.md", ".gitignore",
+  "start-here.cmd", "start-bridge.cmd",
+  "start-here.sh", "start-bridge.sh", "start-here.command"
+)) {
+  $src = Join-Path $RepoRoot $name
+  if (Test-Path $src) {
+    Copy-Item $src (Join-Path $OutDir $name) -Force
+  }
+}
+$vsCode = Join-Path $RepoRoot ".vscode"
+if (Test-Path $vsCode) {
+  Copy-Tree $vsCode (Join-Path $OutDir ".vscode")
 }
 Copy-Tree (Join-Path $RepoRoot "docs") (Join-Path $OutDir "docs")
 Copy-Tree (Join-Path $RepoRoot "labs") (Join-Path $OutDir "labs")
