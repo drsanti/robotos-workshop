@@ -23,7 +23,7 @@ if "%~1"=="" (
   echo    scripts\wifi-cfg.cmd --reconnect
   echo    scripts\wifi-cfg.cmd --disable
   echo.
-  echo  Use your PC LAN IP in --connect ^(not 127.0.0.1 — the board cannot reach that^).
+  echo  Use your PC LAN IP in --connect ^(not 127.0.0.1 - the board cannot reach that^).
   echo  Watch status: scripts\run.cmd hw-02 board_watch
   echo.
   wifi-cfg.exe --help
