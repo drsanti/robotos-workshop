@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Second terminal for HW labs — leave running while labs use start-here.sh.
+# Second terminal for HW labs — leave running while labs use start-here / VS Code.
 
 set -euo pipefail
-cd "$(dirname "$0")"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
 
-ROOT="$PWD"
 if [[ -d "$ROOT/code/robotos-v0.3.0-macos-arm64/bin" ]]; then
   OS_BIN="$ROOT/code/robotos-v0.3.0-macos-arm64/bin"
 elif [[ -d "$ROOT/code/robotos-v0.3.0-linux-x64/bin" ]]; then
@@ -21,7 +21,7 @@ chmod +x "$OS_BIN/serial-bridge" 2>/dev/null || true
 echo
 echo " robotos-workshop — serial-bridge (board)"
 echo " ----------------------------------------"
-echo " Plug in USB. Leave this window open. Labs: ./start-here.sh"
+echo " Plug in USB. Leave this window open. Labs: ./scripts/start-here.sh"
 echo " If auto fails: serial-bridge --port /dev/cu.usbmodemXXXX ..."
 echo
 

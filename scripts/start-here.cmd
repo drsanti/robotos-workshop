@@ -1,10 +1,11 @@
 @echo off
 setlocal EnableExtensions
-cd /d "%~dp0"
+cd /d "%~dp0\.."
 
-rem Double-click this file (Windows). Sets PATH + Python venv for THIS window only.
+rem Double-click scripts\start-here.cmd (Windows). PATH + venv for THIS window only.
 
-set "ROBOTOS_BIN=%~dp0code\robotos-v0.3.0-windows-x64\bin"
+set "ROOT=%CD%"
+set "ROBOTOS_BIN=%ROOT%\code\robotos-v0.3.0-windows-x64\bin"
 if not exist "%ROBOTOS_BIN%\robotos.exe" (
   echo.
   echo  Missing %ROBOTOS_BIN%\robotos.exe
@@ -19,10 +20,9 @@ echo.
 echo  robotos-workshop
 echo  ----------------
 echo  This window is ready for CLI + Python labs.
-echo  PATH lasts only here — double-click again for a new terminal.
+echo  PATH lasts only here — run scripts\start-here.cmd again for a new terminal.
 echo.
 
-rem First-time: create .venv and install the Windows wheel
 if not exist ".venv\Scripts\python.exe" (
   echo  First time: creating .venv and installing the robotos wheel ...
   where py >nul 2>&1 && (
@@ -37,7 +37,7 @@ if not exist ".venv\Scripts\python.exe" (
   )
   call ".venv\Scripts\activate.bat"
   python -m pip install -U pip
-  python -m pip install "%~dp0code\robotos-0.3.0-py3-none-win_amd64.whl"
+  python -m pip install "%ROOT%\code\robotos-0.3.0-py3-none-win_amd64.whl"
   if errorlevel 1 (
     echo  Wheel install failed — see SETUP.md
     pause
@@ -49,10 +49,9 @@ if not exist ".venv\Scripts\python.exe" (
   call ".venv\Scripts\activate.bat"
 )
 
-rem Warehouse sim (leave it open; do not re-launch every new terminal)
-if exist "%~dp0code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe" (
+if exist "%ROOT%\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe" (
   echo  Starting warehouse sim ^(if not already open^) ...
-  start "" "%~dp0code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe"
+  start "" "%ROOT%\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe"
   echo.
 )
 
@@ -60,10 +59,10 @@ echo  Quick checks:
 echo    robotos version
 echo    robotos topic list
 echo.
-echo  Example lab ^(workshop root — stay here^):
-echo    python labs\wh\wh-01-drive-twist\starter\drive_forward.py
+echo  Example lab:
+echo    scripts\run.cmd wh-01
 echo.
-echo  Board labs ^(HW^): open start-bridge.cmd in a SECOND window, leave it running.
+echo  Board labs ^(HW^): scripts\start-bridge.cmd in a SECOND window.
 echo  Full guide: SETUP.md
 echo.
 

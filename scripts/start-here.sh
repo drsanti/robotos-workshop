@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# macOS / Linux helper — from Terminal:
-#   chmod +x start-here.sh && ./start-here.sh
-# macOS Finder: rename to start-here.command (same contents) and double-click once.
+# macOS / Linux — from workshop root:
+#   chmod +x scripts/start-here.sh && ./scripts/start-here.sh
+# Or double-click scripts/start-here.command on macOS.
 
 set -euo pipefail
-cd "$(dirname "$0")"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
 
-ROOT="$PWD"
 if [[ -d "$ROOT/code/robotos-v0.3.0-macos-arm64/bin" ]]; then
   OS_BIN="$ROOT/code/robotos-v0.3.0-macos-arm64/bin"
   WHEEL=( "$ROOT"/code/robotos-0.3.0-py3-none-any.whl )
@@ -26,7 +26,7 @@ chmod +x "$OS_BIN"/* 2>/dev/null || true
 echo
 echo " robotos-workshop"
 echo " ----------------"
-echo " PATH set for this shell only. Run ./start-here.sh again in a new terminal."
+echo " PATH set for this shell only. Run ./scripts/start-here.sh again in a new terminal."
 echo
 
 if [[ ! -x .venv/bin/python ]]; then
@@ -54,9 +54,9 @@ echo "   robotos version"
 echo "   robotos topic list"
 echo
 echo " Example:"
-echo "   python labs/wh/wh-01-drive-twist/starter/drive_forward.py"
+echo "   ./scripts/run wh-01"
 echo
-echo " Board labs: ./start-bridge.sh in a second Terminal."
+echo " Board labs: ./scripts/start-bridge.sh in a second Terminal."
 echo " Full guide: SETUP.md"
 echo
 

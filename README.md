@@ -15,7 +15,7 @@ Class machines use **VS Code**. Open **this folder** as the workspace
 
 ### Recommended (Windows + VS Code)
 
-1. **Once per machine:** double-click [`start-here.cmd`](start-here.cmd)  
+1. **Once per machine:** double-click [`scripts/start-here.cmd`](scripts/start-here.cmd)  
    — creates `.venv`, installs the wheel, starts the warehouse sim.  
    You can close that cmd window afterward if you prefer VS Code.
 2. In VS Code: **Terminal → New Terminal**.  
@@ -30,13 +30,13 @@ Class machines use **VS Code**. Open **this folder** as the workspace
    scripts\run.cmd hw-02 imu_watch
    ```
 
-5. **Board labs (HW):** double-click [`start-bridge.cmd`](start-bridge.cmd) and
+5. **Board labs (HW):** double-click [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd) and
    leave that window open; keep using the VS Code terminal for Python labs.
 
 | OS | Helper |
 |----|--------|
-| **Windows** | [`start-here.cmd`](start-here.cmd) · HW: [`start-bridge.cmd`](start-bridge.cmd) |
-| **macOS** | [`start-here.command`](start-here.command) / `./start-here.sh` · HW: `./start-bridge.sh` |
+| **Windows** | [`scripts/start-here.cmd`](scripts/start-here.cmd) · HW: [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd) |
+| **macOS** | [`scripts/start-here.command`](scripts/start-here.command) / `./scripts/start-here.sh` · HW: `./scripts/start-bridge.sh` |
 
 Full manual steps: [`SETUP.md`](SETUP.md) · ebook [Ch.0](docs/ebook/chapters/ch00-setup-your-machine.md).
 
@@ -88,9 +88,7 @@ Each concept has a short theory note and a practice lab
 
 | Path | For students |
 |------|----------------|
-| [`start-here.cmd`](start-here.cmd) / [`start-here.sh`](start-here.sh) | One-click lab terminal (PATH + venv + sim) |
-| [`start-bridge.cmd`](start-bridge.cmd) / [`start-bridge.sh`](start-bridge.sh) | Second window for board `serial-bridge` |
-| [`scripts/run.cmd`](scripts/run.cmd) / [`scripts/run`](scripts/run) | `scripts\run.cmd wh-01` — run a lab by short id |
+| [`scripts/`](scripts/) | `start-here` / `start-bridge` / `run` — all student helpers |
 | [`SETUP.md`](SETUP.md) | PATH, wheel, sim, serial-bridge (full manual) |
 | [`docs/ebook/`](docs/ebook/) | Ebook chapters (start at Ch.0) |
 | [`labs/mw/`](labs/mw/), [`labs/wh/`](labs/wh/), [`labs/hw/`](labs/hw/) | Lab sheets + starters |

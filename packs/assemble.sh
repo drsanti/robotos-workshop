@@ -48,16 +48,15 @@ mkdir -p "$OUT"
 echo "Staging curriculum → $OUT"
 cp "$ROOT/README.md" "$ROOT/SETUP.md" "$OUT/"
 [[ -f "$ROOT/.gitignore" ]] && cp "$ROOT/.gitignore" "$OUT/"
-for f in start-here.cmd start-bridge.cmd start-here.sh start-bridge.sh start-here.command; do
-  [[ -f "$ROOT/$f" ]] && cp "$ROOT/$f" "$OUT/"
-done
 [[ -d "$ROOT/.vscode" ]] && cp -R "$ROOT/.vscode" "$OUT/.vscode"
-chmod +x "$OUT/start-here.sh" "$OUT/start-bridge.sh" "$OUT/start-here.command" 2>/dev/null || true
 cp -R "$ROOT/docs" "$OUT/docs"
 cp -R "$ROOT/labs" "$OUT/labs"
 if [[ -d "$ROOT/scripts" ]]; then
   cp -R "$ROOT/scripts" "$OUT/scripts"
-  chmod +x "$OUT/scripts/run" 2>/dev/null || true
+  chmod +x "$OUT/scripts/run" \
+            "$OUT/scripts/start-here.sh" \
+            "$OUT/scripts/start-bridge.sh" \
+            "$OUT/scripts/start-here.command" 2>/dev/null || true
 fi
 
 CODE="$OUT/code"

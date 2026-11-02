@@ -1,10 +1,11 @@
 @echo off
 setlocal EnableExtensions
-cd /d "%~dp0"
+cd /d "%~dp0\.."
 
-rem Second window for HW labs — leave this open while you work in start-here.cmd.
+rem Second window for HW labs — leave open while using VS Code or start-here.
 
-set "ROBOTOS_BIN=%~dp0code\robotos-v0.3.0-windows-x64\bin"
+set "ROOT=%CD%"
+set "ROBOTOS_BIN=%ROOT%\code\robotos-v0.3.0-windows-x64\bin"
 if not exist "%ROBOTOS_BIN%\serial-bridge.exe" (
   echo  Missing serial-bridge.exe under code\robotos-v0.3.0-windows-x64\bin
   pause
@@ -17,9 +18,9 @@ echo.
 echo  robotos-workshop — serial-bridge ^(board^)
 echo  -----------------------------------------
 echo  Plug in the ESP32-S3 USB cable first.
-echo  Leave this window open. Use start-here.cmd for labs.
+echo  Leave this window open. Labs: VS Code terminal or scripts\start-here.cmd
 echo.
-echo  Default: --port auto. If it fails, edit this file or run:
+echo  Default: --port auto. If it fails:
 echo    serial-bridge --port COM17 --baud 921600 --robot-id 01 --cmd-topic all
 echo  ^(use your USB Serial Device COM number from Device Manager^)
 echo.

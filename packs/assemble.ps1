@@ -48,11 +48,7 @@ if (Test-Path $OutDir) {
 New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
 Write-Host "Staging curriculum → $OutDir"
 
-foreach ($name in @(
-  "README.md", "SETUP.md", ".gitignore",
-  "start-here.cmd", "start-bridge.cmd",
-  "start-here.sh", "start-bridge.sh", "start-here.command"
-)) {
+foreach ($name in @("README.md", "SETUP.md", ".gitignore")) {
   $src = Join-Path $RepoRoot $name
   if (Test-Path $src) {
     Copy-Item $src (Join-Path $OutDir $name) -Force
