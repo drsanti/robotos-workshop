@@ -32,6 +32,8 @@ code/
   # linux-x64 + matching wheels when built
 ```
 
+**Class OS focus:** Windows x64 + macOS arm64. Linux packs deferred for now.
+
 ## Tracks
 
 | Track | Labs | Focus |
