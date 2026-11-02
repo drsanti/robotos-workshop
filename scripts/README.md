@@ -15,7 +15,9 @@ All day-1 shortcuts live here (not in the workshop root).
 1. Open the **workshop root** folder in VS Code.  
 2. Once: double-click `scripts\start-here.cmd` (or `./scripts/start-here.sh`).  
 3. **Terminal → New Terminal** — `robotos` is already on PATH (`.vscode/settings.json`).  
-4. Labs: `scripts\run.cmd list` then `scripts\run.cmd wh-01` (etc.).  
-5. HW: leave `scripts\start-bridge.cmd` running in a second window.
+4. WH / MW: `scripts\run.cmd wh-01` (etc.).  
+5. **HW (two clicks):** close sim → `scripts\start-bridge.cmd` →  
+   `scripts\run.cmd hw-01`  
+   (`run` auto-sets `ROBOTOS_CONNECT` for `hw-*`; no env typing.)
 
 Details: [`../SETUP.md`](../SETUP.md) · ebook Ch.0.

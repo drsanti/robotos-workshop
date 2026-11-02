@@ -5,8 +5,12 @@ Examples:
   python scripts/run.py list
   python scripts/run.py wh-01
   python scripts/run.py wh-01 --vx 0.2 --seconds 3
+  python scripts/run.py hw-01
   python scripts/run.py hw-02 imu_watch
   python scripts/run.py hw-03 led_fx
+
+HW ids auto-set ROBOTOS_CONNECT=tcp/127.0.0.1:7447 when unset
+(start-bridge must already be running; close warehouse sim first).
 
 Windows:  scripts\\run.cmd wh-01
 macOS:    ./scripts/run wh-01
@@ -129,6 +133,17 @@ def main(argv: list[str]) -> int:
     print(f"+ {' '.join(cmd)}", flush=True)
     env = os.environ.copy()
     env["PYTHONPATH"] = str(root) + os.pathsep + env.get("PYTHONPATH", "")
+
+    # HW labs talk to serial-bridge (LISTEN :7447). Students should not have to
+    # type ROBOTOS_CONNECT every time — set a default if unset.
+    if short.startswith("hw-") and not env.get("ROBOTOS_CONNECT"):
+        env["ROBOTOS_CONNECT"] = "tcp/127.0.0.1:7447"
+        print(
+            "(auto) ROBOTOS_CONNECT=tcp/127.0.0.1:7447  "
+            "— leave scripts/start-bridge running; close warehouse sim first",
+            flush=True,
+        )
+
     return subprocess.call(cmd, cwd=str(root), env=env)
 
 

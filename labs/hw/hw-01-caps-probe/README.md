@@ -25,18 +25,32 @@ Ebook walkthrough: [`ch04-board-on-graph.md`](../../../docs/ebook/chapters/ch04-
 
 ## Prerequisites
 
-- HW-00: bridge still running (terminal A)  
-- Terminal B: `ROBOTOS_CONNECT` + PATH + `.venv`  
+- Close warehouse **sim** (port clash with bridge)  
+- Board USB plugged (`es3c28p` or `ws28p`)  
 
-## Practice
+## Practice (preferred — two steps)
 
-> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+**A — bridge** (leave open): double-click `scripts\start-bridge.cmd`  
+(macOS: `./scripts/start-bridge.sh`)
 
+**B — probe** (VS Code terminal, workshop root):
+
+```text
+scripts\run.cmd hw-01
+```
+
+```bash
+./scripts/run hw-01
+```
+
+`run` sets `ROBOTOS_CONNECT` for you on `hw-*` labs.
+
+### Manual fallback (if a TA asks)
 
 ### Windows (PowerShell)
 
 ```powershell
-$env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"   # if not already set
+$env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
 python labs\hw\hw-01-caps-probe\starter\caps_probe.py
 ```
 

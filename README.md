@@ -30,8 +30,9 @@ Class machines use **VS Code**. Open **this folder** as the workspace
    scripts\run.cmd hw-02 imu_watch
    ```
 
-5. **Board labs (HW):** double-click [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd) and
-   leave that window open; keep using the VS Code terminal for Python labs.
+5. **Board labs (HW):** close the sim → double-click
+   [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd) (leave open) →
+   `scripts\run.cmd hw-01` (`run` sets `ROBOTOS_CONNECT` for you).
 
 | OS | Helper |
 |----|--------|

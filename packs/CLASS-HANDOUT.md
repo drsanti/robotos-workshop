@@ -34,11 +34,11 @@ Or clone the GitHub repo (already includes `code/` packs for Win + Mac).
 Students: run **HW-01** and follow caps — LED labs need `es3c28p`; IMU labs need `ws28p`.  
 Details: [`labs/hw/README.md`](../labs/hw/README.md).
 
-1. Prefer **closing the warehouse sim** first (avoids port `7447` fighting the bridge).  
-2. Plug USB → **Windows:** `scripts\start-bridge.cmd` · **macOS:** `./scripts/start-bridge.sh`  
-3. Leave bridge window open.  
-4. Labs terminal: `scripts\run.cmd hw-01` / `./scripts/run hw-01`
+Student path (no env typing — `run` sets `ROBOTOS_CONNECT` for `hw-*`):
 
+1. Close warehouse sim.  
+2. Plug USB → `scripts\start-bridge.cmd` / `./scripts/start-bridge.sh` (leave open).  
+3. VS Code terminal: `scripts\run.cmd hw-01` / `./scripts/run hw-01`
 ### This room (instructor fill-in)
 
 | Item | Value |
