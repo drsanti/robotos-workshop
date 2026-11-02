@@ -55,6 +55,10 @@ done
 chmod +x "$OUT/start-here.sh" "$OUT/start-bridge.sh" "$OUT/start-here.command" 2>/dev/null || true
 cp -R "$ROOT/docs" "$OUT/docs"
 cp -R "$ROOT/labs" "$OUT/labs"
+if [[ -d "$ROOT/scripts" ]]; then
+  cp -R "$ROOT/scripts" "$OUT/scripts"
+  chmod +x "$OUT/scripts/run" 2>/dev/null || true
+fi
 
 CODE="$OUT/code"
 mkdir -p "$CODE"

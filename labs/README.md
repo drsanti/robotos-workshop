@@ -12,7 +12,19 @@ Helper rules: [`common/README.md`](common/README.md).
 
 ## Running starters
 
-Always prefer the **workshop root** (folder with `SETUP.md` and `labs/`):
+From the **workshop root** (folder with `SETUP.md` and `labs/`):
+
+```text
+scripts\run.cmd list          # Windows — see lab ids
+scripts\run.cmd wh-01
+scripts\run.cmd wh-01 --vx 0.2
+scripts\run.cmd hw-02 imu_watch
+
+./scripts/run list            # macOS / Linux
+./scripts/run wh-01
+```
+
+Or call Python directly:
 
 ```text
 python labs/wh/wh-01-drive-twist/starter/drive_forward.py

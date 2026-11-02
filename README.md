@@ -22,7 +22,15 @@ Class machines use **VS Code**. Open **this folder** as the workspace
    `robotos` is already on PATH (workspace settings). If VS Code asks you to
    pick a Python interpreter, choose `.venv`.
 3. Check: `robotos topic list` → `/robot/01/cmd_vel`, `odom`, `scan`.
-4. **Board labs (HW):** double-click [`start-bridge.cmd`](start-bridge.cmd) and
+4. Run a lab starter (from workshop root):
+
+   ```text
+   scripts\run.cmd list
+   scripts\run.cmd wh-01
+   scripts\run.cmd hw-02 imu_watch
+   ```
+
+5. **Board labs (HW):** double-click [`start-bridge.cmd`](start-bridge.cmd) and
    leave that window open; keep using the VS Code terminal for Python labs.
 
 | OS | Helper |
@@ -82,6 +90,7 @@ Each concept has a short theory note and a practice lab
 |------|----------------|
 | [`start-here.cmd`](start-here.cmd) / [`start-here.sh`](start-here.sh) | One-click lab terminal (PATH + venv + sim) |
 | [`start-bridge.cmd`](start-bridge.cmd) / [`start-bridge.sh`](start-bridge.sh) | Second window for board `serial-bridge` |
+| [`scripts/run.cmd`](scripts/run.cmd) / [`scripts/run`](scripts/run) | `scripts\run.cmd wh-01` — run a lab by short id |
 | [`SETUP.md`](SETUP.md) | PATH, wheel, sim, serial-bridge (full manual) |
 | [`docs/ebook/`](docs/ebook/) | Ebook chapters (start at Ch.0) |
 | [`labs/mw/`](labs/mw/), [`labs/wh/`](labs/wh/), [`labs/hw/`](labs/hw/) | Lab sheets + starters |

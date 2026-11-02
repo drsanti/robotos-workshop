@@ -64,6 +64,10 @@ if (Test-Path $vsCode) {
 }
 Copy-Tree (Join-Path $RepoRoot "docs") (Join-Path $OutDir "docs")
 Copy-Tree (Join-Path $RepoRoot "labs") (Join-Path $OutDir "labs")
+$scripts = Join-Path $RepoRoot "scripts"
+if (Test-Path $scripts) {
+  Copy-Tree $scripts (Join-Path $OutDir "scripts")
+}
 # Drop bytecode caches if present (dev machines often have them under labs/)
 Get-ChildItem -Path (Join-Path $OutDir "labs") -Recurse -Directory -Filter "__pycache__" -ErrorAction SilentlyContinue |
   Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
