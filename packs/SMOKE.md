@@ -44,3 +44,15 @@ Assembled under `drops/` (gitignored):
 | `robotos-workshop-macos-arm64-20261102.zip` | CLI + `py3-none-any` wheel + sim + Mac serial-bridge |
 
 Maya WH-01/ch02 ignore-bootstrap wording landed same day.
+
+## 2026-11-02 windows-x64 HW (board on desk)
+
+Host: Windows 11 · board **ws28p** on **COM17** · `serial-bridge --port COM17 --baud 921600 --cmd-topic all` · `ROBOTOS_LISTEN=tcp/0.0.0.0:7447`
+
+| Check | Result |
+|-------|--------|
+| Bridge up; heartbeats | **PASS** |
+| `robotos topic list` shows `/robot/01/sys/board`, IMU, battery, … | **PASS** |
+| HW-01 `caps_probe.py` | **PASS** — `hw_model=ws28p` `fw=robotos-fw/0.3.0` `caps=0x3c` (IMU/RTC/BATT/BTN yes; LED/MIC no) |
+
+Notes: `--port auto` with default `probe_ms=2500` **skipped COM17** (“no workshop frame”); explicit `--port COM17 --settle-ms 3500` worked. Prefer COM path on this host or raise `--probe-ms` / `--probe-settle-ms` for auto.

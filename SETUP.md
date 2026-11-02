@@ -216,7 +216,9 @@ robotos topic echo /robot/01/sys/board --count 3
 python labs\hw\hw-01-caps-probe\starter\caps_probe.py
 ```
 
-Override port with `--port COM7` if auto-detect fails. Pack ships `serial-bridge.exe` next to `robotos.exe`.
+Override port with `--port COM17` (or your USB Serial Device) if auto-detect fails.
+If auto skips the real USB port, raise probe time: `--probe-settle-ms 2000 --probe-ms 5000`,
+or pass `--port COMx` explicitly. Pack ships `serial-bridge.exe` next to `robotos.exe`.
 
 ### Linux x64 — Terminal A (bridge)
 
