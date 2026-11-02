@@ -1,6 +1,10 @@
 # Pack layout (shipping recipe)
 
-Binary packs are **not** committed (large, closed). Assembled drop shape:
+Student delivery must be **self-contained**: `code/` (CLI pack + wheel + sim when
+available) ships **in this repo** so a clone/unzip works without sibling repos.
+`drops/` and assemble zips are optional class mirrors, not the only channel.
+
+Assembled drop shape (same tree as git + filled `code/`):
 
 ```text
 robotos-workshop/          # zip root OR git checkout + code/ filled
@@ -73,4 +77,6 @@ chmod +x code/robotos-v*/bin/robotos \
 
 `assemble.sh` restores `+x` while staging; students may still need the commands above after re-zip. Documented in SETUP troubleshooting and per-OS NOTES.
 
-Do not commit `code/*.whl` or OS trees into git. Edit COM/`cu`/`ttyACM` in class NOTES only if the room uses fixed ports.
+Commit the OS packs you teach under `code/` (today: windows-x64). Keep `drops/`
+and `packs/*.zip` gitignored. Edit COM/`cu`/`ttyACM` in class `code/NOTES.txt`
+only if the room uses fixed ports.

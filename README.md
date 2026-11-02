@@ -17,8 +17,8 @@ Closed-source **lab packs** and **theory + practice** curriculum for robotos.
 | [`labs/mw/`](labs/mw/) | Middleware labs (`mw-00` … `mw-06`) |
 | [`labs/wh/`](labs/wh/) | Warehouse labs (`wh-00` … `wh-08`) |
 | [`labs/hw/`](labs/hw/) | ESP32-S3 board labs (`hw-00` … `hw-07`) |
-| [`packs/`](packs/) | Assemble recipe — start at [`packs/LAYOUT.md`](packs/LAYOUT.md) |
-| [`code/`](code/) | Binaries at ship time |
+| [`packs/`](packs/) | Maintainer assemble recipe — [`packs/LAYOUT.md`](packs/LAYOUT.md) |
+| [`code/`](code/) | **Shipped packs** (CLI, wheel, sim) — required; clone is self-contained |
 
 ## Tracks
 
@@ -30,9 +30,17 @@ Closed-source **lab packs** and **theory + practice** curriculum for robotos.
 
 Format: theory note → practice lab for each concept ([`docs/lab-outline.md`](docs/lab-outline.md)).
 
+## Students
+
+Clone (or unzip) this repo and follow [`SETUP.md`](SETUP.md). You only need this
+folder — `code/` already has the Windows CLI pack, wheel, and warehouse sim.
+Mac/Linux `code/` trees are added when those packs are built (WH may be
+Windows-only until then; MW/HW still work with a matching CLI+wheel).
+
 ## Maintainer / agents
 
-- Assemble student zip: [`packs/LAYOUT.md`](packs/LAYOUT.md) + `packs/assemble.ps1`
+- Keep `code/` self-contained for the OS you teach; do not ship a docs-only tree
+- Optional class zip: [`packs/LAYOUT.md`](packs/LAYOUT.md) + `packs/assemble.ps1`
 - **Build Mac/Linux warehouse sim packs (P2.1):** follow sibling
   [`robotos-sim/docs/workshop-bundle-building.md`](../robotos-sim/docs/workshop-bundle-building.md)
   (Mac → `macos-arm64` only; Linux/CI → `linux-x64`; do not cross-build Tauri)

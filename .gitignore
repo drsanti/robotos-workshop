@@ -2,24 +2,30 @@
 instructor/
 **/instructor/
 
-# Local packs / binaries (never commit)
+# Maintainer assemble outputs / local env (not the student tree)
 packs/*.zip
 packs/dist/
 drops/
 .venv/
-code/robotos-v*/
-code/robotos-sim-v*/
-code/*.whl
-code/NOTES.txt
+venv/
+
+# Student `code/` packs ARE committed — clone must be self-contained.
+# (Windows packs ship today; add macos/linux trees when built.)
+
+# Native libs outside code/ (smoke leftovers, accidental copies)
 *.exe
 *.dylib
 *.so
 *.dll
+!/code/
+!/code/**
+!/code/**/*.exe
+!/code/**/*.dll
+!/code/**/*.dylib
+!/code/**/*.so
 
 # Python / OS
 __pycache__/
-.venv/
-venv/
 .DS_Store
 Thumbs.db
 *.log
