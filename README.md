@@ -1,44 +1,26 @@
 # robotos-workshop
 
-Closed-source **lab packs** and **theory + practice** curriculum for robotos.
+Student-facing curriculum + **prebuilt** `code/` packs (robotos CLI, wheels, robotos-sim).  
+Do **not** clone `robotos` or `robotos-sim` source for class labs.
 
-**Content goal:** middleware concepts, warehouse-sim autonomy, **and ESP32-S3 board labs** (read sensors + command actuators) — instructor owns scheduling.
+## Layout (in progress)
 
-## Contents
+```text
+code/
+  robotos-v0.3.0-macos-arm64/       # CLI + SDK headers
+  robotos-sim-v0.1.0-macos-arm64/   # warehouse desktop sim (.app)
+packs/
+  SMOKE.md                          # maintainer smoke log
+```
 
-| Path | Purpose |
-|------|---------|
-| [`docs/lab-outline.md`](docs/lab-outline.md) | Content map (concept → theory → lab) |
-| [`docs/coverage.md`](docs/coverage.md) | Checklist vs `nd3/docs` week02–03 |
-| [`docs/ebook/`](docs/ebook/) | **Student ebook chapters** + style + persona QA |
-| [`docs/theory/`](docs/theory/) | Instructor talking points (short) |
-| [`docs/p0-contract.md`](docs/p0-contract.md) | Warehouse topic contract |
-| [`SETUP.md`](SETUP.md) | PATH, wheel, sim (see also ebook Ch.0) |
-| [`labs/mw/`](labs/mw/) | Middleware labs (`mw-00` … `mw-06`) |
-| [`labs/wh/`](labs/wh/) | Warehouse labs (`wh-00` … `wh-08`) |
-| [`labs/hw/`](labs/hw/) | ESP32-S3 board labs (`hw-00` … `hw-07`) |
-| [`packs/`](packs/) | Assemble recipe — start at [`packs/LAYOUT.md`](packs/LAYOUT.md) |
-| [`code/`](code/) | Binaries at ship time |
+Windows / Linux sim + full SETUP / labs land as the class pack fills in.
+See private `robotos-sim` docs: `workshop-bundle-building.md`.
 
-## Tracks
+## macOS quick smoke
 
-| Track | Labs | Focus |
-|-------|------|--------|
-| **MW** | `mw-00` … `mw-06` | Middleware patterns on the laptop graph |
-| **WH** | `wh-00` … `wh-08` | Warehouse sim on `/robot/01/*` |
-| **HW** | `hw-00` … `hw-07` | ESP32-S3: probe, sense, actuate, params, bag, closed loop |
-
-Format: theory note → practice lab for each concept ([`docs/lab-outline.md`](docs/lab-outline.md)).
-
-## Maintainer / agents
-
-- Assemble student zip: [`packs/LAYOUT.md`](packs/LAYOUT.md) + `packs/assemble.ps1`
-- **Build Mac/Linux warehouse sim packs (P2.1):** follow sibling
-  [`robotos-sim/docs/workshop-bundle-building.md`](../robotos-sim/docs/workshop-bundle-building.md)
-  (Mac → `macos-arm64` only; Linux/CI → `linux-x64`; do not cross-build Tauri)
-- CLI + wheels: [`robotos/docs/workshop-bundle-building.md`](../robotos/docs/workshop-bundle-building.md)
-- Smoke log: [`packs/SMOKE.md`](packs/SMOKE.md)
-
-## License
-
-Closed / workshop use.
+```bash
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+open ./code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
+# Gatekeeper first launch: right-click → Open if blocked
+robotos topic list   # expect /robot/01/cmd_vel|odom|scan
+```

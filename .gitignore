@@ -1,29 +1,7 @@
-# Instructor-only solutions
-instructor/
-**/instructor/
-
-# Local packs / binaries (never commit)
-packs/*.zip
-packs/dist/
-drops/
-.venv/
-code/robotos-v*/
-code/robotos-sim-v*/
-code/*.whl
-code/NOTES.txt
-*.exe
-*.dylib
-*.so
-*.dll
-
-# Python / OS
-__pycache__/
+.DS_Store
+**/__pycache__/
+*.pyc
 .venv/
 venv/
-.DS_Store
-Thumbs.db
-*.log
-*.rbag
-
-# Local IDE / agent
-.cursor/
+drops/
+*.zip

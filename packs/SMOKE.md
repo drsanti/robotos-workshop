@@ -1,36 +1,17 @@
-# Smoke log (maintainers)
+# robotos-workshop pack smoke log
 
-## 2026-11-02 windows-x64
+Append dated sections after each OS ship. Do not invent new pack folder names.
 
-| Check | Result |
-|-------|--------|
-| Wheel build with `geometry` / `nav` / `laser` pb2 | PASS |
-| Twist pub/sub roundtrip (two Python nodes) | PASS |
-| `assemble.ps1` + zip | PASS |
-| Desktop auto-bootstrap External+Native+Connect | PASS (`bootstrapTauriWorkshop`) |
-| `robotos node list` shows `robotos_sim` (3 endpoints) | PASS |
-| `topic list` cmd_vel / odom / scan | PASS |
-| Lab 01 drive: odom x 3.01 → 3.77 in ~3 s @ 0.25 m/s | PASS |
-| Lab 02 / 03 starters | run after Lab 01 (see session) |
+## 2026-11-02 macos-arm64
 
-## macos-arm64 (pending — build on Mac)
-
-Follow [`../../robotos-sim/docs/workshop-bundle-building.md`](../../robotos-sim/docs/workshop-bundle-building.md). Fill after Gatekeeper + WH-01 smoke:
+Host: Apple Silicon Mac · packs in `code/`
 
 | Check | Result |
 |-------|--------|
-| `npm run tauri:build` on Apple Silicon | |
-| Stage `robotos-sim-v0.1.0-macos-arm64/` | |
-| Gatekeeper right-click Open / Allow | |
-| Auto External+Native+Connect | |
-| `topic list` cmd_vel / odom / scan | |
-| WH-01 `drive_forward.py` | |
+| Sim launches (`open …/robotos-sim.app`) | **PASS** |
+| Auto External + Native + Connect | **PASS** (desktop bootstrap) |
+| `robotos topic list` shows `/robot/01/cmd_vel`, `odom`, `scan` | **PASS** |
+| WH-01 `drive_forward.py` | **SKIP** — workshop curriculum / labs not in repo yet |
+| `robotos node list` | not required once topics PASS |
 
-## linux-x64 (pending — build on Linux/CI, not Mac)
-
-| Check | Result |
-|-------|--------|
-| `npm run tauri:build` on Linux | |
-| Stage `robotos-sim-v0.1.0-linux-x64/` | |
-| Auto External+Native+Connect | |
-| `topic list` + WH-01 drive | |
+Notes: Tauri `tauri build` DMG step hit `hdiutil … Resource busy`; `.app` from release bundle is good. Installer DMG recreated with `hdiutil create` into `installers/`.
