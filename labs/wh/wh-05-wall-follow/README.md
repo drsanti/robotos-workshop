@@ -24,9 +24,13 @@ Follow a wall using the three rangers (default: **right** wall).
 
 ## Hint
 
-Too far from wall → forward + turn toward wall.  
-Too close → turn away.  
+Too far from wall → forward + turn **toward** wall.  
+Too close → turn **away**.  
 Front blocked → hard turn / spin away from wall side.
+
+Start near a rack aisle (Reset leaves you in open floor at ~2 m, 2 m — drive
+toward a brown shelf first, or the side ranger stays at max range and steering
+saturates into a circle).
 
 ## Run
 

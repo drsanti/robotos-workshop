@@ -60,10 +60,13 @@ def main() -> None:
                 front = scan.front
                 side = scan.ranges[side_i]
                 if front < args.front_stop:
+                    # Spin away from the followed wall (into the aisle).
                     cmd = make_twist(wz=sign * 0.9)
                 else:
-                    err = args.target - side  # >0 → too far from wall
-                    wz = sign * (-args.k * err)
+                    # err>0 → too close; err<0 → too far.
+                    # +wz = turn left. Right-wall: too far → turn right (−wz).
+                    err = args.target - side
+                    wz = sign * (args.k * err)
                     wz = max(-1.2, min(1.2, wz))
                     cmd = make_twist(vx=args.vx, wz=wz)
                 pub.publish(cmd)
