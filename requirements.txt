@@ -1,0 +1,5 @@
+# Install the OS-matched wheel from code/ after SETUP (not from PyPI):
+#   pip install code/robotos-0.3.0-*.whl
+#
+# Direct dependency of that wheel:
+protobuf>=5.27

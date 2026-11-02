@@ -1,0 +1,72 @@
+robotos-workshop pack
+=====================
+Date:       2026-11-02
+OS/arch:    linux-x64
+robotos:    v0.3.0
+robotos-sim: code/robotos-sim-v0.1.0-linux-x64/robotos-sim
+serial-bridge: code/robotos-v0.3.0-linux-x64/bin/serial-bridge
+Contract:   P0 warehouse 2026-11-02 + HW board labs
+
+Use bash. Full SETUP: SETUP.md · Ebook: docs/ebook/chapters/ch00-setup-your-machine.md
+
+If code/robotos-sim-v0.1.0-linux-x64/ is missing from this zip, skip WH labs (MW/HW still OK).
+
+---------------------------------------------------------------------------
+A) Middleware / warehouse (no board)
+---------------------------------------------------------------------------
+Env (optional TCP peer):
+  export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+
+PATH (each new terminal):
+  export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+  chmod +x code/robotos-v0.3.0-linux-x64/bin/robotos \
+           code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2>/dev/null || true
+
+Sim (WH labs — only if folder present):
+  chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
+  ./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &
+  Auto External+Native+Connect.
+
+Python:
+  python3 -m venv .venv
+  source .venv/bin/activate
+  python -m pip install -U pip
+  python -m pip install code/robotos-0.3.0-*-manylinux*.whl
+  # or: code/robotos-0.3.0-py3-none-any.whl if that is what this pack ships
+
+Smoke:
+  robotos topic list
+  python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+
+---------------------------------------------------------------------------
+B) ESP32-S3 board (HW labs) — serial-bridge
+---------------------------------------------------------------------------
+Prereq: board flashed; USB attached.
+Serial permission: sudo usermod -aG dialout $USER  then log out/in.
+Self-check: groups | grep dialout ; ls -l /dev/ttyACM*
+Do not sudo serial-bridge to paper over permissions.
+
+1) Terminal A — bridge (leave open):
+     cd <robotos-workshop>
+     export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+     export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+     chmod +x code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2>/dev/null || true
+     serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
+   Or pin: --port /dev/ttyACM0
+
+2) Terminal B — labs:
+     cd <robotos-workshop>
+     export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+     export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+     source .venv/bin/activate
+     robotos topic echo /robot/01/sys/board --count 3
+     python labs/hw/hw-01-caps-probe/starter/caps_probe.py
+
+Troubleshooting:
+  - Permission denied on /dev/ttyACM* → dialout + re-login
+  - no topics → bridge down or ROBOTOS_CONNECT missing
+  - Actuator no-op → forgot --cmd-topic all
+  - Zip stripped +x → chmod +x the binaries again
+
+Support:
+  instructor

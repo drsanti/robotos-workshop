@@ -1,0 +1,68 @@
+# HW-07 — Sense → actuate (closed loop on silicon)
+
+## Goal
+
+One host node: **read a sensor**, **command an actuator** (WH-03 pattern on hardware).
+
+## Learning outcomes
+
+- Branch on HW-01 caps (IMU+LED vs IMU-only vs LED-only)  
+- Close a loop: tilt → LED / console state  
+- Zero/off on exit when commanding LEDs  
+
+## Prerequisites
+
+- HW-01/02/03 as needed for your caps  
+- Ebook: [`ch05-feedback-control.md`](../../../docs/ebook/chapters/ch05-feedback-control.md) + [`ch04-board-on-graph.md`](../../../docs/ebook/chapters/ch04-board-on-graph.md)
+
+## Spec (minimum)
+
+- If board has **IMU + LED**: tilt threshold → LED solid; level → off.  
+- If **IMU only**: print `TILT` / `LEVEL` (no LED).  
+- If **LED only**: map battery % or a param into color (instructor pick).
+
+## Architecture
+
+```mermaid
+flowchart LR
+  imu["/robot/01/sensor/imu"] --> node[sense_actuate.py]
+  node -->|LedFx| led["/robot/01/actuator/led/fx"]
+```
+
+## Run
+
+### Windows (PowerShell)
+
+```powershell
+python labs\hw\hw-07-sense-actuate\starter\sense_actuate.py
+```
+
+### Linux / macOS (bash)
+
+```bash
+python labs/hw/hw-07-sense-actuate/starter/sense_actuate.py
+```
+
+Needs caps matching your branch (probe with HW-01 first). On `ws28p`, expect IMU path + LED publish may be a no-op (no LED cap) — console `TILT`/`LEVEL` still counts.
+
+## Expected output
+
+```text
+tilt>25.0° → LED; level → off — Ctrl-C
+TILT 138°
+LEVEL 12°
+```
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| No prints | Bridge / IMU cap / `ROBOTOS_CONNECT` |
+| LED dark with TILT | No LED cap — OK; use console branch |
+| Forgot `--cmd-topic all` | Restart bridge with flag |
+
+## Done when
+
+Physical motion (or chosen input) changes an actuator or clear console state without Manual board UI.
+
+See [CHECKLIST.md](CHECKLIST.md).
