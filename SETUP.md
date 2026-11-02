@@ -296,6 +296,7 @@ Always run HW-01 (caps) before LED/IMU labs.
 |---------|--------|
 | `robotos` not found | PATH to `code/robotos-v*/bin` in **this** terminal; or reopen VS Code after unpack (`.vscode` settings); `chmod +x` on Linux/macOS |
 | `scripts\run` / `./scripts/run` fails | cwd must be workshop root (`SETUP.md` next to `labs/`); activate `.venv` first |
+| HW `caps_probe` waits forever / only WH topics with `ROBOTOS_CONNECT` | Close **robotos-sim**, then restart `scripts/start-bridge` — sim and bridge both want `:7447` |
 
 | `Activate.ps1` blocked | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
 | wheel “not supported” | Wrong OS wheel — `win_amd64` / `macosx` / linux / `py3-none-any` |

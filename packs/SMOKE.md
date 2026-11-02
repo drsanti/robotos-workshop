@@ -51,7 +51,28 @@ Maya WH-01/ch02 ignore-bootstrap wording landed same day.
 |------|--------|
 | `scripts/start-here`, `start-bridge`, `run` (+ `.vscode` PATH) | **Shipped** in tree |
 | Docs prefer helpers: README, SETUP, ch00/ch01, NOTES.*, lab sheets | **Updated** |
-| Re-zip student drops after this doc pass | Optional (instructor) |
+| Re-zip student drops after this doc pass | **Done** (afternoon refresh) |
+
+## 2026-11-02 afternoon — re-zip + Maya helper smoke
+
+Handout: [`CLASS-HANDOUT.md`](CLASS-HANDOUT.md).
+
+| Check | Result |
+|-------|--------|
+| Assemble Win + Mac from in-repo `code/` → `drops/*-20261102.zip` | **PASS** (~71 MB each; includes `scripts/`, `.vscode/`) |
+| `robotos topic list` (sim) shows cmd_vel/odom/scan | **PASS** |
+| `scripts\run.cmd wh-01` | **PASS** (100 cmds + zero) |
+| HW: bridge on **COM17** + `ROBOTOS_CONNECT` + `scripts\run.cmd hw-01` | **PASS** (`ws28p` caps=`0x3c`) after **closing sim** |
+
+Notes: With warehouse sim still bound on `:7447`, `ROBOTOS_CONNECT=tcp/127.0.0.1:7447` can hit the **sim** instead of the bridge — topic list shows only WH topics and `hw-01` waits forever. Class tip: **close sim before start-bridge** (handout). `--port auto` still flaky on this host; pin `COM17` when needed.
+
+### macOS parity checklist (run on a Mac before class)
+
+- [ ] Unzip `robotos-workshop-macos-arm64-20261102.zip`  
+- [ ] Gatekeeper: right-click `scripts/start-here.command` → Open; same for `robotos-sim.app` if blocked  
+- [ ] `chmod +x` on `code/robotos-v*/bin/*` if zip stripped execute bits  
+- [ ] `./scripts/run wh-01` moves the robot  
+- [ ] `./scripts/start-bridge.sh` + `./scripts/run hw-01` with board  
 
 ## 2026-11-02 windows-x64 HW (board on desk)
 

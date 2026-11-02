@@ -17,6 +17,7 @@ set "ROBOTOS_LISTEN=tcp/0.0.0.0:7447"
 echo.
 echo  robotos-workshop — serial-bridge ^(board^)
 echo  -----------------------------------------
+echo  Prefer closing the warehouse sim first ^(avoids port 7447 clash^).
 echo  Plug in the ESP32-S3 USB cable first.
 echo  Leave this window open. Labs: VS Code terminal or scripts\start-here.cmd
 echo.

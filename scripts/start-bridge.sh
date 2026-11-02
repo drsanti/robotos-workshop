@@ -21,6 +21,7 @@ chmod +x "$OS_BIN/serial-bridge" 2>/dev/null || true
 echo
 echo " robotos-workshop — serial-bridge (board)"
 echo " ----------------------------------------"
+echo " Prefer closing the warehouse sim first (avoids port 7447 clash)."
 echo " Plug in USB. Leave this window open. Labs: ./scripts/start-here.sh"
 echo " If auto fails: serial-bridge --port /dev/cu.usbmodemXXXX ..."
 echo
