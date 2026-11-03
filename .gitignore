@@ -33,5 +33,10 @@ Thumbs.db
 *.log
 *.rbag
 
-# Local IDE / agent
+# Local IDE / agent scratch (do not commit)
 .cursor/
+.instructor/
+labs/.images/
+labs/.prompt/
+docs/theory/.images/
+docs/theory/.prompt/

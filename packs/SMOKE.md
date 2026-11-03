@@ -37,6 +37,20 @@ Host: Windows 11 x64 · `robotos-sim` `91d4b72` (Phase 2 UX, L/R, START, aisle s
 | Workshop WH-05 starter seek/diagnostics | **PASS** (committed `67d1a82`) |
 | WH-05 aisle lap smoke | **manual** — Reset → External → `wall_follow.py --side right --target 0.7 --k 0.6` |
 
+## NEXT — 2026-11-03+ macos-arm64 Phase 2 parity
+
+**Agent on Mac:** follow `robotos-sim/docs/MACOS-AGENT-HANDOFF.md`.
+
+| Check | Result |
+|-------|--------|
+| `git pull` robotos + robotos-sim + robotos-workshop | pending |
+| `npm run tauri:build` → replace `code/robotos-sim-v0.1.0-macos-arm64/` | pending |
+| Gatekeeper open; NATIVE · EXTERNAL · connected | pending |
+| Reset aisle spawn; R/L labels correct; START square | pending |
+| WH-01 drive_forward | pending |
+| WH-05 `--side right --target 0.7 --k 0.6` → `follow` | pending |
+| Update building.md macos status → Shipped; commit+push | pending |
+
 ## 2026-11-02 macos follow-ups
 
 | Item | Status |
