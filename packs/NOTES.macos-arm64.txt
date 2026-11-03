@@ -1,11 +1,11 @@
 robotos-workshop pack
 =====================
-Date:       2026-11-02
+Date:       2026-11-03
 OS/arch:    macos-arm64
 robotos:    v0.3.0
 robotos-sim: code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
-serial-bridge: code/robotos-v0.3.0-macos-arm64/bin/serial-bridge
-Contract:   P0 warehouse 2026-11-02 + HW board labs
+serial-bridge: code/robotos-v0.3.0-macos-arm64/bin/serial-bridge (--port auto)
+Contract:   P0 warehouse Phase 2 polish + HW board labs
 
 Prefer helpers under scripts/. Full SETUP: SETUP.md · Ebook: docs/ebook/chapters/ch00-setup-your-machine.md
 
@@ -54,7 +54,10 @@ Flash: hardware-interface-workshop/firmware-prebuilt/{es3c28p|ws28p}/
 Always run HW-01 and follow caps (labs/hw/README.md).
 
 1) Prefer: ./scripts/start-bridge.sh
-   Or: serial-bridge --port /dev/cu.usbmodemXXXX --baud 921600 --robot-id 01 --cmd-topic all
+   (uses --port auto; close warehouse sim first to free :7447)
+   Or: serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all \
+         --probe-settle-ms 2000 --probe-ms 5000
+   Pin if auto skips USB: --port /dev/cu.usbmodemXXXX …
 
 2) Labs:
      export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
@@ -66,6 +69,7 @@ Troubleshooting:
   - Port busy → close serial monitor
   - no topics → bridge down or ROBOTOS_CONNECT missing
   - chmod +x after unzip if binaries refuse to run
+  - Teaching lock on in sim hides Mock/WS bridge — WH Native path uses Native + Join graph
 
 Support:
   instructor

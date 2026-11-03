@@ -57,7 +57,9 @@ Host: Apple Silicon · `robotos-sim` `5f1eb5e` (teaching lock, aisle art, Join g
 |-------|--------|
 | `tauri:build` → replace `code/robotos-sim-v0.1.0-macos-arm64/` | **PASS** |
 | Launch; topics + aisle spawn odom/scan | **PASS** (re-smoke) |
-| Windows pack rebuild for same polish | **pending** (Windows host) |
+| Rebuild Mac `serial-bridge` with `--port auto` into CLI pack | **PASS** |
+| Assemble `drops/robotos-workshop-macos-arm64-20261103.zip` (~66 MB) | **PASS** |
+| Windows pack rebuild for same polish | **deferred** (Windows host later) |
 
 ## 2026-11-02 macos follow-ups
 
