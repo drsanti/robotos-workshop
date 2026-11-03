@@ -37,19 +37,17 @@ Host: Windows 11 x64 · `robotos-sim` `91d4b72` (Phase 2 UX, L/R, START, aisle s
 | Workshop WH-05 starter seek/diagnostics | **PASS** (committed `67d1a82`) |
 | WH-05 aisle lap smoke | **manual** — Reset → External → `wall_follow.py --side right --target 0.7 --k 0.6` |
 
-## NEXT — 2026-11-03+ macos-arm64 Phase 2 parity
+## 2026-11-03 macos-arm64 Phase 2 parity
 
-**Agent on Mac:** follow `robotos-sim/docs/MACOS-AGENT-HANDOFF.md`.
+Host: Apple Silicon Mac · `robotos-sim` `91d4b72`/`5ba0521` lineage · pack in `code/robotos-sim-v0.1.0-macos-arm64/`
 
 | Check | Result |
 |-------|--------|
-| `git pull` robotos + robotos-sim + robotos-workshop | pending |
-| `npm run tauri:build` → replace `code/robotos-sim-v0.1.0-macos-arm64/` | pending |
-| Gatekeeper open; NATIVE · EXTERNAL · connected | pending |
-| Reset aisle spawn; R/L labels correct; START square | pending |
-| WH-01 drive_forward | pending |
-| WH-05 `--side right --target 0.7 --k 0.6` → `follow` | pending |
-| Update building.md macos status → Shipped; commit+push | pending |
+| `npm run tauri:build` → replace macos pack (`.app` + launcher + DMG) | **PASS** |
+| Launch; topics `/robot/01/cmd_vel|odom|scan`; aisle spawn `(4.25, 3)` yaw `π/2` | **PASS** (scan R≈0.6 F=4 L=3) |
+| WH-01 `drive_forward.py` | **PASS** (odom y 3.0 → ~4.08) |
+| WH-05 `--side right --target 0.7 --k 0.6` | **PASS** (25 s all `follow`; side 0.60→0.76; aisle advance y→~7.8) |
+| building.md macos status → Shipped | **PASS** |
 
 ## 2026-11-02 macos follow-ups
 
