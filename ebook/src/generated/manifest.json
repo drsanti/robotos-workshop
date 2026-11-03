@@ -1,0 +1,33 @@
+{
+  "generated_utc": "2026-11-02T12:57:04.6076269Z",
+  "chapters": 14,
+  "labs": 24,
+  "checklists": 24,
+  "discovered_labs": [
+    "mw/mw-00-getting-started",
+    "mw/mw-01-pub-sub",
+    "mw/mw-02-services",
+    "mw/mw-03-actions",
+    "mw/mw-04-parameters",
+    "mw/mw-05-record-replay",
+    "mw/mw-06-mini-twin",
+    "wh/wh-00-hello-graph",
+    "wh/wh-01-drive-twist",
+    "wh/wh-02-sense-odom-scan",
+    "wh/wh-03-avoid-front",
+    "wh/wh-04-square-path",
+    "wh/wh-05-wall-follow",
+    "wh/wh-06-state-machine",
+    "wh/wh-07-record-bag",
+    "wh/wh-08-capstone",
+    "hw/hw-00-board-connect",
+    "hw/hw-01-caps-probe",
+    "hw/hw-02-read-sensors",
+    "hw/hw-03-command-actuators",
+    "hw/hw-04-board-params",
+    "hw/hw-05-input-events",
+    "hw/hw-06-record-board",
+    "hw/hw-07-sense-actuate"
+  ],
+  "missing_readmes": []
+}

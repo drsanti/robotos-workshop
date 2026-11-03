@@ -1,0 +1,24 @@
+[book]
+title = "robotos Workshop — Ebook"
+description = "Student chapters and lab sheets for middleware, warehouse sim, and ESP32-S3 board tracks. Markdown under docs/ebook/chapters and labs/ remains the source of truth."
+authors = ["robotos workshop"]
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "light"
+additional-css = ["theme/ebook.css"]
+additional-js = ["theme/mermaid.min.js", "theme/ebook.js", "theme/force-light.js"]
+no-section-label = false
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.print]
+enable = true

@@ -1,0 +1,554 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ch.0 — Setup your machine - robotos Workshop — Ebook</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Student chapters and lab sheets for middleware, warehouse sim, and ESP32-S3 board tracks. Markdown under docs/ebook/chapters and labs/ remains the source of truth.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/ebook-bd0553b9.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "light";
+            window.path_to_searchindex_js = "../searchindex-b7decd78.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b74680cb.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">robotos Workshop — Ebook</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="chapter-0--setup-your-machine"><a class="header" href="#chapter-0--setup-your-machine">Chapter 0 — Setup your machine</a></h1>
+<h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
+<p>After this chapter you can:</p>
+<ul>
+<li>Unpack the workshop drop and recognize each folder’s job</li>
+<li>Open a terminal on <strong>your</strong> OS and run <code>robotos version</code></li>
+<li>Create a Python virtual environment and import the <code>robotos</code> SDK</li>
+<li>Launch the warehouse simulator (when your pack includes it)</li>
+<li>Run a first smoke test that moves the simulated robot</li>
+</ul>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<ul>
+<li>The course ZIP / drop for <strong>your</strong> OS (class focus: <strong>Windows x64</strong> or <strong>macOS arm64</strong>)</li>
+<li><strong>VS Code</strong> (class machines)</li>
+<li>About 2 GB free disk space</li>
+<li>Administrator rights only if your school PC blocks installing Python or running unsigned apps — ask a TA if unsure</li>
+</ul>
+<p>You do <strong>not</strong> need to clone private GitHub source repos for the student labs.
+Clone/unzip <strong>robotos-workshop</strong> only — it already includes <code>code/</code> packs.</p>
+<hr>
+<h2 id="1-motivation"><a class="header" href="#1-motivation">1. Motivation</a></h2>
+<p>Robot middleware is a <strong>graph of programs</strong> talking over named topics. Your laptop will run:</p>
+<ol>
+<li><strong>CLI tools</strong> (<code>robotos</code>) — list topics, echo messages, record bags</li>
+<li><strong>Python scripts</strong> — your labs publish and subscribe</li>
+<li><strong>Warehouse sim</strong> (WH labs) — a desktop app that <em>is</em> the robot on the graph</li>
+<li>Optionally a <strong>serial-bridge</strong> (HW labs) — connects a real ESP32-S3 board</li>
+</ol>
+<p>If PATH, the Python wheel, or the sim connection is wrong, every later lab looks “broken.” This chapter removes that fog.</p>
+<hr>
+<h2 id="2-theory--what-you-are-installing"><a class="header" href="#2-theory--what-you-are-installing">2. Theory — what you are installing</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Artifact</th><th>What it is</th><th>You use it when…</th></tr>
+</thead>
+<tbody>
+<tr><td><code>code/robotos-v0.3.0-&lt;os&gt;/</code></td><td>Prebuilt CLI + native libraries</td><td>Every lab (<code>robotos topic list</code>, …)</td></tr>
+<tr><td><code>code/robotos-0.3.0-*.whl</code></td><td>Python package (<code>import robotos</code>)</td><td>Every Python starter</td></tr>
+<tr><td><code>code/robotos-sim-v*/</code></td><td>Desktop warehouse simulator</td><td>Warehouse (WH) labs</td></tr>
+<tr><td><code>code/NOTES.txt</code></td><td>Class-specific ports / COM hints</td><td>Especially HW labs</td></tr>
+<tr><td><code>scripts/</code></td><td><code>start-here</code>, <code>start-bridge</code>, <code>run</code></td><td>Day-1 helpers (prefer these)</td></tr>
+<tr><td><code>labs/</code></td><td>Step sheets + starter code</td><td>Graded work</td></tr>
+<tr><td><code>docs/</code> + <code>docs/ebook/</code></td><td>Theory &amp; this ebook source</td><td>Reading / revision</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Virtual environment (venv):</strong> an isolated Python folder (<code>.venv/</code>) so course packages do not fight other class installs. Always <strong>activate</strong> it before <code>pip</code> or <code>python</code> lab commands.</p>
+<p><strong>PATH:</strong> the list of folders your terminal searches for programs. Putting <code>code/robotos-v*/bin</code> on PATH makes <code>robotos</code> and <code>serial-bridge</code> runnable by name.</p>
+<hr>
+<h2 id="3-architecture--pieces-on-your-pc"><a class="header" href="#3-architecture--pieces-on-your-pc">3. Architecture — pieces on your PC</a></h2>
+<pre><code class="language-mermaid">flowchart TB
+  subgraph student_pc [Your computer]
+    cli[robotos CLI]
+    py[Python venv + lab scripts]
+    sim[robotos-sim desktop]
+    bridge[serial-bridge optional]
+  end
+  subgraph graph [robotos graph / Zenoh]
+    topics[Topics e.g. /robot/01/cmd_vel]
+  end
+  board[ESP32-S3 board optional]
+  cli --&gt; topics
+  py --&gt; topics
+  sim --&gt; topics
+  bridge --&gt; topics
+  board --&gt;|USB UART| bridge
+</code></pre>
+<hr>
+<h2 id="4-sequence--first-successful-hour"><a class="header" href="#4-sequence--first-successful-hour">4. Sequence — first successful hour</a></h2>
+<pre><code class="language-mermaid">sequenceDiagram
+  actor You
+  participant Zip as Workshop ZIP
+  participant VS as "VS Code + scripts"
+  participant Sim as robotos-sim
+  participant Graph as Topic bus
+  You-&gt;&gt;Zip: Unzip to a short path
+  You-&gt;&gt;VS: Open folder, run scripts/start-here
+  VS-&gt;&gt;Sim: Starts sim and creates .venv
+  Sim-&gt;&gt;Graph: Announce odom, scan, subscribe cmd_vel
+  You-&gt;&gt;VS: New terminal, robotos topic list
+  VS--&gt;&gt;You: /robot/01/cmd_vel, odom, scan
+  You-&gt;&gt;VS: scripts/run wh-01
+  VS-&gt;&gt;Graph: Twist messages
+  Graph-&gt;&gt;Sim: Robot moves about 1 m
+</code></pre>
+<hr>
+<h2 id="5-hands-on--windows-vs-code--helpers"><a class="header" href="#5-hands-on--windows-vs-code--helpers">5. Hands-on — Windows (VS Code + helpers)</a></h2>
+<h3 id="50-preferred-class-path-do-this-first"><a class="header" href="#50-preferred-class-path-do-this-first">5.0 Preferred class path (do this first)</a></h3>
+<ol>
+<li>Unzip to a short path <strong>without spaces</strong>, e.g. <code>C:\robotos-workshop</code>.</li>
+<li>Confirm you see <code>SETUP.md</code>, <code>labs\</code>, <code>code\</code>, and <code>scripts\</code>.</li>
+<li>Open that folder in <strong>VS Code</strong> (<code>File → Open Folder…</code>).</li>
+<li>Double-click <code>scripts\start-here.cmd</code> once — creates <code>.venv</code>, installs the wheel, starts the sim.</li>
+<li>In VS Code: <strong>Terminal → New Terminal</strong>.</li>
+<li>Smoke:</li>
+</ol>
+<pre><code class="language-powershell">robotos topic list
+scripts\run.cmd wh-01
+</code></pre>
+<p><strong>Expect:</strong> topics <code>/robot/01/cmd_vel</code>, <code>odom</code>, <code>scan</code>, and the sim robot moves ~1 m.</p>
+<p>Board labs later: double-click <code>scripts\start-bridge.cmd</code> and leave it open, then <code>scripts\run.cmd hw-01</code>.</p>
+<blockquote>
+<p>The rest of §5 is the <strong>manual</strong> PowerShell walkthrough if a TA asks you to type every step.</p>
+</blockquote>
+<h3 id="51-open-powershell-manual"><a class="header" href="#51-open-powershell-manual">5.1 Open PowerShell (manual)</a></h3>
+<ol>
+<li>Press <code>Win</code>, type <code>PowerShell</code>, open <strong>Windows PowerShell</strong>.</li>
+<li>This is a text window where you type commands and press Enter. Red text usually means an error — read it; it is rarely “your PC is broken.”</li>
+</ol>
+<h3 id="52-unpack-manual"><a class="header" href="#52-unpack-manual">5.2 Unpack (manual)</a></h3>
+<ol>
+<li>Unzip the course drop.</li>
+<li>Prefer a short path <strong>without spaces</strong>, e.g. <code>C:\robotos-workshop</code> or <code>D:\CODE\robotos-workshop</code>.</li>
+<li>Confirm you see <code>SETUP.md</code>, <code>labs\</code>, <code>code\</code>, and <code>scripts\</code>.</li>
+</ol>
+<h3 id="53-path-and-robotos"><a class="header" href="#53-path-and-robotos">5.3 PATH and <code>robotos</code></a></h3>
+<pre><code class="language-powershell">cd C:\robotos-workshop
+# ↑ change to YOUR unzip folder
+
+$os = "robotos-v0.3.0-windows-x64"
+$env:PATH = "$PWD\code\$os\bin;$env:PATH"
+Get-Command robotos
+robotos version
+</code></pre>
+<p><strong>Expect:</strong> a line containing <code>robotos 0.3.0</code> (version may match your pack).</p>
+<p>If <code>Get-Command</code> fails: you typed the wrong <code>cd</code>, or the <code>code\robotos-v0.3.0-windows-x64\bin</code> folder is missing.</p>
+<blockquote>
+<p><strong>Note:</strong> <code>$env:PATH = ...</code> lasts only for <strong>this</strong> PowerShell window. Open a new window → run the PATH lines again (or keep the window open for the session).</p>
+</blockquote>
+<h3 id="54-python-venv--wheel"><a class="header" href="#54-python-venv--wheel">5.4 Python venv + wheel</a></h3>
+<p>Need Python 3.10+ from <a href="https://www.python.org/downloads/">python.org</a> (check “Add python.exe to PATH” on install).</p>
+<pre><code class="language-powershell">cd C:\robotos-workshop
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+</code></pre>
+<p>If activation errors with <strong>ExecutionPolicy</strong>, run <strong>once</strong> as the same user:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<p>Then retry <code>Activate.ps1</code>. Your prompt usually gains <code>(.venv)</code>.</p>
+<pre><code class="language-powershell">python -m pip install -U pip
+python -m pip install (Get-Item .\code\robotos-0.3.0-*-win_amd64.whl).FullName
+python -c "import robotos; print(robotos.Node.version())"
+</code></pre>
+<h3 id="55-start-the-sim"><a class="header" href="#55-start-the-sim">5.5 Start the sim</a></h3>
+<pre><code class="language-powershell">Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe
+</code></pre>
+<p>Or double-click <code>robotos-sim.exe</code> in Explorer. Wait until the UI shows <strong>connected / NATIVE</strong> (desktop builds auto-connect). If you changed modes: <strong>Warehouse → Native → External → Connect</strong>.</p>
+<h3 id="56-smoke-test-manual"><a class="header" href="#56-smoke-test-manual">5.6 Smoke test (manual)</a></h3>
+<p>In the <strong>same</strong> activated PowerShell (PATH + venv):</p>
+<pre><code class="language-powershell">robotos topic list
+scripts\run.cmd wh-01
+# or: python .\labs\wh\wh-01-drive-twist\starter\drive_forward.py
+</code></pre>
+<p><strong>Expect:</strong> topic list includes <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, <code>/robot/01/scan</code>, and the sim robot moves forward briefly.</p>
+<hr>
+<h2 id="6-hands-on--linux--macos-bash"><a class="header" href="#6-hands-on--linux--macos-bash">6. Hands-on — Linux / macOS (bash)</a></h2>
+<h3 id="61-open-a-terminal"><a class="header" href="#61-open-a-terminal">6.1 Open a terminal</a></h3>
+<ul>
+<li><strong>Ubuntu:</strong> Apps → Terminal</li>
+<li><strong>macOS:</strong> Spotlight (<code>Cmd+Space</code>) → <code>Terminal</code></li>
+</ul>
+<h3 id="62-unpack"><a class="header" href="#62-unpack">6.2 Unpack</a></h3>
+<pre><code class="language-bash">cd ~   # or where you unzipped
+cd robotos-workshop
+ls SETUP.md labs code
+</code></pre>
+<p>Use a path without spaces if possible.</p>
+<h3 id="63-path"><a class="header" href="#63-path">6.3 PATH</a></h3>
+<p><strong>Linux x64</strong></p>
+<pre><code class="language-bash">export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+chmod +x code/robotos-v0.3.0-linux-x64/bin/robotos 2&gt;/dev/null || true
+robotos version
+</code></pre>
+<p><strong>macOS Apple Silicon</strong></p>
+<pre><code class="language-bash">export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/robotos 2&gt;/dev/null || true
+robotos version
+</code></pre>
+<h3 id="64-python-venv--wheel"><a class="header" href="#64-python-venv--wheel">6.4 Python venv + wheel</a></h3>
+<p><strong>Linux x64</strong> — prefer the exact name in your pack’s <code>NOTES.txt</code>; tag-safe:</p>
+<pre><code class="language-bash">python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-*-manylinux*.whl
+# or: code/robotos-0.3.0-py3-none-any.whl
+python -c "import robotos; print(robotos.Node.version())"
+</code></pre>
+<p><strong>macOS Apple Silicon</strong></p>
+<pre><code class="language-bash">python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-*-macosx*.whl
+python -c "import robotos; print(robotos.Node.version())"
+</code></pre>
+<h3 id="60-preferred-class-path-macos"><a class="header" href="#60-preferred-class-path-macos">6.0 Preferred class path (macOS)</a></h3>
+<ol>
+<li>Unzip / clone so you see <code>SETUP.md</code>, <code>labs/</code>, <code>code/</code>, and <code>scripts/</code>.</li>
+<li>Open that folder in <strong>VS Code</strong>.</li>
+<li>Once: double-click <code>scripts/start-here.command</code> (or run <code>./scripts/start-here.sh</code>).</li>
+<li>New VS Code terminal → smoke:</li>
+</ol>
+<pre><code class="language-bash">robotos topic list
+./scripts/run wh-01
+</code></pre>
+<p>HW later: <code>./scripts/start-bridge.sh</code> in a second window, then <code>./scripts/run hw-01</code>.</p>
+<blockquote>
+<p>§§6.1–6.6 below are the <strong>manual</strong> Terminal.app walkthrough.</p>
+</blockquote>
+<h3 id="65-start-the-sim-manual"><a class="header" href="#65-start-the-sim-manual">6.5 Start the sim (manual)</a></h3>
+<p>Windows and macOS class packs <strong>include</strong> the sim. If your zip is Linux-only or
+<code>code/robotos-sim-v*/</code> is missing, skip this section and WH labs — continue with
+MW/HW (see <code>SETUP.md</code> §4).</p>
+<p><strong>Linux x64</strong> (sim often not shipped)</p>
+<pre><code class="language-bash">chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
+./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &amp;
+</code></pre>
+<p><strong>macOS Apple Silicon</strong></p>
+<pre><code class="language-bash"># Prefer the .app bundle from the class pack:
+open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
+# First launch: Finder → right-click → Open if Gatekeeper blocks
+</code></pre>
+<blockquote>
+<p><strong>macOS Gatekeeper (do this at first launch):</strong> if macOS says the app “cannot be opened,” use <strong>right-click → Open</strong>, or System Settings → Privacy &amp; Security → Allow. Do not skip this — the binary will not stay running until you approve it.</p>
+</blockquote>
+<p>Confirm <strong>Native / External / Connect</strong> in the UI as on Windows.</p>
+<h3 id="66-smoke-test-manual"><a class="header" href="#66-smoke-test-manual">6.6 Smoke test (manual)</a></h3>
+<p>Keep the same PATH folder you used in §6.3 (<code>linux-x64</code> or <code>macos-arm64</code>), venv active:</p>
+<pre><code class="language-bash">robotos topic list
+./scripts/run wh-01
+# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+</code></pre>
+<hr>
+<h2 id="7-code-walkthrough--drive_forwardpy-preview"><a class="header" href="#7-code-walkthrough--drive_forwardpy-preview">7. Code walkthrough — <code>drive_forward.py</code> (preview)</a></h2>
+<p>Full path: <code>labs/wh/wh-01-drive-twist/starter/drive_forward.py</code>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Part</th><th>Why it matters</th></tr>
+</thead>
+<tbody>
+<tr><td><code>SETUP.md</code> path walk</td><td>Puts workshop root on <code>sys.path</code> so <code>labs.common</code> imports work</td></tr>
+<tr><td><code>from ... geometry_pb2 import Twist</code></td><td>Messages are typed (protobuf schemas), not free-form JSON</td></tr>
+<tr><td><code>TOPIC = "/robot/01/cmd_vel"</code></td><td><strong>Contract name</strong> — must match the sim</td></tr>
+<tr><td><code>Node("lab01_drive")</code></td><td>Joins the graph as one more node</td></tr>
+<tr><td><code>create_publisher</code> + <code>settle()</code> / <code>make_twist</code></td><td>Graph API stays visible; settle/twist helpers are workshop plumbing</td></tr>
+<tr><td>Loop at 20 Hz</td><td>Controllers must <strong>keep publishing</strong>; one message is not enough</td></tr>
+<tr><td>Final <code>zero_twist()</code></td><td>Commands zero velocity so the robot stops</td></tr>
+</tbody>
+</table>
+</div>
+<p>Detailed walkthrough continues in Chapter 2 / lab WH-01.</p>
+<hr>
+<h2 id="8-expected-results"><a class="header" href="#8-expected-results">8. Expected results</a></h2>
+<p><strong><code>robotos version</code></strong></p>
+<pre><code class="language-text">robotos 0.3.0
+</code></pre>
+<p><strong><code>robotos topic list</code></strong> (sim connected; columns may vary)</p>
+<pre><code class="language-text">TOPIC                 PUBS  SUBS  ...
+/robot/01/cmd_vel     ...   1
+/robot/01/odom        1     ...
+/robot/01/scan        1     ...
+</code></pre>
+<p><strong><code>drive_forward.py</code></strong></p>
+<pre><code class="language-text">robotos 0.3.0 — pub Twist vx=0.2 wz=0.0 for ~5.0s @ 20.0 Hz
+done — 100 cmds + zero
+</code></pre>
+<hr>
+<h2 id="9-troubleshooting"><a class="header" href="#9-troubleshooting">9. Troubleshooting</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr>
+</thead>
+<tbody>
+<tr><td><code>robotos: command not found</code></td><td>PATH not set in <strong>this</strong> terminal</td><td>Re-run PATH export / <code>$env:PATH</code></td></tr>
+<tr><td><code>Activate.ps1</code> cannot run</td><td>ExecutionPolicy</td><td><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></td></tr>
+<tr><td>Wheel “not supported”</td><td>Wrong OS wheel</td><td>Install <code>win_amd64</code> / <code>macosx</code> / <code>manylinux</code> matching your PC</td></tr>
+<tr><td><code>ModuleNotFoundError: labs</code></td><td>Not inside workshop tree</td><td>Terminal cwd under folder with <code>SETUP.md</code> + <code>labs/</code> (see <code>labs/common/README.md</code>)</td></tr>
+<tr><td><code>no topics announced</code></td><td>Sim not connected or wrong mesh env</td><td>Connect Native+External; clear leftover <code>ROBOTOS_LISTEN</code> from HW labs</td></tr>
+<tr><td>Robot ignores Twist</td><td>Control ownership still Manual</td><td>UI: External + Native; keep publishing ≥ ~2 Hz</td></tr>
+<tr><td>Git Bash mangles <code>/robot/...</code></td><td>Bash on Windows rewrites paths</td><td>Use <strong>PowerShell</strong> for <code>robotos topic …</code> on Windows</td></tr>
+<tr><td>Linux serial later fails</td><td>User not in <code>dialout</code></td><td><code>sudo usermod -aG dialout $USER</code> then log out/in</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="10-check-yourself"><a class="header" href="#10-check-yourself">10. Check yourself</a></h2>
+<ol>
+<li>What three processes might share the graph in a WH lab?</li>
+<li>Why does PATH need to be set again in a new terminal?</li>
+<li>What UI mode must the warehouse use for your script to drive the robot?</li>
+<li>Name the three P0 topics under <code>/robot/01/</code>.</li>
+</ol>
+<h2 id="glossary"><a class="header" href="#glossary">Glossary</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Term</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td>Topic</td><td>Named channel for typed messages</td></tr>
+<tr><td>Node</td><td>One program participating on the graph</td></tr>
+<tr><td>Wheel (<code>.whl</code>)</td><td>Python install package</td></tr>
+<tr><td>venv</td><td>Isolated Python environment folder</td></tr>
+<tr><td>PATH</td><td>Where the shell looks for executables</td></tr>
+<tr><td>Native / External</td><td>Sim modes: real graph + accept external cmd_vel</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="next"><a class="header" href="#next">Next</a></h2>
+<ul>
+<li>Fast checklist twin of this chapter: <a href="../../../SETUP.html"><code>SETUP.md</code></a></li>
+<li>Chapter 1 — Graph, nodes, topics</li>
+<li>Lab <a href="../generated/wh/wh-00-hello-graph/index.html"><code>wh-00-hello-graph</code></a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../reading-order.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/ch01-graph-nodes-topics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../reading-order.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/ch01-graph-nodes-topics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/mermaid-581ed7d7.min.js"></script>
+        <script src="../theme/ebook-50eb2d88.js"></script>
+        <script src="../theme/force-light-46287557.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
