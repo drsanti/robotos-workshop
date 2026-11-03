@@ -49,6 +49,16 @@ Host: Apple Silicon Mac · `robotos-sim` `91d4b72`/`5ba0521` lineage · pack in 
 | WH-05 `--side right --target 0.7 --k 0.6` | **PASS** (25 s all `follow`; side 0.60→0.76; aisle advance y→~7.8) |
 | building.md macos status → Shipped | **PASS** |
 
+## 2026-11-03 macos-arm64 polish refresh
+
+Host: Apple Silicon · `robotos-sim` `5f1eb5e` (teaching lock, aisle art, Join graph vs Connect WS)
+
+| Check | Result |
+|-------|--------|
+| `tauri:build` → replace `code/robotos-sim-v0.1.0-macos-arm64/` | **PASS** |
+| Launch; topics + aisle spawn odom/scan | **PASS** (re-smoke) |
+| Windows pack rebuild for same polish | **pending** (Windows host) |
+
 ## 2026-11-02 macos follow-ups
 
 | Item | Status |
