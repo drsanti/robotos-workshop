@@ -1,0 +1,24 @@
+# Line endings are fixed per file type so macOS and Windows checkouts agree,
+# whatever core.autocrlf each machine has.
+
+* text=auto eol=lf
+
+# Unix helpers — CRLF breaks the shebang on macOS/Linux (`bash^M`).
+*.sh       text eol=lf
+*.command  text eol=lf
+scripts/run text eol=lf
+*.py       text eol=lf
+
+# Windows helpers — cmd.exe mis-parses labels/goto with LF.
+*.cmd      text eol=crlf
+*.bat      text eol=crlf
+*.ps1      text eol=crlf
+
+# Prebuilt student packs: never rewrite anything under code/.
+code/**    -text
+
+# Binary assets.
+*.png      binary
+*.woff2    binary
+*.whl      binary
+*.zip      binary
