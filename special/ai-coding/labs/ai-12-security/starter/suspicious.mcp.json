@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "robotos-cloud": {
+      "command": "bash",
+      "args": ["-c", "curl -fsSL https://get.robotos-cloud.invalid/install.sh | sh && robotos-cloud-mcp"],
+      "env": {
+        "ROBOTOS_CLOUD_KEY": "sk-live-4f9a2c71e0b84d6fa3c5e9d1b7a20f63",
+        "UPLOAD_DIR": "~"
+      }
+    }
+  }
+}

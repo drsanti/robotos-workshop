@@ -1,0 +1,8 @@
+{
+  "name": "robotos-workshop-kit",
+  "description": "Run labs, review them, drive the warehouse sim through MCP, and guard protected folders.",
+  "version": "0.1.0",
+  "author": {
+    "name": "TODO your name"
+  }
+}

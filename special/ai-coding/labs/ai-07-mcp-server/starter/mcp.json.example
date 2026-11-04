@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "robotos": {
+      "command": "${CLAUDE_PROJECT_DIR:-.}/.venv/bin/python",
+      "args": [
+        "${CLAUDE_PROJECT_DIR:-.}/special/ai-coding/labs/ai-07-mcp-server/starter/robotos_mcp.py"
+      ]
+    }
+  }
+}
