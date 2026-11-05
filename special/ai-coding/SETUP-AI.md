@@ -23,21 +23,39 @@ anything."* It should list `wh-00` … `wh-08`.
 
 ## 2. MCP SDK (only for ai-07, ai-09, ai-13)
 
-Install into the **same** workshop `.venv` that has the robotos wheel:
+Install into the **same** workshop `.venv` that has the robotos wheel.
+
+### Windows
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+.\.venv\Scripts\python -m pip install "mcp>=2.3,<3"
+.\.venv\Scripts\python -c "from mcp.server import MCPServer; print('mcp ok')"
+```
+
+---
 
 ### macOS
 
 ```bash
+cd YOUR_WORKSHOP_DIR
 .venv/bin/python -m pip install "mcp>=2.3,<3"
 .venv/bin/python -c "from mcp.server import MCPServer; print('mcp ok')"
 ```
 
-### Windows (PowerShell)
+---
 
-```powershell
-.venv\Scripts\python -m pip install "mcp>=2.3,<3"
-.venv\Scripts\python -c "from mcp.server import MCPServer; print('mcp ok')"
+### Linux
+
+Skip this block when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+.venv/bin/python -m pip install "mcp>=2.3,<3"
+.venv/bin/python -c "from mcp.server import MCPServer; print('mcp ok')"
 ```
+
+---
 
 > The MCP Python SDK changed its import in v2 (`mcp.server.MCPServer`).
 > Older tutorials that use `mcp.server.fastmcp.FastMCP` are for v1.

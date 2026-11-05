@@ -2,27 +2,13 @@
 
 from __future__ import annotations
 
-import threading
-from typing import Any, TypeVar
-
-T = TypeVar("T")
+from typing import Any
 
 
 def wait_for_message(sub: Any, timeout: float = 15.0) -> Any:
-    """Block until ``sub`` delivers one message via ``on_message``, or raise.
+    """Block until ``sub.recv`` returns one message, or raise TimeoutError.
 
-    Prefer this over busy ``recv()`` for infrequent pubs (e.g. BoardInfo).
+    Sparse topics such as BoardInfo are not latched, so this waits for the
+    next sample. ``recv`` is the path that delivers on the class Python.
     """
-    got = threading.Event()
-    box: dict[str, Any] = {}
-
-    def _on(msg: Any, _meta: dict) -> None:
-        box["msg"] = msg
-        got.set()
-
-    sub.on_message(_on)
-    if not got.wait(timeout):
-        raise TimeoutError(
-            f"no message within {timeout:g}s — is the publisher / bridge up?"
-        )
-    return box["msg"]
+    return sub.recv(timeout_ms=max(1, int(timeout * 1000)))

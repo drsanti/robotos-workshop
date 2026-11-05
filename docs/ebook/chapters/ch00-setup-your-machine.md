@@ -197,16 +197,43 @@ scripts\run.cmd wh-01
 
 **Expect:** topic list includes `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan`, and the sim robot moves forward briefly.
 
+### If something fails
+
+| What you see | What to do |
+|--------------|------------|
+| `robotos` not found | Paste the PATH block again in this window |
+| `Activate.ps1` cannot run | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, then activate again |
+| Wheel “not supported” | Install `code\robotos-0.3.0-py3-none-win_amd64.whl` |
+| Git Bash breaks `/robot/...` | Use PowerShell |
+
 ---
 
-## 6. Hands-on — Linux / macOS (bash)
+## 6. Hands-on — macOS (Apple Silicon)
 
-### 6.1 Open a terminal
+Use **Terminal** on Apple Silicon. Stay in this section until you are done.
 
-- **Ubuntu:** Apps → Terminal  
-- **macOS:** Spotlight (`Cmd+Space`) → `Terminal`
+### 6.0 Preferred class path
 
-### 6.2 Unpack
+1. Unzip / clone so you see `SETUP.md`, `labs/`, `code/`, and `scripts/`.  
+2. Open that folder in **VS Code**.  
+3. Once: double-click `scripts/start-here.command` (or run `./scripts/start-here.sh`).  
+4. Open Terminal. Paste the whole block. Do not type only the last line.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01
+```
+
+Board labs later: `./scripts/start-bridge.sh` in a second window, then `./scripts/run hw-01`.
+
+### 6.1 Open Terminal (manual)
+
+Spotlight (`Cmd+Space`) → `Terminal`.
+
+### 6.2 Unpack (manual)
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -215,18 +242,7 @@ ls SETUP.md labs code
 
 Use a path without spaces if possible.
 
-### 6.3 PATH
-
-**Linux x64**
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-chmod +x code/robotos-v0.3.0-linux-x64/bin/robotos 2>/dev/null || true
-robotos version
-```
-
-**macOS Apple Silicon**
+### 6.3 PATH and `robotos`
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -235,10 +251,10 @@ chmod +x code/robotos-v0.3.0-macos-arm64/bin/robotos 2>/dev/null || true
 robotos version
 ```
 
+**Expect:** a line containing `robotos 0.3.0`.
+
 ### 6.4 Python venv + wheel
 
-**Linux x64** — prefer the exact name in your pack’s `NOTES.txt`; tag-safe:
-
 ```bash
 cd YOUR_WORKSHOP_DIR
 python3 -m venv .venv
@@ -248,23 +264,16 @@ python -m pip install code/robotos-0.3.0-py3-none-any.whl
 python -c "import robotos; print(robotos.Node.version())"
 ```
 
-**macOS Apple Silicon**
+### 6.5 Start the sim
 
 ```bash
 cd YOUR_WORKSHOP_DIR
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install code/robotos-0.3.0-py3-none-any.whl
-python -c "import robotos; print(robotos.Node.version())"
+open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
 ```
 
-### 6.0 Preferred class path (macOS)
+The first launch may say the app cannot be opened. In Finder, right-click the app and choose **Open**, or allow it under System Settings → Privacy & Security. Confirm connected / **NATIVE**. If not: **Warehouse → Native → External → Connect**.
 
-1. Unzip / clone so you see `SETUP.md`, `labs/`, `code/`, and `scripts/`.  
-2. Open that folder in **VS Code**.  
-3. Once: double-click `scripts/start-here.command` (or run `./scripts/start-here.sh`).  
-4. Open Terminal, Cursor, or VS Code. Paste the whole block. Do not type only the last line.
+### 6.6 Smoke test
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -274,17 +283,59 @@ robotos topic list
 ./scripts/run wh-01
 ```
 
-HW later: `./scripts/start-bridge.sh` in a second window, then `./scripts/run hw-01`.
+**Expect:** `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan`, and the sim robot moves forward briefly.
 
-> §§6.1–6.6 below are the **manual** Terminal.app walkthrough.
+### If something fails
 
-### 6.5 Start the sim (manual)
+| What you see | What to do |
+|--------------|------------|
+| `robotos` not found | Paste the PATH block again in this window |
+| `python` not found | Use `python3`, then `source .venv/bin/activate` |
+| Wheel “not supported” | Install `code/robotos-0.3.0-py3-none-any.whl` |
+| “cannot be opened” | Privacy & Security → allow `robotos-sim` |
 
-Windows and macOS class packs **include** the sim. If your zip is Linux-only or
-`code/robotos-sim-v*/` is missing, skip this section and WH labs — continue with
-MW/HW (see `SETUP.md` §4).
+---
 
-**Linux x64** (sim often not shipped)
+## 6b. Hands-on — Linux (bash)
+
+Use **bash**. Stay in this section until you are done. Skip this section when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### 6b.1 Open a terminal
+
+Apps → Terminal.
+
+### 6b.2 Unpack
+
+```bash
+cd YOUR_WORKSHOP_DIR
+ls SETUP.md labs code
+```
+
+### 6b.3 PATH and `robotos`
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+chmod +x code/robotos-v0.3.0-linux-x64/bin/robotos 2>/dev/null || true
+robotos version
+```
+
+### 6b.4 Python venv + wheel
+
+On Ubuntu: `sudo apt install python3 python3-venv`.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c "import robotos; print(robotos.Node.version())"
+```
+
+### 6b.5 Start the sim
+
+This class drop often has no Linux sim. If `code/robotos-sim-v0.1.0-linux-x64` is missing, skip WH and do MW or HW.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -292,31 +343,9 @@ chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
 ./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &
 ```
 
-**macOS Apple Silicon**
+Confirm connected / **NATIVE**. If not: **Warehouse → Native → External → Connect**.
 
-```bash
-cd YOUR_WORKSHOP_DIR
-open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
-# First launch: Finder → right-click → Open if Gatekeeper blocks
-```
-
-> **macOS Gatekeeper (do this at first launch):** if macOS says the app “cannot be opened,” use **right-click → Open**, or System Settings → Privacy & Security → Allow. Do not skip this — the binary will not stay running until you approve it.
-
-Confirm **Native / External / Connect** in the UI as on Windows.
-
-### 6.6 Smoke test (manual)
-
-**macOS Apple Silicon**
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-robotos topic list
-./scripts/run wh-01
-```
-
-**Linux** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
+### 6b.6 Smoke test
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -325,6 +354,15 @@ source .venv/bin/activate
 robotos topic list
 ./scripts/run wh-01
 ```
+
+### If something fails
+
+| What you see | What to do |
+|--------------|------------|
+| `robotos` not found | Paste the PATH block again in this window. `chmod +x` the files in `code/robotos-v0.3.0-linux-x64/bin` |
+| `python` not found | Use `python3`, then `source .venv/bin/activate` |
+| Wheel “not supported” | Install `code/robotos-0.3.0-py3-none-any.whl` |
+| Permission denied on `/dev/ttyACM*` | `sudo usermod -aG dialout $USER`, then log out and back in |
 
 ---
 
@@ -376,14 +414,10 @@ done — 100 cmds + zero
 
 | Symptom | Likely cause | Fix |
 |---------|--------------|-----|
-| `robotos: command not found` | PATH not set in **this** terminal | Re-run PATH export / `$env:PATH` |
-| `Activate.ps1` cannot run | ExecutionPolicy | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
-| Wheel “not supported” | Wrong OS wheel | Install `win_amd64` / `macosx` / `manylinux` matching your PC |
-| `ModuleNotFoundError: labs` | Not inside workshop tree | Terminal cwd under folder with `SETUP.md` + `labs/` (see `labs/common/README.md`) |
-| `no topics announced` | Sim not connected or wrong mesh env | Connect Native+External; clear leftover `ROBOTOS_LISTEN` from HW labs |
-| Robot ignores Twist | Control ownership still Manual | UI: External + Native; keep publishing ≥ ~2 Hz |
-| Git Bash mangles `/robot/...` | Bash on Windows rewrites paths | Use **PowerShell** for `robotos topic …` on Windows |
-| Linux serial later fails | User not in `dialout` | `sudo usermod -aG dialout $USER` then log out/in |
+| `robotos: command not found` | PATH not set in **this** window | Paste the PATH block from your computer's section again |
+| `ModuleNotFoundError: labs` | Not inside workshop tree | The window must be in the folder that contains `SETUP.md` and `labs/` |
+| `no topics announced` | Sim not connected, or the bridge is down | Connect Native + External. Close the sim before a board lab |
+| Robot ignores Twist | Control ownership still Manual | UI: External + Native; keep publishing |
 
 ---
 

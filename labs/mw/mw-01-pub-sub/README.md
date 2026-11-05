@@ -12,14 +12,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Start two processes that share one topic  
@@ -57,14 +49,19 @@ sequenceDiagram
   T->>B: acc.z / gyro.x lines
 ```
 
-## Practice — open two terminals
+## Windows
 
-**Windows:** press `Win`, type `PowerShell`, Enter — that is terminal 1. Do it **again** for terminal 2 (a second window).  
-**Linux/macOS:** open a second Terminal tab/window the same way you opened the first.
+Use **PowerShell**. Follow this section from the first block to the last.
 
-In **each** window, paste the whole block for your computer. A second window does not keep the first window's setup:
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
 
-### Both terminals — Windows (PowerShell)
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### Both terminals
+
+Press the `Win` key, type `PowerShell`, and press Enter. That is terminal 1. Do it again for terminal 2 (a second window).
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -72,31 +69,11 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 ```
 
-### Both terminals — macOS Apple Silicon (zsh or bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-```
-
-### Both terminals — Linux (bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-```
-
-
 > **Preferred runner** (workshop root): pick the starter name —
-> `scripts\run.cmd mw-01 sim_sensor` / `mw-01 monitor` (Windows) or
-> `./scripts/run mw-01 sim_sensor` (macOS/Linux). You still need **two**
-> terminals (publisher + subscriber).
+> `scripts\run.cmd mw-01 sim_sensor` or `scripts\run.cmd mw-01 monitor`.
+> You still need **two** terminals (publisher + subscriber).
 
 ### Terminal A — publisher (leave running)
-
-**Windows (PowerShell)**
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -105,31 +82,10 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 python labs\mw\mw-01-pub-sub\starter\sim_sensor.py
 ```
 
-**macOS Apple Silicon (zsh or bash)**
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
-```
-
-**Linux (bash)**
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
-```
-
-
 You should see `publishing on /machine/01/sensor/imu`.  
 It looks “stuck” — that is normal. Stop later with **Ctrl-C**.
 
 ### Terminal B — subscriber / CLI
-
-**Windows (PowerShell)**
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -140,7 +96,41 @@ robotos topic echo /machine/01/sensor/imu --count 5
 python labs\mw\mw-01-pub-sub\starter\monitor.py 5
 ```
 
-**macOS Apple Silicon (zsh or bash)**
+(`monitor.py 5` exits after ~5 s. No argument → waits for Enter.)
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### Both terminals
+
+Open **Terminal**. That is terminal 1. Open a second Terminal window for terminal 2.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+```
+
+> **Preferred runner** (workshop root): pick the starter name —
+> `./scripts/run mw-01 sim_sensor` or `./scripts/run mw-01 monitor`.
+> You still need **two** terminals (publisher + subscriber).
+
+### Terminal A — publisher (leave running)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
+```
+
+You should see `publishing on /machine/01/sensor/imu`.  
+It looks “stuck” — that is normal. Stop later with **Ctrl-C**.
+
+### Terminal B — subscriber / CLI
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -151,7 +141,41 @@ robotos topic echo /machine/01/sensor/imu --count 5
 python labs/mw/mw-01-pub-sub/starter/monitor.py 5
 ```
 
-**Linux (bash)**
+(`monitor.py 5` exits after ~5 s. No argument → waits for Enter.)
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### Both terminals
+
+Open a terminal. That is terminal 1. Open a second terminal window for terminal 2.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+```
+
+> **Preferred runner** (workshop root): pick the starter name —
+> `./scripts/run mw-01 sim_sensor` or `./scripts/run mw-01 monitor`.
+> You still need **two** terminals (publisher + subscriber).
+
+### Terminal A — publisher (leave running)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
+```
+
+You should see `publishing on /machine/01/sensor/imu`.  
+It looks “stuck” — that is normal. Stop later with **Ctrl-C**.
+
+### Terminal B — subscriber / CLI
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -162,8 +186,9 @@ robotos topic echo /machine/01/sensor/imu --count 5
 python labs/mw/mw-01-pub-sub/starter/monitor.py 5
 ```
 
-
 (`monitor.py 5` exits after ~5 s. No argument → waits for Enter.)
+
+---
 
 ## Code walkthrough
 

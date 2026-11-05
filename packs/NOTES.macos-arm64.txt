@@ -57,7 +57,9 @@ Always run HW-01 and follow caps (labs/hw/README.md).
    (uses --port auto; close warehouse sim first to free :7447)
    Or: serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all \
          --probe-settle-ms 2000 --probe-ms 5000
-   Pin if auto skips USB: --port /dev/cu.usbmodemXXXX …
+   Pin the path from "[auto] selected". cu.usbmodem* can be skipped
+   (no workshop frame in 2500 ms) while tty.usbmodem* is the board.
+   This Mac: --port /dev/tty.usbmodem101
 
 2) Labs:
      export ROBOTOS_CONNECT=tcp/127.0.0.1:7447

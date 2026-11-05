@@ -71,7 +71,7 @@ sequenceDiagram
 
 ## 5–6. Hands-on
 
-Follow [`labs/wh/wh-01-drive-twist/README.md`](../../../labs/wh/wh-01-drive-twist/README.md) (PowerShell and bash fences).
+Follow the section for your computer in [`labs/wh/wh-01-drive-twist/README.md`](../../../labs/wh/wh-01-drive-twist/README.md).
 
 ## 7. Code walkthrough
 

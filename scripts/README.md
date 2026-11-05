@@ -2,20 +2,55 @@
 
 All day-1 shortcuts live here (not in the workshop root).
 
-| Script | OS | What it does |
-|--------|-----|----------------|
-| [`start-here.cmd`](start-here.cmd) | Windows | PATH + first-time `.venv`/wheel + start sim + open a ready cmd window |
-| [`start-bridge.cmd`](start-bridge.cmd) | Windows | Second window: `serial-bridge` for HW labs |
-| [`start-here.sh`](start-here.sh) / [`start-here.command`](start-here.command) | macOS / Linux | Same idea in Terminal / Finder |
-| [`start-bridge.sh`](start-bridge.sh) | macOS / Linux | Board bridge |
-| [`run.cmd`](run.cmd) / [`run`](run) / [`run.py`](run.py) | All | Run a lab by short id: `scripts\run.cmd wh-01` |
-| [`wifi-cfg.cmd`](wifi-cfg.cmd) | Windows | Optional: push SSID/password + zenoh `--connect` (needs `start-bridge`) |
-## Class flow
-
-1. Open the **workshop root** folder (it contains `SETUP.md`). Any terminal works: PowerShell, Terminal, Cursor, or VS Code.  
-2. Once: double-click `scripts\start-here.cmd` (Windows) or `./scripts/start-here.sh` (macOS, after `cd` to the workshop root).  
-3. Every new window starts blank. Paste the lab README's whole block, including `cd` and the PATH line. Do not assume VS Code already set PATH.  
-4. WH / MW: that block ends with `scripts\run.cmd wh-01` (Windows) or `./scripts/run wh-01` (macOS).  
-5. **HW:** close the sim, start the bridge (`scripts\start-bridge.cmd` or `./scripts/start-bridge.sh` from the workshop root), then paste the HW lab block in a second window. `run` sets `ROBOTOS_CONNECT` for `hw-*`.
-
 Details: [`../SETUP.md`](../SETUP.md) · ebook Ch.0.
+
+## Windows
+
+| Script | What it does |
+|--------|----------------|
+| [`start-here.cmd`](start-here.cmd) | First time: `.venv`, wheel, sim, and a ready window |
+| [`start-bridge.cmd`](start-bridge.cmd) | Second window: `serial-bridge` for HW labs |
+| [`run.cmd`](run.cmd) | Run a lab: `scripts\run.cmd wh-01` |
+| [`wifi-cfg.cmd`](wifi-cfg.cmd) | Optional: push SSID/password. Needs the bridge |
+
+1. Open the workshop root (it contains `SETUP.md`) in PowerShell.
+2. Once: double-click `scripts\start-here.cmd`.
+3. Every new window starts blank. Paste the lab README's whole block.
+4. WH / MW: that block ends with `scripts\run.cmd wh-01`.
+5. HW: close the sim, start `scripts\start-bridge.cmd`, then paste the HW lab block in a second window.
+
+---
+
+## macOS
+
+| Script | What it does |
+|--------|----------------|
+| [`start-here.sh`](start-here.sh) / [`start-here.command`](start-here.command) | First time: `.venv`, wheel, and the sim |
+| [`start-bridge.sh`](start-bridge.sh) | Board bridge |
+| [`run`](run) | Run a lab: `./scripts/run wh-01` |
+
+1. Open the workshop root in Terminal.
+2. Once: `./scripts/start-here.sh` after `cd` to that folder, or double-click `start-here.command`.
+3. Every new window starts blank. Paste the lab README's whole block.
+4. WH / MW: that block ends with `./scripts/run wh-01`.
+5. HW: close the sim, run `./scripts/start-bridge.sh`, then paste the HW lab block in a second window.
+
+---
+
+## Linux
+
+| Script | What it does |
+|--------|----------------|
+| [`start-here.sh`](start-here.sh) | First time: `.venv` and wheel, when the Linux pack is in the drop |
+| [`start-bridge.sh`](start-bridge.sh) | Board bridge |
+| [`run`](run) | Run a lab: `./scripts/run wh-01` |
+
+Skip this section when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+1. Open the workshop root in a terminal.
+2. Once: `./scripts/start-here.sh` after `cd` to that folder.
+3. Every new window starts blank. Paste the lab README's whole block.
+4. WH / MW: that block ends with `./scripts/run wh-01`.
+5. HW: close the sim, run `./scripts/start-bridge.sh`, then paste the HW lab block in a second window.
+
+---

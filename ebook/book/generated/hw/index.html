@@ -36,7 +36,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-b74680cb.js"></script>
@@ -184,11 +184,19 @@
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\start-bridge.cmd
 </code></pre>
+<hr>
 <p><strong>macOS Apple Silicon</strong> — bridge window:</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 ./scripts/start-bridge.sh
 </code></pre>
+<hr>
+<p><strong>Linux (bash)</strong> — bridge window, only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+./scripts/start-bridge.sh
+</code></pre>
+<hr>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/hw/README.md</code></p>
 
 </div>
@@ -224,14 +232,20 @@ export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 <p><strong>Always run HW-01 first</strong> and branch labs on caps — do not assume LED or IMU.</p>
 <h2 id="lab-order"><a class="header" href="#lab-order">Lab order</a></h2>
 <p><code>hw-00</code> → <code>hw-01</code> → <code>hw-02</code> … → <code>hw-07</code> (see <a href="../../docs/lab-outline.html"><code>docs/lab-outline.md</code></a>).</p>
-<h2 id="optional-board-wifi"><a class="header" href="#optional-board-wifi">Optional: board Wi‑Fi</a></h2>
-<p>Not graded. With <code>scripts/start-bridge</code> running (Windows pack includes <code>wifi-cfg.exe</code>):</p>
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<p>Optional, not graded. The bridge must already be running. <code>wifi-cfg.exe</code> is in the Windows pack.</p>
 <pre><code class="language-text">scripts\wifi-cfg.cmd --enable
 scripts\wifi-cfg.cmd --ssid YOUR_SSID --pass YOUR_PASSWORD --connect tcp/PC_LAN_IP:7447
 scripts\run.cmd hw-02 board_watch
 </code></pre>
-<p>Details: <code>code/NOTES.txt</code> section D · rebuild: <code>cargo build --release -p serial-bridge --bin wifi-cfg</code>.</p>
-
+<p>Details: <code>code/NOTES.txt</code> section D.</p>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<p>This optional Wi-Fi step is not in the macOS pack. Skip it and continue with the HW labs.</p>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p>This optional Wi-Fi step is not in the Linux pack. Skip it and continue with the HW labs.</p>
+<hr>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

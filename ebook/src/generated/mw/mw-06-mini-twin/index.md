@@ -15,6 +15,8 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\run.cmd mw-06
 ```
 
+---
+
 **macOS Apple Silicon (zsh or bash)**
 
 ```bash
@@ -24,6 +26,8 @@ source .venv/bin/activate
 ./scripts/run mw-06
 ```
 
+---
+
 **Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
 
 ```bash
@@ -32,6 +36,8 @@ export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run mw-06
 ```
+
+---
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/mw/mw-06-mini-twin/README.md</code></p>
 
@@ -49,14 +55,6 @@ Run a plant (`machine.py`) and a twin (`twin.py`) on shared cmd/state topics.
 Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
-
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
 
 ## Learning outcomes
 
@@ -77,14 +75,19 @@ flowchart LR
   twin -->|/machine/01/cmd| machine
 ```
 
-## Practice
+## Windows
 
-> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd mw-06 <starter>` (Windows) or `./scripts/run mw-06 <starter>` (macOS/Linux). Starters: `machine / twin`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+Use **PowerShell**. Follow this section from the first block to the last.
 
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd mw-06 <starter>`. Starters: `machine / twin`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 ### Terminal A — plant
-
-**Windows (PowerShell)**
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -93,28 +96,7 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 python labs\mw\mw-06-mini-twin\starter\machine.py
 ```
 
-**macOS Apple Silicon (zsh or bash)**
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-06-mini-twin/starter/machine.py
-```
-
-**Linux (bash)**
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-06-mini-twin/starter/machine.py
-```
-
-
 ### Terminal B — twin
-
-**Windows (PowerShell)**
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -123,7 +105,26 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 python labs\mw\mw-06-mini-twin\starter\twin.py
 ```
 
-**macOS Apple Silicon (zsh or bash)**
+Topics: `/machine/01/state`, `/machine/01/cmd` (Imu used as a simple stand-in payload).
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `./scripts/run mw-06 <starter>`. Starters: `machine / twin`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+### Terminal A — plant
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-06-mini-twin/starter/machine.py
+```
+
+### Terminal B — twin
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -132,7 +133,26 @@ source .venv/bin/activate
 python labs/mw/mw-06-mini-twin/starter/twin.py
 ```
 
-**Linux (bash)**
+Topics: `/machine/01/state`, `/machine/01/cmd` (Imu used as a simple stand-in payload).
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `./scripts/run mw-06 <starter>`. Starters: `machine / twin`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+### Terminal A — plant
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-06-mini-twin/starter/machine.py
+```
+
+### Terminal B — twin
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -141,8 +161,9 @@ source .venv/bin/activate
 python labs/mw/mw-06-mini-twin/starter/twin.py
 ```
 
-
 Topics: `/machine/01/state`, `/machine/01/cmd` (Imu used as a simple stand-in payload).
+
+---
 
 ## Expected output
 

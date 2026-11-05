@@ -26,7 +26,7 @@ echo " robotos-workshop — serial-bridge (board)"
 echo " ----------------------------------------"
 echo " Prefer closing the warehouse sim first (avoids port 7447 clash)."
 echo " Plug in USB. Leave this window open. Labs: ./scripts/start-here.sh"
-echo " If auto fails: serial-bridge --port /dev/cu.usbmodemXXXX ..."
+echo " If auto skips cu.usbmodem*, pin the [auto] selected path (often /dev/tty.usbmodem*)."
 echo " Board Wi-Fi zenoh: wifi-cfg --connect tcp/PC_LAN_IP:7447"
 echo
 

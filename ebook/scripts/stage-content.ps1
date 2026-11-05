@@ -122,6 +122,8 @@ function New-LabRunBlock {
   $lines.Add("scripts\run.cmd $LabId")
   $lines.Add('```')
   $lines.Add('')
+  $lines.Add('---')
+  $lines.Add('')
   $lines.Add('**macOS Apple Silicon (zsh or bash)**')
   $lines.Add('')
   $lines.Add('```bash')
@@ -131,6 +133,8 @@ function New-LabRunBlock {
   $lines.Add("./scripts/run $LabId")
   $lines.Add('```')
   $lines.Add('')
+  $lines.Add('---')
+  $lines.Add('')
   $lines.Add('**Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:')
   $lines.Add('')
   $lines.Add('```bash')
@@ -139,6 +143,8 @@ function New-LabRunBlock {
   $lines.Add('source .venv/bin/activate')
   $lines.Add("./scripts/run $LabId")
   $lines.Add('```')
+  $lines.Add('')
+  $lines.Add('---')
   if ($TrackId -eq 'hw') {
     $lines.Add('')
     $lines.Add('Prerequisite: serial bridge running, warehouse sim closed.')
@@ -350,6 +356,8 @@ cd YOUR_WORKSHOP_DIR
 scripts\run.cmd list
 ``````
 
+---
+
 **macOS Apple Silicon**
 
 ``````bash
@@ -358,6 +366,19 @@ export PATH="`$PWD/code/robotos-v0.3.0-macos-arm64/bin:`$PATH"
 source .venv/bin/activate
 ./scripts/run list
 ``````
+
+---
+
+**Linux (bash)** — only if ``code/robotos-v0.3.0-linux-x64`` is in your drop:
+
+``````bash
+cd YOUR_WORKSHOP_DIR
+export PATH="`$PWD/code/robotos-v0.3.0-linux-x64/bin:`$PATH"
+source .venv/bin/activate
+./scripts/run list
+``````
+
+---
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/README.md</code></p>
 
@@ -439,6 +460,8 @@ cd YOUR_WORKSHOP_DIR
 scripts\start-bridge.cmd
 ``````
 
+---
+
 **macOS Apple Silicon** — bridge window:
 
 ``````bash
@@ -446,6 +469,18 @@ cd YOUR_WORKSHOP_DIR
 export PATH="`$PWD/code/robotos-v0.3.0-macos-arm64/bin:`$PATH"
 ./scripts/start-bridge.sh
 ``````
+
+---
+
+**Linux (bash)** — bridge window, only if ``code/robotos-v0.3.0-linux-x64`` is in your drop:
+
+``````bash
+cd YOUR_WORKSHOP_DIR
+export PATH="`$PWD/code/robotos-v0.3.0-linux-x64/bin:`$PATH"
+./scripts/start-bridge.sh
+``````
+
+---
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/$($t.Id)/README.md</code></p>
 

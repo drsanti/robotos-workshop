@@ -16,14 +16,39 @@ and a mini digital twin. No warehouse sim or board required for most MW labs
 | `mw-05` | Record / replay |
 | `mw-06` | Mini twin |
 
-## How to run
+## Windows
 
-From the **workshop root**:
-
-```text
-scripts\run.cmd list
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd mw-00
-# Unix: ./scripts/run mw-00
 ```
+
+---
+
+## macOS
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-00
+```
+
+---
+
+## Linux
+
+Skip this section when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-00
+```
+
+---
 
 Source of truth: `labs/mw/*/README.md`.

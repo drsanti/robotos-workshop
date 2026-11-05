@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../../../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -185,18 +185,21 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-07
 </code></pre>
+<hr>
 <p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run wh-07
 </code></pre>
+<hr>
 <p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run wh-07
 </code></pre>
+<hr>
 <p>Prerequisite: warehouse sim running (<code>scripts/start-here</code>).</p>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/wh/wh-07-record-bag/README.md</code></p>
 
@@ -208,10 +211,6 @@ source .venv/bin/activate
 <p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
 <p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
 <p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
-<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
-<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-</code></pre>
-<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
 <ul>
 <li>Record odom + scan during WH-03 or WH-05</li>
@@ -225,28 +224,50 @@ source .venv/bin/activate
 <li>Theory: <a href="../../../docs/theory/06-bags-evidence.html"><code>docs/theory/06-bags-evidence.md</code></a></li>
 </ul>
 <p>Exact CLI flags follow your pack — check <code>robotos --help</code> / <code>NOTES.txt</code>.</p>
-<h2 id="typical-flow"><a class="header" href="#typical-flow">Typical flow</a></h2>
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<p>Use <strong>PowerShell</strong>. Follow this section from the first block to the last.</p>
+<p>If <code>Activate.ps1</code> is blocked, run this once, then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<h3 id="3-terminal-b--record"><a class="header" href="#3-terminal-b--record">3. Terminal B — record</a></h3>
 <ol>
 <li>Sim Connected (Native / External).</li>
-<li>Terminal A — start WH-03 or WH-05 (<code>scripts\run.cmd wh-03</code> / <code>wh-05</code>, or
-<code>./scripts/run …</code>).</li>
-<li>Terminal B — record:</li>
+<li>Terminal A — start WH-03 or WH-05 (<code>scripts\run.cmd wh-03</code> or <code>scripts\run.cmd wh-05</code>).</li>
 </ol>
-<h3 id="windows-powershell"><a class="header" href="#windows-powershell">Windows (PowerShell)</a></h3>
 <pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 robotos record -o run1.rbag /robot/01/odom /robot/01/scan
 # Ctrl-C after ~20–30 s
 robotos bag info run1.rbag
 </code></pre>
-<h3 id="macos-apple-silicon-zsh-or-bash"><a class="header" href="#macos-apple-silicon-zsh-or-bash">macOS Apple Silicon (zsh or bash)</a></h3>
+<ol start="4">
+<li>Note: bag path, duration, topics, approximate message counts.</li>
+</ol>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<p>Use <strong>Terminal</strong> on Apple Silicon (zsh or bash). Follow this section from the first block to the last.</p>
+<h3 id="3-terminal-b--record-1"><a class="header" href="#3-terminal-b--record-1">3. Terminal B — record</a></h3>
+<ol>
+<li>Sim Connected (Native / External).</li>
+<li>Terminal A — start WH-03 or WH-05 (<code>./scripts/run wh-03</code> or <code>./scripts/run wh-05</code>).</li>
+</ol>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 robotos record -o run1.rbag /robot/01/odom /robot/01/scan
 # Ctrl-C after ~20–30 s
 robotos bag info run1.rbag
 </code></pre>
-<h3 id="linux-bash"><a class="header" href="#linux-bash">Linux (bash)</a></h3>
+<ol start="4">
+<li>Note: bag path, duration, topics, approximate message counts.</li>
+</ol>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p>Use <strong>bash</strong>. Follow this section from the first block to the last. Skip it when <code>code/robotos-v0.3.0-linux-x64</code> is not in your drop.</p>
+<h3 id="3-terminal-b--record-2"><a class="header" href="#3-terminal-b--record-2">3. Terminal B — record</a></h3>
+<ol>
+<li>Sim Connected (Native / External).</li>
+<li>Terminal A — start WH-03 or WH-05 (<code>./scripts/run wh-03</code> or <code>./scripts/run wh-05</code>).</li>
+</ol>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 robotos record -o run1.rbag /robot/01/odom /robot/01/scan
@@ -256,6 +277,7 @@ robotos bag info run1.rbag
 <ol start="4">
 <li>Note: bag path, duration, topics, approximate message counts.</li>
 </ol>
+<hr>
 <h2 id="expected-output"><a class="header" href="#expected-output">Expected output</a></h2>
 <p><code>bag info</code> lists <code>/robot/01/odom</code> and <code>/robot/01/scan</code> with non-zero counts.</p>
 <h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>

@@ -173,6 +173,8 @@ robotos topic echo /robot/01/odom --count 3
 ./scripts/run wh-01
 ```
 
+---
+
 ## 6b. Hands-on — Linux (bash)
 
 Only if `code/robotos-v0.3.0-linux-x64` is in your drop.

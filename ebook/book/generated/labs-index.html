@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b74680cb.js"></script>
@@ -185,12 +185,21 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 scripts\run.cmd list
 </code></pre>
+<hr>
 <p><strong>macOS Apple Silicon</strong></p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run list
 </code></pre>
+<hr>
+<p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run list
+</code></pre>
+<hr>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/README.md</code></p>
 
 </div>
@@ -210,8 +219,29 @@ source .venv/bin/activate
 </div>
 <p>Content map: <a href="../../../docs/lab-outline.html"><code>docs/lab-outline.md</code></a>.<br>Helper rules: <a href="common/index.html"><code>common/README.md</code></a>.</p>
 <h2 id="running-starters"><a class="header" href="#running-starters">Running starters</a></h2>
-<p>Open the lab README (<code>labs/wh/wh-01-drive-twist/README.md</code> and the others). Paste the <strong>whole</strong> block for your computer. The first lines are <code>cd</code>, PATH, and <code>.venv</code>. A new window does not keep them.</p>
-<p><code>scripts\run.cmd wh-01</code> and <code>python labs/...</code> fail with “not found” when those first lines were skipped.</p>
+<p>Open the lab README and paste the <strong>whole</strong> block in your section. A new window does not keep <code>cd</code>, PATH, or <code>.venv</code>.</p>
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+scripts\run.cmd wh-01
+</code></pre>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-01
+</code></pre>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p>Skip this section when <code>code/robotos-v0.3.0-linux-x64</code> is not in your drop.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-01
+</code></pre>
+<hr>
 <p>Starters that use <code>labs.common</code> put the workshop root on <code>sys.path</code> automatically (walk for <code>SETUP.md</code>).<br>If you see <code>ModuleNotFoundError: No module named 'labs'</code>, you are not inside a workshop tree that contains <code>SETUP.md</code> next to <code>labs/</code>.</p>
 
                     </main>

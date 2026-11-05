@@ -12,14 +12,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Print `x`, `y`, yaw from odometry at ~5 Hz  
@@ -51,14 +43,21 @@ flowchart LR
   scan --> sense
 ```
 
-## Run
+## Windows
 
-> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+Use **PowerShell**. Follow this section from the first block to the last.
 
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### Run
+
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 Open a **second** window to drive (WH-01) or use Manual briefly. Paste this page's command block in that window too.
-
-### Windows (PowerShell)
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -67,7 +66,17 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 python labs\wh\wh-02-sense-odom-scan\starter\sense.py
 ```
 
-### macOS Apple Silicon (zsh or bash)
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### Run
+
+> **Preferred runner** (workshop root): `./scripts/run <lab-id>`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+Open a **second** window to drive (WH-01) or use Manual briefly. Paste this page's command block in that window too.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -76,7 +85,17 @@ source .venv/bin/activate
 python labs/wh/wh-02-sense-odom-scan/starter/sense.py
 ```
 
-### Linux (bash)
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### Run
+
+> **Preferred runner** (workshop root): `./scripts/run <lab-id>`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+Open a **second** window to drive (WH-01) or use Manual briefly. Paste this page's command block in that window too.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -85,6 +104,7 @@ source .venv/bin/activate
 python labs/wh/wh-02-sense-odom-scan/starter/sense.py
 ```
 
+---
 
 ## Expected output
 

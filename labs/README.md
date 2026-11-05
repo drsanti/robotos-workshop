@@ -12,9 +12,42 @@ Helper rules: [`common/README.md`](common/README.md).
 
 ## Running starters
 
-Open the lab README (`labs/wh/wh-01-drive-twist/README.md` and the others). Paste the **whole** block for your computer. The first lines are `cd`, PATH, and `.venv`. A new window does not keep them.
+Open the lab README and paste the **whole** block in your section. A new window does not keep `cd`, PATH, or `.venv`.
 
-`scripts\run.cmd wh-01` and `python labs/...` fail with "not found" when those first lines were skipped.
+## Windows
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+scripts\run.cmd wh-01
+```
+
+---
+
+## macOS
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-01
+```
+
+---
+
+## Linux
+
+Skip this section when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-01
+```
+
+---
 
 Starters that use `labs.common` put the workshop root on `sys.path` automatically (walk for `SETUP.md`).  
 If you see `ModuleNotFoundError: No module named 'labs'`, you are not inside a workshop tree that contains `SETUP.md` next to `labs/`.

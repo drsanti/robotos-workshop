@@ -1,166 +1,98 @@
 # SETUP — student machine
 
-Week03-style: activate **your OS** folder under `code/`, install the matching wheel, then labs.
+Follow **one** section and stop at the end of it.
 
-**VS Code class workflow:** open this folder in VS Code, then once double-click
-[`scripts/start-here.cmd`](scripts/start-here.cmd) (venv + wheel + sim). New VS Code
-terminals already have `robotos` on PATH. Board labs:
-[`scripts/start-bridge.cmd`](scripts/start-bridge.cmd) in a second window.
-macOS: [`scripts/start-here.command`](scripts/start-here.command) /
-[`scripts/start-bridge.sh`](scripts/start-bridge.sh).
+| Your computer | Read only this |
+|---------------|----------------|
+| Windows | [Windows](#windows) |
+| macOS | [macOS](#macos) |
+| Linux | [Linux](#linux) |
 
-You can skip most of the copy-paste PATH/venv lines below when using that flow.
-
-**New to terminals?** Full guide:  
-[`docs/ebook/chapters/ch00-setup-your-machine.md`](docs/ebook/chapters/ch00-setup-your-machine.md)  
-(how to open PowerShell/Terminal, diagrams, ExecutionPolicy, Gatekeeper).
-- **MW labs:** CLI + Python (sim optional).  
-- **WH labs:** also start warehouse desktop sim (section 4).  
-- **HW labs:** board + serial-bridge (section 7); sim not required.
-
-Replace `YOUR_WORKSHOP_DIR` below with the folder where you unzipped this drop  
-(example Windows: `C:\robotos-workshop` — **not** an instructor’s `D:\CODE\…` path).
-
-**Lab runners:** after PATH + venv (or `scripts\start-here.cmd`), prefer  
-`scripts\run.cmd wh-01` / `./scripts/run wh-01` instead of long `python labs\…` paths.  
-See [`scripts/README.md`](scripts/README.md).
-
-## 1. Unpack
+`YOUR_WORKSHOP_DIR` is the folder that contains this file, `code/`, and `labs/`. Use a short path without spaces.
 
 Unzip so you see:
 
 ```text
 robotos-workshop/
   SETUP.md
-  scripts/                          # start-here, start-bridge, run
-  .vscode/                          # robotos on VS Code terminal PATH
-  docs/
+  scripts/
   labs/
   code/
-    robotos-v0.3.0-<os>-<arch>/     # CLI + libs
-    robotos-0.3.0-*.whl             # Python SDK (this OS)
-    robotos-sim-v<ver>-<os>-<arch>/ # desktop sim (Win + Mac shipped)
+    robotos-v0.3.0-<os>-<arch>/
+    robotos-0.3.0-*.whl
+    robotos-sim-v<ver>-<os>-<arch>/
     NOTES.txt
 ```
 
-Prefer a short path **without spaces**.
+- **MW** labs use the CLI and Python. The sim is optional.
+- **WH** labs need the warehouse sim when your pack includes it.
+- **HW** labs need the board and `serial-bridge`. Close the sim first. The sim and the bridge both use port `7447`.
 
-## 2. PATH + `robotos version`
+Two boards. Flash the matching folder. Run HW-01 and follow the caps it prints.
 
-### Windows — open PowerShell first
+| Board | Firmware | Typical caps | Notes |
+|-------|----------|--------------|-------|
+| `es3c28p` | `hardware-interface-workshop/firmware-prebuilt/es3c28p/` | `≈ 0x33` | LED + mic |
+| `ws28p` | `hardware-interface-workshop/firmware-prebuilt/ws28p/` | `≈ 0x3c` | IMU + RTC; no LED/mic |
 
-`Win` key → type `PowerShell` → Enter. Then:
+Lab map: [`docs/lab-outline.md`](docs/lab-outline.md). Each lab sheet repeats the setup lines, because a new window forgets them.
+
+`robotos` is a file in `code/…/bin`. It is not installed on the computer. Paste each block in full. A new window needs the block again.
+
+## Windows
+
+Use **PowerShell**. Press the `Win` key, type `PowerShell`, and press Enter. Stay in this section until you are done.
+
+### 1. Check `robotos`
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
-$os = "robotos-v0.3.0-windows-x64"
-$env:PATH = "$PWD\code\$os\bin;$env:PATH"
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 Get-Command robotos
 robotos version
 ```
 
-PATH lasts only for **this** window. A new PowerShell, Terminal, Cursor, or VS Code window starts blank. Paste the whole block again, including `cd` and the PATH line. Do not skip the PATH line. VS Code settings sometimes add it, and sometimes they do not.
+Expect `robotos 0.3.0` (any `0.3.x` is fine).
 
-### Linux x64
+Once per machine you can double-click [`scripts/start-here.cmd`](scripts/start-here.cmd). That creates `.venv`, installs the wheel, and starts the sim. The next PowerShell window is still blank. Paste the blocks below again.
 
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-chmod +x code/robotos-v0.3.0-linux-x64/bin/* 2>/dev/null || true
-robotos version
-```
+### 2. Python
 
-### macOS Apple Silicon
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-chmod +x code/robotos-v0.3.0-macos-arm64/bin/* 2>/dev/null || true
-robotos version
-```
-
-Follow `code/NOTES.txt` if the pack starts a router/daemon first.
-
-## 3. Python SDK
-
-Need Python **3.10+**. On Windows, install from python.org and tick **Add python.exe to PATH**. On Ubuntu you may need `sudo apt install python3 python3-venv`.
-
-### Windows (PowerShell)
+Python 3.10 or newer, from python.org. Tick **Add python.exe to PATH** during install.
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-```
-
-If activation fails with **ExecutionPolicy**:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Then retry `Activate.ps1`. Prompt should show `(.venv)`.
-
-```powershell
 python -m pip install -U pip
 python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
 python -c "import robotos; print(robotos.Node.version())"
 ```
 
-(If the wheel filename differs, `Get-ChildItem .\code\*.whl` and install that file.)
+If `.venv` already exists, start at `.\.venv\Scripts\Activate.ps1`. The prompt should show `(.venv)`.
 
-### Linux x64 (bash)
+If `Activate.ps1` is blocked, run this once, then activate again:
 
-```bash
-cd YOUR_WORKSHOP_DIR
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-# Prefer the exact name printed in NOTES.txt for your pack. Tag-safe pick:
-python -m pip install code/robotos-0.3.0-*-manylinux*.whl
-# If your drop ships a pure Python wheel instead:
-# python -m pip install code/robotos-0.3.0-py3-none-any.whl
-python -c "import robotos; print(robotos.Node.version())"
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```
 
-### macOS Apple Silicon (bash)
+If the wheel name differs, run `Get-ChildItem .\code\*.whl` and install that file. Use the `win_amd64` wheel.
 
-```bash
+### 3. Warehouse sim
+
+WH labs need the sim. MW and HW do not.
+
+```powershell
 cd YOUR_WORKSHOP_DIR
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install code/robotos-0.3.0-*-macosx*.whl
-# or: python -m pip install code/robotos-0.3.0-py3-none-any.whl
-python -c "import robotos; print(robotos.Node.version())"
+Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe
 ```
 
-Do **not** install a `win_amd64` wheel on Linux/macOS. If `ls code/*.whl` shows more than one file, pick the tag that matches your OS.
+Or double-click `robotos-sim.exe` in that folder. Confirm the window says connected / **NATIVE**. If it does not: **Warehouse → Native → External → Connect**. Graded WH labs use Native, not Mock. Do not restart the sim every time you open PowerShell.
 
-## 4. Start warehouse sim
+### 4. Smoke test
 
-**Pack honesty:** WH labs need `code/robotos-sim-v*/` for **your** OS.
-Windows x64 and macOS arm64 sims ship in this drop. If your zip is **Linux-only**
-or the sim folder is missing, **skip WH** and do **MW** / **HW** instead.
-MW/HW do not require the desktop sim.
-
-When the sim **is** present:
-
-1. Open `code/robotos-sim-v*/` for **your** OS.  
-   - **Windows:** double-click `robotos-sim.exe` (or `Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe`).  
-   - **Linux:** `chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim && ./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &`  
-   - **macOS:** `chmod +x code/robotos-sim-v0.1.0-macos-arm64/robotos-sim && open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim`  
-     (or right-click the app/binary → **Open** the first time). If blocked: System Settings → Privacy & Security → Allow.  
-2. Desktop builds **auto-select External + Native and Connect**. Confirm the UI shows connected / **NATIVE**.  
-3. If you disconnected or used Mock/Manual: **Warehouse → Native → External → Connect**.  
-
-Graded WH labs use the **real graph** (Native), not Mock.
-
-## 5. Smoke
-
-Sim must already be **Native → External → Connect** (section 4).
-
-### Windows (PowerShell)
+The sim must already be connected.
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -168,61 +100,21 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 robotos topic list
 scripts\run.cmd wh-01
-# or: python labs\wh\wh-01-drive-twist\starter\drive_forward.py
 ```
 
-### Linux x64 (bash)
+`topic list` shows `/robot/01/cmd_vel`, `/robot/01/odom`, and `/robot/01/scan`. WH-01 moves the robot about 1 m. Use PowerShell for these commands. Git Bash rewrites paths that start with `/robot/`.
 
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-robotos topic list
-./scripts/run wh-01
-# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
-```
+Optional, same window:
 
-### macOS Apple Silicon (bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-robotos topic list
-./scripts/run wh-01
-# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
-```
-
-**Expect:** `topic list` shows `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan` (not `no topics announced`). Then WH-01 moves the robot ~1 m.
-
-Optional:
-
-```text
+```powershell
 robotos topic echo /robot/01/odom --count 5
 ```
 
-(On **Windows**, use PowerShell for topic paths — Git Bash rewrites `/robot/...`.)
+### 5. Board (HW labs)
 
-## 6. Labs
+Close the sim first. Two windows.
 
-Order / map: [`docs/lab-outline.md`](docs/lab-outline.md).  
-Warehouse contract: [`docs/p0-contract.md`](docs/p0-contract.md).  
-Ebook backlog / QA: [`docs/ebook/BACKLOG.md`](docs/ebook/BACKLOG.md).
-
-## 7. ESP32-S3 board (HW labs)
-
-**Two board variants** (flash the matching prebuilt folder — do not mix):
-
-| Board | Firmware | Typical caps | Notes |
-|-------|----------|--------------|-------|
-| `es3c28p` | `hardware-interface-workshop/firmware-prebuilt/es3c28p/` | `≈ 0x33` | LED + mic |
-| `ws28p` | `hardware-interface-workshop/firmware-prebuilt/ws28p/` | `≈ 0x3c` | IMU + RTC; no LED/mic |
-
-Students run **HW-01** and follow caps. Track overview: [`labs/hw/README.md`](labs/hw/README.md).
-
-Full copy-paste: [`code/NOTES.txt`](code/NOTES.txt) section B (must match **your** OS pack). Short form:
-
-### Windows — Terminal A (bridge)
+**Window A — bridge.** Leave it open. Or double-click [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd).
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -231,34 +123,102 @@ $env:ROBOTOS_LISTEN = "tcp/0.0.0.0:7447"
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-### Windows — Terminal B (labs)
+If auto-detect misses the USB port, add `--probe-settle-ms 2000 --probe-ms 5000`, or set `--port COM17` to the COM port shown in Device Manager. `serial-bridge.exe` is next to `robotos.exe`.
+
+**Window B — labs.** A second PowerShell. Do not reuse window A.
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+Remove-Item Env:ROBOTOS_LISTEN -ErrorAction SilentlyContinue
 $env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
 .\.venv\Scripts\Activate.ps1
 robotos topic echo /robot/01/sys/board --count 3
 scripts\run.cmd hw-01
-# or: python labs\hw\hw-01-caps-probe\starter\caps_probe.py
 ```
 
-Override port with `--port COM17` (or your USB Serial Device) if auto-detect fails.
-If auto skips the real USB port, raise probe time: `--probe-settle-ms 2000 --probe-ms 5000`,
-or pass `--port COMx` explicitly. Pack ships `serial-bridge.exe` next to `robotos.exe`.
+Run HW-01 before LED or IMU labs. Follow the caps it prints.
 
-### Linux x64 — Terminal A (bridge)
+### If something fails
+
+| What you see | What to do |
+|--------------|------------|
+| `robotos` not found | Paste section 1 again in **this** window |
+| `Activate.ps1` blocked | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, then activate again |
+| Wheel “not supported” | Install `code\robotos-0.3.0-py3-none-win_amd64.whl` |
+| `scripts\run.cmd` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
+| `no topics announced` | Sim not connected, or the bridge is down |
+| Robot does not move | In the sim: **External**, then **Native**. Keep publishing |
+| HW-01 waits forever | Close the sim. Start window A again |
+| `CONNECTION_TO_SELF` | Window B must run `Remove-Item Env:ROBOTOS_LISTEN`. Do not listen and connect in one window |
+| Git Bash breaks `/robot/...` | Use PowerShell |
+| Board silent / port busy | Check USB, close other serial programs, set `--port COMx` |
+| LED lab does nothing | That board has no LED. Use the other board, or a non-LED lab |
+| IMU timeout | That board has no IMU. Use `board_watch` |
+| `ModuleNotFoundError: labs` | The window is not in the workshop folder |
+
+End of the Windows section.
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Stay in this section until you are done.
+
+### 1. Check `robotos`
 
 ```bash
 cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
-chmod +x code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2>/dev/null || true
-serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
-# or: --port /dev/ttyACM0
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/* 2>/dev/null || true
+robotos version
 ```
 
-### macOS Apple Silicon — Terminal A (bridge)
+Expect `robotos 0.3.0` (any `0.3.x` is fine). A new terminal needs this block again.
+
+Once per machine you can double-click [`scripts/start-here.command`](scripts/start-here.command), or run `./scripts/start-here.sh` from this folder. That creates `.venv`, installs the wheel, and opens the sim. The next terminal is still blank. Paste the blocks below again.
+
+### 2. Python
+
+Python 3.10 or newer.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c "import robotos; print(robotos.Node.version())"
+```
+
+If `.venv` already exists, start at `source .venv/bin/activate`. Do not install the `win_amd64` wheel.
+
+### 3. Warehouse sim
+
+```bash
+cd YOUR_WORKSHOP_DIR
+open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
+```
+
+The first launch may say the app cannot be opened. In Finder, right-click the app and choose **Open**, or allow it under System Settings → Privacy & Security. Confirm connected / **NATIVE**. If not: **Warehouse → Native → External → Connect**. Do not restart the sim every time you open Terminal.
+
+### 4. Smoke test
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01
+```
+
+`topic list` shows `/robot/01/cmd_vel`, `/robot/01/odom`, and `/robot/01/scan`. WH-01 moves the robot about 1 m.
+
+### 5. Board (HW labs)
+
+Close the sim first. Two windows.
+
+**Window A — bridge.** Leave it open. Or run `./scripts/start-bridge.sh` from this folder.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -266,54 +226,153 @@ export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
 chmod +x code/robotos-v0.3.0-macos-arm64/bin/serial-bridge 2>/dev/null || true
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
-# or: --port /dev/cu.usbmodem*   # tab-complete
 ```
 
-### Linux x64 — Terminal B (labs)
+Auto-detect can skip `/dev/cu.usbmodem*` (`no workshop frame`) and select `/dev/tty.usbmodem…`. Pin the path from the line `[auto] selected`. On the class Mac that path was `/dev/tty.usbmodem101`.
 
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
-source .venv/bin/activate
-robotos topic echo /robot/01/sys/board --count 3
-./scripts/run hw-01
-# or: python labs/hw/hw-01-caps-probe/starter/caps_probe.py
-```
-
-### macOS Apple Silicon — Terminal B (labs)
+**Window B — labs.** A second terminal.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+unset ROBOTOS_LISTEN
 export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 source .venv/bin/activate
 robotos topic echo /robot/01/sys/board --count 3
 ./scripts/run hw-01
-# or: python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 ```
 
-**Linux serial permission:** `sudo usermod -aG dialout $USER` then **log out and back in**.  
-Self-check: `groups | grep dialout` and `ls -l /dev/ttyACM*`. Do **not** run `sudo serial-bridge` to paper over permissions — fix `dialout` instead.  
-Always run HW-01 (caps) before LED/IMU labs.
+Run HW-01 before LED or IMU labs. A `ws28p` board prints `caps=0x3c`.
 
-## Troubleshooting
+### If something fails
 
-| Symptom | Check |
-|---------|--------|
-| `robotos` not found | PATH to `code/robotos-v*/bin` in **this** terminal; or reopen VS Code after unpack (`.vscode` settings); `chmod +x` on Linux/macOS |
-| `scripts\run` / `./scripts/run` fails | cwd must be workshop root (`SETUP.md` next to `labs/`); activate `.venv` first |
-| HW `caps_probe` waits forever / only WH topics with `ROBOTOS_CONNECT` | Close **robotos-sim**, then restart `scripts/start-bridge` — sim and bridge both want `:7447` |
+| What you see | What to do |
+|--------------|------------|
+| `robotos` not found | Paste section 1 again in **this** terminal |
+| `python` not found | Use `python3`, then `source .venv/bin/activate` |
+| Wheel “not supported” | Install `code/robotos-0.3.0-py3-none-any.whl` |
+| `./scripts/run` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
+| “cannot be opened” | Privacy & Security → allow `robotos-sim` |
+| `no topics announced` | Sim not connected, or the bridge is down |
+| Robot does not move | In the sim: **External**, then **Native**. Keep publishing |
+| HW-01 waits forever | Close the sim. Start window A again |
+| `CONNECTION_TO_SELF` | Window B must `unset ROBOTOS_LISTEN` |
+| Auto skips `cu.usbmodem` | Use the `/dev/tty.usbmodem…` path from `[auto] selected` |
+| Board silent / port busy | USB, close other serial programs |
+| LED lab does nothing | That board has no LED |
+| IMU timeout | That board has no IMU. Use `board_watch` |
+| `ModuleNotFoundError: labs` | The terminal is not in the workshop folder |
 
-| `Activate.ps1` blocked | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
-| wheel “not supported” | Wrong OS wheel — `win_amd64` / `macosx` / linux / `py3-none-any` |
-| `python` not found (Unix) | Use `python3` / activate `.venv` |
-| `no topics announced` | Sim not Connected **or** board bridge down / wrong `ROBOTOS_CONNECT` |
-| Pub but no move (WH) | Still **Manual**; need **External**; keep publishing (≥ ~2 Hz) |
-| Board silent / port busy | USB, flash, bridge `--cmd-topic`, caps; Linux `dialout` |
-| LED lab no-op | Board without LED cap — use wave or swap variant |
-| IMU timeout | Board without IMU cap — use `board_watch` instead |
-| ImportError geometry/nav | Pack wheel older than geometry/nav codegen — get updated wheel |
-| `ModuleNotFoundError: labs` | Open terminal in workshop root (`SETUP.md` + `labs/`); see `labs/common/README.md` |
-| Git Bash topic paths (Windows) | Use **PowerShell** (Bash rewrites `/robot/...`) |
-| macOS “cannot be opened” | Privacy & Security → allow `robotos-sim` |
+End of the macOS section.
+
+---
+
+## Linux
+
+Use **bash**. Stay in this section until you are done. This class drop often has no `code/robotos-v0.3.0-linux-x64` folder. If `ls code` does not show it, this section does not apply.
+
+### 1. Check `robotos`
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+chmod +x code/robotos-v0.3.0-linux-x64/bin/* 2>/dev/null || true
+robotos version
+```
+
+Expect `robotos 0.3.0` (any `0.3.x` is fine). A new terminal needs this block again.
+
+### 2. Python
+
+Python 3.10 or newer. On Ubuntu: `sudo apt install python3 python3-venv`.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c "import robotos; print(robotos.Node.version())"
+```
+
+If `.venv` already exists, start at `source .venv/bin/activate`. Do not install the `win_amd64` wheel.
+
+### 3. Warehouse sim
+
+WH labs need a sim binary. This class drop ships Windows and macOS sims. If `code/robotos-sim-v0.1.0-linux-x64` is missing, skip WH and do MW or HW.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
+./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &
+```
+
+Confirm connected / **NATIVE**. If not: **Warehouse → Native → External → Connect**.
+
+### 4. Smoke test
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01
+```
+
+`topic list` shows `/robot/01/cmd_vel`, `/robot/01/odom`, and `/robot/01/scan`. WH-01 moves the robot about 1 m.
+
+### 5. Board (HW labs)
+
+Close the sim first. Serial access needs the `dialout` group. Run this once, then log out and back in:
+
+```bash
+sudo usermod -aG dialout $USER
+```
+
+Check with `groups | grep dialout` and `ls -l /dev/ttyACM*`. Do not use `sudo serial-bridge` in place of that.
+
+**Window A — bridge.** Leave it open.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2>/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
+```
+
+If auto-detect misses the board, add `--port /dev/ttyACM0`.
+
+**Window B — labs.** A second terminal.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+unset ROBOTOS_LISTEN
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+source .venv/bin/activate
+robotos topic echo /robot/01/sys/board --count 3
+./scripts/run hw-01
+```
+
+Run HW-01 before LED or IMU labs.
+
+### If something fails
+
+| What you see | What to do |
+|--------------|------------|
+| `robotos` not found | Paste section 1 again in **this** terminal. `chmod +x` the files in `code/robotos-v0.3.0-linux-x64/bin` |
+| `python` not found | Use `python3`, then `source .venv/bin/activate` |
+| Wheel “not supported” | Install `code/robotos-0.3.0-py3-none-any.whl` |
+| `./scripts/run` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
+| Permission denied on `/dev/ttyACM*` | `dialout` group, then log out and back in |
+| `no topics announced` | Sim not connected, or the bridge is down |
+| HW-01 waits forever | Close the sim. Start window A again |
+| `CONNECTION_TO_SELF` | Window B must `unset ROBOTOS_LISTEN` |
+| Board silent / port busy | USB, close other serial programs, `--port /dev/ttyACM0` |
+| `ModuleNotFoundError: labs` | The terminal is not in the workshop folder |
+
+End of the Linux section.
+
+---
+

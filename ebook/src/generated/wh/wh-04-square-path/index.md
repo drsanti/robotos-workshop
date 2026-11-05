@@ -15,6 +15,8 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\run.cmd wh-04
 ```
 
+---
+
 **macOS Apple Silicon (zsh or bash)**
 
 ```bash
@@ -24,6 +26,8 @@ source .venv/bin/activate
 ./scripts/run wh-04
 ```
 
+---
+
 **Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
 
 ```bash
@@ -32,6 +36,8 @@ export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run wh-04
 ```
+
+---
 
 Prerequisite: warehouse sim running (`scripts/start-here`).
 
@@ -52,14 +58,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Build an open-loop timed sequence within contract clamps  
@@ -71,12 +69,19 @@ Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. T
 - WH-00…03; External + Native + Connect; paste this page's command block in this window  
 - Ebook: [`ch05-feedback-control.md`](../../../chapters/ch05-feedback-control.md) (open vs closed)
 
-## Run
+## Windows
 
-> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+Use **PowerShell**. Follow this section from the first block to the last.
 
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
 
-### Windows (PowerShell)
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### Run
+
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -86,7 +91,15 @@ python labs\wh\wh-04-square-path\starter\square.py
 python labs\wh\wh-04-square-path\starter\square.py --side 0.8 --vx 0.2
 ```
 
-### macOS Apple Silicon (zsh or bash)
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### Run
+
+> **Preferred runner** (workshop root): `./scripts/run <lab-id>`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -96,7 +109,15 @@ python labs/wh/wh-04-square-path/starter/square.py
 python labs/wh/wh-04-square-path/starter/square.py --side 0.8 --vx 0.2
 ```
 
-### Linux (bash)
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### Run
+
+> **Preferred runner** (workshop root): `./scripts/run <lab-id>`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -106,6 +127,7 @@ python labs/wh/wh-04-square-path/starter/square.py
 python labs/wh/wh-04-square-path/starter/square.py --side 0.8 --vx 0.2
 ```
 
+---
 
 ## Spec (minimum)
 

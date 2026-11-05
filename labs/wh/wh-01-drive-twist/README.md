@@ -12,14 +12,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Publish Twist at a steady rate from Python  
@@ -54,15 +46,22 @@ sequenceDiagram
   Note over S: Stops (also 500 ms timeout if silent)
 ```
 
-## Run
+## Windows
 
-> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+Use **PowerShell**. Follow this section from the first block to the last.
 
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### Run
+
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 Stay in the **workshop root** (the folder that contains `SETUP.md` and `labs\`).  
 Do **not** `cd` into `starter\` for these commands.
-
-### Windows (PowerShell)
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -72,7 +71,20 @@ python labs\wh\wh-01-drive-twist\starter\drive_forward.py
 python labs\wh\wh-01-drive-twist\starter\drive_forward.py --wz 0.5 --vx 0 --seconds 2
 ```
 
-### macOS Apple Silicon (zsh or bash)
+Optional advanced CLI hex (skip if new to terminals): [starter/README.md](starter/README.md).
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### Run
+
+> **Preferred runner** (workshop root): `./scripts/run <lab-id>`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+Stay in the **workshop root** (the folder that contains `SETUP.md` and `labs\`).  
+Do **not** `cd` into `starter\` for these commands.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -82,7 +94,20 @@ python labs/wh/wh-01-drive-twist/starter/drive_forward.py
 python labs/wh/wh-01-drive-twist/starter/drive_forward.py --wz 0.5 --vx 0 --seconds 2
 ```
 
-### Linux (bash)
+Optional advanced CLI hex (skip if new to terminals): [starter/README.md](starter/README.md).
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### Run
+
+> **Preferred runner** (workshop root): `./scripts/run <lab-id>`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+Stay in the **workshop root** (the folder that contains `SETUP.md` and `labs\`).  
+Do **not** `cd` into `starter\` for these commands.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -92,8 +117,9 @@ python labs/wh/wh-01-drive-twist/starter/drive_forward.py
 python labs/wh/wh-01-drive-twist/starter/drive_forward.py --wz 0.5 --vx 0 --seconds 2
 ```
 
-
 Optional advanced CLI hex (skip if new to terminals): [starter/README.md](starter/README.md).
+
+---
 
 ## Expected output
 

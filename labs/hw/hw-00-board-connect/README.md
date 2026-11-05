@@ -12,14 +12,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Run bridge (listen) and lab terminal (connect) without env conflicts  
@@ -57,14 +49,21 @@ sequenceDiagram
   B->>B: topic echo sys/board
 ```
 
-## Bridge (terminal A)
+## Windows
+
+Use **PowerShell**. Follow this section from the first block to the last.
+
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### Bridge (terminal A)
 
 Leave this terminal open.
 
-> **Preferred:** double-click `scripts\start-bridge.cmd` (Windows) or run
-> `./scripts/start-bridge.sh` (macOS/Linux). Manual fences below if a TA asks.
-
-### Windows (PowerShell)
+> **Preferred:** double-click `scripts\start-bridge.cmd`. Manual commands below if a TA asks.
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -74,68 +73,88 @@ serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 # or: serial-bridge --port COM7 --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-### macOS Apple Silicon (zsh or bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
-chmod +x code/robotos-v*/bin/serial-bridge 2>/dev/null || true
-serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
-# or: --port /dev/ttyACM0          (Linux)
-# or: --port /dev/cu.usbmodem*     (macOS)
-```
-
-### Linux (bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
-chmod +x code/robotos-v*/bin/serial-bridge 2>/dev/null || true
-serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
-# or: --port /dev/ttyACM0          (Linux)
-# or: --port /dev/cu.usbmodem*     (macOS)
-```
-
-
-Linux permission denied → `sudo usermod -aG dialout $USER` then log out/in.
-
-## Practice (terminal B)
-
-### Windows (PowerShell)
+### Practice (terminal B)
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+Remove-Item Env:ROBOTOS_LISTEN -ErrorAction SilentlyContinue
 $env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
 robotos node list
 robotos topic list
 robotos topic echo /robot/01/sys/board --count 3
 ```
 
-### macOS Apple Silicon (zsh or bash)
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### Bridge (terminal A)
+
+Leave this terminal open.
+
+> **Preferred:** run `./scripts/start-bridge.sh` from this folder. Manual commands below if a TA asks.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v*/bin/serial-bridge 2>/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
+# If auto skips /dev/cu.usbmodem* , pin the "[auto] selected" path.
+# This Mac selected /dev/tty.usbmodem101.
+```
+
+### Practice (terminal B)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+unset ROBOTOS_LISTEN
 export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 robotos node list
 robotos topic list
 robotos topic echo /robot/01/sys/board --count 3
 ```
 
-### Linux (bash)
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### Bridge (terminal A)
+
+Leave this terminal open.
+
+> **Preferred:** run `./scripts/start-bridge.sh` from this folder. Manual commands below if a TA asks.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v*/bin/serial-bridge 2>/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
+# or: --port /dev/ttyACM0
+```
+
+Linux permission denied → `sudo usermod -aG dialout $USER` then log out/in.
+
+### Practice (terminal B)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+unset ROBOTOS_LISTEN
 export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 robotos node list
 robotos topic list
 robotos topic echo /robot/01/sys/board --count 3
 ```
 
+---
 
 ## Expected output
 

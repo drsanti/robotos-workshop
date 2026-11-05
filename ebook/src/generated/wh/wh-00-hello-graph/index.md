@@ -15,6 +15,8 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\run.cmd wh-00
 ```
 
+---
+
 **macOS Apple Silicon (zsh or bash)**
 
 ```bash
@@ -24,6 +26,8 @@ source .venv/bin/activate
 ./scripts/run wh-00
 ```
 
+---
+
 **Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
 
 ```bash
@@ -32,6 +36,8 @@ export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run wh-00
 ```
+
+---
 
 Prerequisite: warehouse sim running (`scripts/start-here`).
 
@@ -52,25 +58,25 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Prerequisites
 
 - Sim is running. Paste this page's command block in this window. Full machine setup is [`SETUP.md`](../../../../SETUP.md) if MW-00 is not done  
 - Sim launched and **Connected** (**Native**) — see SETUP §4  
 - Ebook: [`ch01-graph-nodes-topics.md`](../../../chapters/ch01-graph-nodes-topics.md)
 
-## Steps
+## Windows
+
+Use **PowerShell**. Follow this section from the first block to the last.
+
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### Steps
 
 Paste the whole block for your computer. There is no starter script for WH-00.
-
-### Windows (PowerShell)
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -79,7 +85,19 @@ robotos topic list
 robotos topic echo /robot/01/odom --count 5
 ```
 
-### macOS Apple Silicon (zsh or bash)
+**Expect:** list includes `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan`. Echo prints odometry (move the robot in Manual briefly if idle).
+
+Before WH-01: set sim to **External** (desktop builds often already did; confirm UI).
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### Steps
+
+Paste the whole block for your computer. There is no starter script for WH-00.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -88,7 +106,19 @@ robotos topic list
 robotos topic echo /robot/01/odom --count 5
 ```
 
-### Linux (bash)
+**Expect:** list includes `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan`. Echo prints odometry (move the robot in Manual briefly if idle).
+
+Before WH-01: set sim to **External** (desktop builds often already did; confirm UI).
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### Steps
+
+Paste the whole block for your computer. There is no starter script for WH-00.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -97,10 +127,11 @@ robotos topic list
 robotos topic echo /robot/01/odom --count 5
 ```
 
-
 **Expect:** list includes `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan`. Echo prints odometry (move the robot in Manual briefly if idle).
 
 Before WH-01: set sim to **External** (desktop builds often already did; confirm UI).
+
+---
 
 ## Done when
 

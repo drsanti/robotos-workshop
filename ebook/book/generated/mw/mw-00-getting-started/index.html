@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../../../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -185,18 +185,21 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 scripts\run.cmd mw-00
 </code></pre>
+<hr>
 <p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run mw-00
 </code></pre>
+<hr>
 <p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run mw-00
 </code></pre>
+<hr>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/mw/mw-00-getting-started/README.md</code></p>
 
 </div>
@@ -212,17 +215,10 @@ source .venv/bin/activate
 <p>Use any terminal: Terminal, iTerm, Cursor, or VS Code. Open it in the <strong>workshop root</strong>, the folder that contains <code>code/</code>, <code>labs/</code>, and <code>SETUP.md</code>.</p>
 <p><code>robotos</code> is not installed on the computer. It lives in <code>code/…/bin</code>. Each new terminal must be told to look there. A VS Code terminal opened on this folder sometimes does that for you. Every other terminal, including Cursor, does not. If you skip the <code>export</code> or <code>$env:PATH</code> line, the next command fails with <code>command not found: robotos</code>.</p>
 <p>The PATH line lasts for <strong>this window only</strong>. A new window needs it again. Every later lab repeats the same first lines, because a new window forgets them.</p>
-<h2 id="practice"><a class="header" href="#practice">Practice</a></h2>
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<p>Use <strong>PowerShell</strong>. Follow this section from the first block to the last.</p>
+<h3 id="practice"><a class="header" href="#practice">Practice</a></h3>
 <p>Replace nothing if you are already in the workshop root. <code>cd</code> to that folder first if the prompt shows some other path.</p>
-<h3 id="macos-apple-silicon-zsh-or-bash"><a class="header" href="#macos-apple-silicon-zsh-or-bash">macOS Apple Silicon (zsh or bash)</a></h3>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-robotos version
-robotos doctor
-robotos node list
-robotos topic list
-</code></pre>
-<h3 id="windows-powershell"><a class="header" href="#windows-powershell">Windows (PowerShell)</a></h3>
 <pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 robotos version
@@ -230,7 +226,52 @@ robotos doctor
 robotos node list
 robotos topic list
 </code></pre>
-<h3 id="linux-bash"><a class="header" href="#linux-bash">Linux (bash)</a></h3>
+<p><strong>Expect:</strong> <code>robotos version</code> prints <code>robotos 0.3.0</code> (any <code>0.3.x</code> is fine). <code>node list</code> and <code>topic list</code> may be <strong>empty</strong> until the sim, the serial bridge, or MW-01 is running. An empty list is a valid quiet graph. It does not mean the CLI is broken.</p>
+<p>Optional: <code>robotos ui</code> if the pack embeds the inspector.</p>
+<h3 id="python-sdk-check"><a class="header" href="#python-sdk-check">Python SDK check</a></h3>
+<p>The checklist also asks for a successful <code>import robotos</code>. Paste the whole block. Do not run <code>.\.venv\Scripts\Activate.ps1</code> before <code>.venv</code> exists.</p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -U pip
+python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
+python -c "import robotos; print(robotos.Node.version())"
+</code></pre>
+<p>If <code>.venv</code> already exists, skip <code>python -m venv .venv</code> and start at <code>.\.venv\Scripts\Activate.ps1</code>.</p>
+<p>If activation is blocked, run <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code> once, then activate again. The prompt should show <code>(.venv)</code>.</p>
+<p><strong>Expect:</strong> the import prints a version string. Use the <code>win_amd64</code> wheel in the block above.</p>
+<p>Full setup, the sim, and the board bridge are in <a href="../../../../SETUP.html"><code>SETUP.md</code></a>. This lab does not need the sim.</p>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<p>Use <strong>Terminal</strong> on Apple Silicon (zsh or bash). Follow this section from the first block to the last.</p>
+<h3 id="practice-1"><a class="header" href="#practice-1">Practice</a></h3>
+<p>Replace nothing if you are already in the workshop root. <code>cd</code> to that folder first if the prompt shows some other path.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+robotos version
+robotos doctor
+robotos node list
+robotos topic list
+</code></pre>
+<p><strong>Expect:</strong> <code>robotos version</code> prints <code>robotos 0.3.0</code> (any <code>0.3.x</code> is fine). <code>node list</code> and <code>topic list</code> may be <strong>empty</strong> until the sim, the serial bridge, or MW-01 is running. An empty list is a valid quiet graph. It does not mean the CLI is broken.</p>
+<p>Optional: <code>robotos ui</code> if the pack embeds the inspector.</p>
+<h3 id="python-sdk-check-1"><a class="header" href="#python-sdk-check-1">Python SDK check</a></h3>
+<p>The checklist also asks for a successful <code>import robotos</code>. Paste the whole block. Do not run <code>source .venv/bin/activate</code> before <code>.venv</code> exists.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c "import robotos; print(robotos.Node.version())"
+</code></pre>
+<p>If <code>.venv</code> already exists, skip <code>python3 -m venv .venv</code> and start at <code>source .venv/bin/activate</code>.</p>
+<p><strong>Expect:</strong> the import prints a version string. Use the wheel in the block above.</p>
+<p>Full setup, the sim, and the board bridge are in <a href="../../../../SETUP.html"><code>SETUP.md</code></a>. This lab does not need the sim.</p>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p>Use <strong>bash</strong>. Follow this section from the first block to the last. Skip it when <code>code/robotos-v0.3.0-linux-x64</code> is not in your drop.</p>
+<h3 id="practice-2"><a class="header" href="#practice-2">Practice</a></h3>
+<p>Replace nothing if you are already in the workshop root. <code>cd</code> to that folder first if the prompt shows some other path.</p>
 <p>Linux packs are not in the current class drop. If your drop has the folder:</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
@@ -241,18 +282,8 @@ robotos topic list
 </code></pre>
 <p><strong>Expect:</strong> <code>robotos version</code> prints <code>robotos 0.3.0</code> (any <code>0.3.x</code> is fine). <code>node list</code> and <code>topic list</code> may be <strong>empty</strong> until the sim, the serial bridge, or MW-01 is running. An empty list is a valid quiet graph. It does not mean the CLI is broken.</p>
 <p>Optional: <code>robotos ui</code> if the pack embeds the inspector.</p>
-<h2 id="python-sdk-check"><a class="header" href="#python-sdk-check">Python SDK check</a></h2>
+<h3 id="python-sdk-check-2"><a class="header" href="#python-sdk-check-2">Python SDK check</a></h3>
 <p>The checklist also asks for a successful <code>import robotos</code>. Paste the whole block. Do not run <code>source .venv/bin/activate</code> before <code>.venv</code> exists.</p>
-<h3 id="macos-apple-silicon-zsh-or-bash-1"><a class="header" href="#macos-apple-silicon-zsh-or-bash-1">macOS Apple Silicon (zsh or bash)</a></h3>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install code/robotos-0.3.0-py3-none-any.whl
-python -c "import robotos; print(robotos.Node.version())"
-</code></pre>
-<p>If <code>.venv</code> already exists, skip <code>python3 -m venv .venv</code> and start at <code>source .venv/bin/activate</code>.</p>
-<h3 id="linux-bash-1"><a class="header" href="#linux-bash-1">Linux (bash)</a></h3>
 <p>Only if <code>code/robotos-0.3.0-py3-none-any.whl</code> is in your drop:</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 python3 -m venv .venv
@@ -261,17 +292,10 @@ python -m pip install -U pip
 python -m pip install code/robotos-0.3.0-py3-none-any.whl
 python -c "import robotos; print(robotos.Node.version())"
 </code></pre>
-<h3 id="windows-powershell-1"><a class="header" href="#windows-powershell-1">Windows (PowerShell)</a></h3>
-<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -U pip
-python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
-python -c "import robotos; print(robotos.Node.version())"
-</code></pre>
-<p>If activation is blocked, run <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code> once, then activate again. The prompt should show <code>(.venv)</code>.</p>
-<p><strong>Expect:</strong> the import prints a version string. Do not install the Windows wheel on macOS or Linux.</p>
+<p>If <code>.venv</code> already exists, skip <code>python3 -m venv .venv</code> and start at <code>source .venv/bin/activate</code>.</p>
+<p><strong>Expect:</strong> the import prints a version string. Use the wheel in the block above.</p>
 <p>Full setup, the sim, and the board bridge are in <a href="../../../../SETUP.html"><code>SETUP.md</code></a>. This lab does not need the sim.</p>
+<hr>
 <h2 id="done-when"><a class="header" href="#done-when">Done when</a></h2>
 <p>CLI works and you can explain what an empty <code>topic list</code> means.</p>
 <p>See <a href="CHECKLIST.html">CHECKLIST.md</a>.</p>

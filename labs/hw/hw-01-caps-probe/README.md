@@ -12,14 +12,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Wait for `/robot/01/sys/board` and decode the caps bitfield  
@@ -42,16 +34,19 @@ Ebook walkthrough: [`ch04-board-on-graph.md`](../../../docs/ebook/chapters/ch04-
 ## Prerequisites
 
 - Close warehouse **sim** (port clash with bridge)  
-- Board USB plugged (`es3c28p` or `ws28p`)  
+- Board USB plugged (`es3c28p` or `ws28p`)
 
-## Practice (preferred — two steps)
+## Windows
 
-**A — bridge** (leave open): double-click `scripts\start-bridge.cmd`  
-(macOS: `./scripts/start-bridge.sh`)
+Use **PowerShell**. Follow this section from the first block to the last.
 
-**B — probe** (a second window, after the bridge is running). Paste the whole block:
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
 
-### Windows (PowerShell)
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### **B — probe** (a second window, after the bridge is running). Paste the whole block
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -60,7 +55,27 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\run.cmd hw-01
 ```
 
-### macOS Apple Silicon (zsh or bash)
+`run` sets `ROBOTOS_CONNECT` for you on `hw-*` labs.
+
+### Manual fallback (if a TA asks)
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+$env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
+python labs\hw\hw-01-caps-probe\starter\caps_probe.py
+```
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### **B — probe** (a second window, after the bridge is running). Paste the whole block
+
+**A — bridge** (leave open): `./scripts/start-bridge.sh`
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -69,7 +84,25 @@ source .venv/bin/activate
 ./scripts/run hw-01
 ```
 
-### Linux (bash)
+`run` sets `ROBOTOS_CONNECT` for you on `hw-*` labs.
+
+### Manual fallback (if a TA asks)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+python labs/hw/hw-01-caps-probe/starter/caps_probe.py
+```
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### **B — probe** (a second window, after the bridge is running). Paste the whole block
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -82,18 +115,6 @@ source .venv/bin/activate
 
 ### Manual fallback (if a TA asks)
 
-### Windows (PowerShell)
-
-```powershell
-cd YOUR_WORKSHOP_DIR
-$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
-.\.venv\Scripts\Activate.ps1
-$env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
-python labs\hw\hw-01-caps-probe\starter\caps_probe.py
-```
-
-### Linux x64 (bash) — new Terminal B
-
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
@@ -102,20 +123,12 @@ export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 ```
 
-### macOS Apple Silicon (bash) — new Terminal B
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
-python labs/hw/hw-01-caps-probe/starter/caps_probe.py
-```
+---
 
 ## Code notes (`caps_probe.py`)
 
 - Inline walk for `SETUP.md` then `from labs.common…` (do not edit the path block)  
-- `wait_for_message` (in `labs.common`) — sparse BoardInfo via `on_message`  
+- `wait_for_message` (in `labs.common`) — waits for the next sparse BoardInfo sample  
 - `CAPS_BITS` table lives in `labs.common.caps` — **yes/no print loop stays in the starter**  
 - Prints `hw_model`, `fw_version`, `caps=0x..`
 

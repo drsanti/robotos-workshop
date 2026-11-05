@@ -13,16 +13,7 @@
 
 Or clone the GitHub repo (already includes `code/` packs for Win + Mac).
 
-## Day-1 (5 minutes)
-
-1. Unzip / clone → open folder in VS Code.  
-2. **Windows:** double-click `scripts\start-here.cmd`  
-   **macOS:** double-click `scripts/start-here.command` (Gatekeeper: right-click → Open once).  
-3. VS Code → **Terminal → New Terminal**  
-4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`  
-5. `scripts\run.cmd wh-01` or `./scripts/run wh-01`
-
-## Board labs (HW)
+## Boards
 
 **Two SKUs** (flash the matching folder; do not mix bins):
 
@@ -31,32 +22,75 @@ Or clone the GitHub repo (already includes `code/` packs for Win + Mac).
 | **`es3c28p`** (Ternion) | `hardware-interface-workshop/firmware-prebuilt/es3c28p/` | `≈ 0x33` | LED + mic (+ keys/batt/wave) |
 | **`ws28p`** (Waveshare) | `hardware-interface-workshop/firmware-prebuilt/ws28p/` | `≈ 0x3c` | IMU + RTC (+ keys/batt/wave; **no** LED/mic) |
 
-Students: run **HW-01** and follow caps — LED labs need `es3c28p`; IMU labs need `ws28p`.  
-Details: [`labs/hw/README.md`](../labs/hw/README.md).
+Students run **HW-01** and follow caps. LED labs need `es3c28p`. IMU labs need `ws28p`. Details: [`labs/hw/README.md`](../labs/hw/README.md).
 
-Student path (no env typing — `run` sets `ROBOTOS_CONNECT` for `hw-*`):
+## Windows
 
-1. Close warehouse sim.  
-2. Plug USB → `scripts\start-bridge.cmd` / `./scripts/start-bridge.sh` (leave open).  
-3. VS Code terminal: `scripts\run.cmd hw-01` / `./scripts/run hw-01`
+Day 1:
+
+1. Unzip / clone → open the folder in VS Code.
+2. Double-click `scripts\start-here.cmd`.
+3. VS Code → **Terminal → New Terminal** (PowerShell).
+4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`.
+5. `scripts\run.cmd wh-01`
+
+Board labs. Close the sim and plug in USB. `run` sets `ROBOTOS_CONNECT` for `hw-*`.
+
+1. `scripts\start-bridge.cmd` (leave open). If auto-detect misses the port: `serial-bridge --port COMx --baud 921600 --robot-id 01 --cmd-topic all`.
+2. Second window: `scripts\run.cmd hw-01`
+
+Optional Wi-Fi (not graded). Bridge already running. Use the PC LAN IP from `ipconfig`, and set the Wi-Fi profile to **Private** if `zenoh` stays false.
+
+```text
+scripts\wifi-cfg.cmd --ssid YOUR_SSID --pass YOUR_PASSWORD --connect tcp/PC_LAN_IP:7447
+scripts\run.cmd hw-02 board_watch
+```
+
+Expect `state=3` / `zenoh=True`.
+
+---
+
+## macOS
+
+Day 1:
+
+1. Unzip / clone → open the folder in VS Code.
+2. Double-click `scripts/start-here.command` (Gatekeeper: right-click → Open once).
+3. VS Code → **Terminal → New Terminal**.
+4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`.
+5. `./scripts/run wh-01`
+
+Board labs. Close the sim and plug in USB.
+
+1. `./scripts/start-bridge.sh` (leave open). Pin the path from `[auto] selected` if auto-detect skips `cu.usbmodem`.
+2. Second window: `./scripts/run hw-01`
+
+---
+
+## Linux
+
+Skip this section when the drop has no `code/robotos-v0.3.0-linux-x64`.
+
+Day 1:
+
+1. `./scripts/start-here.sh` from the workshop folder.
+2. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`.
+3. `./scripts/run wh-01`
+
+Board labs. Close the sim and plug in USB.
+
+1. `./scripts/start-bridge.sh` (leave open). If auto-detect misses the board, add `--port /dev/ttyACM0`.
+2. Second window: `./scripts/run hw-01`
+
+---
+
 ### This room (instructor fill-in)
 
 | Item | Value |
 |------|--------|
 | Board SKU today | `es3c28p` / `ws28p` / mixed |
-| USB Serial COM / `cu.*` | e.g. `COM17` (Device Manager / System Information) |
-| If `--port auto` skips the board | `serial-bridge --port COMx --baud 921600 --robot-id 01 --cmd-topic all` |
+| USB serial port | |
 | Wi‑Fi / other | — |
-
-## Optional — board Wi‑Fi (not graded)
-
-Windows pack includes `wifi-cfg`. Bridge running, then:
-
-```text
-scripts\wifi-cfg.cmd --ssid YOUR_SSID --pass YOUR_PASSWORD --connect tcp/PC_LAN_IP:7447
-```
-
-Use the PC LAN IP (`ipconfig`), not `127.0.0.1`. On Windows, set the Wi‑Fi profile to **Private** and allow inbound TCP **7447** if `zenoh` stays false. Status: `scripts\run.cmd hw-02 board_watch` → `state=3` / `zenoh=True`.
 
 ## Tracks order
 

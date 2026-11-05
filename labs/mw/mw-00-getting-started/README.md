@@ -17,22 +17,13 @@ Use any terminal: Terminal, iTerm, Cursor, or VS Code. Open it in the **workshop
 
 The PATH line lasts for **this window only**. A new window needs it again. Every later lab repeats the same first lines, because a new window forgets them.
 
-## Practice
+## Windows
+
+Use **PowerShell**. Follow this section from the first block to the last.
+
+### Practice
 
 Replace nothing if you are already in the workshop root. `cd` to that folder first if the prompt shows some other path.
-
-### macOS Apple Silicon (zsh or bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-robotos version
-robotos doctor
-robotos node list
-robotos topic list
-```
-
-### Windows (PowerShell)
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -43,7 +34,82 @@ robotos node list
 robotos topic list
 ```
 
-### Linux (bash)
+**Expect:** `robotos version` prints `robotos 0.3.0` (any `0.3.x` is fine). `node list` and `topic list` may be **empty** until the sim, the serial bridge, or MW-01 is running. An empty list is a valid quiet graph. It does not mean the CLI is broken.
+
+Optional: `robotos ui` if the pack embeds the inspector.
+
+### Python SDK check
+
+The checklist also asks for a successful `import robotos`. Paste the whole block. Do not run `.\.venv\Scripts\Activate.ps1` before `.venv` exists.
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -U pip
+python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
+python -c "import robotos; print(robotos.Node.version())"
+```
+
+If `.venv` already exists, skip `python -m venv .venv` and start at `.\.venv\Scripts\Activate.ps1`.
+
+If activation is blocked, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then activate again. The prompt should show `(.venv)`.
+
+**Expect:** the import prints a version string. Use the `win_amd64` wheel in the block above.
+
+Full setup, the sim, and the board bridge are in [`SETUP.md`](../../../SETUP.md). This lab does not need the sim.
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### Practice
+
+Replace nothing if you are already in the workshop root. `cd` to that folder first if the prompt shows some other path.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+robotos version
+robotos doctor
+robotos node list
+robotos topic list
+```
+
+**Expect:** `robotos version` prints `robotos 0.3.0` (any `0.3.x` is fine). `node list` and `topic list` may be **empty** until the sim, the serial bridge, or MW-01 is running. An empty list is a valid quiet graph. It does not mean the CLI is broken.
+
+Optional: `robotos ui` if the pack embeds the inspector.
+
+### Python SDK check
+
+The checklist also asks for a successful `import robotos`. Paste the whole block. Do not run `source .venv/bin/activate` before `.venv` exists.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c "import robotos; print(robotos.Node.version())"
+```
+
+If `.venv` already exists, skip `python3 -m venv .venv` and start at `source .venv/bin/activate`.
+
+**Expect:** the import prints a version string. Use the wheel in the block above.
+
+Full setup, the sim, and the board bridge are in [`SETUP.md`](../../../SETUP.md). This lab does not need the sim.
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### Practice
+
+Replace nothing if you are already in the workshop root. `cd` to that folder first if the prompt shows some other path.
 
 Linux packs are not in the current class drop. If your drop has the folder:
 
@@ -60,24 +126,9 @@ robotos topic list
 
 Optional: `robotos ui` if the pack embeds the inspector.
 
-## Python SDK check
+### Python SDK check
 
 The checklist also asks for a successful `import robotos`. Paste the whole block. Do not run `source .venv/bin/activate` before `.venv` exists.
-
-### macOS Apple Silicon (zsh or bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install code/robotos-0.3.0-py3-none-any.whl
-python -c "import robotos; print(robotos.Node.version())"
-```
-
-If `.venv` already exists, skip `python3 -m venv .venv` and start at `source .venv/bin/activate`.
-
-### Linux (bash)
 
 Only if `code/robotos-0.3.0-py3-none-any.whl` is in your drop:
 
@@ -90,22 +141,13 @@ python -m pip install code/robotos-0.3.0-py3-none-any.whl
 python -c "import robotos; print(robotos.Node.version())"
 ```
 
-### Windows (PowerShell)
+If `.venv` already exists, skip `python3 -m venv .venv` and start at `source .venv/bin/activate`.
 
-```powershell
-cd YOUR_WORKSHOP_DIR
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -U pip
-python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
-python -c "import robotos; print(robotos.Node.version())"
-```
-
-If activation is blocked, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then activate again. The prompt should show `(.venv)`.
-
-**Expect:** the import prints a version string. Do not install the Windows wheel on macOS or Linux.
+**Expect:** the import prints a version string. Use the wheel in the block above.
 
 Full setup, the sim, and the board bridge are in [`SETUP.md`](../../../SETUP.md). This lab does not need the sim.
+
+---
 
 ## Done when
 

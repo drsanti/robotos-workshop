@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../../../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -185,18 +185,21 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-00
 </code></pre>
+<hr>
 <p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run wh-00
 </code></pre>
+<hr>
 <p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run wh-00
 </code></pre>
+<hr>
 <p>Prerequisite: warehouse sim running (<code>scripts/start-here</code>).</p>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/wh/wh-00-hello-graph/README.md</code></p>
 
@@ -208,31 +211,43 @@ source .venv/bin/activate
 <p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
 <p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
 <p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
-<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
-<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-</code></pre>
-<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <ul>
 <li>Sim is running. Paste this page’s command block in this window. Full machine setup is <a href="../../../../SETUP.html"><code>SETUP.md</code></a> if MW-00 is not done</li>
 <li>Sim launched and <strong>Connected</strong> (<strong>Native</strong>) — see SETUP §4</li>
 <li>Ebook: <a href="../../../chapters/ch01-graph-nodes-topics.html"><code>ch01-graph-nodes-topics.md</code></a></li>
 </ul>
-<h2 id="steps"><a class="header" href="#steps">Steps</a></h2>
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<p>Use <strong>PowerShell</strong>. Follow this section from the first block to the last.</p>
+<p>If <code>Activate.ps1</code> is blocked, run this once, then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<h3 id="steps"><a class="header" href="#steps">Steps</a></h3>
 <p>Paste the whole block for your computer. There is no starter script for WH-00.</p>
-<h3 id="windows-powershell"><a class="header" href="#windows-powershell">Windows (PowerShell)</a></h3>
 <pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 robotos topic list
 robotos topic echo /robot/01/odom --count 5
 </code></pre>
-<h3 id="macos-apple-silicon-zsh-or-bash"><a class="header" href="#macos-apple-silicon-zsh-or-bash">macOS Apple Silicon (zsh or bash)</a></h3>
+<p><strong>Expect:</strong> list includes <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, <code>/robot/01/scan</code>. Echo prints odometry (move the robot in Manual briefly if idle).</p>
+<p>Before WH-01: set sim to <strong>External</strong> (desktop builds often already did; confirm UI).</p>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<p>Use <strong>Terminal</strong> on Apple Silicon (zsh or bash). Follow this section from the first block to the last.</p>
+<h3 id="steps-1"><a class="header" href="#steps-1">Steps</a></h3>
+<p>Paste the whole block for your computer. There is no starter script for WH-00.</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 robotos topic list
 robotos topic echo /robot/01/odom --count 5
 </code></pre>
-<h3 id="linux-bash"><a class="header" href="#linux-bash">Linux (bash)</a></h3>
+<p><strong>Expect:</strong> list includes <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, <code>/robot/01/scan</code>. Echo prints odometry (move the robot in Manual briefly if idle).</p>
+<p>Before WH-01: set sim to <strong>External</strong> (desktop builds often already did; confirm UI).</p>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p>Use <strong>bash</strong>. Follow this section from the first block to the last. Skip it when <code>code/robotos-v0.3.0-linux-x64</code> is not in your drop.</p>
+<h3 id="steps-2"><a class="header" href="#steps-2">Steps</a></h3>
+<p>Paste the whole block for your computer. There is no starter script for WH-00.</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 robotos topic list
@@ -240,6 +255,7 @@ robotos topic echo /robot/01/odom --count 5
 </code></pre>
 <p><strong>Expect:</strong> list includes <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, <code>/robot/01/scan</code>. Echo prints odometry (move the robot in Manual briefly if idle).</p>
 <p>Before WH-01: set sim to <strong>External</strong> (desktop builds often already did; confirm UI).</p>
+<hr>
 <h2 id="done-when"><a class="header" href="#done-when">Done when</a></h2>
 <p>You can explain which process is the sim node and which topics are in vs out (<a href="../../../docs/p0-contract.html">contract</a>).</p>
 <p>See <a href="CHECKLIST.html">CHECKLIST.md</a>.</p>

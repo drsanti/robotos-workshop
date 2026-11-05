@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../../../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -185,18 +185,21 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 scripts\run.cmd mw-05
 </code></pre>
+<hr>
 <p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run mw-05
 </code></pre>
+<hr>
 <p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run mw-05
 </code></pre>
+<hr>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/mw/mw-05-record-replay/README.md</code></p>
 
 </div>
@@ -207,10 +210,6 @@ source .venv/bin/activate
 <p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
 <p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
 <p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
-<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
-<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-</code></pre>
-<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
 <ul>
 <li>Same bag workflow as Ch.9 / WH-07, on the laptop graph</li>
@@ -221,49 +220,65 @@ source .venv/bin/activate
 <li>MW-01 starters</li>
 <li>Ebook: <a href="../../../chapters/ch09-bags-evidence.html"><code>ch09-bags-evidence.md</code></a></li>
 </ul>
-<h2 id="practice"><a class="header" href="#practice">Practice</a></h2>
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<p>Use <strong>PowerShell</strong>. Follow this section from the first block to the last.</p>
+<p>If <code>Activate.ps1</code> is blocked, run this once, then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<h3 id="1-terminal-a--publisher-leave-it-running-paste-the-whole-block-in-that-window"><a class="header" href="#1-terminal-a--publisher-leave-it-running-paste-the-whole-block-in-that-window">1. Terminal A — publisher. Leave it running. Paste the whole block in that window</a></h3>
 <blockquote>
-<p><strong>Preferred runner</strong> (workshop root): <code>scripts\run.cmd &lt;lab-id&gt;</code> (Windows) or <code>./scripts/run &lt;lab-id&gt;</code> (macOS/Linux). List: <code>scripts\run.cmd list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
+<p><strong>Preferred runner</strong> (workshop root): <code>scripts\run.cmd &lt;lab-id&gt;</code>. List: <code>scripts\run.cmd list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
 </blockquote>
-<ol>
-<li>Terminal A — publisher. Leave it running. Paste the whole block in that window:</li>
-</ol>
-<h3 id="windows-powershell"><a class="header" href="#windows-powershell">Windows (PowerShell)</a></h3>
 <pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 python labs\mw\mw-01-pub-sub\starter\sim_sensor.py
 </code></pre>
-<h3 id="macos-apple-silicon-zsh-or-bash"><a class="header" href="#macos-apple-silicon-zsh-or-bash">macOS Apple Silicon (zsh or bash)</a></h3>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
-</code></pre>
-<h3 id="linux-bash"><a class="header" href="#linux-bash">Linux (bash)</a></h3>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
-</code></pre>
-<ol start="2">
-<li>Terminal B — record:</li>
-</ol>
-<h3 id="windows-powershell-1"><a class="header" href="#windows-powershell-1">Windows (PowerShell)</a></h3>
+<h3 id="2-terminal-b--record"><a class="header" href="#2-terminal-b--record">2. Terminal B — record</a></h3>
 <pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 robotos record -o imu_run.rbag /machine/01/sensor/imu
 # Ctrl-C after ~15 s
 robotos bag info imu_run.rbag
 </code></pre>
-<h3 id="macos-apple-silicon-zsh-or-bash-1"><a class="header" href="#macos-apple-silicon-zsh-or-bash-1">macOS Apple Silicon (zsh or bash)</a></h3>
+<ol start="3">
+<li>Replay per pack docs; optionally run <code>monitor.py</code> during replay.</li>
+</ol>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<p>Use <strong>Terminal</strong> on Apple Silicon (zsh or bash). Follow this section from the first block to the last.</p>
+<h3 id="1-terminal-a--publisher-leave-it-running-paste-the-whole-block-in-that-window-1"><a class="header" href="#1-terminal-a--publisher-leave-it-running-paste-the-whole-block-in-that-window-1">1. Terminal A — publisher. Leave it running. Paste the whole block in that window</a></h3>
+<blockquote>
+<p><strong>Preferred runner</strong> (workshop root): <code>./scripts/run &lt;lab-id&gt;</code>. List: <code>./scripts/run list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
+</blockquote>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
+</code></pre>
+<h3 id="2-terminal-b--record-1"><a class="header" href="#2-terminal-b--record-1">2. Terminal B — record</a></h3>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 robotos record -o imu_run.rbag /machine/01/sensor/imu
 # Ctrl-C after ~15 s
 robotos bag info imu_run.rbag
 </code></pre>
-<h3 id="linux-bash-1"><a class="header" href="#linux-bash-1">Linux (bash)</a></h3>
+<ol start="3">
+<li>Replay per pack docs; optionally run <code>monitor.py</code> during replay.</li>
+</ol>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p>Use <strong>bash</strong>. Follow this section from the first block to the last. Skip it when <code>code/robotos-v0.3.0-linux-x64</code> is not in your drop.</p>
+<h3 id="1-terminal-a--publisher-leave-it-running-paste-the-whole-block-in-that-window-2"><a class="header" href="#1-terminal-a--publisher-leave-it-running-paste-the-whole-block-in-that-window-2">1. Terminal A — publisher. Leave it running. Paste the whole block in that window</a></h3>
+<blockquote>
+<p><strong>Preferred runner</strong> (workshop root): <code>./scripts/run &lt;lab-id&gt;</code>. List: <code>./scripts/run list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
+</blockquote>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
+</code></pre>
+<h3 id="2-terminal-b--record-2"><a class="header" href="#2-terminal-b--record-2">2. Terminal B — record</a></h3>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 robotos record -o imu_run.rbag /machine/01/sensor/imu
@@ -273,6 +288,7 @@ robotos bag info imu_run.rbag
 <ol start="3">
 <li>Replay per pack docs; optionally run <code>monitor.py</code> during replay.</li>
 </ol>
+<hr>
 <h2 id="expected-output"><a class="header" href="#expected-output">Expected output</a></h2>
 <p><code>bag info</code> shows Imu topic with non-zero count.</p>
 <h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>

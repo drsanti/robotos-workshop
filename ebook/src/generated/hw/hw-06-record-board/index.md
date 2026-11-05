@@ -15,6 +15,8 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\run.cmd hw-06
 ```
 
+---
+
 **macOS Apple Silicon (zsh or bash)**
 
 ```bash
@@ -24,6 +26,8 @@ source .venv/bin/activate
 ./scripts/run hw-06
 ```
 
+---
+
 **Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
 
 ```bash
@@ -32,6 +36,8 @@ export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run hw-06
 ```
+
+---
 
 Prerequisite: serial bridge running, warehouse sim closed.
 
@@ -52,14 +58,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Same evidence workflow as WH-07, on silicon  
@@ -70,12 +68,19 @@ Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. T
 - HW-00 streaming (or HW-02 watchers)  
 - Ebook: [`ch09-bags-evidence.md`](../../../chapters/ch09-bags-evidence.md)
 
-## Practice
+## Windows
 
-1. Leave the board streaming (or run HW-02).  
-2. Record:
+Use **PowerShell**. Follow this section from the first block to the last.
 
-### Windows (PowerShell)
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### 2. Record
+
+1. Leave the board streaming (or run HW-02).
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -85,7 +90,17 @@ robotos record -o board_run.rbag /robot/01/sensor/imu /robot/01/sys/board
 robotos bag info board_run.rbag
 ```
 
-### macOS Apple Silicon (zsh or bash)
+Adjust the topic list to what your caps publish (no IMU → drop that topic; add battery if useful).
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### 2. Record
+
+1. Leave the board streaming (or run HW-02).
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -95,7 +110,17 @@ robotos record -o board_run.rbag /robot/01/sensor/imu /robot/01/sys/board
 robotos bag info board_run.rbag
 ```
 
-### Linux (bash)
+Adjust the topic list to what your caps publish (no IMU → drop that topic; add battery if useful).
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### 2. Record
+
+1. Leave the board streaming (or run HW-02).
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -105,8 +130,9 @@ robotos record -o board_run.rbag /robot/01/sensor/imu /robot/01/sys/board
 robotos bag info board_run.rbag
 ```
 
-
 Adjust the topic list to what your caps publish (no IMU → drop that topic; add battery if useful).
+
+---
 
 ## Expected output
 

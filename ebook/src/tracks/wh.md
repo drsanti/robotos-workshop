@@ -23,11 +23,39 @@ contract on `/robot/01/*` (`cmd_vel`, `odom`, `scan`).
 | `wh-07` | Record bag |
 | `wh-08` | Capstone |
 
-## How to run
+## Windows
 
-```text
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-01
-# Unix: ./scripts/run wh-01
 ```
+
+---
+
+## macOS
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-01
+```
+
+---
+
+## Linux
+
+Skip this section when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-01
+```
+
+---
 
 Source of truth: `labs/wh/*/README.md` · contract: `docs/p0-contract.md`.

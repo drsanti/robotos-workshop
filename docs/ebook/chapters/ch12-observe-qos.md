@@ -84,6 +84,8 @@ robotos topic list
 robotos topic echo /robot/01/odom --count 3
 ```
 
+---
+
 ### macOS Apple Silicon (zsh or bash)
 
 ```bash
@@ -93,6 +95,8 @@ robotos doctor
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
 ```
+
+---
 
 ### Linux (bash)
 
@@ -105,6 +109,8 @@ robotos doctor
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
 ```
+
+---
 
 ## 7–8. Expected / walkthrough
 

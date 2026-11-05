@@ -69,7 +69,7 @@ sequenceDiagram
 | **Native ≠ Mock** | Mock can move the viewport without your node joining; `topic list` won’t prove your script. |
 | Echo “silent” with pub alive | Schema / type mismatch → skipped messages. |
 | QoS = “make it faster” | Policy tradeoffs, not a speed cheat code. |
-| PowerShell-only debug | Same verbs on macOS/Linux bash: `robotos doctor`, `topic list`, … |
+| Debug looks OS-specific | The verbs are the same: `robotos doctor`, `topic list`, `topic echo`. Paste them from your computer's section. |
 
 ## Check questions
 

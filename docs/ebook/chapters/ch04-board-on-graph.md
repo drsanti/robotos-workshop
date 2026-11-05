@@ -93,7 +93,7 @@ sequenceDiagram
 | Piece | Role |
 |-------|------|
 | Subscribe `BoardInfo` on `/robot/01/sys/board` | Same schema the CLI echoes |
-| `wait_for_message(sub, 15)` | Sparse board pubs via `on_message` (`labs.common.wait`) |
+| `wait_for_message(sub, 15)` | Waits for the next sparse BoardInfo (`labs.common.wait`) |
 | `CAPS_BITS` + `info.caps & bit` | Table in `labs.common.caps`; **yes/no print loop stays in starter** |
 | Print `hw_model` / `fw_version` | Confirm you are talking to the expected firmware |
 

@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b74680cb.js"></script>
@@ -196,12 +196,28 @@ and a mini digital twin. No warehouse sim or board required for most MW labs
 </tbody>
 </table>
 </div>
-<h2 id="how-to-run"><a class="header" href="#how-to-run">How to run</a></h2>
-<p>From the <strong>workshop root</strong>:</p>
-<pre><code class="language-text">scripts\run.cmd list
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd mw-00
-# Unix: ./scripts/run mw-00
 </code></pre>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-00
+</code></pre>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p>Skip this section when <code>code/robotos-v0.3.0-linux-x64</code> is not in your drop.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-00
+</code></pre>
+<hr>
 <p>Source of truth: <code>labs/mw/*/README.md</code>.</p>
 
                     </main>

@@ -14,6 +14,8 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\start-bridge.cmd
 ```
 
+---
+
 **macOS Apple Silicon** — bridge window:
 
 ```bash
@@ -21,6 +23,18 @@ cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 ./scripts/start-bridge.sh
 ```
+
+---
+
+**Linux (bash)** — bridge window, only if `code/robotos-v0.3.0-linux-x64` is in your drop:
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+./scripts/start-bridge.sh
+```
+
+---
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/hw/README.md</code></p>
 
@@ -52,9 +66,9 @@ Firmware images (instructor flash; students usually get a preflashed board):
 
 `hw-00` → `hw-01` → `hw-02` … → `hw-07` (see [`docs/lab-outline.md`](../../docs/lab-outline.md)).
 
-## Optional: board Wi‑Fi
+## Windows
 
-Not graded. With `scripts/start-bridge` running (Windows pack includes `wifi-cfg.exe`):
+Optional, not graded. The bridge must already be running. `wifi-cfg.exe` is in the Windows pack.
 
 ```text
 scripts\wifi-cfg.cmd --enable
@@ -62,4 +76,18 @@ scripts\wifi-cfg.cmd --ssid YOUR_SSID --pass YOUR_PASSWORD --connect tcp/PC_LAN_
 scripts\run.cmd hw-02 board_watch
 ```
 
-Details: `code/NOTES.txt` section D · rebuild: `cargo build --release -p serial-bridge --bin wifi-cfg`.
+Details: `code/NOTES.txt` section D.
+
+---
+
+## macOS
+
+This optional Wi-Fi step is not in the macOS pack. Skip it and continue with the HW labs.
+
+---
+
+## Linux
+
+This optional Wi-Fi step is not in the Linux pack. Skip it and continue with the HW labs.
+
+---

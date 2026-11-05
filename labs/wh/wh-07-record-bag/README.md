@@ -12,14 +12,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Record odom + scan during WH-03 or WH-05  
@@ -34,14 +26,20 @@ Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. T
 
 Exact CLI flags follow your pack — check `robotos --help` / `NOTES.txt`.
 
-## Typical flow
+## Windows
+
+Use **PowerShell**. Follow this section from the first block to the last.
+
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### 3. Terminal B — record
 
 1. Sim Connected (Native / External).  
-2. Terminal A — start WH-03 or WH-05 (`scripts\run.cmd wh-03` / `wh-05`, or
-   `./scripts/run …`).  
-3. Terminal B — record:
-
-### Windows (PowerShell)
+2. Terminal A — start WH-03 or WH-05 (`scripts\run.cmd wh-03` or `scripts\run.cmd wh-05`).
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -51,7 +49,18 @@ robotos record -o run1.rbag /robot/01/odom /robot/01/scan
 robotos bag info run1.rbag
 ```
 
-### macOS Apple Silicon (zsh or bash)
+4. Note: bag path, duration, topics, approximate message counts.
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### 3. Terminal B — record
+
+1. Sim Connected (Native / External).  
+2. Terminal A — start WH-03 or WH-05 (`./scripts/run wh-03` or `./scripts/run wh-05`).
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -61,7 +70,18 @@ robotos record -o run1.rbag /robot/01/odom /robot/01/scan
 robotos bag info run1.rbag
 ```
 
-### Linux (bash)
+4. Note: bag path, duration, topics, approximate message counts.
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### 3. Terminal B — record
+
+1. Sim Connected (Native / External).  
+2. Terminal A — start WH-03 or WH-05 (`./scripts/run wh-03` or `./scripts/run wh-05`).
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -71,8 +91,9 @@ robotos record -o run1.rbag /robot/01/odom /robot/01/scan
 robotos bag info run1.rbag
 ```
 
-
 4. Note: bag path, duration, topics, approximate message counts.
+
+---
 
 ## Expected output
 

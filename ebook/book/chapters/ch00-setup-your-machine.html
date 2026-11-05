@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b74680cb.js"></script>
@@ -334,54 +334,29 @@ robotos topic list
 scripts\run.cmd wh-01
 </code></pre>
 <p><strong>Expect:</strong> topic list includes <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, <code>/robot/01/scan</code>, and the sim robot moves forward briefly.</p>
+<h3 id="if-something-fails"><a class="header" href="#if-something-fails">If something fails</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>What you see</th><th>What to do</th></tr>
+</thead>
+<tbody>
+<tr><td><code>robotos</code> not found</td><td>Paste the PATH block again in this window</td></tr>
+<tr><td><code>Activate.ps1</code> cannot run</td><td><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code>, then activate again</td></tr>
+<tr><td>Wheel “not supported”</td><td>Install <code>code\robotos-0.3.0-py3-none-win_amd64.whl</code></td></tr>
+<tr><td>Git Bash breaks <code>/robot/...</code></td><td>Use PowerShell</td></tr>
+</tbody>
+</table>
+</div>
 <hr>
-<h2 id="6-hands-on--linux--macos-bash"><a class="header" href="#6-hands-on--linux--macos-bash">6. Hands-on — Linux / macOS (bash)</a></h2>
-<h3 id="61-open-a-terminal"><a class="header" href="#61-open-a-terminal">6.1 Open a terminal</a></h3>
-<ul>
-<li><strong>Ubuntu:</strong> Apps → Terminal</li>
-<li><strong>macOS:</strong> Spotlight (<code>Cmd+Space</code>) → <code>Terminal</code></li>
-</ul>
-<h3 id="62-unpack"><a class="header" href="#62-unpack">6.2 Unpack</a></h3>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-ls SETUP.md labs code
-</code></pre>
-<p>Use a path without spaces if possible.</p>
-<h3 id="63-path"><a class="header" href="#63-path">6.3 PATH</a></h3>
-<p><strong>Linux x64</strong></p>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-chmod +x code/robotos-v0.3.0-linux-x64/bin/robotos 2&gt;/dev/null || true
-robotos version
-</code></pre>
-<p><strong>macOS Apple Silicon</strong></p>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-chmod +x code/robotos-v0.3.0-macos-arm64/bin/robotos 2&gt;/dev/null || true
-robotos version
-</code></pre>
-<h3 id="64-python-venv--wheel"><a class="header" href="#64-python-venv--wheel">6.4 Python venv + wheel</a></h3>
-<p><strong>Linux x64</strong> — prefer the exact name in your pack’s <code>NOTES.txt</code>; tag-safe:</p>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install code/robotos-0.3.0-py3-none-any.whl
-python -c "import robotos; print(robotos.Node.version())"
-</code></pre>
-<p><strong>macOS Apple Silicon</strong></p>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install code/robotos-0.3.0-py3-none-any.whl
-python -c "import robotos; print(robotos.Node.version())"
-</code></pre>
-<h3 id="60-preferred-class-path-macos"><a class="header" href="#60-preferred-class-path-macos">6.0 Preferred class path (macOS)</a></h3>
+<h2 id="6-hands-on--macos-apple-silicon"><a class="header" href="#6-hands-on--macos-apple-silicon">6. Hands-on — macOS (Apple Silicon)</a></h2>
+<p>Use <strong>Terminal</strong> on Apple Silicon. Stay in this section until you are done.</p>
+<h3 id="60-preferred-class-path"><a class="header" href="#60-preferred-class-path">6.0 Preferred class path</a></h3>
 <ol>
 <li>Unzip / clone so you see <code>SETUP.md</code>, <code>labs/</code>, <code>code/</code>, and <code>scripts/</code>.</li>
 <li>Open that folder in <strong>VS Code</strong>.</li>
 <li>Once: double-click <code>scripts/start-here.command</code> (or run <code>./scripts/start-here.sh</code>).</li>
-<li>Open Terminal, Cursor, or VS Code. Paste the whole block. Do not type only the last line.</li>
+<li>Open Terminal. Paste the whole block. Do not type only the last line.</li>
 </ol>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
@@ -389,43 +364,108 @@ source .venv/bin/activate
 robotos topic list
 ./scripts/run wh-01
 </code></pre>
-<p>HW later: <code>./scripts/start-bridge.sh</code> in a second window, then <code>./scripts/run hw-01</code>.</p>
-<blockquote>
-<p>§§6.1–6.6 below are the <strong>manual</strong> Terminal.app walkthrough.</p>
-</blockquote>
-<h3 id="65-start-the-sim-manual"><a class="header" href="#65-start-the-sim-manual">6.5 Start the sim (manual)</a></h3>
-<p>Windows and macOS class packs <strong>include</strong> the sim. If your zip is Linux-only or
-<code>code/robotos-sim-v*/</code> is missing, skip this section and WH labs — continue with
-MW/HW (see <code>SETUP.md</code> §4).</p>
-<p><strong>Linux x64</strong> (sim often not shipped)</p>
+<p>Board labs later: <code>./scripts/start-bridge.sh</code> in a second window, then <code>./scripts/run hw-01</code>.</p>
+<h3 id="61-open-terminal-manual"><a class="header" href="#61-open-terminal-manual">6.1 Open Terminal (manual)</a></h3>
+<p>Spotlight (<code>Cmd+Space</code>) → <code>Terminal</code>.</p>
+<h3 id="62-unpack-manual"><a class="header" href="#62-unpack-manual">6.2 Unpack (manual)</a></h3>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
-./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &amp;
+ls SETUP.md labs code
 </code></pre>
-<p><strong>macOS Apple Silicon</strong></p>
+<p>Use a path without spaces if possible.</p>
+<h3 id="63-path-and-robotos"><a class="header" href="#63-path-and-robotos">6.3 PATH and <code>robotos</code></a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/robotos 2&gt;/dev/null || true
+robotos version
+</code></pre>
+<p><strong>Expect:</strong> a line containing <code>robotos 0.3.0</code>.</p>
+<h3 id="64-python-venv--wheel"><a class="header" href="#64-python-venv--wheel">6.4 Python venv + wheel</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c "import robotos; print(robotos.Node.version())"
+</code></pre>
+<h3 id="65-start-the-sim"><a class="header" href="#65-start-the-sim">6.5 Start the sim</a></h3>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
-# First launch: Finder → right-click → Open if Gatekeeper blocks
 </code></pre>
-<blockquote>
-<p><strong>macOS Gatekeeper (do this at first launch):</strong> if macOS says the app “cannot be opened,” use <strong>right-click → Open</strong>, or System Settings → Privacy &amp; Security → Allow. Do not skip this — the binary will not stay running until you approve it.</p>
-</blockquote>
-<p>Confirm <strong>Native / External / Connect</strong> in the UI as on Windows.</p>
-<h3 id="66-smoke-test-manual"><a class="header" href="#66-smoke-test-manual">6.6 Smoke test (manual)</a></h3>
-<p><strong>macOS Apple Silicon</strong></p>
+<p>The first launch may say the app cannot be opened. In Finder, right-click the app and choose <strong>Open</strong>, or allow it under System Settings → Privacy &amp; Security. Confirm connected / <strong>NATIVE</strong>. If not: <strong>Warehouse → Native → External → Connect</strong>.</p>
+<h3 id="66-smoke-test"><a class="header" href="#66-smoke-test">6.6 Smoke test</a></h3>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 robotos topic list
 ./scripts/run wh-01
 </code></pre>
-<p><strong>Linux</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<p><strong>Expect:</strong> <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, <code>/robot/01/scan</code>, and the sim robot moves forward briefly.</p>
+<h3 id="if-something-fails-1"><a class="header" href="#if-something-fails-1">If something fails</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>What you see</th><th>What to do</th></tr>
+</thead>
+<tbody>
+<tr><td><code>robotos</code> not found</td><td>Paste the PATH block again in this window</td></tr>
+<tr><td><code>python</code> not found</td><td>Use <code>python3</code>, then <code>source .venv/bin/activate</code></td></tr>
+<tr><td>Wheel “not supported”</td><td>Install <code>code/robotos-0.3.0-py3-none-any.whl</code></td></tr>
+<tr><td>“cannot be opened”</td><td>Privacy &amp; Security → allow <code>robotos-sim</code></td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="6b-hands-on--linux-bash"><a class="header" href="#6b-hands-on--linux-bash">6b. Hands-on — Linux (bash)</a></h2>
+<p>Use <strong>bash</strong>. Stay in this section until you are done. Skip this section when <code>code/robotos-v0.3.0-linux-x64</code> is not in your drop.</p>
+<h3 id="6b1-open-a-terminal"><a class="header" href="#6b1-open-a-terminal">6b.1 Open a terminal</a></h3>
+<p>Apps → Terminal.</p>
+<h3 id="6b2-unpack"><a class="header" href="#6b2-unpack">6b.2 Unpack</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+ls SETUP.md labs code
+</code></pre>
+<h3 id="6b3-path-and-robotos"><a class="header" href="#6b3-path-and-robotos">6b.3 PATH and <code>robotos</code></a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+chmod +x code/robotos-v0.3.0-linux-x64/bin/robotos 2&gt;/dev/null || true
+robotos version
+</code></pre>
+<h3 id="6b4-python-venv--wheel"><a class="header" href="#6b4-python-venv--wheel">6b.4 Python venv + wheel</a></h3>
+<p>On Ubuntu: <code>sudo apt install python3 python3-venv</code>.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c "import robotos; print(robotos.Node.version())"
+</code></pre>
+<h3 id="6b5-start-the-sim"><a class="header" href="#6b5-start-the-sim">6b.5 Start the sim</a></h3>
+<p>This class drop often has no Linux sim. If <code>code/robotos-sim-v0.1.0-linux-x64</code> is missing, skip WH and do MW or HW.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
+./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &amp;
+</code></pre>
+<p>Confirm connected / <strong>NATIVE</strong>. If not: <strong>Warehouse → Native → External → Connect</strong>.</p>
+<h3 id="6b6-smoke-test"><a class="header" href="#6b6-smoke-test">6b.6 Smoke test</a></h3>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 robotos topic list
 ./scripts/run wh-01
 </code></pre>
+<h3 id="if-something-fails-2"><a class="header" href="#if-something-fails-2">If something fails</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>What you see</th><th>What to do</th></tr>
+</thead>
+<tbody>
+<tr><td><code>robotos</code> not found</td><td>Paste the PATH block again in this window. <code>chmod +x</code> the files in <code>code/robotos-v0.3.0-linux-x64/bin</code></td></tr>
+<tr><td><code>python</code> not found</td><td>Use <code>python3</code>, then <code>source .venv/bin/activate</code></td></tr>
+<tr><td>Wheel “not supported”</td><td>Install <code>code/robotos-0.3.0-py3-none-any.whl</code></td></tr>
+<tr><td>Permission denied on <code>/dev/ttyACM*</code></td><td><code>sudo usermod -aG dialout $USER</code>, then log out and back in</td></tr>
+</tbody>
+</table>
+</div>
 <hr>
 <h2 id="7-code-walkthrough--drive_forwardpy-preview"><a class="header" href="#7-code-walkthrough--drive_forwardpy-preview">7. Code walkthrough — <code>drive_forward.py</code> (preview)</a></h2>
 <p>Full path: <code>labs/wh/wh-01-drive-twist/starter/drive_forward.py</code>.</p>
@@ -469,14 +509,10 @@ done — 100 cmds + zero
 <tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr>
 </thead>
 <tbody>
-<tr><td><code>robotos: command not found</code></td><td>PATH not set in <strong>this</strong> terminal</td><td>Re-run PATH export / <code>$env:PATH</code></td></tr>
-<tr><td><code>Activate.ps1</code> cannot run</td><td>ExecutionPolicy</td><td><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></td></tr>
-<tr><td>Wheel “not supported”</td><td>Wrong OS wheel</td><td>Install <code>win_amd64</code> / <code>macosx</code> / <code>manylinux</code> matching your PC</td></tr>
-<tr><td><code>ModuleNotFoundError: labs</code></td><td>Not inside workshop tree</td><td>Terminal cwd under folder with <code>SETUP.md</code> + <code>labs/</code> (see <code>labs/common/README.md</code>)</td></tr>
-<tr><td><code>no topics announced</code></td><td>Sim not connected or wrong mesh env</td><td>Connect Native+External; clear leftover <code>ROBOTOS_LISTEN</code> from HW labs</td></tr>
-<tr><td>Robot ignores Twist</td><td>Control ownership still Manual</td><td>UI: External + Native; keep publishing ≥ ~2 Hz</td></tr>
-<tr><td>Git Bash mangles <code>/robot/...</code></td><td>Bash on Windows rewrites paths</td><td>Use <strong>PowerShell</strong> for <code>robotos topic …</code> on Windows</td></tr>
-<tr><td>Linux serial later fails</td><td>User not in <code>dialout</code></td><td><code>sudo usermod -aG dialout $USER</code> then log out/in</td></tr>
+<tr><td><code>robotos: command not found</code></td><td>PATH not set in <strong>this</strong> window</td><td>Paste the PATH block from your computer’s section again</td></tr>
+<tr><td><code>ModuleNotFoundError: labs</code></td><td>Not inside workshop tree</td><td>The window must be in the folder that contains <code>SETUP.md</code> and <code>labs/</code></td></tr>
+<tr><td><code>no topics announced</code></td><td>Sim not connected, or the bridge is down</td><td>Connect Native + External. Close the sim before a board lab</td></tr>
+<tr><td>Robot ignores Twist</td><td>Control ownership still Manual</td><td>UI: External + Native; keep publishing</td></tr>
 </tbody>
 </table>
 </div>

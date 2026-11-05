@@ -15,6 +15,8 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\run.cmd mw-02
 ```
 
+---
+
 **macOS Apple Silicon (zsh or bash)**
 
 ```bash
@@ -24,6 +26,8 @@ source .venv/bin/activate
 ./scripts/run mw-02
 ```
 
+---
+
 **Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
 
 ```bash
@@ -32,6 +36,8 @@ export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run mw-02
 ```
+
+---
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/mw/mw-02-services/README.md</code></p>
 
@@ -49,14 +55,6 @@ Call a request/reply **service** (`/test/echo`) while a server is running.
 Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
-
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
 
 ## Learning outcomes
 
@@ -79,14 +77,19 @@ flowchart LR
   svc -->|EchoResponse| client
 ```
 
-## Practice
+## Windows
 
-> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd mw-02 <starter>` (Windows) or `./scripts/run mw-02 <starter>` (macOS/Linux). Starters: `echo_server / client`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+Use **PowerShell**. Follow this section from the first block to the last.
 
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd mw-02 <starter>`. Starters: `echo_server / client`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 ### Terminal A — server
-
-**Windows (PowerShell)**
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -95,28 +98,7 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 python labs\mw\mw-02-services\starter\echo_server.py
 ```
 
-**macOS Apple Silicon (zsh or bash)**
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-02-services/starter/echo_server.py
-```
-
-**Linux (bash)**
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-02-services/starter/echo_server.py
-```
-
-
 ### Terminal B — client
-
-**Windows (PowerShell)**
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -126,7 +108,26 @@ python labs\mw\mw-02-services\starter\client.py
 robotos service list
 ```
 
-**macOS Apple Silicon (zsh or bash)**
+Optional: `robotos service call` (CLI help). Client retries while the server starts — expected.
+
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `./scripts/run mw-02 <starter>`. Starters: `echo_server / client`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+### Terminal A — server
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-02-services/starter/echo_server.py
+```
+
+### Terminal B — client
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -136,7 +137,26 @@ python labs/mw/mw-02-services/starter/client.py
 robotos service list
 ```
 
-**Linux (bash)**
+Optional: `robotos service call` (CLI help). Client retries while the server starts — expected.
+
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `./scripts/run mw-02 <starter>`. Starters: `echo_server / client`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+### Terminal A — server
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-02-services/starter/echo_server.py
+```
+
+### Terminal B — client
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -146,8 +166,9 @@ python labs/mw/mw-02-services/starter/client.py
 robotos service list
 ```
 
-
 Optional: `robotos service call` (CLI help). Client retries while the server starts — expected.
+
+---
 
 ## Expected output
 

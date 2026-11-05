@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../../../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -185,18 +185,21 @@ $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 scripts\run.cmd mw-03
 </code></pre>
+<hr>
 <p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run mw-03
 </code></pre>
+<hr>
 <p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ./scripts/run mw-03
 </code></pre>
+<hr>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/mw/mw-03-actions/README.md</code></p>
 
 </div>
@@ -207,10 +210,6 @@ source .venv/bin/activate
 <p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
 <p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
 <p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
-<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
-<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-</code></pre>
-<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
 <ul>
 <li>Start action server + client</li>
@@ -230,49 +229,66 @@ source .venv/bin/activate
   act --&gt;|feedback*| client
   act --&gt;|result| client
 </code></pre>
-<h2 id="practice"><a class="header" href="#practice">Practice</a></h2>
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<p>Use <strong>PowerShell</strong>. Follow this section from the first block to the last.</p>
+<p>If <code>Activate.ps1</code> is blocked, run this once, then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
 <blockquote>
-<p><strong>Preferred runner</strong> (workshop root): this lab has multiple starters — <code>scripts\run.cmd mw-03 &lt;starter&gt;</code> (Windows) or <code>./scripts/run mw-03 &lt;starter&gt;</code> (macOS/Linux). Starters: <code>cycle_server / cycle_client</code>. List: <code>scripts\run.cmd list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
+<p><strong>Preferred runner</strong> (workshop root): this lab has multiple starters — <code>scripts\run.cmd mw-03 &lt;starter&gt;</code>. Starters: <code>cycle_server / cycle_client</code>. List: <code>scripts\run.cmd list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
 </blockquote>
 <h3 id="terminal-a--server"><a class="header" href="#terminal-a--server">Terminal A — server</a></h3>
-<p><strong>Windows (PowerShell)</strong></p>
 <pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 python labs\mw\mw-03-actions\starter\cycle_server.py
 </code></pre>
-<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-03-actions/starter/cycle_server.py
-</code></pre>
-<p><strong>Linux (bash)</strong></p>
-<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-python labs/mw/mw-03-actions/starter/cycle_server.py
-</code></pre>
 <h3 id="terminal-b--client"><a class="header" href="#terminal-b--client">Terminal B — client</a></h3>
-<p><strong>Windows (PowerShell)</strong></p>
 <pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 python labs\mw\mw-03-actions\starter\cycle_client.py
 </code></pre>
-<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<p>Stretch: cancel mid-cycle from a second client / CLI if the pack supports it.</p>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<p>Use <strong>Terminal</strong> on Apple Silicon (zsh or bash). Follow this section from the first block to the last.</p>
+<blockquote>
+<p><strong>Preferred runner</strong> (workshop root): this lab has multiple starters — <code>./scripts/run mw-03 &lt;starter&gt;</code>. Starters: <code>cycle_server / cycle_client</code>. List: <code>./scripts/run list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
+</blockquote>
+<h3 id="terminal-a--server-1"><a class="header" href="#terminal-a--server-1">Terminal A — server</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-03-actions/starter/cycle_server.py
+</code></pre>
+<h3 id="terminal-b--client-1"><a class="header" href="#terminal-b--client-1">Terminal B — client</a></h3>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
 python labs/mw/mw-03-actions/starter/cycle_client.py
 </code></pre>
-<p><strong>Linux (bash)</strong></p>
+<p>Stretch: cancel mid-cycle from a second client / CLI if the pack supports it.</p>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p>Use <strong>bash</strong>. Follow this section from the first block to the last. Skip it when <code>code/robotos-v0.3.0-linux-x64</code> is not in your drop.</p>
+<blockquote>
+<p><strong>Preferred runner</strong> (workshop root): this lab has multiple starters — <code>./scripts/run mw-03 &lt;starter&gt;</code>. Starters: <code>cycle_server / cycle_client</code>. List: <code>./scripts/run list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
+</blockquote>
+<h3 id="terminal-a--server-2"><a class="header" href="#terminal-a--server-2">Terminal A — server</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-03-actions/starter/cycle_server.py
+</code></pre>
+<h3 id="terminal-b--client-2"><a class="header" href="#terminal-b--client-2">Terminal B — client</a></h3>
 <pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 python labs/mw/mw-03-actions/starter/cycle_client.py
 </code></pre>
 <p>Stretch: cancel mid-cycle from a second client / CLI if the pack supports it.</p>
+<hr>
 <h2 id="expected-output"><a class="header" href="#expected-output">Expected output</a></h2>
 <p>Feedback <code>step i/5</code>, then a final <code>cycle complete</code> (or <code>aborted</code> if cancelled).</p>
 <h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>

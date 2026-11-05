@@ -31,7 +31,11 @@ Every file under `docs/ebook/chapters/` follows this outline:
 ## 3. Architecture (block diagram)
 ## 4. Interaction (sequence diagram)
 ## 5. Hands-on — Windows (PowerShell)
-## 6. Hands-on — Linux / macOS (bash)
+---
+## 6. Hands-on — macOS (Apple Silicon)
+---
+## 6b. Hands-on — Linux (bash)
+---
 ## 7. Code walkthrough (line-by-line for starters)
 ## 8. Expected results
 ## 9. Troubleshooting
@@ -66,20 +70,17 @@ sequenceDiagram
 
 Also keep a monospace ASCII fallback when helpful for print/PDF.
 
-## OS forks
+## OS sections
+
+Finish one computer before the next. Order is **Windows**, then **macOS**, then **Linux**. Put `---` between those sections. A Windows reader stops at the first `---`.
 
 Never mix shells in one fence. Label fences:
 
-- `powershell` for Windows
-- `bash` for Linux and macOS (note Apple Silicon path folder names)
+- `powershell` inside the Windows section
+- `bash` with `macos-arm64` inside the macOS section
+- `bash` with `linux-x64` inside the Linux section
 
-Call out OS-only steps in admonitions:
-
-> **Windows only:** if activation fails with ExecutionPolicy…
-
-> **macOS only:** System Settings → Privacy → allow `robotos-sim`…
-
-> **Linux only:** `sudo usermod -aG dialout $USER` then re-login for serial.
+Put an OS-only fix in that OS section: ExecutionPolicy in Windows, Gatekeeper in macOS, `dialout` in Linux.
 
 ## Lab / smoke command preference
 

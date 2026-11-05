@@ -36,7 +36,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-b74680cb.js"></script>
@@ -207,7 +207,16 @@ if not (_root / "SETUP.md").is_file():
 sys.path.insert(0, str(_root))
 </code></pre>
 <p>Then: <code>from labs.common.wait import wait_for_message</code> (etc.).</p>
-<p>Primary run: from workshop root<br><code>scripts\run.cmd wh-01</code> / <code>./scripts/run wh-01</code><br>(or <code>python labs/wh/wh-01-drive-twist/starter/drive_forward.py</code>)</p>
+<p>Primary run, from the workshop root.</p>
+<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
+<p><code>scripts\run.cmd wh-01</code></p>
+<hr>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<p><code>./scripts/run wh-01</code></p>
+<hr>
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<p><code>./scripts/run wh-01</code> when <code>code/robotos-v0.3.0-linux-x64</code> is in the drop.</p>
+<hr>
 <h2 id="what-belongs-here"><a class="header" href="#what-belongs-here">What belongs here</a></h2>
 <div class="table-wrapper">
 <table>

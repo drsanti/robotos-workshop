@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../searchindex-d82a6628.js";
+            window.path_to_searchindex_js = "../searchindex-0af9145c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b74680cb.js"></script>
@@ -275,7 +275,7 @@ boards):</p>
 </thead>
 <tbody>
 <tr><td>Subscribe <code>BoardInfo</code> on <code>/robot/01/sys/board</code></td><td>Same schema the CLI echoes</td></tr>
-<tr><td><code>wait_for_message(sub, 15)</code></td><td>Sparse board pubs via <code>on_message</code> (<code>labs.common.wait</code>)</td></tr>
+<tr><td><code>wait_for_message(sub, 15)</code></td><td>Waits for the next sparse BoardInfo (<code>labs.common.wait</code>)</td></tr>
 <tr><td><code>CAPS_BITS</code> + <code>info.caps &amp; bit</code></td><td>Table in <code>labs.common.caps</code>; <strong>yes/no print loop stays in starter</strong></td></tr>
 <tr><td>Print <code>hw_model</code> / <code>fw_version</code></td><td>Confirm you are talking to the expected firmware</td></tr>
 </tbody>

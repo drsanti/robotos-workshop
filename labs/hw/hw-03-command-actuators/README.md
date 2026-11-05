@@ -12,14 +12,6 @@ Every command block on this page begins with the lines for your computer. Paste 
 
 `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
 
-On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
-
 ## Learning outcomes
 
 - Check HW-01 caps before LED demos  
@@ -39,14 +31,19 @@ Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. T
 | `/robot/01/actuator/led/fx` | `led_fx.py` (needs LED cap) |
 | `/robot/01/effect/wave/cmd` | `wave_play.py` (often available even without LED) |
 
-## Practice
+## Windows
 
-> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd hw-03 <starter>` (Windows) or `./scripts/run hw-03 <starter>` (macOS/Linux). Starters: `led_fx / wave_play`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+Use **PowerShell**. Follow this section from the first block to the last.
 
+If `Activate.ps1` is blocked, run this once, then paste the lab block again:
 
-**LED** (caps LED — often `es3c28p`; **no** on many `ws28p`):
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
 
-### Windows (PowerShell)
+### **LED** (caps LED — often `es3c28p`; **no** on many `ws28p`)
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd hw-03 <starter>`. Starters: `led_fx / wave_play`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -57,32 +54,7 @@ python labs\hw\hw-03-command-actuators\starter\led_fx.py blink 5 120 120 255 0 0
 python labs\hw\hw-03-command-actuators\starter\led_fx.py off
 ```
 
-### macOS Apple Silicon (zsh or bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-source .venv/bin/activate
-python labs/hw/hw-03-command-actuators/starter/led_fx.py solid 0 40 0
-python labs/hw/hw-03-command-actuators/starter/led_fx.py blink 5 120 120 255 0 0
-python labs/hw/hw-03-command-actuators/starter/led_fx.py off
-```
-
-### Linux (bash)
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-python labs/hw/hw-03-command-actuators/starter/led_fx.py solid 0 40 0
-python labs/hw/hw-03-command-actuators/starter/led_fx.py blink 5 120 120 255 0 0
-python labs/hw/hw-03-command-actuators/starter/led_fx.py off
-```
-
-
-**Wave / tone** (both variants typically):
-
-### Windows (PowerShell)
+### **Wave / tone** (both variants typically)
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -92,7 +64,26 @@ python labs\hw\hw-03-command-actuators\starter\wave_play.py --hz 440 --amp 0.4 -
 python labs\hw\hw-03-command-actuators\starter\wave_play.py --off
 ```
 
-### macOS Apple Silicon (zsh or bash)
+---
+
+## macOS
+
+Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the first block to the last.
+
+### **LED** (caps LED — often `es3c28p`; **no** on many `ws28p`)
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `./scripts/run hw-03 <starter>`. Starters: `led_fx / wave_play`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-03-command-actuators/starter/led_fx.py solid 0 40 0
+python labs/hw/hw-03-command-actuators/starter/led_fx.py blink 5 120 120 255 0 0
+python labs/hw/hw-03-command-actuators/starter/led_fx.py off
+```
+
+### **Wave / tone** (both variants typically)
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -102,7 +93,26 @@ python labs/hw/hw-03-command-actuators/starter/wave_play.py --hz 440 --amp 0.4 -
 python labs/hw/hw-03-command-actuators/starter/wave_play.py --off
 ```
 
-### Linux (bash)
+---
+
+## Linux
+
+Use **bash**. Follow this section from the first block to the last. Skip it when `code/robotos-v0.3.0-linux-x64` is not in your drop.
+
+### **LED** (caps LED — often `es3c28p`; **no** on many `ws28p`)
+
+> **Preferred runner** (workshop root): this lab has multiple starters — `./scripts/run hw-03 <starter>`. Starters: `led_fx / wave_play`. List: `./scripts/run list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-03-command-actuators/starter/led_fx.py solid 0 40 0
+python labs/hw/hw-03-command-actuators/starter/led_fx.py blink 5 120 120 255 0 0
+python labs/hw/hw-03-command-actuators/starter/led_fx.py off
+```
+
+### **Wave / tone** (both variants typically)
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -112,6 +122,7 @@ python labs/hw/hw-03-command-actuators/starter/wave_play.py --hz 440 --amp 0.4 -
 python labs/hw/hw-03-command-actuators/starter/wave_play.py --off
 ```
 
+---
 
 ## Expected results
 
