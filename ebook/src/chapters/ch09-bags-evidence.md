@@ -44,7 +44,7 @@ sequenceDiagram
   participant R as record terminal
   participant F as .rbag file
   B->>B: start WH-03 or WH-05
-  R->>F: record odom+scan about 20-30s
+  R->>F: record odom+scan ~20-30s
   R->>R: Ctrl-C
   R->>F: bag info
 ```

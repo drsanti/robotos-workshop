@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -178,17 +178,40 @@
                         <h1 id="lab-wh-02--sense-odom--scan"><a class="header" href="#lab-wh-02--sense-odom--scan">Lab WH-02 — Sense odom + scan</a></h1>
 <div class="ebook-run">
 <p><strong>Track:</strong> <code>wh</code> (Warehouse) · <strong>Lab:</strong> <code>wh-02</code> · <strong>Folder:</strong> <code>wh-02-sense-odom-scan</code></p>
-<pre><code class="language-text"># from workshop root
+<p>Paste the <strong>whole</strong> block for your computer. A new window does not keep PATH or <code>.venv</code>. <code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>.</p>
+<p><strong>Windows (PowerShell)</strong></p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-02
-# Unix: ./scripts/run wh-02
-# prerequisite: warehouse sim running (scripts/start-here)
 </code></pre>
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-02
+</code></pre>
+<p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-02
+</code></pre>
+<p>Prerequisite: warehouse sim running (<code>scripts/start-here</code>).</p>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/wh/wh-02-sense-odom-scan/README.md</code></p>
 
 </div>
 
 <h2 id="goal"><a class="header" href="#goal">Goal</a></h2>
 <p>Subscribe to pose and the three rangers while the robot moves.</p>
+<h2 id="this-window-forgets"><a class="header" href="#this-window-forgets">This window forgets</a></h2>
+<p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
+<p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
+<p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
+<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
 <ul>
 <li>Print <code>x</code>, <code>y</code>, yaw from odometry at ~5 Hz</li>
@@ -223,14 +246,26 @@ scripts\run.cmd wh-02
 </code></pre>
 <h2 id="run"><a class="header" href="#run">Run</a></h2>
 <blockquote>
-<p><strong>Preferred runner</strong> (workshop root): <code>scripts\run.cmd &lt;lab-id&gt;</code> (Windows) or <code>./scripts/run &lt;lab-id&gt;</code> (macOS/Linux). List: <code>scripts\run.cmd list</code>. The <code>python labs/...</code> lines below still work.</p>
+<p><strong>Preferred runner</strong> (workshop root): <code>scripts\run.cmd &lt;lab-id&gt;</code> (Windows) or <code>./scripts/run &lt;lab-id&gt;</code> (macOS/Linux). List: <code>scripts\run.cmd list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
 </blockquote>
-<p>Workshop root; PATH + <code>.venv</code> active. Open a <strong>second</strong> terminal to drive (WH-01) or use Manual briefly.</p>
+<p>Open a <strong>second</strong> window to drive (WH-01) or use Manual briefly. Paste this page’s command block in that window too.</p>
 <h3 id="windows-powershell"><a class="header" href="#windows-powershell">Windows (PowerShell)</a></h3>
-<pre><code class="language-powershell">python labs\wh\wh-02-sense-odom-scan\starter\sense.py
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+python labs\wh\wh-02-sense-odom-scan\starter\sense.py
 </code></pre>
-<h3 id="linux--macos-bash"><a class="header" href="#linux--macos-bash">Linux / macOS (bash)</a></h3>
-<pre><code class="language-bash">python labs/wh/wh-02-sense-odom-scan/starter/sense.py
+<h3 id="macos-apple-silicon-zsh-or-bash"><a class="header" href="#macos-apple-silicon-zsh-or-bash">macOS Apple Silicon (zsh or bash)</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/wh/wh-02-sense-odom-scan/starter/sense.py
+</code></pre>
+<h3 id="linux-bash"><a class="header" href="#linux-bash">Linux (bash)</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/wh/wh-02-sense-odom-scan/starter/sense.py
 </code></pre>
 <h2 id="expected-output"><a class="header" href="#expected-output">Expected output</a></h2>
 <pre><code class="language-text">listening odom+scan — Ctrl-C to stop
@@ -252,7 +287,7 @@ x=0.35 y=0.00 yaw=0.00  R=2.50 F=1.90 L=2.50
 <tbody>
 <tr><td><code>odom=?</code> / <code>scan=?</code></td><td>Sim Connected; <code>topic list</code> shows pubs</td></tr>
 <tr><td>Numbers never change</td><td>Drive with WH-01 or Manual</td></tr>
-<tr><td><code>robotos</code> / import errors</td><td>SETUP PATH + wheel</td></tr>
+<tr><td><code>robotos</code> / import errors</td><td>Paste this page’s command block again. If <code>.venv</code> is missing, do MW-00</td></tr>
 </tbody>
 </table>
 </div>

@@ -111,17 +111,42 @@ function New-LabRunBlock {
   }
   $lines.Add("**Track:** ``$TrackId`` ($trackTitle) · **Lab:** ``$LabId`` · **Folder:** ``$FolderName``")
   $lines.Add('')
-  $lines.Add('```text')
-  $lines.Add("# from workshop root")
+  $lines.Add('Paste the **whole** block for your computer. A new window does not keep PATH or `.venv`. `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`.')
+  $lines.Add('')
+  $lines.Add('**Windows (PowerShell)**')
+  $lines.Add('')
+  $lines.Add('```powershell')
+  $lines.Add('cd YOUR_WORKSHOP_DIR')
+  $lines.Add('$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"')
+  $lines.Add('.\.venv\Scripts\Activate.ps1')
   $lines.Add("scripts\run.cmd $LabId")
-  $lines.Add("# Unix: ./scripts/run $LabId")
+  $lines.Add('```')
+  $lines.Add('')
+  $lines.Add('**macOS Apple Silicon (zsh or bash)**')
+  $lines.Add('')
+  $lines.Add('```bash')
+  $lines.Add('cd YOUR_WORKSHOP_DIR')
+  $lines.Add('export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"')
+  $lines.Add('source .venv/bin/activate')
+  $lines.Add("./scripts/run $LabId")
+  $lines.Add('```')
+  $lines.Add('')
+  $lines.Add('**Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:')
+  $lines.Add('')
+  $lines.Add('```bash')
+  $lines.Add('cd YOUR_WORKSHOP_DIR')
+  $lines.Add('export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"')
+  $lines.Add('source .venv/bin/activate')
+  $lines.Add("./scripts/run $LabId")
+  $lines.Add('```')
   if ($TrackId -eq 'hw') {
-    $lines.Add('# prerequisite: scripts/start-bridge running; sim closed')
+    $lines.Add('')
+    $lines.Add('Prerequisite: serial bridge running, warehouse sim closed.')
   }
   elseif ($TrackId -eq 'wh') {
-    $lines.Add('# prerequisite: warehouse sim running (scripts/start-here)')
+    $lines.Add('')
+    $lines.Add('Prerequisite: warehouse sim running (`scripts/start-here`).')
   }
-  $lines.Add('```')
   $lines.Add('')
   $lines.Add("<p class=`"ebook-source`"><strong>Source:</strong> <code>$RelSource</code></p>")
   $lines.Add('')
@@ -149,7 +174,7 @@ function Repair-LabLinks {
       param($m)
       $part = $m.Groups[2].Value
       $folder = $m.Groups[3].Value
-      return "](../../generated/$part/$folder/index.md)"
+      return "](../../$part/$folder/index.md)"
     }
   )
   # Ebook chapter links from labs → staged chapters
@@ -314,9 +339,24 @@ $labsIndexRun = @"
 
 **Section:** ``labs/`` · all practice labs live under ``mw/``, ``wh/``, ``hw/``
 
-``````text
+Paste the whole block. `YOUR_WORKSHOP_DIR` contains `SETUP.md`.
+
+**Windows (PowerShell)**
+
+``````powershell
+cd YOUR_WORKSHOP_DIR
+`$env:PATH = "`$PWD\code\robotos-v0.3.0-windows-x64\bin;`$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd list
-# Unix: ./scripts/run list
+``````
+
+**macOS Apple Silicon**
+
+``````bash
+cd YOUR_WORKSHOP_DIR
+export PATH="`$PWD/code/robotos-v0.3.0-macos-arm64/bin:`$PATH"
+source .venv/bin/activate
+./scripts/run list
 ``````
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/README.md</code></p>
@@ -389,10 +429,22 @@ foreach ($t in $tracks) {
 
 **Track:** ``$($t.Id)`` · board labs via serial-bridge
 
-``````text
+Close the sim first. Paste the whole block in the bridge window, then paste the lab block in a second window.
+
+**Windows (PowerShell)** — bridge window:
+
+``````powershell
+cd YOUR_WORKSHOP_DIR
+`$env:PATH = "`$PWD\code\robotos-v0.3.0-windows-x64\bin;`$env:PATH"
 scripts\start-bridge.cmd
-scripts\run.cmd hw-01
-# Unix: ./scripts/start-bridge.sh && ./scripts/run hw-01
+``````
+
+**macOS Apple Silicon** — bridge window:
+
+``````bash
+cd YOUR_WORKSHOP_DIR
+export PATH="`$PWD/code/robotos-v0.3.0-macos-arm64/bin:`$PATH"
+./scripts/start-bridge.sh
 ``````
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/$($t.Id)/README.md</code></p>

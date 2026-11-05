@@ -4,9 +4,24 @@
 
 **Section:** `labs/` · all practice labs live under `mw/`, `wh/`, `hw/`
 
-```text
+Paste the whole block. YOUR_WORKSHOP_DIR contains SETUP.md.
+
+**Windows (PowerShell)**
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd list
-# Unix: ./scripts/run list
+```
+
+**macOS Apple Silicon**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run list
 ```
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/README.md</code></p>
@@ -26,23 +41,9 @@ Helper rules: [`common/README.md`](common/index.md).
 
 ## Running starters
 
-From the **workshop root** (folder with `SETUP.md` and `labs/`):
+Open the lab README (`labs/wh/wh-01-drive-twist/README.md` and the others). Paste the **whole** block for your computer. The first lines are `cd`, PATH, and `.venv`. A new window does not keep them.
 
-```text
-scripts\run.cmd list          # Windows — see lab ids
-scripts\run.cmd wh-01
-scripts\run.cmd wh-01 --vx 0.2
-scripts\run.cmd hw-02 imu_watch
-
-./scripts/run list            # macOS / Linux
-./scripts/run wh-01
-```
-
-Or call Python directly:
-
-```text
-python labs/wh/wh-01-drive-twist/starter/drive_forward.py
-```
+`scripts\run.cmd wh-01` and `python labs/...` fail with "not found" when those first lines were skipped.
 
 Starters that use `labs.common` put the workshop root on `sys.path` automatically (walk for `SETUP.md`).  
 If you see `ModuleNotFoundError: No module named 'labs'`, you are not inside a workshop tree that contains `SETUP.md` next to `labs/`.

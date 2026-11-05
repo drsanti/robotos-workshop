@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b74680cb.js"></script>
@@ -236,20 +236,33 @@
   participant U as You
   participant C as CLI
   participant S as "sim/bridge"
-  U-&gt;&gt;C: topic list shows empty
+  U-&gt;&gt;C: topic list -&gt; empty
   U-&gt;&gt;C: doctor
   U-&gt;&gt;S: Confirm Connected / bridge listen
   U-&gt;&gt;C: topic list again
 </code></pre>
 <h2 id="56-hands-on"><a class="header" href="#56-hands-on">5–6. Hands-on</a></h2>
 <p>MW-00 + SETUP smoke. Optional: <code>robotos topic hz /robot/01/odom</code> with sim running.</p>
+<p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>. Paste the whole block.</p>
 <h3 id="windows-powershell"><a class="header" href="#windows-powershell">Windows (PowerShell)</a></h3>
-<pre><code class="language-powershell">robotos doctor
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+robotos doctor
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
 </code></pre>
-<h3 id="linux--macos-bash"><a class="header" href="#linux--macos-bash">Linux / macOS (bash)</a></h3>
-<pre><code class="language-bash">robotos doctor
+<h3 id="macos-apple-silicon-zsh-or-bash"><a class="header" href="#macos-apple-silicon-zsh-or-bash">macOS Apple Silicon (zsh or bash)</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+robotos doctor
+robotos topic list
+robotos topic echo /robot/01/odom --count 3
+</code></pre>
+<h3 id="linux-bash"><a class="header" href="#linux-bash">Linux (bash)</a></h3>
+<p>Only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+robotos doctor
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
 </code></pre>

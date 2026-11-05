@@ -114,7 +114,7 @@ without hitting anything, using only the robotos tools.` Watch and log.
 |---------|-----|
 | `/mcp` shows failed | Run the self-test command; read the traceback. Wrong python path in `.mcp.json`? |
 | `ModuleNotFoundError: mcp` | Installed into a different Python; use the `.venv` one (SETUP-AI §2) |
-| `topic_list` says CLI not on PATH | Start the agent from a VS Code terminal in the workshop (PATH is set there) |
+| `topic_list` says CLI not on PATH | In that same window, `cd` to the workshop root and run the PATH line from [MW-00](../../../labs/mw/mw-00-getting-started/README.md), then start the agent again |
 | Server dies / garbled | Something printed to **stdout**. Log with `log()` (stderr) only |
 | Changes don't apply | The agent app started the server; reconnect in `/mcp` or start a new session |
 

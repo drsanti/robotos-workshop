@@ -36,7 +36,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-b74680cb.js"></script>
@@ -178,9 +178,16 @@
                         <h1 id="hw-track--esp32-s3-board"><a class="header" href="#hw-track--esp32-s3-board">HW track — ESP32-S3 board</a></h1>
 <div class="ebook-run">
 <p><strong>Track:</strong> <code>hw</code> · board labs via serial-bridge</p>
-<pre><code class="language-text">scripts\start-bridge.cmd
-scripts\run.cmd hw-01
-# Unix: ./scripts/start-bridge.sh &amp;&amp; ./scripts/run hw-01
+<p>Close the sim first. Paste the whole block in the bridge window, then paste the lab block in a second window.</p>
+<p><strong>Windows (PowerShell)</strong> — bridge window:</p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+scripts\start-bridge.cmd
+</code></pre>
+<p><strong>macOS Apple Silicon</strong> — bridge window:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+./scripts/start-bridge.sh
 </code></pre>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/hw/README.md</code></p>
 

@@ -61,8 +61,8 @@ flowchart TB
 sequenceDiagram
   participant U as You
   participant C as CLI
-  participant S as sim/bridge
-  U->>C: topic list → empty
+  participant S as "sim/bridge"
+  U->>C: topic list -> empty
   U->>C: doctor
   U->>S: Confirm Connected / bridge listen
   U->>C: topic list again
@@ -72,17 +72,35 @@ sequenceDiagram
 
 MW-00 + SETUP smoke. Optional: `robotos topic hz /robot/01/odom` with sim running.
 
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`. Paste the whole block.
+
 ### Windows (PowerShell)
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 robotos doctor
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
 ```
 
-### Linux / macOS (bash)
+### macOS Apple Silicon (zsh or bash)
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+robotos doctor
+robotos topic list
+robotos topic echo /robot/01/odom --count 3
+```
+
+### Linux (bash)
+
+Only if `code/robotos-v0.3.0-linux-x64` is in your drop.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 robotos doctor
 robotos topic list
 robotos topic echo /robot/01/odom --count 3

@@ -74,8 +74,8 @@ sequenceDiagram
   D->>S: Twist or Manual motion
   S->>N: Odometry stream
   S->>N: LaserScan stream
-  Note over N: Print pose + R/F/L about 5 Hz
-  N->>N: Drive toward wall, F drops
+  Note over N: Print pose + R/F/L ~5 Hz
+  N->>N: Drive toward wall -> F drops
 ```
 
 ## 5–6. Hands-on

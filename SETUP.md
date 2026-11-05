@@ -59,9 +59,7 @@ Get-Command robotos
 robotos version
 ```
 
-PATH lasts only for **this** window — new window → run PATH lines again.
-In a **VS Code** terminal opened on this folder, skip the `$env:PATH = …` line
-(`.vscode/settings.json` already prepends `code/.../bin`).
+PATH lasts only for **this** window. A new PowerShell, Terminal, Cursor, or VS Code window starts blank. Paste the whole block again, including `cd` and the PATH line. Do not skip the PATH line. VS Code settings sometimes add it, and sometimes they do not.
 
 ### Linux x64
 

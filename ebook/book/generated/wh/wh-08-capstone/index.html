@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -178,17 +178,40 @@
                         <h1 id="lab-wh-08--capstone-challenge"><a class="header" href="#lab-wh-08--capstone-challenge">Lab WH-08 — Capstone challenge</a></h1>
 <div class="ebook-run">
 <p><strong>Track:</strong> <code>wh</code> (Warehouse) · <strong>Lab:</strong> <code>wh-08</code> · <strong>Folder:</strong> <code>wh-08-capstone</code></p>
-<pre><code class="language-text"># from workshop root
+<p>Paste the <strong>whole</strong> block for your computer. A new window does not keep PATH or <code>.venv</code>. <code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>.</p>
+<p><strong>Windows (PowerShell)</strong></p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-08
-# Unix: ./scripts/run wh-08
-# prerequisite: warehouse sim running (scripts/start-here)
 </code></pre>
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-08
+</code></pre>
+<p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-08
+</code></pre>
+<p>Prerequisite: warehouse sim running (<code>scripts/start-here</code>).</p>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/wh/wh-08-capstone/README.md</code></p>
 
 </div>
 
 <h2 id="goal"><a class="header" href="#goal">Goal</a></h2>
 <p>Apply WH skills on a timed warehouse task. Pairs allowed. <strong>Contract topics only.</strong></p>
+<h2 id="this-window-forgets"><a class="header" href="#this-window-forgets">This window forgets</a></h2>
+<p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
+<p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
+<p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
+<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
 <ul>
 <li>Pick a track and ship a working External/Native run</li>

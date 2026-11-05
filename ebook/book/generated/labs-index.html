@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b74680cb.js"></script>
@@ -178,8 +178,18 @@
                         <h1 id="labs"><a class="header" href="#labs">Labs</a></h1>
 <div class="ebook-run">
 <p><strong>Section:</strong> <code>labs/</code> · all practice labs live under <code>mw/</code>, <code>wh/</code>, <code>hw/</code></p>
-<pre><code class="language-text">scripts\run.cmd list
-# Unix: ./scripts/run list
+<p>Paste the whole block. YOUR_WORKSHOP_DIR contains SETUP.md.</p>
+<p><strong>Windows (PowerShell)</strong></p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+scripts\run.cmd list
+</code></pre>
+<p><strong>macOS Apple Silicon</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run list
 </code></pre>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/README.md</code></p>
 
@@ -200,18 +210,8 @@
 </div>
 <p>Content map: <a href="../../../docs/lab-outline.html"><code>docs/lab-outline.md</code></a>.<br>Helper rules: <a href="common/index.html"><code>common/README.md</code></a>.</p>
 <h2 id="running-starters"><a class="header" href="#running-starters">Running starters</a></h2>
-<p>From the <strong>workshop root</strong> (folder with <code>SETUP.md</code> and <code>labs/</code>):</p>
-<pre><code class="language-text">scripts\run.cmd list          # Windows — see lab ids
-scripts\run.cmd wh-01
-scripts\run.cmd wh-01 --vx 0.2
-scripts\run.cmd hw-02 imu_watch
-
-./scripts/run list            # macOS / Linux
-./scripts/run wh-01
-</code></pre>
-<p>Or call Python directly:</p>
-<pre><code class="language-text">python labs/wh/wh-01-drive-twist/starter/drive_forward.py
-</code></pre>
+<p>Open the lab README (<code>labs/wh/wh-01-drive-twist/README.md</code> and the others). Paste the <strong>whole</strong> block for your computer. The first lines are <code>cd</code>, PATH, and <code>.venv</code>. A new window does not keep them.</p>
+<p><code>scripts\run.cmd wh-01</code> and <code>python labs/...</code> fail with “not found” when those first lines were skipped.</p>
 <p>Starters that use <code>labs.common</code> put the workshop root on <code>sys.path</code> automatically (walk for <code>SETUP.md</code>).<br>If you see <code>ModuleNotFoundError: No module named 'labs'</code>, you are not inside a workshop tree that contains <code>SETUP.md</code> next to <code>labs/</code>.</p>
 
                     </main>

@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -178,9 +178,24 @@
                         <h1 id="mw-03--actions"><a class="header" href="#mw-03--actions">MW-03 — Actions</a></h1>
 <div class="ebook-run">
 <p><strong>Track:</strong> <code>mw</code> (Middleware) · <strong>Lab:</strong> <code>mw-03</code> · <strong>Folder:</strong> <code>mw-03-actions</code></p>
-<pre><code class="language-text"># from workshop root
+<p>Paste the <strong>whole</strong> block for your computer. A new window does not keep PATH or <code>.venv</code>. <code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>.</p>
+<p><strong>Windows (PowerShell)</strong></p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd mw-03
-# Unix: ./scripts/run mw-03
+</code></pre>
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-03
+</code></pre>
+<p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-03
 </code></pre>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/mw/mw-03-actions/README.md</code></p>
 
@@ -188,6 +203,14 @@ scripts\run.cmd mw-03
 
 <h2 id="goal"><a class="header" href="#goal">Goal</a></h2>
 <p>Run a long-running <strong>action</strong> (<code>/machine/01/cycle</code>) with feedback, then a result.</p>
+<h2 id="this-window-forgets"><a class="header" href="#this-window-forgets">This window forgets</a></h2>
+<p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
+<p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
+<p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
+<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
 <ul>
 <li>Start action server + client</li>
@@ -196,7 +219,7 @@ scripts\run.cmd mw-03
 </ul>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <ul>
-<li>MW-02; PATH + <code>.venv</code> in both terminals</li>
+<li>MW-02; paste this page’s command block in <strong>both</strong> windows</li>
 <li>Ebook: <a href="../../../chapters/ch07-actions.html"><code>ch07-actions.md</code></a></li>
 <li>Theory: <a href="../../../docs/theory/09-actions.html"><code>docs/theory/09-actions.md</code></a></li>
 </ul>
@@ -209,21 +232,45 @@ scripts\run.cmd mw-03
 </code></pre>
 <h2 id="practice"><a class="header" href="#practice">Practice</a></h2>
 <blockquote>
-<p><strong>Preferred runner</strong> (workshop root): this lab has multiple starters — <code>scripts\run.cmd mw-03 &lt;starter&gt;</code> (Windows) or <code>./scripts/run mw-03 &lt;starter&gt;</code> (macOS/Linux). Starters: <code>cycle_server / cycle_client</code>. List: <code>scripts\run.cmd list</code>. The <code>python labs/...</code> lines below still work.</p>
+<p><strong>Preferred runner</strong> (workshop root): this lab has multiple starters — <code>scripts\run.cmd mw-03 &lt;starter&gt;</code> (Windows) or <code>./scripts/run mw-03 &lt;starter&gt;</code> (macOS/Linux). Starters: <code>cycle_server / cycle_client</code>. List: <code>scripts\run.cmd list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
 </blockquote>
 <h3 id="terminal-a--server"><a class="header" href="#terminal-a--server">Terminal A — server</a></h3>
 <p><strong>Windows (PowerShell)</strong></p>
-<pre><code class="language-powershell">python labs\mw\mw-03-actions\starter\cycle_server.py
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+python labs\mw\mw-03-actions\starter\cycle_server.py
 </code></pre>
-<p><strong>Linux / macOS (bash)</strong></p>
-<pre><code class="language-bash">python labs/mw/mw-03-actions/starter/cycle_server.py
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-03-actions/starter/cycle_server.py
+</code></pre>
+<p><strong>Linux (bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-03-actions/starter/cycle_server.py
 </code></pre>
 <h3 id="terminal-b--client"><a class="header" href="#terminal-b--client">Terminal B — client</a></h3>
 <p><strong>Windows (PowerShell)</strong></p>
-<pre><code class="language-powershell">python labs\mw\mw-03-actions\starter\cycle_client.py
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+python labs\mw\mw-03-actions\starter\cycle_client.py
 </code></pre>
-<p><strong>Linux / macOS (bash)</strong></p>
-<pre><code class="language-bash">python labs/mw/mw-03-actions/starter/cycle_client.py
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-03-actions/starter/cycle_client.py
+</code></pre>
+<p><strong>Linux (bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-03-actions/starter/cycle_client.py
 </code></pre>
 <p>Stretch: cancel mid-cycle from a second client / CLI if the pack supports it.</p>
 <h2 id="expected-output"><a class="header" href="#expected-output">Expected output</a></h2>

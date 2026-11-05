@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -178,17 +178,40 @@
                         <h1 id="hw-02--read-sensors-from-the-board"><a class="header" href="#hw-02--read-sensors-from-the-board">HW-02 — Read sensors from the board</a></h1>
 <div class="ebook-run">
 <p><strong>Track:</strong> <code>hw</code> (Hardware) · <strong>Lab:</strong> <code>hw-02</code> · <strong>Folder:</strong> <code>hw-02-read-sensors</code></p>
-<pre><code class="language-text"># from workshop root
+<p>Paste the <strong>whole</strong> block for your computer. A new window does not keep PATH or <code>.venv</code>. <code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>.</p>
+<p><strong>Windows (PowerShell)</strong></p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd hw-02
-# Unix: ./scripts/run hw-02
-# prerequisite: scripts/start-bridge running; sim closed
 </code></pre>
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run hw-02
+</code></pre>
+<p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run hw-02
+</code></pre>
+<p>Prerequisite: serial bridge running, warehouse sim closed.</p>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/hw/hw-02-read-sensors/README.md</code></p>
 
 </div>
 
 <h2 id="goal"><a class="header" href="#goal">Goal</a></h2>
 <p>Subscribe to live telemetry the MCU publishes (IMU and/or board status).</p>
+<h2 id="this-window-forgets"><a class="header" href="#this-window-forgets">This window forgets</a></h2>
+<p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
+<p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
+<p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
+<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
 <ul>
 <li>Choose IMU vs board_watch based on <strong>HW-01 caps</strong></li>
@@ -198,7 +221,7 @@ scripts\run.cmd hw-02
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <ul>
 <li>HW-00 bridge up; HW-01 caps known (<code>IMU=0x04</code>, <code>BATT=0x10</code>, …)</li>
-<li>PATH + <code>.venv</code> + <code>ROBOTOS_CONNECT</code></li>
+<li>Paste this page’s command block (it sets PATH, <code>.venv</code>, and <code>ROBOTOS_CONNECT</code>)</li>
 <li>Ebook: <a href="../../../chapters/ch04-board-on-graph.html"><code>ch04-board-on-graph.md</code></a></li>
 </ul>
 <h2 id="topics"><a class="header" href="#topics">Topics</a></h2>
@@ -224,21 +247,45 @@ scripts\run.cmd hw-02
 </code></pre>
 <h2 id="practice"><a class="header" href="#practice">Practice</a></h2>
 <blockquote>
-<p><strong>Preferred runner</strong> (workshop root): this lab has multiple starters — <code>scripts\run.cmd hw-02 &lt;starter&gt;</code> (Windows) or <code>./scripts/run hw-02 &lt;starter&gt;</code> (macOS/Linux). Starters: <code>imu_watch / board_watch</code>. List: <code>scripts\run.cmd list</code>. The <code>python labs/...</code> lines below still work.</p>
+<p><strong>Preferred runner</strong> (workshop root): this lab has multiple starters — <code>scripts\run.cmd hw-02 &lt;starter&gt;</code> (Windows) or <code>./scripts/run hw-02 &lt;starter&gt;</code> (macOS/Linux). Starters: <code>imu_watch / board_watch</code>. List: <code>scripts\run.cmd list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
 </blockquote>
 <h3 id="imu-needs-imu-cap--often-ws28p"><a class="header" href="#imu-needs-imu-cap--often-ws28p">IMU (needs IMU cap — often <code>ws28p</code>)</a></h3>
 <p><strong>Windows (PowerShell)</strong></p>
-<pre><code class="language-powershell">python labs\hw\hw-02-read-sensors\starter\imu_watch.py 10
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+python labs\hw\hw-02-read-sensors\starter\imu_watch.py 10
 </code></pre>
-<p><strong>Linux / macOS (bash)</strong></p>
-<pre><code class="language-bash">python labs/hw/hw-02-read-sensors/starter/imu_watch.py 10
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-02-read-sensors/starter/imu_watch.py 10
+</code></pre>
+<p><strong>Linux (bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-02-read-sensors/starter/imu_watch.py 10
 </code></pre>
 <h3 id="battery--wifi--board-info"><a class="header" href="#battery--wifi--board-info">Battery / Wi‑Fi / board info</a></h3>
 <p><strong>Windows (PowerShell)</strong></p>
-<pre><code class="language-powershell">python labs\hw\hw-02-read-sensors\starter\board_watch.py 15
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+python labs\hw\hw-02-read-sensors\starter\board_watch.py 15
 </code></pre>
-<p><strong>Linux / macOS (bash)</strong></p>
-<pre><code class="language-bash">python labs/hw/hw-02-read-sensors/starter/board_watch.py 15
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-02-read-sensors/starter/board_watch.py 15
+</code></pre>
+<p><strong>Linux (bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-02-read-sensors/starter/board_watch.py 15
 </code></pre>
 <h2 id="expected-output-imu"><a class="header" href="#expected-output-imu">Expected output (IMU)</a></h2>
 <pre><code class="language-text">watching /robot/01/sensor/imu — Ctrl-C to stop (10s)

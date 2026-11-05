@@ -4,6 +4,22 @@
 
 Bring the ESP32-S3 onto the robotos graph via `serial-bridge` and see `/robot/01/sys/board`.
 
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
+
 ## Learning outcomes
 
 - Run bridge (listen) and lab terminal (connect) without env conflicts  
@@ -58,17 +74,30 @@ serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 # or: serial-bridge --port COM7 --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-### Linux / macOS (bash)
+### macOS Apple Silicon (zsh or bash)
 
 ```bash
 cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"   # or macos-arm64
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
 chmod +x code/robotos-v*/bin/serial-bridge 2>/dev/null || true
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 # or: --port /dev/ttyACM0          (Linux)
 # or: --port /dev/cu.usbmodem*     (macOS)
 ```
+
+### Linux (bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v*/bin/serial-bridge 2>/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
+# or: --port /dev/ttyACM0          (Linux)
+# or: --port /dev/cu.usbmodem*     (macOS)
+```
+
 
 Linux permission denied → `sudo usermod -aG dialout $USER` then log out/in.
 
@@ -80,23 +109,33 @@ Linux permission denied → `sudo usermod -aG dialout $USER` then log out/in.
 cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 $env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
-.\.venv\Scripts\Activate.ps1
 robotos node list
 robotos topic list
 robotos topic echo /robot/01/sys/board --count 3
 ```
 
-### Linux / macOS (bash)
+### macOS Apple Silicon (zsh or bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+robotos node list
+robotos topic list
+robotos topic echo /robot/01/sys/board --count 3
+```
+
+### Linux (bash)
 
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
-source .venv/bin/activate
 robotos node list
 robotos topic list
 robotos topic echo /robot/01/sys/board --count 3
 ```
+
 
 ## Expected output
 

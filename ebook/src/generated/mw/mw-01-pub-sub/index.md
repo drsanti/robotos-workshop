@@ -4,10 +4,33 @@
 
 **Track:** `mw` (Middleware) · **Lab:** `mw-01` · **Folder:** `mw-01-pub-sub`
 
-```text
-# from workshop root
+Paste the **whole** block for your computer. A new window does not keep PATH or `.venv`. `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`.
+
+**Windows (PowerShell)**
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd mw-01
-# Unix: ./scripts/run mw-01
+```
+
+**macOS Apple Silicon (zsh or bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-01
+```
+
+**Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-01
 ```
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/mw/mw-01-pub-sub/README.md</code></p>
@@ -18,6 +41,22 @@ scripts\run.cmd mw-01
 ## Goal
 
 Run a publisher and a subscriber on `/machine/01/sensor/imu` (`robotos.sensor.v1.Imu`) without the warehouse sim.
+
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
 
 ## Learning outcomes
 
@@ -61,25 +100,32 @@ sequenceDiagram
 **Windows:** press `Win`, type `PowerShell`, Enter — that is terminal 1. Do it **again** for terminal 2 (a second window).  
 **Linux/macOS:** open a second Terminal tab/window the same way you opened the first.
 
-In **each** window, go to the workshop root (folder with `SETUP.md`), then PATH + venv:
+In **each** window, paste the whole block for your computer. A second window does not keep the first window's setup:
 
 ### Both terminals — Windows (PowerShell)
 
 ```powershell
-cd C:\robotos-workshop
-# ↑ your unzip path
+cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 ```
 
-### Both terminals — Linux / macOS (bash)
+### Both terminals — macOS Apple Silicon (zsh or bash)
 
 ```bash
-cd ~/robotos-workshop
-# ↑ your unzip path; use linux-x64 or macos-arm64 below
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+```
+
+### Both terminals — Linux (bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 source .venv/bin/activate
 ```
+
 
 > **Preferred runner** (workshop root): pick the starter name —
 > `scripts\run.cmd mw-01 sim_sensor` / `mw-01 monitor` (Windows) or
@@ -91,14 +137,30 @@ source .venv/bin/activate
 **Windows (PowerShell)**
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\mw\mw-01-pub-sub\starter\sim_sensor.py
 ```
 
-**Linux / macOS (bash)**
+**macOS Apple Silicon (zsh or bash)**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
 ```
+
+**Linux (bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-01-pub-sub/starter/sim_sensor.py
+```
+
 
 You should see `publishing on /machine/01/sensor/imu`.  
 It looks “stuck” — that is normal. Stop later with **Ctrl-C**.
@@ -108,18 +170,36 @@ It looks “stuck” — that is normal. Stop later with **Ctrl-C**.
 **Windows (PowerShell)**
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 robotos topic list
 robotos topic echo /machine/01/sensor/imu --count 5
 python labs\mw\mw-01-pub-sub\starter\monitor.py 5
 ```
 
-**Linux / macOS (bash)**
+**macOS Apple Silicon (zsh or bash)**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 robotos topic list
 robotos topic echo /machine/01/sensor/imu --count 5
 python labs/mw/mw-01-pub-sub/starter/monitor.py 5
 ```
+
+**Linux (bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+robotos topic list
+robotos topic echo /machine/01/sensor/imu --count 5
+python labs/mw/mw-01-pub-sub/starter/monitor.py 5
+```
+
 
 (`monitor.py 5` exits after ~5 s. No argument → waits for Enter.)
 
@@ -146,7 +226,7 @@ acc.z=9.81  gyro.x=+0.123
 
 | Symptom | Fix |
 |---------|-----|
-| `robotos` / `python` not found | PATH + activate `.venv` in **this** terminal |
+| `robotos` / `python` not found | Paste this page's command block again in **this** window |
 | `labs\mw\...` path not found | `cd` to workshop root first (see both-terminals block) |
 | Empty topic list | Terminal A not running — wait 1–2 s |
 | Monitor empty after Ctrl-C on A | You stopped the publisher; start A again |

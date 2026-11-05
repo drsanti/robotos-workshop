@@ -87,13 +87,13 @@ sequenceDiagram
   participant Graph as Topic bus
   You->>Zip: Unzip to a short path
   You->>VS: Open folder, run scripts/start-here
-  VS->>Sim: Starts sim and creates .venv
+  VS->>Sim: Starts sim + creates .venv
   Sim->>Graph: Announce odom, scan, subscribe cmd_vel
   You->>VS: New terminal, robotos topic list
   VS-->>You: /robot/01/cmd_vel, odom, scan
   You->>VS: scripts/run wh-01
   VS->>Graph: Twist messages
-  Graph->>Sim: Robot moves about 1 m
+  Graph->>Sim: Robot moves ~1 m
 ```
 
 ---
@@ -106,10 +106,12 @@ sequenceDiagram
 2. Confirm you see `SETUP.md`, `labs\`, `code\`, and `scripts\`.  
 3. Open that folder in **VS Code** (`File → Open Folder…`).  
 4. Double-click `scripts\start-here.cmd` once — creates `.venv`, installs the wheel, starts the sim.  
-5. In VS Code: **Terminal → New Terminal**.  
-6. Smoke:
+5. Open PowerShell or a VS Code terminal. It does not remember `robotos`. Paste the whole block. `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`.
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 robotos topic list
 scripts\run.cmd wh-01
 ```
@@ -134,11 +136,8 @@ Board labs later: double-click `scripts\start-bridge.cmd` and leave it open, the
 ### 5.3 PATH and `robotos`
 
 ```powershell
-cd C:\robotos-workshop
-# ↑ change to YOUR unzip folder
-
-$os = "robotos-v0.3.0-windows-x64"
-$env:PATH = "$PWD\code\$os\bin;$env:PATH"
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 Get-Command robotos
 robotos version
 ```
@@ -154,7 +153,7 @@ If `Get-Command` fails: you typed the wrong `cd`, or the `code\robotos-v0.3.0-wi
 Need Python 3.10+ from [python.org](https://www.python.org/downloads/) (check “Add python.exe to PATH” on install).
 
 ```powershell
-cd C:\robotos-workshop
+cd YOUR_WORKSHOP_DIR
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
@@ -168,14 +167,17 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 Then retry `Activate.ps1`. Your prompt usually gains `(.venv)`.
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+.\.venv\Scripts\Activate.ps1
 python -m pip install -U pip
-python -m pip install (Get-Item .\code\robotos-0.3.0-*-win_amd64.whl).FullName
+python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
 python -c "import robotos; print(robotos.Node.version())"
 ```
 
 ### 5.5 Start the sim
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
 Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe
 ```
 
@@ -183,12 +185,14 @@ Or double-click `robotos-sim.exe` in Explorer. Wait until the UI shows **connect
 
 ### 5.6 Smoke test (manual)
 
-In the **same** activated PowerShell (PATH + venv):
+Paste the whole block again. A new window does not keep PATH or `.venv`.
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 robotos topic list
 scripts\run.cmd wh-01
-# or: python .\labs\wh\wh-01-drive-twist\starter\drive_forward.py
 ```
 
 **Expect:** topic list includes `/robot/01/cmd_vel`, `/robot/01/odom`, `/robot/01/scan`, and the sim robot moves forward briefly.
@@ -205,8 +209,7 @@ scripts\run.cmd wh-01
 ### 6.2 Unpack
 
 ```bash
-cd ~   # or where you unzipped
-cd robotos-workshop
+cd YOUR_WORKSHOP_DIR
 ls SETUP.md labs code
 ```
 
@@ -217,6 +220,7 @@ Use a path without spaces if possible.
 **Linux x64**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
 chmod +x code/robotos-v0.3.0-linux-x64/bin/robotos 2>/dev/null || true
 robotos version
@@ -225,6 +229,7 @@ robotos version
 **macOS Apple Silicon**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 chmod +x code/robotos-v0.3.0-macos-arm64/bin/robotos 2>/dev/null || true
 robotos version
@@ -235,21 +240,22 @@ robotos version
 **Linux x64** — prefer the exact name in your pack’s `NOTES.txt`; tag-safe:
 
 ```bash
+cd YOUR_WORKSHOP_DIR
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -U pip
-python -m pip install code/robotos-0.3.0-*-manylinux*.whl
-# or: code/robotos-0.3.0-py3-none-any.whl
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
 python -c "import robotos; print(robotos.Node.version())"
 ```
 
 **macOS Apple Silicon**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -U pip
-python -m pip install code/robotos-0.3.0-*-macosx*.whl
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
 python -c "import robotos; print(robotos.Node.version())"
 ```
 
@@ -258,9 +264,12 @@ python -c "import robotos; print(robotos.Node.version())"
 1. Unzip / clone so you see `SETUP.md`, `labs/`, `code/`, and `scripts/`.  
 2. Open that folder in **VS Code**.  
 3. Once: double-click `scripts/start-here.command` (or run `./scripts/start-here.sh`).  
-4. New VS Code terminal → smoke:
+4. Open Terminal, Cursor, or VS Code. Paste the whole block. Do not type only the last line.
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 robotos topic list
 ./scripts/run wh-01
 ```
@@ -278,6 +287,7 @@ MW/HW (see `SETUP.md` §4).
 **Linux x64** (sim often not shipped)
 
 ```bash
+cd YOUR_WORKSHOP_DIR
 chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
 ./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &
 ```
@@ -285,7 +295,7 @@ chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
 **macOS Apple Silicon**
 
 ```bash
-# Prefer the .app bundle from the class pack:
+cd YOUR_WORKSHOP_DIR
 open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
 # First launch: Finder → right-click → Open if Gatekeeper blocks
 ```
@@ -296,12 +306,24 @@ Confirm **Native / External / Connect** in the UI as on Windows.
 
 ### 6.6 Smoke test (manual)
 
-Keep the same PATH folder you used in §6.3 (`linux-x64` or `macos-arm64`), venv active:
+**macOS Apple Silicon**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 robotos topic list
 ./scripts/run wh-01
-# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+```
+
+**Linux** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01
 ```
 
 ---

@@ -4,6 +4,22 @@
 
 Read `BoardInfo.caps` and know which demos apply on **this** board.
 
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
+
 ## Learning outcomes
 
 - Wait for `/robot/01/sys/board` and decode the caps bitfield  
@@ -33,13 +49,32 @@ Ebook walkthrough: [`ch04-board-on-graph.md`](../../../docs/ebook/chapters/ch04-
 **A — bridge** (leave open): double-click `scripts\start-bridge.cmd`  
 (macOS: `./scripts/start-bridge.sh`)
 
-**B — probe** (VS Code terminal, workshop root):
+**B — probe** (a second window, after the bridge is running). Paste the whole block:
 
-```text
+### Windows (PowerShell)
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd hw-01
 ```
 
+### macOS Apple Silicon (zsh or bash)
+
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run hw-01
+```
+
+### Linux (bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
 ./scripts/run hw-01
 ```
 
@@ -50,6 +85,9 @@ scripts\run.cmd hw-01
 ### Windows (PowerShell)
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 $env:ROBOTOS_CONNECT = "tcp/127.0.0.1:7447"
 python labs\hw\hw-01-caps-probe\starter\caps_probe.py
 ```
@@ -59,8 +97,8 @@ python labs\hw\hw-01-caps-probe\starter\caps_probe.py
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 source .venv/bin/activate
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 ```
 
@@ -69,8 +107,8 @@ python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 source .venv/bin/activate
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
 python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 ```
 

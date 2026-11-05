@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b74680cb.js"></script>
@@ -298,8 +298,7 @@ pub = node.create_publisher("/robot/01/cmd_vel", Twist)
 <hr>
 <h2 id="5-hands-on--windows-powershell"><a class="header" href="#5-hands-on--windows-powershell">5. Hands-on — Windows (PowerShell)</a></h2>
 <p>Assumes Chapter 0 PATH + venv + sim connected (or <code>scripts\start-here.cmd</code> already done).</p>
-<pre><code class="language-powershell">cd C:\robotos-workshop
-# VS Code terminal: skip PATH line — .vscode settings already add it
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 
@@ -310,16 +309,23 @@ scripts\run.cmd wh-01
 </code></pre>
 <p>Watch the sim: the robot should move, then stop.</p>
 <hr>
-<h2 id="6-hands-on--linux--macos-bash"><a class="header" href="#6-hands-on--linux--macos-bash">6. Hands-on — Linux / macOS (bash)</a></h2>
-<pre><code class="language-bash">cd ~/robotos-workshop
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"   # or macos-arm64
+<h2 id="6-hands-on--macos-apple-silicon-zsh-or-bash"><a class="header" href="#6-hands-on--macos-apple-silicon-zsh-or-bash">6. Hands-on — macOS Apple Silicon (zsh or bash)</a></h2>
+<p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>. Paste the whole block.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
-
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
 ./scripts/run wh-01
-# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
-
+</code></pre>
+<h2 id="6b-hands-on--linux-bash"><a class="header" href="#6b-hands-on--linux-bash">6b. Hands-on — Linux (bash)</a></h2>
+<p>Only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop.</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+robotos topic list
+robotos topic echo /robot/01/odom --count 3
+./scripts/run wh-01
 </code></pre>
 <hr>
 <h2 id="7-code-walkthrough--publishing-a-twist"><a class="header" href="#7-code-walkthrough--publishing-a-twist">7. Code walkthrough — publishing a Twist</a></h2>

@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -178,32 +178,64 @@
                         <h1 id="lab-wh-00--hello-graph"><a class="header" href="#lab-wh-00--hello-graph">Lab WH-00 — Hello graph</a></h1>
 <div class="ebook-run">
 <p><strong>Track:</strong> <code>wh</code> (Warehouse) · <strong>Lab:</strong> <code>wh-00</code> · <strong>Folder:</strong> <code>wh-00-hello-graph</code></p>
-<pre><code class="language-text"># from workshop root
+<p>Paste the <strong>whole</strong> block for your computer. A new window does not keep PATH or <code>.venv</code>. <code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>.</p>
+<p><strong>Windows (PowerShell)</strong></p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-00
-# Unix: ./scripts/run wh-00
-# prerequisite: warehouse sim running (scripts/start-here)
 </code></pre>
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-00
+</code></pre>
+<p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-00
+</code></pre>
+<p>Prerequisite: warehouse sim running (<code>scripts/start-here</code>).</p>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/wh/wh-00-hello-graph/README.md</code></p>
 
 </div>
 
 <h2 id="goal"><a class="header" href="#goal">Goal</a></h2>
 <p>Confirm pack tools see the same graph as <strong>robotos-sim</strong>.</p>
+<h2 id="this-window-forgets"><a class="header" href="#this-window-forgets">This window forgets</a></h2>
+<p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
+<p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
+<p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
+<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <ul>
-<li><a href="../../../../SETUP.html"><code>SETUP.md</code></a> complete (PATH + venv), or <code>scripts/start-here</code> once</li>
+<li>Sim is running. Paste this page’s command block in this window. Full machine setup is <a href="../../../../SETUP.html"><code>SETUP.md</code></a> if MW-00 is not done</li>
 <li>Sim launched and <strong>Connected</strong> (<strong>Native</strong>) — see SETUP §4</li>
 <li>Ebook: <a href="../../../chapters/ch01-graph-nodes-topics.html"><code>ch01-graph-nodes-topics.md</code></a></li>
 </ul>
 <h2 id="steps"><a class="header" href="#steps">Steps</a></h2>
-<p>Workshop root; PATH active in this terminal (VS Code new terminal after
-<code>scripts/start-here</code> is enough — no starter script for WH-00).</p>
+<p>Paste the whole block for your computer. There is no starter script for WH-00.</p>
 <h3 id="windows-powershell"><a class="header" href="#windows-powershell">Windows (PowerShell)</a></h3>
-<pre><code class="language-powershell">robotos topic list
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+robotos topic list
 robotos topic echo /robot/01/odom --count 5
 </code></pre>
-<h3 id="linux--macos-bash"><a class="header" href="#linux--macos-bash">Linux / macOS (bash)</a></h3>
-<pre><code class="language-bash">robotos topic list
+<h3 id="macos-apple-silicon-zsh-or-bash"><a class="header" href="#macos-apple-silicon-zsh-or-bash">macOS Apple Silicon (zsh or bash)</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+robotos topic list
+robotos topic echo /robot/01/odom --count 5
+</code></pre>
+<h3 id="linux-bash"><a class="header" href="#linux-bash">Linux (bash)</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+robotos topic list
 robotos topic echo /robot/01/odom --count 5
 </code></pre>
 <p><strong>Expect:</strong> list includes <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, <code>/robot/01/scan</code>. Echo prints odometry (move the robot in Manual briefly if idle).</p>

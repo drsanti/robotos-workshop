@@ -10,29 +10,51 @@ shipped yet.
 
 ## Students — start here
 
-Class machines use **VS Code**. Open **this folder** as the workspace
-(`File → Open Folder…` → the `robotos-workshop` folder).
+`YOUR_WORKSHOP_DIR` is this folder: it contains `SETUP.md`, `code/`, and `labs/`.
 
-### Recommended (Windows + VS Code)
+`robotos` is a file inside `code/…/bin`. It is not installed on the computer. A new PowerShell, Terminal, Cursor, or VS Code window does not remember it. Every command block below starts with `cd` and the PATH line for your computer. Paste the **whole** block. If you open another window, paste the whole block again. Do not skip the PATH line.
 
-1. **Once per machine:** double-click [`scripts/start-here.cmd`](scripts/start-here.cmd)  
-   — creates `.venv`, installs the wheel, starts the warehouse sim.  
-   You can close that cmd window afterward if you prefer VS Code.
-2. In VS Code: **Terminal → New Terminal**.  
-   `robotos` is already on PATH (workspace settings). If VS Code asks you to
-   pick a Python interpreter, choose `.venv`.
-3. Check: `robotos topic list` → `/robot/01/cmd_vel`, `odom`, `scan`.
-4. Run a lab starter (from workshop root):
+Each lab sheet repeats those same first lines. Open the lab README and paste its block. Do not type only the last line.
 
-   ```text
-   scripts\run.cmd list
-   scripts\run.cmd wh-01
-   scripts\run.cmd hw-02 imu_watch
-   ```
+### Once per machine
 
-5. **Board labs (HW):** close the sim → double-click
-   [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd) (leave open) →
-   `scripts\run.cmd hw-01` (`run` sets `ROBOTOS_CONNECT` for you).
+| OS | What to double-click |
+|----|----------------------|
+| **Windows** | [`scripts/start-here.cmd`](scripts/start-here.cmd) — creates `.venv`, installs the wheel, starts the warehouse sim |
+| **macOS** | [`scripts/start-here.command`](scripts/start-here.command) (or `./scripts/start-here.sh` from a terminal that is already in this folder) |
+
+You can close that helper window. The next terminal is blank again.
+
+### Check the CLI
+
+**Windows (PowerShell)**
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+robotos topic list
+```
+
+**macOS Apple Silicon (zsh or bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+robotos topic list
+```
+
+With the sim running, expect `/robot/01/cmd_vel`, `odom`, and `scan`. An empty list means the sim is not running. It does not mean you typed the command wrong.
+
+### Run a lab
+
+Open that lab's README and paste its block. Example after the PATH lines above, in the **same** window:
+
+**Windows:** `.\.venv\Scripts\Activate.ps1` then `scripts\run.cmd wh-01`  
+**macOS:** `source .venv/bin/activate` then `./scripts/run wh-01`
+
+If activate says `.venv` does not exist, do [MW-00](labs/mw/mw-00-getting-started/README.md) first.
+
+**Board labs (HW):** close the sim. Windows: double-click [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd) and leave it open. macOS: in a terminal, `cd YOUR_WORKSHOP_DIR` then `./scripts/start-bridge.sh`. Then open the HW lab README and paste its block in a **second** window.
 
 | OS | Helper |
 |----|--------|
@@ -50,8 +72,7 @@ Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe
 robotos topic list   # expect /robot/01/cmd_vel|odom|scan
 ```
 
-In a **VS Code** terminal you usually **skip** the `$env:PATH = …` line (settings
-already add it). Do **not** restart the sim every time you open a terminal.
+Do **not** skip `$env:PATH`. Do **not** restart the sim every time you open a terminal. A new terminal still needs `cd` and the PATH line.
 
 ### macOS quick smoke (manual)
 

@@ -4,6 +4,22 @@
 
 Publish actuator commands and see/hear the effect.
 
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
+
 ## Learning outcomes
 
 - Check HW-01 caps before LED demos  
@@ -13,7 +29,7 @@ Publish actuator commands and see/hear the effect.
 ## Prerequisites
 
 - HW-00 bridge with `--cmd-topic all`; HW-01 caps  
-- `ROBOTOS_CONNECT` + PATH + `.venv`  
+- Paste this page's command block (it sets PATH, `.venv`, and `ROBOTOS_CONNECT`)  
 - Ebook: [`ch04-board-on-graph.md`](../../../docs/ebook/chapters/ch04-board-on-graph.md) (command vs read)
 
 ## Topics (examples)
@@ -25,7 +41,7 @@ Publish actuator commands and see/hear the effect.
 
 ## Practice
 
-> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd hw-03 <starter>` (Windows) or `./scripts/run hw-03 <starter>` (macOS/Linux). Starters: `led_fx / wave_play`. List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd hw-03 <starter>` (Windows) or `./scripts/run hw-03 <starter>` (macOS/Linux). Starters: `led_fx / wave_play`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 
 **LED** (caps LED — often `es3c28p`; **no** on many `ws28p`):
@@ -33,34 +49,69 @@ Publish actuator commands and see/hear the effect.
 ### Windows (PowerShell)
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\hw\hw-03-command-actuators\starter\led_fx.py solid 0 40 0
 python labs\hw\hw-03-command-actuators\starter\led_fx.py blink 5 120 120 255 0 0
 python labs\hw\hw-03-command-actuators\starter\led_fx.py off
 ```
 
-### Linux / macOS (bash)
+### macOS Apple Silicon (zsh or bash)
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/hw/hw-03-command-actuators/starter/led_fx.py solid 0 40 0
 python labs/hw/hw-03-command-actuators/starter/led_fx.py blink 5 120 120 255 0 0
 python labs/hw/hw-03-command-actuators/starter/led_fx.py off
 ```
+
+### Linux (bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-03-command-actuators/starter/led_fx.py solid 0 40 0
+python labs/hw/hw-03-command-actuators/starter/led_fx.py blink 5 120 120 255 0 0
+python labs/hw/hw-03-command-actuators/starter/led_fx.py off
+```
+
 
 **Wave / tone** (both variants typically):
 
 ### Windows (PowerShell)
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\hw\hw-03-command-actuators\starter\wave_play.py --hz 440 --amp 0.4 --cycles 20
 python labs\hw\hw-03-command-actuators\starter\wave_play.py --off
 ```
 
-### Linux / macOS (bash)
+### macOS Apple Silicon (zsh or bash)
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/hw/hw-03-command-actuators/starter/wave_play.py --hz 440 --amp 0.4 --cycles 20
 python labs/hw/hw-03-command-actuators/starter/wave_play.py --off
 ```
+
+### Linux (bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-03-command-actuators/starter/wave_play.py --hz 440 --amp 0.4 --cycles 20
+python labs/hw/hw-03-command-actuators/starter/wave_play.py --off
+```
+
 
 ## Expected results
 

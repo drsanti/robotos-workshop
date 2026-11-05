@@ -66,7 +66,7 @@ sequenceDiagram
   D->>S: Twist vx=0.2 (every 50 ms)
   Note over S: Motion while commands fresh
   D->>S: Twist zero
-  Note over S: Or timeout 500 ms then stop
+  Note over S: Or timeout 500 ms -> stop
 ```
 
 ## 5–6. Hands-on

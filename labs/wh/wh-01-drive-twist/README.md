@@ -4,6 +4,22 @@
 
 Move the warehouse robot by publishing `/robot/01/cmd_vel` (`robotos.geometry.v1.Twist`).
 
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/README.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
+
 ## Learning outcomes
 
 - Publish Twist at a steady rate from Python  
@@ -12,7 +28,7 @@ Move the warehouse robot by publishing `/robot/01/cmd_vel` (`robotos.geometry.v1
 
 ## Prerequisites
 
-- [`SETUP.md`](../../../SETUP.md) (PATH + `.venv` in **this** PowerShell/terminal)  
+- [`SETUP.md`](../../../SETUP.md) (paste this page's command block in **this** window (it sets PATH and `.venv`))  
 - Lab WH-00; sim **External** + **Native** + **Connect**  
 - Ebook: [`ch02-twist-control.md`](../../../docs/ebook/chapters/ch02-twist-control.md)  
 - Short notes: [`docs/theory/02-twist-control.md`](../../../docs/theory/02-twist-control.md)
@@ -40,7 +56,7 @@ sequenceDiagram
 
 ## Run
 
-> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 
 Stay in the **workshop root** (the folder that contains `SETUP.md` and `labs\`).  
@@ -49,17 +65,33 @@ Do **not** `cd` into `starter\` for these commands.
 ### Windows (PowerShell)
 
 ```powershell
-# PATH + venv already set in this window (SETUP §2–3)
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\wh\wh-01-drive-twist\starter\drive_forward.py
 python labs\wh\wh-01-drive-twist\starter\drive_forward.py --wz 0.5 --vx 0 --seconds 2
 ```
 
-### Linux / macOS (bash)
+### macOS Apple Silicon (zsh or bash)
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/wh/wh-01-drive-twist/starter/drive_forward.py
 python labs/wh/wh-01-drive-twist/starter/drive_forward.py --wz 0.5 --vx 0 --seconds 2
 ```
+
+### Linux (bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+python labs/wh/wh-01-drive-twist/starter/drive_forward.py --wz 0.5 --vx 0 --seconds 2
+```
+
 
 Optional advanced CLI hex (skip if new to terminals): [starter/README.md](starter/README.md).
 
@@ -98,7 +130,7 @@ Your job is the publish loop and the CLI flags below.
 
 | Symptom | Fix |
 |---------|-----|
-| `python` / `robotos` not found | Re-run PATH + `Activate.ps1` in **this** window (SETUP) |
+| `python` / `robotos` not found | Paste this page's command block again in **this** window |
 | Script OK, robot still | UI still **Manual** → set **External**; confirm Connected |
 | Moves then freezes mid-run | Another window stole focus / you stopped publishing |
 | `ImportError` … `geometry_pb2` | Reinstall the pack wheel into `.venv` |

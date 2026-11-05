@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b74680cb.js"></script>
@@ -255,10 +255,10 @@ boards):</p>
   participant B as serial-bridge
   participant M as MCU
   participant P as caps_probe.py
-  B-&gt;&gt;B: ROBOTOS_LISTEN on port 7447
+  B-&gt;&gt;B: ROBOTOS_LISTEN :7447
   B-&gt;&gt;M: open USB / probe frames
   M-&gt;&gt;B: BoardInfo heartbeat
-  B-&gt;&gt;P: topic /robot/01/sys/board
+  B-&gt;&gt;P: /robot/01/sys/board
   P-&gt;&gt;P: print caps bits
 </code></pre>
 <h2 id="56-hands-on"><a class="header" href="#56-hands-on">5–6. Hands-on</a></h2>

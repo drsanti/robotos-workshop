@@ -4,10 +4,22 @@
 
 **Track:** `hw` · board labs via serial-bridge
 
-```text
+Close the sim first. Paste the whole block in the bridge window, then paste the lab block in a second window.
+
+**Windows (PowerShell)** — bridge window:
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 scripts\start-bridge.cmd
-scripts\run.cmd hw-01
-# Unix: ./scripts/start-bridge.sh && ./scripts/run hw-01
+```
+
+**macOS Apple Silicon** — bridge window:
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+./scripts/start-bridge.sh
 ```
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/hw/README.md</code></p>

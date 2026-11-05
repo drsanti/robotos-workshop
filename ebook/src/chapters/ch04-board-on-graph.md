@@ -75,10 +75,10 @@ sequenceDiagram
   participant B as serial-bridge
   participant M as MCU
   participant P as caps_probe.py
-  B->>B: ROBOTOS_LISTEN on port 7447
+  B->>B: ROBOTOS_LISTEN :7447
   B->>M: open USB / probe frames
   M->>B: BoardInfo heartbeat
-  B->>P: topic /robot/01/sys/board
+  B->>P: /robot/01/sys/board
   P->>P: print caps bits
 ```
 

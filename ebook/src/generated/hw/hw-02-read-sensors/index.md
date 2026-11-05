@@ -4,12 +4,36 @@
 
 **Track:** `hw` (Hardware) · **Lab:** `hw-02` · **Folder:** `hw-02-read-sensors`
 
-```text
-# from workshop root
+Paste the **whole** block for your computer. A new window does not keep PATH or `.venv`. `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`.
+
+**Windows (PowerShell)**
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd hw-02
-# Unix: ./scripts/run hw-02
-# prerequisite: scripts/start-bridge running; sim closed
 ```
+
+**macOS Apple Silicon (zsh or bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run hw-02
+```
+
+**Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run hw-02
+```
+
+Prerequisite: serial bridge running, warehouse sim closed.
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/hw/hw-02-read-sensors/README.md</code></p>
 
@@ -20,6 +44,22 @@ scripts\run.cmd hw-02
 
 Subscribe to live telemetry the MCU publishes (IMU and/or board status).
 
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
+
 ## Learning outcomes
 
 - Choose IMU vs board_watch based on **HW-01 caps**  
@@ -29,7 +69,7 @@ Subscribe to live telemetry the MCU publishes (IMU and/or board status).
 ## Prerequisites
 
 - HW-00 bridge up; HW-01 caps known (`IMU=0x04`, `BATT=0x10`, …)  
-- PATH + `.venv` + `ROBOTOS_CONNECT`  
+- Paste this page's command block (it sets PATH, `.venv`, and `ROBOTOS_CONNECT`)  
 - Ebook: [`ch04-board-on-graph.md`](../../../chapters/ch04-board-on-graph.md)
 
 ## Topics
@@ -53,7 +93,7 @@ flowchart LR
 
 ## Practice
 
-> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd hw-02 <starter>` (Windows) or `./scripts/run hw-02 <starter>` (macOS/Linux). Starters: `imu_watch / board_watch`. List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd hw-02 <starter>` (Windows) or `./scripts/run hw-02 <starter>` (macOS/Linux). Starters: `imu_watch / board_watch`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 
 ### IMU (needs IMU cap — often `ws28p`)
@@ -61,28 +101,60 @@ flowchart LR
 **Windows (PowerShell)**
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\hw\hw-02-read-sensors\starter\imu_watch.py 10
 ```
 
-**Linux / macOS (bash)**
+**macOS Apple Silicon (zsh or bash)**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/hw/hw-02-read-sensors/starter/imu_watch.py 10
 ```
+
+**Linux (bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-02-read-sensors/starter/imu_watch.py 10
+```
+
 
 ### Battery / Wi‑Fi / board info
 
 **Windows (PowerShell)**
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\hw\hw-02-read-sensors\starter\board_watch.py 15
 ```
 
-**Linux / macOS (bash)**
+**macOS Apple Silicon (zsh or bash)**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/hw/hw-02-read-sensors/starter/board_watch.py 15
 ```
+
+**Linux (bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/hw/hw-02-read-sensors/starter/board_watch.py 15
+```
+
 
 ## Expected output (IMU)
 

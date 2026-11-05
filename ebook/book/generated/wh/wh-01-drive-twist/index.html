@@ -36,7 +36,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "light";
-            window.path_to_searchindex_js = "../../../searchindex-b7decd78.js";
+            window.path_to_searchindex_js = "../../../searchindex-d82a6628.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-b74680cb.js"></script>
@@ -178,17 +178,40 @@
                         <h1 id="lab-wh-01--drive-by-twist"><a class="header" href="#lab-wh-01--drive-by-twist">Lab WH-01 — Drive by Twist</a></h1>
 <div class="ebook-run">
 <p><strong>Track:</strong> <code>wh</code> (Warehouse) · <strong>Lab:</strong> <code>wh-01</code> · <strong>Folder:</strong> <code>wh-01-drive-twist</code></p>
-<pre><code class="language-text"># from workshop root
+<p>Paste the <strong>whole</strong> block for your computer. A new window does not keep PATH or <code>.venv</code>. <code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>.</p>
+<p><strong>Windows (PowerShell)</strong></p>
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-01
-# Unix: ./scripts/run wh-01
-# prerequisite: warehouse sim running (scripts/start-here)
 </code></pre>
+<p><strong>macOS Apple Silicon (zsh or bash)</strong></p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-01
+</code></pre>
+<p><strong>Linux (bash)</strong> — only if <code>code/robotos-v0.3.0-linux-x64</code> is in your drop:</p>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-01
+</code></pre>
+<p>Prerequisite: warehouse sim running (<code>scripts/start-here</code>).</p>
 <p class="ebook-source"><strong>Source:</strong> <code>labs/wh/wh-01-drive-twist/README.md</code></p>
 
 </div>
 
 <h2 id="goal"><a class="header" href="#goal">Goal</a></h2>
 <p>Move the warehouse robot by publishing <code>/robot/01/cmd_vel</code> (<code>robotos.geometry.v1.Twist</code>).</p>
+<h2 id="this-window-forgets"><a class="header" href="#this-window-forgets">This window forgets</a></h2>
+<p><code>robotos</code> is not installed on the computer. The program is a file in <code>code/…/bin</code> inside the workshop folder. Lab <code>python</code> is the <code>.venv</code> in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.</p>
+<p>Every command block on this page begins with the lines for your computer. Paste the <strong>whole</strong> block. If you open another window, paste the whole block again.</p>
+<p><code>YOUR_WORKSHOP_DIR</code> is the folder that contains <code>SETUP.md</code>, <code>code/</code>, and <code>labs/</code>. If <code>dir</code> or <code>ls</code> does not show those names, you are in the wrong folder. If activate says <code>.venv</code> does not exist, do the Python SDK check in <a href="../../mw/mw-00-getting-started/index.html">MW-00</a> first, then come back and paste the block again.</p>
+<p>On Windows, if <code>Activate.ps1</code> is blocked, run this once and then paste the lab block again:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+</code></pre>
+<p>Use the Linux block only when <code>code/robotos-v0.3.0-linux-x64</code> is in your drop. This class drop is Windows and macOS.</p>
 <h2 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning outcomes</a></h2>
 <ul>
 <li>Publish Twist at a steady rate from Python</li>
@@ -197,7 +220,7 @@ scripts\run.cmd wh-01
 </ul>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <ul>
-<li><a href="../../../../SETUP.html"><code>SETUP.md</code></a> (PATH + <code>.venv</code> in <strong>this</strong> PowerShell/terminal)</li>
+<li><a href="../../../../SETUP.html"><code>SETUP.md</code></a> (paste this page’s command block in <strong>this</strong> window (it sets PATH and <code>.venv</code>))</li>
 <li>Lab WH-00; sim <strong>External</strong> + <strong>Native</strong> + <strong>Connect</strong></li>
 <li>Ebook: <a href="../../../chapters/ch02-twist-control.html"><code>ch02-twist-control.md</code></a></li>
 <li>Short notes: <a href="../../../docs/theory/02-twist-control.html"><code>docs/theory/02-twist-control.md</code></a></li>
@@ -219,16 +242,28 @@ scripts\run.cmd wh-01
 </code></pre>
 <h2 id="run"><a class="header" href="#run">Run</a></h2>
 <blockquote>
-<p><strong>Preferred runner</strong> (workshop root): <code>scripts\run.cmd &lt;lab-id&gt;</code> (Windows) or <code>./scripts/run &lt;lab-id&gt;</code> (macOS/Linux). List: <code>scripts\run.cmd list</code>. The <code>python labs/...</code> lines below still work.</p>
+<p><strong>Preferred runner</strong> (workshop root): <code>scripts\run.cmd &lt;lab-id&gt;</code> (Windows) or <code>./scripts/run &lt;lab-id&gt;</code> (macOS/Linux). List: <code>scripts\run.cmd list</code>. Paste the whole block below, including the first lines. A new window needs the whole block again.</p>
 </blockquote>
 <p>Stay in the <strong>workshop root</strong> (the folder that contains <code>SETUP.md</code> and <code>labs\</code>).<br>Do <strong>not</strong> <code>cd</code> into <code>starter\</code> for these commands.</p>
 <h3 id="windows-powershell"><a class="header" href="#windows-powershell">Windows (PowerShell)</a></h3>
-<pre><code class="language-powershell"># PATH + venv already set in this window (SETUP §2–3)
+<pre><code class="language-powershell">cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\wh\wh-01-drive-twist\starter\drive_forward.py
 python labs\wh\wh-01-drive-twist\starter\drive_forward.py --wz 0.5 --vx 0 --seconds 2
 </code></pre>
-<h3 id="linux--macos-bash"><a class="header" href="#linux--macos-bash">Linux / macOS (bash)</a></h3>
-<pre><code class="language-bash">python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+<h3 id="macos-apple-silicon-zsh-or-bash"><a class="header" href="#macos-apple-silicon-zsh-or-bash">macOS Apple Silicon (zsh or bash)</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+python labs/wh/wh-01-drive-twist/starter/drive_forward.py --wz 0.5 --vx 0 --seconds 2
+</code></pre>
+<h3 id="linux-bash"><a class="header" href="#linux-bash">Linux (bash)</a></h3>
+<pre><code class="language-bash">cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/wh/wh-01-drive-twist/starter/drive_forward.py
 python labs/wh/wh-01-drive-twist/starter/drive_forward.py --wz 0.5 --vx 0 --seconds 2
 </code></pre>
 <p>Optional advanced CLI hex (skip if new to terminals): <a href="starter/README.html">starter/README.md</a>.</p>
@@ -270,7 +305,7 @@ Your job is the publish loop and the CLI flags below.</p>
 <tr><th>Symptom</th><th>Fix</th></tr>
 </thead>
 <tbody>
-<tr><td><code>python</code> / <code>robotos</code> not found</td><td>Re-run PATH + <code>Activate.ps1</code> in <strong>this</strong> window (SETUP)</td></tr>
+<tr><td><code>python</code> / <code>robotos</code> not found</td><td>Paste this page’s command block again in <strong>this</strong> window</td></tr>
 <tr><td>Script OK, robot still</td><td>UI still <strong>Manual</strong> → set <strong>External</strong>; confirm Connected</td></tr>
 <tr><td>Moves then freezes mid-run</td><td>Another window stole focus / you stopped publishing</td></tr>
 <tr><td><code>ImportError</code> … <code>geometry_pb2</code></td><td>Reinstall the pack wheel into <code>.venv</code></td></tr>

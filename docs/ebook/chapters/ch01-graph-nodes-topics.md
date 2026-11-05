@@ -129,7 +129,7 @@ sequenceDiagram
   participant S as robotos_sim
   participant C as robotos topic echo
   Note over S: User clicked Connect Native+External
-  S->>T: announce pubs odom, scan; sub cmd_vel
+  S->>T: announce pubs odom, scan, sub cmd_vel
   D->>T: announce pub cmd_vel
   D->>T: Twist vx=0.2 @ 20 Hz
   T->>S: deliver Twist
@@ -146,8 +146,7 @@ sequenceDiagram
 Assumes Chapter 0 PATH + venv + sim connected (or `scripts\start-here.cmd` already done).
 
 ```powershell
-cd C:\robotos-workshop
-# VS Code terminal: skip PATH line — .vscode settings already add it
+cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
 .\.venv\Scripts\Activate.ps1
 
@@ -161,18 +160,30 @@ Watch the sim: the robot should move, then stop.
 
 ---
 
-## 6. Hands-on — Linux / macOS (bash)
+## 6. Hands-on — macOS Apple Silicon (zsh or bash)
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`. Paste the whole block.
 
 ```bash
-cd ~/robotos-workshop
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"   # or macos-arm64
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 source .venv/bin/activate
-
 robotos topic list
 robotos topic echo /robot/01/odom --count 3
 ./scripts/run wh-01
-# or: python labs/wh/wh-01-drive-twist/starter/drive_forward.py
+```
 
+## 6b. Hands-on — Linux (bash)
+
+Only if `code/robotos-v0.3.0-linux-x64` is in your drop.
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+robotos topic list
+robotos topic echo /robot/01/odom --count 3
+./scripts/run wh-01
 ```
 
 ---

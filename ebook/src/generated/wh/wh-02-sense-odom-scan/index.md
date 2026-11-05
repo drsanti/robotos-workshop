@@ -4,12 +4,36 @@
 
 **Track:** `wh` (Warehouse) · **Lab:** `wh-02` · **Folder:** `wh-02-sense-odom-scan`
 
-```text
-# from workshop root
+Paste the **whole** block for your computer. A new window does not keep PATH or `.venv`. `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`.
+
+**Windows (PowerShell)**
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-02
-# Unix: ./scripts/run wh-02
-# prerequisite: warehouse sim running (scripts/start-here)
 ```
+
+**macOS Apple Silicon (zsh or bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-02
+```
+
+**Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-02
+```
+
+Prerequisite: warehouse sim running (`scripts/start-here`).
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/wh/wh-02-sense-odom-scan/README.md</code></p>
 
@@ -19,6 +43,22 @@ scripts\run.cmd wh-02
 ## Goal
 
 Subscribe to pose and the three rangers while the robot moves.
+
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
 
 ## Learning outcomes
 
@@ -53,22 +93,38 @@ flowchart LR
 
 ## Run
 
-> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 
-Workshop root; PATH + `.venv` active. Open a **second** terminal to drive (WH-01) or use Manual briefly.
+Open a **second** window to drive (WH-01) or use Manual briefly. Paste this page's command block in that window too.
 
 ### Windows (PowerShell)
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\wh\wh-02-sense-odom-scan\starter\sense.py
 ```
 
-### Linux / macOS (bash)
+### macOS Apple Silicon (zsh or bash)
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/wh/wh-02-sense-odom-scan/starter/sense.py
 ```
+
+### Linux (bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/wh/wh-02-sense-odom-scan/starter/sense.py
+```
+
 
 ## Expected output
 
@@ -90,7 +146,7 @@ x=0.35 y=0.00 yaw=0.00  R=2.50 F=1.90 L=2.50
 |---------|-----|
 | `odom=?` / `scan=?` | Sim Connected; `topic list` shows pubs |
 | Numbers never change | Drive with WH-01 or Manual |
-| `robotos` / import errors | SETUP PATH + wheel |
+| `robotos` / import errors | Paste this page's command block again. If `.venv` is missing, do MW-00 |
 
 ## Done when
 

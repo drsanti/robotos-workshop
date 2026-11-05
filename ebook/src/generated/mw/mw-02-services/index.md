@@ -4,10 +4,33 @@
 
 **Track:** `mw` (Middleware) · **Lab:** `mw-02` · **Folder:** `mw-02-services`
 
-```text
-# from workshop root
+Paste the **whole** block for your computer. A new window does not keep PATH or `.venv`. `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`.
+
+**Windows (PowerShell)**
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd mw-02
-# Unix: ./scripts/run mw-02
+```
+
+**macOS Apple Silicon (zsh or bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-02
+```
+
+**Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run mw-02
 ```
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/mw/mw-02-services/README.md</code></p>
@@ -19,6 +42,22 @@ scripts\run.cmd mw-02
 
 Call a request/reply **service** (`/test/echo`) while a server is running.
 
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
+
 ## Learning outcomes
 
 - Contrast topic streams vs service RPC  
@@ -27,7 +66,7 @@ Call a request/reply **service** (`/test/echo`) while a server is running.
 
 ## Prerequisites
 
-- MW-01; PATH + `.venv` in **both** terminals  
+- MW-01; paste this page's command block in **both** windows  
 - Ebook: [`ch06-services.md`](../../../chapters/ch06-services.md)  
 - Theory: [`docs/theory/08-services.md`](../../../docs/theory/08-services.md)
 
@@ -42,7 +81,7 @@ flowchart LR
 
 ## Practice
 
-> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd mw-02 <starter>` (Windows) or `./scripts/run mw-02 <starter>` (macOS/Linux). Starters: `echo_server / client`. List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+> **Preferred runner** (workshop root): this lab has multiple starters — `scripts\run.cmd mw-02 <starter>` (Windows) or `./scripts/run mw-02 <starter>` (macOS/Linux). Starters: `echo_server / client`. List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 
 ### Terminal A — server
@@ -50,30 +89,63 @@ flowchart LR
 **Windows (PowerShell)**
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\mw\mw-02-services\starter\echo_server.py
 ```
 
-**Linux / macOS (bash)**
+**macOS Apple Silicon (zsh or bash)**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/mw/mw-02-services/starter/echo_server.py
 ```
+
+**Linux (bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-02-services/starter/echo_server.py
+```
+
 
 ### Terminal B — client
 
 **Windows (PowerShell)**
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\mw\mw-02-services\starter\client.py
 robotos service list
 ```
 
-**Linux / macOS (bash)**
+**macOS Apple Silicon (zsh or bash)**
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/mw/mw-02-services/starter/client.py
 robotos service list
 ```
+
+**Linux (bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/mw/mw-02-services/starter/client.py
+robotos service list
+```
+
 
 Optional: `robotos service call` (CLI help). Client retries while the server starts — expected.
 
@@ -94,7 +166,7 @@ reply: 'hello robotos' (seq 1)
 |---------|-----|
 | `no responder` | Start A first; same workshop root / env |
 | ImportError `echo_pb2` | Reinstall pack wheel into `.venv` |
-| command not found | PATH + activate `.venv` |
+| command not found | Paste this page's command block again in this window |
 
 ## Done when
 

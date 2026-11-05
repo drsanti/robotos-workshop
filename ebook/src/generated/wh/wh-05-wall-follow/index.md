@@ -4,12 +4,36 @@
 
 **Track:** `wh` (Warehouse) · **Lab:** `wh-05` · **Folder:** `wh-05-wall-follow`
 
-```text
-# from workshop root
+Paste the **whole** block for your computer. A new window does not keep PATH or `.venv`. `YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`.
+
+**Windows (PowerShell)**
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 scripts\run.cmd wh-05
-# Unix: ./scripts/run wh-05
-# prerequisite: warehouse sim running (scripts/start-here)
 ```
+
+**macOS Apple Silicon (zsh or bash)**
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-05
+```
+
+**Linux (bash)** — only if `code/robotos-v0.3.0-linux-x64` is in your drop:
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+./scripts/run wh-05
+```
+
+Prerequisite: warehouse sim running (`scripts/start-here`).
 
 <p class="ebook-source"><strong>Source:</strong> <code>labs/wh/wh-05-wall-follow/README.md</code></p>
 
@@ -19,6 +43,22 @@ scripts\run.cmd wh-05
 ## Goal
 
 Follow a wall using the three rangers (default: **right** wall).
+
+## This window forgets
+
+`robotos` is not installed on the computer. The program is a file in `code/…/bin` inside the workshop folder. Lab `python` is the `.venv` in that same folder. A new Terminal, PowerShell, Cursor, or VS Code window starts blank and does not remember them.
+
+Every command block on this page begins with the lines for your computer. Paste the **whole** block. If you open another window, paste the whole block again.
+
+`YOUR_WORKSHOP_DIR` is the folder that contains `SETUP.md`, `code/`, and `labs/`. If `dir` or `ls` does not show those names, you are in the wrong folder. If activate says `.venv` does not exist, do the Python SDK check in [MW-00](../../mw/mw-00-getting-started/index.md) first, then come back and paste the block again.
+
+On Windows, if `Activate.ps1` is blocked, run this once and then paste the lab block again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Use the Linux block only when `code/robotos-v0.3.0-linux-x64` is in your drop. This class drop is Windows and macOS.
 
 ## Learning outcomes
 
@@ -57,28 +97,54 @@ Too far from wall → forward + turn **toward** wall.
 Too close → turn **away**.  
 Front blocked → hard turn / spin away from wall side.
 
-Start near a rack aisle (Reset leaves you in open floor at ~2 m, 2 m — drive
-toward a brown shelf first, or the side ranger stays at max range and steering
-saturates into a circle).
+**Setup:** Sim **Reset** should seat you in the aisle west of the first rack
+(right ranger ~0.7 m, heading up the aisle). Use **External**, then run the
+default **right** wall command. Status prints `follow` when locked; `seek-no-wall`
+means that side is free — if it notes “wall on the OTHER side”, flip `--side`
+or Manual-reseat.
+
+```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
+python labs\wh\wh-05-wall-follow\starter\wall_follow.py --target 0.7 --k 1.0
+```
 
 ## Run
 
-> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. The `python labs/...` lines below still work.
+> **Preferred runner** (workshop root): `scripts\run.cmd <lab-id>` (Windows) or `./scripts/run <lab-id>` (macOS/Linux). List: `scripts\run.cmd list`. Paste the whole block below, including the first lines. A new window needs the whole block again.
 
 
 ### Windows (PowerShell)
 
 ```powershell
+cd YOUR_WORKSHOP_DIR
+$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+.\.venv\Scripts\Activate.ps1
 python labs\wh\wh-05-wall-follow\starter\wall_follow.py
 python labs\wh\wh-05-wall-follow\starter\wall_follow.py --side left --target 0.7 --k 1.0
 ```
 
-### Linux / macOS (bash)
+### macOS Apple Silicon (zsh or bash)
 
 ```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+source .venv/bin/activate
 python labs/wh/wh-05-wall-follow/starter/wall_follow.py
 python labs/wh/wh-05-wall-follow/starter/wall_follow.py --side left --target 0.7 --k 0.8
 ```
+
+### Linux (bash)
+
+```bash
+cd YOUR_WORKSHOP_DIR
+export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+source .venv/bin/activate
+python labs/wh/wh-05-wall-follow/starter/wall_follow.py
+python labs/wh/wh-05-wall-follow/starter/wall_follow.py --side left --target 0.7 --k 0.8
+```
+
 
 ## Expected behavior
 
@@ -88,9 +154,12 @@ Lap a shelf aisle ≥60 s without tunneling or spinning forever.
 
 | Symptom | Fix |
 |---------|-----|
+| Spins / circles in open | Drive to a rack aisle first; watch for `seek-no-wall` in the status line |
+| Status shows side ≈ 3.0 | No wall on that side — wrong `--side` or still in open floor |
 | Oscillates | Lower `--k` |
 | Leaves wall | Raise `--k` / check `--side` |
 | Hits corners | `--front-stop` too small |
+| `front-avoid` forever | Point down the aisle, not into the rack |
 
 ## Done when
 
