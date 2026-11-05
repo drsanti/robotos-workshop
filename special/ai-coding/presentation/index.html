@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>robotos · AI Coding Assistance</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="data.js"></script>
+  <script defer src="diagrams.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="toolbar">
+    <a class="brand" href="#opening"><span class="brand-mark">r/</span> robotos <span class="quiet">AI coding</span></a>
+    <nav aria-label="Filter tracks" class="tracks">
+      <button data-track="all" aria-pressed="true">All <small>30</small></button>
+      <button data-track="intro" aria-pressed="false">Start <small>2</small></button>
+      <button data-track="a" aria-pressed="false">A <small>6</small></button>
+      <button data-track="b" aria-pressed="false">B <small>8</small></button>
+      <button data-track="c" aria-pressed="false">C <small>6</small></button>
+      <button data-track="d" aria-pressed="false">D <small>8</small></button>
+    </nav>
+    <div class="tools"><button id="outline-toggle" aria-expanded="false" aria-controls="outline">Topics</button><button id="notes-toggle" aria-expanded="false" aria-controls="notes">Notes <kbd>N</kbd></button><button id="fullscreen" title="Toggle fullscreen (F)">Present <kbd>F</kbd></button></div>
+  </header>
+  <aside id="outline" class="outline" hidden>
+    <label for="search">Find a lab</label><input id="search" type="search" placeholder="Topic, lab ID or concept…" autocomplete="off">
+    <nav id="lab-list" aria-label="Theory and practice slides"></nav>
+  </aside>
+  <main id="main">
+    <div id="slide-host"></div>
+    <footer class="navigation">
+      <span id="track-name" class="quiet"></span>
+      <div class="page-nav"><button id="previous" aria-label="Previous slide">←</button><span id="position" role="status" aria-live="polite"></span><button id="next" aria-label="Next slide">→</button></div>
+      <div><button id="export-svg">Export diagram SVG</button><button id="print">Print deck</button></div>
+    </footer>
+    <p class="shortcuts">← → navigate <span>·</span> Home / End <span>·</span> N notes <span>·</span> F fullscreen <span>·</span> Esc close</p>
+    <section id="student-reading" class="student-reading" aria-label="Student reading and worked example"></section>
+  </main>
+  <aside id="notes" class="notes" hidden aria-label="Presenter notes"><div class="notes-top"><h2>Presenter notes</h2><button id="notes-close" aria-label="Close presenter notes">×</button></div><div id="notes-body"></div></aside>
+  <noscript>This offline presentation requires JavaScript. The lab source documents remain available in the parent MW, WH and HW folders.</noscript>
+</body>
+</html>

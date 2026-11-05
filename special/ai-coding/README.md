@@ -8,6 +8,8 @@ is wrong, whatever the AI says.
 **Status:** special workshop, separate from the main MW / WH / HW tracks.
 Lab ids are `ai-00` … `ai-13`. They are **not** listed by `scripts/run list`.
 
+Browser presentation: [HTML + SVG slides](presentation/index.html) · [presentation guide](presentation/README.md). Covers the opening, setup and all 14 theory/practice pairs.
+
 ## Prerequisites
 
 - Main tracks: **MW-00, MW-01, WH-00, WH-01, WH-02** done. You must already

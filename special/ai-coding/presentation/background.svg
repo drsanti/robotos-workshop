@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs><radialGradient id="light"><stop stop-color="#55477d"/><stop offset="1" stop-color="#10101b"/></radialGradient><filter id="blur"><feGaussianBlur stdDeviation="12"/></filter></defs>
+  <rect width="1600" height="900" fill="url(#light)"/>
+  <g filter="url(#blur)" opacity=".45" stroke="#8676b0" stroke-width="4" fill="#151728">
+    <rect x="80" y="80" width="320" height="650" rx="15"/><rect x="1240" y="30" width="260" height="710" rx="15"/>
+    <path d="M100 190H380M100 290H380M100 390H380M100 490H380M1260 150H1480M1260 250H1480M1260 350H1480M1260 450H1480M1260 550H1480"/>
+    <rect x="560" y="380" width="530" height="310" rx="18"/><path d="M510 710H1140L1200 760H450Z"/>
+  </g>
+  <g filter="url(#blur)" fill="#d2e589" opacity=".45"><circle cx="345" cy="155" r="10"/><circle cx="345" cy="260" r="10"/><circle cx="1450" cy="120" r="9"/><circle cx="1450" cy="220" r="9"/></g>
+</svg>

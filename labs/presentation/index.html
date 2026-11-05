@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>robotos · Lab presentations</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="data.js"></script>
+  <script defer src="diagrams.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="toolbar">
+    <a class="brand" href="#mw-00-getting-started"><span class="brand-mark">r/</span> robotos <span class="quiet">workshop</span></a>
+    <nav aria-label="Filter tracks" class="tracks">
+      <button data-track="all" aria-pressed="true">All <small>24</small></button>
+      <button data-track="mw" aria-pressed="false">MW <small>7</small></button>
+      <button data-track="wh" aria-pressed="false">WH <small>9</small></button>
+      <button data-track="hw" aria-pressed="false">HW <small>8</small></button>
+    </nav>
+    <div class="tools"><button id="read">Read</button><button id="outline-toggle" aria-expanded="false" aria-controls="outline">Labs</button><button id="notes-toggle" aria-expanded="false" aria-controls="notes">Notes <kbd>N</kbd></button><button id="fullscreen" title="Toggle fullscreen (F)">Present <kbd>F</kbd></button></div>
+  </header>
+  <aside id="outline" class="outline" hidden>
+    <label for="search">Find a lab</label><input id="search" type="search" placeholder="Title, ID or topic…" autocomplete="off">
+    <nav id="lab-list" aria-label="Lab slides"></nav>
+  </aside>
+  <main id="main">
+    <div id="slide-host"></div>
+    <footer class="navigation">
+      <span id="track-name" class="quiet"></span>
+      <div class="page-nav"><button id="previous" aria-label="Previous slide">←</button><span id="position" role="status" aria-live="polite"></span><button id="next" aria-label="Next slide">→</button></div>
+      <div><button id="export-svg">Export diagram SVG</button><button id="print">Print deck</button></div>
+    </footer>
+    <p class="shortcuts">← → navigate <span>·</span> Home / End <span>·</span> N notes <span>·</span> F fullscreen <span>·</span> Esc close</p>
+    <section id="student-reading" class="student-reading" aria-label="Student reading, practice and procedure"></section>
+  </main>
+  <aside id="notes" class="notes" hidden aria-label="Presenter notes"><div class="notes-top"><h2>Presenter notes</h2><button id="notes-close" aria-label="Close presenter notes">×</button></div><div id="notes-body"></div></aside>
+  <noscript>This offline presentation requires JavaScript. The lab source documents remain available in the parent MW, WH and HW folders.</noscript>
+</body>
+</html>

@@ -1,0 +1,148 @@
+"""Student-facing copy. Source procedures and full SVGs remain linked separately."""
+# explanations, worked example, three practice steps, four compact workflow labels
+READING = {
+ 'mw-00': (
+  ['The robotos CLI and Python SDK are separate tools. A working executable proves the shell can find the CLI; a successful import checks the selected Python environment.',
+   'Discovery lists peers and topics visible in the current environment. Before another participant runs, an empty list can be normal. It does not establish either an installation failure or a working message exchange.'],
+  'Run robotos version and the venv SDK import separately. Then inspect node and topic lists. Describe the deliberately quiet graph instead of inventing a missing publisher.',
+  ['Start in the workshop root with pack PATH and venv ready.', 'Run the CLI, doctor and discovery checks.', 'Verify the SDK import and explain the empty or populated graph.'],
+  ['CLI version','SDK import','Environment check','Discovery']),
+ 'mw-01': (
+  ['A publisher sends typed messages on a topic. Subscribers receive that stream independently when the topic and message contract are compatible.',
+   'Here sim_sensor produces synthetic Imu data on the laptop. The Python monitor and CLI echo both subscribe directly; the CLI is not a relay to the monitor.'],
+  'acceleration.z stays at 9.81 while angular_velocity.x varies. These values are generated, not measured by a board. The monitor argument 5 means five seconds, not five messages.',
+  ['Start sim_sensor in Terminal A and leave it running.', 'List the topic, echo five messages and run the monitor in B.', 'Compare the two receiving paths, then stop the publisher.'],
+  ['Synthetic publisher','Typed topic','Independent receivers','Decoded fields']),
+ 'mw-02': (
+  ['A service is a named request/reply interaction. The client sends an EchoRequest; the provider returns the corresponding EchoResponse.',
+   'The server copies the text and sequence into the reply. A client may find the provider unavailable and retry, so a normal process exit alone does not prove a reply arrived.'],
+  'For /test/echo, the expected reply contains hello robotos and sequence 1. Check that returned content rather than treating a service listing as proof of a completed call.',
+  ['Start echo_server in A before running the client.', 'Call /test/echo from B in the same peer environment.', 'Inspect the paired response and stop the provider when finished.'],
+  ['Named provider','EchoRequest','EchoResponse','Verify reply']),
+ 'mw-03': (
+  ['An action represents work that progresses over time. The client first learns whether the goal was accepted, then may receive intermediate feedback and finally a terminal result.',
+   'The starter sends step i/5 feedback before returning cycle complete. Goal and feedback use EchoRequest; the result uses EchoResponse. The default client does not request cancellation.'],
+  'A step 3/5 update reports progress. It does not say the cycle finished. Confirm the terminal result for the accepted goal and keep acceptance, progress and completion distinct.',
+  ['Start the cycle action server, then the client.', 'Identify goal ID, feedback and terminal result in the output.', 'Report cancellation as supported by the server, not exercised by this client.'],
+  ['Send goal','Accepted ID','Feedback','Terminal result']),
+ 'mw-04': (
+  ['A parameter is a named configuration value owned by a running node. tuning_node declares setpoint=42 and mode=auto, permits remote writes and rereads the values in its print loop.',
+   'Changing a parameter affects live RAM configuration. Restarting this starter declares its defaults again. Lifecycle help is a separate interface-discovery step, not a state transition performed by this exercise.'],
+  'Set setpoint to 99, get it again and wait for the next two-second node print. mode should remain auto. Keep this observation separate from persistent board settings.',
+  ['Start tuning_node in A and inspect its defaults.', 'Set and get setpoint from B; compare the next node print.', 'Inspect lifecycle help, then stop the running node.'],
+  ['Read defaults','Remote set','Get + periodic print','Separate lifecycle help']),
+ 'mw-05': (
+  ['A recorder saves messages it actually receives from selected topics. Creating a file is only the first step; inspecting its topics and counts establishes whether messages were captured.',
+   'This lab reuses the MW-01 publisher and its exact Imu topic. Replay is a separate, pack-dependent path. Stop the live publisher before comparing replayed messages on an isolated graph.'],
+  'Inspect imu_run.rbag with bag info and confirm /machine/01/sensor/imu has a non-zero count. If the pack lacks a usable replay command, document that limitation rather than inventing syntax.',
+  ['Start the MW-01 publisher and record the exact topic.', 'Stop the recorder before inspecting the saved file.', 'Use CLI help for replay, or document the pack limitation.'],
+  ['Live topic','Record messages','Inspect bag','Optional replay']),
+ 'mw-06': (
+  ['The plant process owns the simulated machine state. The twin mirrors received state and sends commands back through a separate topic.',
+   'This is a toy contract: acceleration.x stores speed and frame_id carries START or STOP. Reusing an Imu message teaches the interaction pattern; it does not make those fields physically measured IMU quantities.'],
+  'The twin watches for 5 s, sends START, watches 8 s, sends STOP and watches 6 s. Speed should rise toward 1 and then fall toward 0; the plant keeps running after the twin returns.',
+  ['Start machine.py in A and leave it running.', 'Run twin.py in B and watch START/STOP and mirrored speed.', 'Observe the response, then stop the plant process.'],
+  ['Plant owns state','Twin mirrors state','Twin sends command','Plant responds']),
+ 'wh-00': (
+  ['The Native warehouse simulator participates in the robotos graph. It produces odometry and scan messages that a CLI observer can decode.',
+   'Discovery announces topic contracts; decoding an actual message is stronger evidence of reception. Mock animation alone does not show that the learner joined the graph. WH-00 inspects the graph without publishing motion commands.'],
+  'Echo /robot/01/odom with --count 5 and inspect the decoded pose. /robot/01/cmd_vel is the future command route; script-driven motion begins in WH-01.',
+  ['Start one Native sim and confirm Connected; stop the serial bridge.', 'List topics and echo five odometry messages.', 'Release any Manual input and leave ownership on External.'],
+  ['Native connection','Discover topics','Decode odometry','External for next lab']),
+ 'wh-01': (
+  ['Twist commands request forward speed and yaw rate. The simulator needs a continuing stream while External ownership allows the script to control motion.',
+   'The starter requests 20 Hz publication, about one command every 50 ms. Normal completion sends zero; interruption may skip that line, so stale-command timeout and observed stopping remain separate checks.'],
+  'At 0.2 m/s for roughly 5 s, ideal clear-space travel is about 1 m. A yaw-only run uses vx=0; positive yaw means a counterclockwise left turn.',
+  ['Confirm Native + Connected + External and one motion publisher.', 'Run forward motion, then a separate yaw-only case.', 'Observe actual motion and verify stopping after each run.'],
+  ['Fresh Twist stream','External ownership','Observe motion','Verify stop']),
+ 'wh-02': (
+  ['Odometry describes local pose: x, y and yaw. LaserScan describes obstacle ranges in robot-relative directions, so the two messages answer different questions about the scene.',
+   'The workshop scan has exactly three entries: index 0 is right, index 1 is front and index 2 is left. sense.py caches messages and prints about 5 Hz; that print interval is not the graph publication rate.'],
+  'When approaching a shelf directly ahead, ranges[1] should shorten. Turning changes which obstacle is forward even if the local odometry origin does not change.',
+  ['Run sense.py while the Native graph is connected.', 'Identify x/y/yaw and the right/front/left order.', 'Observe stationary and controlled motion cases; compare changes.'],
+  ['Odometry: local pose','Scan: three ranges','Observer cache','Read printed values']),
+ 'wh-03': (
+  ['Front avoidance is a local feedback controller. It reads front clearance and uses a threshold to choose either forward motion or a turn toward the clearer side.',
+   'This controller has no goal location or route planner. It repeatedly reacts to scan data. The starter has no scan-freshness guard, so verify live reception before judging behavior.'],
+  'When front < 0.6 m, turn in place: left ≥ right selects positive yaw; otherwise select negative yaw. When clear, the starter requests slow forward motion.',
+  ['Check live scan and External control before running.', 'Run the avoidance loop and observe clear and blocked cases.', 'Use Ctrl-C and confirm the robot actually stops.'],
+  ['Read scan','Threshold decision','Publish Twist','Observe updated scan']),
+ 'wh-04': (
+  ['A timed square computes forward and turn durations from commanded speeds. Motion remains open loop when odometry is only read to report the start and end poses.',
+   'Four drive/90-degree-turn pairs ideally close the path, but timing, clamps and simulation steps can affect the result. Compare actual coordinates; do not invent a non-zero error when rounding produces zero.'],
+  'Use t_drive=side/v and t_turn=(π/2)/ω for positive in-contract speeds. Compute closure distance from the actual differences in x and y, and compare final yaw separately.',
+  ['Choose side length and valid positive drive/turn speeds.', 'Run the finite four-leg square and retain start/end output.', 'Compute closure from actual odometry and explain open-loop timing.'],
+  ['Compute durations','Four drive/turn pairs','Read start/end pose','Compare closure']),
+ 'wh-05': (
+  ['Wall following adjusts yaw from the difference between target distance and the side range. The selected wall side determines the steering sign; front clearance has higher priority than following.',
+   'Start in an actual shelf aisle. A missing side wall can produce seek-no-wall behavior rather than stable following. Judge a continuous run and the status/ranges, not one attractive frame.'],
+  'Right-wall example: target 0.7 m minus side 0.4 m gives +0.3 m error and positive yaw, turning left away from the wall. The front-stop threshold defaults to 0.55 m.',
+  ['Reset into an aisle and select the correct wall side.', 'Run the controller; tune gain carefully while watching status and ranges.', 'Assess at least 60 s, including corners and clean stopping.'],
+  ['Choose wall side','Read distance error','Steer + front priority','Observe sustained follow']),
+ 'wh-06': (
+  ['A finite-state machine makes control decisions explicit. The shipped states are CRUISE, AVOID and RECOVER, with transition output when the selected state changes.',
+   'Conditions are prioritized: all three ranges below 0.45 m select RECOVER; otherwise front below 0.6 m selects AVOID; otherwise CRUISE. Recovery spin is an attempt, not proof that the robot escaped.'],
+  'A RECOVER log means a tight-space condition selected that state. Look for increasing clearance and a later transition as well as the visible behavior. FOLLOW is only an optional extension.',
+  ['Read the three states and their priority conditions.', 'Run for 90 s and retain transition lines with range values.', 'Explain transitions and report any permanent spin or stuck behavior.'],
+  ['Latest ranges','Priority conditions','Named state','Transition + behavior']),
+ 'wh-07': (
+  ['A bag provides saved message evidence from a selected interval. To study a moving behavior, the recording must overlap the behavior and include relevant pose and sensor streams.',
+   'The behavior publishes commands to the sim; the sim produces odometry and scan for the recorder. Stop the recorder before inspecting the file. State logs and visible behavior provide additional evidence beyond counts.'],
+  'Record /robot/01/odom and /robot/01/scan to run1.rbag while a controller runs. bag info should list the selected topics and received messages; counts alone do not prove collision-free control.',
+  ['Start one existing behavior in A with a connected Native sim.', 'Record odom and scan in B during 20–30 s of motion.', 'Stop recording, inspect the bag and retain the interval and behavior log.'],
+  ['Run behavior','Record during motion','Stop recorder','Inspect saved topics']),
+ 'wh-08': (
+  ['The capstone applies the warehouse skills to one selected challenge. Choose patrol, clear aisle or the instructor-defined region and use that track’s actual completion criteria.',
+   'The scored run uses External ownership and a connected Native graph. Keep one reset before scoring separate from the run itself, and retain the executed script plus evidence of the behavior.'],
+  'Submit the actual script, log-or-bag evidence and a three-sentence failure/tuning note. Record a specific failure when the track bar is not met rather than changing the criteria afterward.',
+  ['Agree on a track and rehearse its criteria.', 'Use one pre-score reset, then run External + Native.', 'Save the executed script, evidence and the failure/tuning note.'],
+  ['Choose track','Rehearse + reset','Scored run','Submit evidence']),
+ 'hw-00': (
+  ['The preflashed board sends messages through USB/UART to a host serial bridge. The bridge listens on TCP; CLI and lab processes connect to it.',
+   'Two terminals have different roles: A keeps the bridge running, while B inspects the graph. Close the warehouse sim first to avoid the shared port conflict. WH simulation and board transport are separate class setups.'],
+  'Bridge A listens at tcp/0.0.0.0:7447. CLI B connects to tcp/127.0.0.1:7447 and echoes /robot/01/sys/board. Decoded BoardInfo confirms reception through the bridge.',
+  ['Connect the preflashed board and start the bridge in A.', 'Set the CLI connect environment explicitly in B.', 'Discover traffic and decode BoardInfo; keep A open for HW-01.'],
+  ['Board USB','Bridge listens','CLI connects','Decode BoardInfo']),
+ 'hw-01': (
+  ['BoardInfo includes a capability bitmask describing which peripherals the firmware exposes. Test the actual bits before selecting a sensor or actuator demo.',
+   'Board names provide examples, not a substitute for probing. Typical es3c28p and ws28p boards have different LED and IMU capabilities, so a demo that works at one station may not be valid at another.'],
+  'caps & 0x04 being non-zero indicates IMU support. The six bits are LED 0x01, MIC 0x02, IMU 0x04, RTC 0x08, BATT 0x10 and BTN 0x20.',
+  ['Keep the bridge running and run the capability probe.', 'Record the received model, firmware and yes/no bits.', 'Choose later demos from this actual result.'],
+  ['Receive BoardInfo','Decode caps','Record actual bits','Choose supported lab']),
+ 'hw-02': (
+  ['Telemetry subscriptions must match what the board actually publishes. Use imu_watch when the IMU capability is present, or board_watch for board/status messages available on the station.',
+   'Receiving data and observing a physical change are separate checks. IMU samples should respond to movement; battery or Wi-Fi fields need not change merely because a watcher runs.'],
+  'A board without the IMU bit may time out on /robot/01/sensor/imu even while /robot/01/sys/board works. Check capability and the specific stream before diagnosing transport.',
+  ['Use the HW-01 result to select a watcher.', 'Receive and identify at least one real topic and schema.', 'On IMU hardware, move the board gently and compare samples.'],
+  ['Probe capability','Choose live stream','Run watcher','Relate data to input']),
+ 'hw-03': (
+  ['An actuator command travels from the host through the bridge to board firmware. The bridge must forward commands, and the selected output must exist and be supported on that station.',
+   'A program printing sent establishes host-side publication, not a visible or audible effect. Verify the physical response and the off command separately. LED and verified wave-output demos are different branches.'],
+  'On an LED-capable board, test a color or blink and then off. If using wave output, first verify wiring/routing and finish with --off. Do not expect a local RGB LED on an IMU-only ws28p.',
+  ['Check capabilities and bridge command forwarding.', 'Run one supported actuator branch and observe its effect.', 'Send the clean off command and verify the output stops.'],
+  ['Host command','Bridge forwarding','Supported effector','Observed effect + OFF']),
+ 'hw-04': (
+  ['Board parameters are firmware-defined names and values. List them first, read the original value and choose a reversible change supported by the station.',
+   'A successful set needs a meaningful reply/result code and a subsequent get showing the new value. Restore the original and verify it again. Persistence is an optional firmware-dependent extension.'],
+  'Use /robot/01/param/cmd for ParamCmd and /robot/01/param/event for ParamEvent. Replace placeholders with actual listed names; do not invent a universal parameter name.',
+  ['List/get and save the original value.', 'Set a temporary value; check the reply and get it again.', 'Restore the original, verify it, and keep persist separate.'],
+  ['List + save original','Set temporary','Reply + get','Restore + re-read']),
+ 'hw-05': (
+  ['Touch and UI interactions arrive as events on topics. The host watcher reacts to decoded messages instead of polling a board GPIO directly.',
+   'Actual stream availability depends on firmware and the board. A BTN capability alone does not promise every touch/UI stream. Quiet output is meaningful only when a supported interaction occurred during the watch interval.'],
+  'The starter maps event 0 to UP, 1 to DOWN and 2 to MOVE. Match host lines to physical press/release or drag actions; do not require both touch and UI messages if only one stream is exposed.',
+  ['Check which input streams the station exposes.', 'Run touch_watch and perform a supported interaction.', 'Match each host line to the action, then stop the watcher.'],
+  ['Physical input','Firmware event','Bridge transport','Matching host line']),
+ 'hw-06': (
+  ['Recording a board uses the same message-evidence workflow as a simulator, but topic selection follows the actual board’s capabilities and live publishers.',
+   'Use BoardInfo as the baseline instead of requiring an IMU at every station. Keep board identity, capabilities and the recording interval with the saved file so someone else can interpret it.'],
+  'Record /robot/01/sys/board to board_run.rbag and inspect it after the recorder exits. Add /robot/01/sensor/imu only when capability and real received samples have already been confirmed.',
+  ['Confirm a supported board topic is live through the bridge.', 'Record about 20 s, then stop the recorder.', 'Inspect topics and non-zero counts; retain identity and interval.'],
+  ['Verified board topic','Record live messages','Stop recorder','Inspect bag']),
+ 'hw-07': (
+  ['The starter estimates tilt from the acceleration vector relative to +Z and compares it with 25 degrees. It logs TILT or LEVEL only when the tilted state changes.',
+   'The program also publishes LedFx without automatically probing capability. Console state is valid on IMU-only hardware; physical LED response requires LED support. A LED-only input adaptation is not implemented by the unchanged starter.'],
+  'With +Z approximately up, tilt past the threshold and then return level. An inverted mounting can show a large angle at rest. This is a threshold response, not a calibrated orientation filter.',
+  ['Probe caps and confirm a live IMU stream.', 'Run the starter and cross the threshold in both directions.', 'Observe console/valid LED output; stop and verify OFF where supported.'],
+  ['Live acceleration','Tilt threshold','Changed state','Capability-dependent output']),
+}
