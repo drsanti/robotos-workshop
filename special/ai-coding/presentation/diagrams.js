@@ -2,11 +2,12 @@
 (() => {
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   let serial=0,marker;
-  const wrap=(s,max=30)=>{const words=s.split(' '),lines=[];let line='';for(const w of words){if((line+' '+w).trim().length>max&&line){lines.push(line);line=w;}else line=(line+' '+w).trim();}if(line)lines.push(line);return lines;};
-  const text=(x,y,lines,size=20,color='var(--text)',anchor='middle')=>`<text x="${x}" y="${y}" fill="${color}" font-family="Inter,Segoe UI,sans-serif" font-size="${size}" text-anchor="${anchor}">${[].concat(lines).map((l,i)=>`<tspan x="${x}" dy="${i?25:0}">${esc(l)}</tspan>`).join('')}</text>`;
+  const tr=s=>window.labPhrase?window.labPhrase(s):s;
+  const wrap=(s,max=30)=>{const words=String(tr(s)).split(' '),lines=[];let line='';for(const w of words){if((line+' '+w).trim().length>max&&line){lines.push(line);line=w;}else line=(line+' '+w).trim();}if(line)lines.push(line);return lines;};
+  const text=(x,y,lines,size=20,color='var(--text)',anchor='middle')=>`<text x="${x}" y="${y}" fill="${color}" font-family="Leelawadee UI,Thonburi,Tahoma,Inter,Segoe UI,sans-serif" font-size="${size}" text-anchor="${anchor}">${[].concat(lines).map((l,i)=>`<tspan x="${x}" dy="${i?25:0}">${esc(tr(l))}</tspan>`).join('')}</text>`;
   const box=(x,y,w,h,title,detail,accent=false)=>`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="14" fill="var(--panel)" stroke="${accent?'var(--accent)':'var(--flow)'}" stroke-width="1.8"/>${text(x+w/2,y+38,title,22,accent?'var(--accent)':'var(--text)')}${text(x+w/2,y+74,wrap(detail,Math.floor(w/9)),18,'var(--muted)')}</g>`;
   const arrow=(x1,y1,x2,y2,accent=false,dashed=false)=>`<path d="M${x1} ${y1} L${x2} ${y2}" fill="none" stroke="${accent?'var(--accent)':'var(--flow)'}" stroke-width="2.5" ${dashed?'stroke-dasharray="8 7"':''} marker-end="url(#${marker}${accent?'a':'f'})"/>`;
-  const note=s=>text(640,322,wrap(s,110),17,'var(--muted)');
+  const note=(s,y=322)=>text(640,y,wrap(s,110),17,'var(--muted)');
   function flow(s){const parallel=s.kind==='theory'&&['AI-01','AI-02','AI-09'].includes(s.id);return s.flow.map((n,i)=>{const x=25+i*315;return text(x+145,55,parallel?'COMPONENT '+(i+1):'STEP '+(i+1),13,'var(--muted)')+box(x,85,285,145,n[0],n[1],i===3)+(i<3&&!parallel?arrow(x+285,157,x+315,157):'');}).join('')+note(parallel?'These are related components, not a mandatory execution order.':'Work in bounded steps; retain the evidence needed to check the result.');}
   function special(s){
     if(s.kind==='theory'&&s.id==='AI-06')return box(30,85,300,150,'Main agent','Assign a bounded review')+box(475,85,330,150,'lab-reviewer','Separate context · read-only tools')+box(950,85,300,150,'Verdict','PASS / FAIL + evidence')+arrow(330,160,475,160)+arrow(805,160,950,160)+note('The reviewer reports findings. Limited tools prevent it from silently editing the work.');

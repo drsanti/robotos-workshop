@@ -2,7 +2,8 @@
 (() => {
   const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   let serial = 0, marker;
-  const text = (x,y,lines,size=19,color='var(--text)',anchor='middle') => `<text x="${x}" y="${y}" fill="${color}" font-size="${size}" text-anchor="${anchor}" font-family="Inter,Segoe UI,sans-serif">${[].concat(lines).map((l,i)=>`<tspan x="${x}" dy="${i ? 25 : 0}">${esc(l)}</tspan>`).join('')}</text>`;
+  const tr = s => window.labPhrase ? window.labPhrase(s) : s;
+  const text = (x,y,lines,size=19,color='var(--text)',anchor='middle') => `<text x="${x}" y="${y}" fill="${color}" font-size="${size}" text-anchor="${anchor}" font-family="Leelawadee UI,Thonburi,Tahoma,Inter,Segoe UI,sans-serif">${[].concat(lines).map((l,i)=>`<tspan x="${x}" dy="${i ? 25 : 0}">${esc(tr(l))}</tspan>`).join('')}</text>`;
   const box = (x,y,w,h,title,detail=[],accent=false) => `<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="var(--panel)" stroke="${accent?'var(--accent)':'var(--flow)'}" stroke-width="1.8"/>${text(x+w/2,y+33,title,21,accent?'var(--accent)':'var(--text)')}${text(x+w/2,y+65,detail,17,'var(--muted)')}</g>`;
   const arrow = (x1,y1,x2,y2,label='',accent=false,dashed=false) => `<path d="M${x1},${y1} L${x2},${y2}" fill="none" stroke="${accent?'var(--accent)':'var(--flow)'}" stroke-width="2.3" ${dashed?'stroke-dasharray="7 6"':''} marker-end="url(#${marker}${accent?'a':'f'})"/>${label?text((x1+x2)/2,(y1+y2)/2-13,label,16,accent?'var(--accent)':'var(--flow)'):''}`;
   const path = (d,accent=false,dashed=false) => `<path d="${d}" fill="none" stroke="${accent?'var(--accent)':'var(--flow)'}" stroke-width="2.3" ${dashed?'stroke-dasharray="7 6"':''} marker-end="url(#${marker}${accent?'a':'f'})"/>`;

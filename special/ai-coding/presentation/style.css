@@ -31,3 +31,11 @@
 body:fullscreen .student-reading{display:none}
 @media(max-width:800px){.student-reading{padding:20px;margin-top:25px}.reading-columns{grid-template-columns:1fr;gap:8px}.student-reading h2{font-size:23px}.student-reading p,.student-reading li{font-size:15px}}
 @media print{.student-reading{display:none!important}}
+.lang{display:flex;gap:4px}.lang button{min-width:44px}
+html[lang=th]{font-family:"Leelawadee UI",Thonburi,Tahoma,Inter,Aptos,"Segoe UI",sans-serif}
+.tools{position:relative}.pointer-panel{position:absolute;top:calc(100% + 8px);right:0;z-index:30;width:250px;padding:12px;background:#141b25;border:1px solid #4a596c;border-radius:10px;box-shadow:0 16px 50px #000a;display:grid;gap:10px}.pointer-panel[hidden]{display:none}.pointer-panel p{margin:0;font-size:13px;font-weight:650}.pointer-colors{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.pointer-colors span{width:100%;font-size:12px;color:#c5d0de}.pointer-colors button, .pointer-colors input[type=color]{width:26px;height:26px;padding:0;border-radius:50%;border:2px solid #3b4555;background:var(--swatch,#e4eaf3)}.pointer-colors button[data-comet=track]{width:auto;border-radius:7px;padding:4px 8px;font-size:12px;background:#171d27}.pointer-colors button[aria-pressed=true]{border-color:#fff}.pointer-panel label{display:grid;grid-template-columns:1fr auto;gap:4px 8px;font-size:12px;color:#c5d0de}.pointer-panel input[type=range]{grid-column:1 / -1;width:100%;accent-color:#b2a2ed}.pointer-panel output{font-variant-numeric:tabular-nums;color:#e4eaf3}
+#comet{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
+html.comet,html.comet *{cursor:none!important}
+html.comet input,html.comet textarea{cursor:text!important}
+@media (prefers-reduced-motion:reduce){#comet{display:none!important}}
+@media print{#comet{display:none!important}html.comet,html.comet *{cursor:auto!important}}

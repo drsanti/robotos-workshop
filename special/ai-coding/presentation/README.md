@@ -12,8 +12,10 @@ Theory slides explain the concept in plain language before showing the diagram. 
 
 - Left / Right, Page Up / Page Down, or Space: navigate.
 - Home / End: first / last slide in the selected part.
-- **Topics**: search titles, lab IDs and concepts; select a theory or practice slide.
-- **N**: presenter notes with original theory cards, practice procedures and completion checklists.
+- **EN / TH**: switch the slide language. Thai keeps technical names in English (MCP, topic, Twist, scan, agent, prompt, and so on). The choice is remembered in this browser.
+- **Pointer**: comet cursor. Set color, size, tail length, and tail life. Track color follows the slide. The choice is remembered in this browser.
+- **Topics**: search titles, lab IDs and concepts in either language; select a theory or practice slide.
+- **N**: presenter notes with original theory cards, practice procedures and completion checklists. Source command dumps stay in English.
 - **F** or **Present**: fullscreen; Escape exits and closes panels.
 - **Export diagram SVG**: download a standalone vector diagram with embedded theme colors.
 - **Print deck**: print all 30 slides or the selected part. Use landscape orientation, background graphics on, and browser headers/footers off.

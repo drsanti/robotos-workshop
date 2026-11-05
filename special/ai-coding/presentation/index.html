@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <script defer src="data.js"></script>
   <script defer src="diagrams.js"></script>
+  <script defer src="lang.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <button data-track="c" aria-pressed="false">C <small>6</small></button>
       <button data-track="d" aria-pressed="false">D <small>8</small></button>
     </nav>
-    <div class="tools"><button id="outline-toggle" aria-expanded="false" aria-controls="outline">Topics</button><button id="notes-toggle" aria-expanded="false" aria-controls="notes">Notes <kbd>N</kbd></button><button id="fullscreen" title="Toggle fullscreen (F)">Present <kbd>F</kbd></button></div>
+    <div class="tools"><div class="lang" role="group" aria-label="Language"><button type="button" id="lang-en" data-lang="en" aria-pressed="true">EN</button><button type="button" id="lang-th" data-lang="th" aria-pressed="false">TH</button></div><button type="button" id="pointer-toggle" aria-expanded="false" aria-controls="pointer-panel">Pointer</button><div id="pointer-panel" class="pointer-panel" hidden><p id="pointer-title">Pointer</p><div class="pointer-colors" role="group" aria-labelledby="pointer-color-name"><span id="pointer-color-name">Color</span><button type="button" data-comet="track">Track</button><button type="button" data-comet="#8cc8e8" style="--swatch:#8cc8e8" aria-label="Ice"></button><button type="button" data-comet="#f4d35e" style="--swatch:#f4d35e" aria-label="Signal"></button><button type="button" data-comet="#ff9a5c" style="--swatch:#ff9a5c" aria-label="Copper"></button><button type="button" data-comet="#8de8b5" style="--swatch:#8de8b5" aria-label="Mint"></button><button type="button" data-comet="#ffffff" style="--swatch:#ffffff" aria-label="White"></button><label class="swatch-custom"><input id="comet-color" type="color" value="#8cc8e8" aria-label="Custom color"></label></div><label><span id="pointer-size-name">Size</span><output id="comet-size-val" for="comet-size"></output><input id="comet-size" type="range" min="0.5" max="2.5" step="0.1" value="1"></label><label><span id="pointer-length-name">Tail length</span><output id="comet-length-val" for="comet-length"></output><input id="comet-length" type="range" min="6" max="90" step="1" value="36"></label><label><span id="pointer-life-name">Tail life</span><output id="comet-life-val" for="comet-life"></output><input id="comet-life" type="range" min="80" max="1600" step="20" value="340"></label></div><button id="outline-toggle" aria-expanded="false" aria-controls="outline">Topics</button><button id="notes-toggle" aria-expanded="false" aria-controls="notes">Notes <kbd>N</kbd></button><button id="fullscreen" title="Toggle fullscreen (F)">Present <kbd>F</kbd></button></div>
   </header>
   <aside id="outline" class="outline" hidden>
     <label for="search">Find a lab</label><input id="search" type="search" placeholder="Topic, lab ID or concept…" autocomplete="off">
@@ -37,6 +38,7 @@
     <section id="student-reading" class="student-reading" aria-label="Student reading and worked example"></section>
   </main>
   <aside id="notes" class="notes" hidden aria-label="Presenter notes"><div class="notes-top"><h2>Presenter notes</h2><button id="notes-close" aria-label="Close presenter notes">×</button></div><div id="notes-body"></div></aside>
+  <canvas id="comet" aria-hidden="true"></canvas>
   <noscript>This offline presentation requires JavaScript. The lab source documents remain available in the parent MW, WH and HW folders.</noscript>
 </body>
 </html>
