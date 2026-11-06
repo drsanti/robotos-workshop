@@ -2,6 +2,26 @@
 
 Interactive follow-along (optional): https://drsanti.github.io/robotos-workshop-docs/
 
+Offline copy in this pack: [`online-docs/`](online-docs/). Prefer the helper (correct web root):
+
+```powershell
+.\scripts\start-online-docs.cmd
+```
+
+```bash
+./scripts/start-online-docs.sh
+```
+
+Or manually **from `online-docs/`** (not a parent folder):
+
+```powershell
+cd online-docs
+python -m http.server 5510
+# or: npx --yes serve . -p 5510
+```
+
+Then open http://127.0.0.1:5510/#/setup (Connect still uses `scripts/start-host.cmd` / `start-host.sh`). Avoid port **5500** — Live Preview often steals it for the workspace root.
+
 1. Open **Your setup** → set **OS** + **Workshop folder** (path to this pack).
 2. For Run / terminals / Live: run `./scripts/start-host.sh` (Windows: `scripts\start-host.cmd`), paste the **Bearer token** from that window, then **Connect**.
 3. After Connect, optional: **Your setup → Serial port** — leave **Auto**, or pin a COM/`cu.*` device if auto-detect misses the board (Copy/Run rewrites `--port auto`).

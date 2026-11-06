@@ -10,6 +10,8 @@ Contract:   P0 warehouse Phase 2 polish + HW board labs
 
 Prefer helpers under scripts/. Full SETUP: SETUP.md · Ebook: docs/ebook/chapters/ch00-setup-your-machine.md
 Interactive docs: https://drsanti.github.io/robotos-workshop-docs/ (Connect: ./scripts/start-host.sh)
+  Offline: ./scripts/start-online-docs.sh  →  http://127.0.0.1:5510/#/setup
+  (avoid port 5500 / Live Preview; or: cd online-docs && python3 -m http.server 5510)
 
 ---------------------------------------------------------------------------
 A) Fast path (recommended)

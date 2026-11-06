@@ -134,7 +134,7 @@ Each concept has a short theory note and a practice lab
 | [`code/`](code/) | Prebuilt CLI, wheels, sim |
 | [`docs/lab-outline.md`](docs/lab-outline.md) | Concept → theory → lab map |
 | [`docs/p0-contract.md`](docs/p0-contract.md) | Warehouse topic names |
-| Interactive docs (optional) | https://drsanti.github.io/robotos-workshop-docs/ |
+| Interactive docs (optional) | https://drsanti.github.io/robotos-workshop-docs/ or local [`online-docs/`](online-docs/) via `scripts/start-online-docs.cmd` / `start-online-docs.sh` |
 
 Instructor talking points (optional): [`docs/theory/`](docs/theory/).
 
@@ -148,7 +148,8 @@ Instructor talking points (optional): [`docs/theory/`](docs/theory/).
 - Rebuild CLI/sim only from the private source repos when you have that
   monorepo checkout — students never need those links.
 - Interactive docs **source** + `workshop-host` source live in private
-  `robotos-workshop-tools/`. Students get the public Pages site and/or a
+  `robotos-workshop-tools/`. Students get the public Pages site and/or the
+  offline folder [`online-docs/`](online-docs/) (open via its README), plus a
   prebuilt `workshop-host` under `code/robotos-v*/bin/` (see tools
   `PUBLISH.md`). After Connect, **Your setup → Serial port** lists USB/COM
   devices (host lists only; Copy/Run can pin `--port`). Rebuild Windows

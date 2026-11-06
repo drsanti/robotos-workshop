@@ -13,6 +13,7 @@ robotos-workshop/          # zip root OR git checkout + code/ filled
   .vscode/                 # VS Code: robotos on terminal PATH
   scripts/                 # start-here, start-bridge, run
   docs/
+  online-docs/             # optional offline interactive site (built dist/, not source)
   labs/
     mw/  wh/  hw/
   code/
@@ -34,7 +35,7 @@ Prefer **per-OS ZIPs** for students (one OS folder + one wheel + one sim), not a
 | `wifi-cfg[.exe]` | `cargo build --release -p serial-bridge --bin wifi-cfg` → same `bin/` (optional board Wi‑Fi) |
 | `workshop-host` (macOS/Linux) | Private `robotos-workshop-tools` — `./scripts/ship-host.sh` → `robotos-v*/bin/` |
 | `workshop-host.exe` (Windows) | Same tools repo **on a Windows machine** — `.\scripts\ship-host.ps1` → `robotos-v*-windows-x64\bin\` (checklist: tools `WINDOWS-SHIP.md`) |
-| Interactive docs `dist/` (optional) | Same tools repo — `./scripts/ship-docs.sh` / `publish-docs-site.sh` → Pages (not source) |
+| Interactive docs (optional) | Same tools repo — `./scripts/ship-docs.sh` → student `online-docs/` (or `publish-docs-site.sh` → Pages). Never ship tools `src/`. |
 | `robotos-sim-v*` | Private https://github.com/drsanti/robotos-sim — build on target OS; Win+Mac shipped in this repo `code/` |
 | Curriculum | this repo |
 | `NOTES.txt` | `packs/NOTES.windows-x64.txt` / `NOTES.macos-arm64.txt` / `NOTES.linux-x64.txt` |

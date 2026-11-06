@@ -1,8 +1,9 @@
 @echo off
 rem Local companion for interactive docs. Windows binary ships when built on a Windows host.
 setlocal
-set "ROOT=%~dp0.."
-cd /d "%ROOT%"
+rem Resolve scripts\.. to a clean absolute path (avoid …\scripts\.. in Your setup).
+cd /d "%~dp0.."
+set "ROOT=%CD%"
 set "ROBOTOS_BIN=%ROOT%\code\robotos-v0.3.0-windows-x64\bin"
 if not exist "%ROBOTOS_BIN%\workshop-host.exe" (
   echo workshop-host.exe not in this pack yet.
