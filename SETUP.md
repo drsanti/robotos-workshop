@@ -1,6 +1,6 @@
 # SETUP — student machine
 
-Interactive follow-along (optional): https://drsanti.github.io/robotos-workshop-docs/ — Copy works offline from the site; Connect (terminals / Live) needs the local `workshop-host` companion when your instructor provides it.
+Interactive follow-along (optional): https://drsanti.github.io/robotos-workshop-docs/ — Copy works from the site alone; Connect (terminals / Live) needs the local companion: Windows `scripts\start-host.cmd`, macOS `./scripts/start-host.sh`.
 
 Follow **one** section and stop at the end of it.
 

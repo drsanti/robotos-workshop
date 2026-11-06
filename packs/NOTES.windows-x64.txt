@@ -1,18 +1,19 @@
 robotos-workshop pack
 =====================
-Date:       2026-11-02
+Date:       2026-11-06
 OS/arch:    windows-x64
 robotos:    v0.3.0
 robotos-sim: code/robotos-sim-v0.1.0-windows-x64/robotos-sim.exe
 serial-bridge: code/robotos-v0.3.0-windows-x64/bin/serial-bridge.exe
 wifi-cfg:   code/robotos-v0.3.0-windows-x64/bin/wifi-cfg.exe
-Contract:   P0 warehouse 2026-11-02 + HW board labs
+workshop-host: code/robotos-v0.3.0-windows-x64/bin/workshop-host.exe
+Contract:   P0 warehouse Phase 2 polish + HW board labs
 
 Open this folder in **VS Code**. Prefer helpers under scripts\ (not Git Bash —
 it rewrites /robot/... paths).
 
 Full SETUP: SETUP.md · Ebook: docs/ebook/chapters/ch00-setup-your-machine.md
-Interactive docs (Copy-only until workshop-host.exe ships): https://drsanti.github.io/robotos-workshop-docs/
+Interactive docs: https://drsanti.github.io/robotos-workshop-docs/ (Connect: scripts\start-host.cmd)
 
 ---------------------------------------------------------------------------
 A) Fast path (recommended)
@@ -25,6 +26,8 @@ A) Fast path (recommended)
      scripts\run.cmd wh-01
 4) Board labs: double-click scripts\start-bridge.cmd (leave open), then
      scripts\run.cmd hw-01
+5) Optional interactive docs: scripts\start-host.cmd, open the printed URL
+   (or the Pages site + paste token)
 
 List labs:  scripts\run.cmd list
 
