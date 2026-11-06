@@ -18,8 +18,9 @@ export PATH="$OS_BIN:$PATH"
 chmod +x "$OS_BIN/workshop-host" 2>/dev/null || true
 
 if ! command -v workshop-host >/dev/null 2>&1; then
-  echo "workshop-host not in this pack yet (macOS arm64 ships it; other OS: ask instructor)."
+  echo "workshop-host is not in this pack."
   echo "Docs still work Copy-only: https://drsanti.github.io/robotos-workshop-docs/"
+  echo "Ask your instructor if you need Connect / Run."
   exit 1
 fi
 

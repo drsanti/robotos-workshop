@@ -1,26 +1,39 @@
 # robotos-workshop
 
-Class drop for **robotos**: middleware labs, warehouse sim, and ESP32-S3 board
-work. Clone or unzip **this repo only** — CLI, Python wheel(s), and sim are
-already under `code/`. You do **not** need the private `robotos` / `robotos-sim`
-source repos.
+Hands-on labs for **robotos**: middleware on your laptop, the warehouse sim,
+and ESP32-S3 board work. Everything you need is in this folder (`code/`,
+`labs/`, `scripts/`).
 
-**Supported now:** Windows x64 and macOS Apple Silicon. Linux packs are not
-shipped yet.
+**Supported:** Windows x64 and macOS Apple Silicon. Use the OS section that
+matches your machine.
 
-## Students — start here
+## Start here
 
-`YOUR_WORKSHOP_DIR` is this folder: it contains `SETUP.md`, `code/`, and `labs/`.
+1. Open this folder in **VS Code** (or Cursor). The folder that contains this
+   `README.md` is `YOUR_WORKSHOP_DIR`.
+2. Follow **one** OS section below, then open the lab sheets under `labs/`.
+3. Prefer the interactive guide if you want clickable Copy / Run:
+   - Online: https://drsanti.github.io/robotos-workshop-docs/
+   - Offline: [`scripts/start-online-docs.cmd`](scripts/start-online-docs.cmd)
+     (Windows) or [`scripts/start-online-docs.sh`](scripts/start-online-docs.sh)
+     (macOS) → http://127.0.0.1:5510/#/setup
 
-`robotos` is a file inside `code/…/bin`. It is not installed on the computer. A new window does not remember it. Paste the **whole** block in your section. If you open another window, paste the whole block again.
+Full manual steps: [`SETUP.md`](SETUP.md) · ebook
+[Chapter 0](docs/ebook/chapters/ch00-setup-your-machine.md).
 
-Each lab sheet repeats those same first lines. Full manual steps: [`SETUP.md`](SETUP.md) · ebook [Ch.0](docs/ebook/chapters/ch00-setup-your-machine.md).
+`robotos` lives under `code/…/bin`. It is **not** installed system-wide. A new
+terminal does not remember PATH or `.venv`. Paste the **whole** block from
+your OS section (or from the lab README) every time you open a new window.
+
+---
 
 ## Windows
 
-Use **PowerShell**. Stay in this section until you are done.
+Use **PowerShell** (not Git Bash — it rewrites paths that start with `/robot/`).
 
-Once: double-click [`scripts/start-here.cmd`](scripts/start-here.cmd). That creates `.venv`, installs the wheel, and starts the sim. You can close that helper window. The next PowerShell window is blank again.
+**Once:** double-click [`scripts/start-here.cmd`](scripts/start-here.cmd). That
+creates `.venv`, installs the Python wheel, and starts the sim. You can close
+that helper window afterward.
 
 ```powershell
 cd YOUR_WORKSHOP_DIR
@@ -30,36 +43,28 @@ robotos topic list
 scripts\run.cmd wh-01
 ```
 
-With the sim running, expect `/robot/01/cmd_vel`, `odom`, and `scan`. An empty list means the sim is not running.
+With the sim connected, `topic list` should show `/robot/01/cmd_vel`, `odom`,
+and `scan`. An empty list usually means the sim is not running.
 
-If activate says `.venv` does not exist, do [MW-00](labs/mw/mw-00-getting-started/README.md) first.
+If activate says `.venv` does not exist, do
+[MW-00](labs/mw/mw-00-getting-started/README.md) first.
 
-Board labs: close the sim, double-click [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd), and leave it open. Paste the HW lab block in a second window.
+**Board labs:** close the sim, double-click
+[`scripts/start-bridge.cmd`](scripts/start-bridge.cmd), leave it open, then
+paste the HW lab block in a **second** PowerShell window.
 
-Optional smoke, same window. Do not restart the sim every time you open PowerShell.
-
-```powershell
-cd YOUR_WORKSHOP_DIR
-$env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
-Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe
-robotos topic list
-```
-
-```text
-code/
-  NOTES.txt
-  robotos-v0.3.0-windows-x64/
-  robotos-0.3.0-py3-none-win_amd64.whl
-  robotos-sim-v0.1.0-windows-x64/
-```
+**Optional interactive docs Connect:** leave
+[`scripts/start-host.cmd`](scripts/start-host.cmd) running, copy the yellow
+Bearer token, then **Connect** in the guide (online or offline).
 
 ---
 
 ## macOS
 
-Use **Terminal** on Apple Silicon. Stay in this section until you are done.
+Use **Terminal** on Apple Silicon.
 
-Once: double-click [`scripts/start-here.command`](scripts/start-here.command), or run `./scripts/start-here.sh` from this folder. You can close that helper window. The next Terminal window is blank again.
+**Once:** double-click [`scripts/start-here.command`](scripts/start-here.command),
+or run `./scripts/start-here.sh` from this folder.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -69,44 +74,18 @@ robotos topic list
 ./scripts/run wh-01
 ```
 
-With the sim running, expect `/robot/01/cmd_vel`, `odom`, and `scan`. An empty list means the sim is not running.
+With the sim connected, expect `/robot/01/cmd_vel`, `odom`, and `scan`.
 
-If activate says `.venv` does not exist, do [MW-00](labs/mw/mw-00-getting-started/README.md) first.
+If activate says `.venv` does not exist, do
+[MW-00](labs/mw/mw-00-getting-started/README.md) first.
 
-Board labs: close the sim. In a terminal, `cd YOUR_WORKSHOP_DIR` then `./scripts/start-bridge.sh`. Leave it open. Paste the HW lab block in a second window.
+**Board labs:** close the sim, run `./scripts/start-bridge.sh`, leave it open,
+then paste the HW lab block in a second terminal.
 
-Optional smoke, same window. The first launch may need a right-click → **Open**.
+**Optional interactive docs Connect:** `./scripts/start-host.sh`, then paste
+the yellow Bearer token into the guide.
 
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
-open ./code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
-robotos topic list
-```
-
-```text
-code/
-  NOTES.txt
-  robotos-v0.3.0-macos-arm64/
-  robotos-0.3.0-py3-none-any.whl
-  robotos-sim-v0.1.0-macos-arm64/
-```
-
----
-
-## Linux
-
-Use **bash**. Stay in this section until you are done. Skip this section when `code/robotos-v0.3.0-linux-x64` is not in your drop.
-
-```bash
-cd YOUR_WORKSHOP_DIR
-export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
-source .venv/bin/activate
-robotos topic list
-./scripts/run wh-01
-```
-
-Board labs: close the sim, run `./scripts/start-bridge.sh` from this folder, and leave it open. Paste the HW lab block in a second window.
+The first sim launch may need right-click → **Open**.
 
 ---
 
@@ -118,42 +97,33 @@ Typical order if your instructor does not specify otherwise: **MW → WH → HW*
 |-------|------|--------|
 | **MW** | `mw-00` … `mw-06` | Middleware patterns on the laptop graph |
 | **WH** | `wh-00` … `wh-08` | Warehouse sim on `/robot/01/*` |
-| **HW** | `hw-00` … `hw-07` | ESP32-S3 (`es3c28p` / `ws28p`): probe, sense, actuate, params, bag, closed loop — [`labs/hw/README.md`](labs/hw/README.md) |
+| **HW** | `hw-00` … `hw-07` | ESP32-S3 board: probe, sense, actuate, params, bag |
 
-Each concept has a short theory note and a practice lab
-([`docs/lab-outline.md`](docs/lab-outline.md)).
+Lab sheets: [`labs/mw/`](labs/mw/), [`labs/wh/`](labs/wh/),
+[`labs/hw/`](labs/hw/). Concept map: [`docs/lab-outline.md`](docs/lab-outline.md).
+
+List runnable labs anytime:
+
+```text
+scripts\run.cmd list          # Windows
+./scripts/run list            # macOS
+```
+
+---
 
 ## What’s in this folder
 
-| Path | For students |
+| Path | What it’s for |
 |------|----------------|
-| [`scripts/`](scripts/) | `start-here` / `start-bridge` / `start-host` / `run` — student helpers |
-| [`SETUP.md`](SETUP.md) | PATH, wheel, sim, serial-bridge (full manual) |
+| [`SETUP.md`](SETUP.md) | Full setup (PATH, wheel, sim, bridge) |
+| [`scripts/`](scripts/) | `start-here`, `start-bridge`, `start-host`, `start-online-docs`, `run` |
+| [`labs/`](labs/) | Lab READMEs and starter code |
+| [`code/`](code/) | Prebuilt `robotos`, wheel, warehouse sim |
+| [`online-docs/`](online-docs/) | Offline interactive guide (same as the website) |
 | [`docs/ebook/`](docs/ebook/) | Ebook chapters (start at Ch.0) |
-| [`labs/mw/`](labs/mw/), [`labs/wh/`](labs/wh/), [`labs/hw/`](labs/hw/) | Lab sheets + starters |
-| [`code/`](code/) | Prebuilt CLI, wheels, sim |
-| [`docs/lab-outline.md`](docs/lab-outline.md) | Concept → theory → lab map |
 | [`docs/p0-contract.md`](docs/p0-contract.md) | Warehouse topic names |
-| Interactive docs (optional) | https://drsanti.github.io/robotos-workshop-docs/ or local [`online-docs/`](online-docs/) via `scripts/start-online-docs.cmd` / `start-online-docs.sh` |
 
-Instructor talking points (optional): [`docs/theory/`](docs/theory/).
-
-## Instructors
-
-- Keep `code/` self-contained for every OS you teach (this public tree is the
-  student drop).
-- Class zip recipe: [`packs/LAYOUT.md`](packs/LAYOUT.md) + `packs/assemble.ps1`
-  / `assemble.sh`.
-- Smoke log: [`packs/SMOKE.md`](packs/SMOKE.md).
-- Rebuild CLI/sim only from the private source repos when you have that
-  monorepo checkout — students never need those links.
-- Interactive docs **source** + `workshop-host` source live in private
-  `robotos-workshop-tools/`. Students get the public Pages site and/or the
-  offline folder [`online-docs/`](online-docs/) (open via its README), plus a
-  prebuilt `workshop-host` under `code/robotos-v*/bin/` (see tools
-  `PUBLISH.md`). After Connect, **Your setup → Serial port** lists USB/COM
-  devices (host lists only; Copy/Run can pin `--port`). Rebuild Windows
-  `.exe` on a Windows host: tools `WINDOWS-SHIP.md` → `.\scripts\ship-host.ps1`.
+---
 
 ## License
 

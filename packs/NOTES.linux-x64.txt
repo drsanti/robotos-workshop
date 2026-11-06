@@ -88,4 +88,4 @@ Troubleshooting:
   - Zip stripped +x → chmod +x the binaries again
 
 Support:
-  instructor
+  your instructor / TA

@@ -99,4 +99,4 @@ opens zenoh to that host. Check: scripts\run.cmd hw-02 board_watch
   --disable     turn Wi‑Fi off
 
 Support:
-  instructor
+  your instructor / TA

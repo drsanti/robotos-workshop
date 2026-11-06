@@ -1,5 +1,8 @@
 # Pack layout (shipping recipe)
 
+> **Staff / pack builders only.** Students: ignore this folder — start at
+> [`../README.md`](../README.md) and [`../SETUP.md`](../SETUP.md).
+
 Student delivery must be **self-contained**: `code/` (CLI pack + wheel + sim when
 available) ships **in this repo** so a clone/unzip works without sibling repos.
 `drops/` and assemble zips are optional class mirrors, not the only channel.

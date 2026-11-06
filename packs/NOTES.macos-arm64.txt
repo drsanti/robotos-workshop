@@ -81,4 +81,4 @@ Troubleshooting:
   - Teaching lock on in sim hides Mock/WS bridge — WH Native path uses Native + Join graph
 
 Support:
-  instructor
+  your instructor / TA

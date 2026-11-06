@@ -1,14 +1,14 @@
 @echo off
-rem Local companion for interactive docs. Windows binary ships when built on a Windows host.
+rem Local companion for interactive docs Connect / Run.
 setlocal
 rem Resolve scripts\.. to a clean absolute path (avoid …\scripts\.. in Your setup).
 cd /d "%~dp0.."
 set "ROOT=%CD%"
 set "ROBOTOS_BIN=%ROOT%\code\robotos-v0.3.0-windows-x64\bin"
 if not exist "%ROBOTOS_BIN%\workshop-host.exe" (
-  echo workshop-host.exe not in this pack yet.
+  echo workshop-host.exe is not in this pack.
   echo Docs still work Copy-only: https://drsanti.github.io/robotos-workshop-docs/
-  echo Instructors: build with robotos-workshop-tools\scripts\ship-host.ps1
+  echo Ask your instructor if you need Connect / Run.
   pause
   exit /b 1
 )

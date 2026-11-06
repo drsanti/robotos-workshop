@@ -1,9 +1,8 @@
-# P0 Warehouse — teaching contract
+# P0 Warehouse — topic contract
 
-**Canonical copy for labs.** Keep in sync with  
-`robotos-sim/docs/p0-warehouse-teaching-contract.md`.
+One-page reference for WH labs (what to publish and subscribe).
 
-## One-page student view
+## Quick view
 
 | | |
 |--|--|
@@ -29,22 +28,20 @@ Defaults clamp: `|v| ≤ 0.5`, `|ω| ≤ 1.5`.
 | 1 | front (0°) |
 | 2 | left (+90°) |
 
-### Modes students must not confuse
+### Modes — do not confuse these
 
 | Mode | Use in labs? |
 |------|----------------|
 | Manual + keyboard | Teleop demo only — your Python `cmd_vel` does **not** own motion |
 | External + Native | **Graded path** — your node is on the real graph; sim applies your Twists |
-| Mock | UI fakes a learner — robot may move in the viewport **without** proving your script joined Zenoh/`topic list` |
-| UI “Bridge” (web demo) | Instructor path — **not** the HW tool `serial-bridge` |
+| Mock | UI fakes a learner — robot may move **without** proving your script joined the graph |
+| UI “Bridge” (web demo) | Not used in graded WH labs — **not** the HW tool `serial-bridge` |
 
 **Native ≠ Mock:** Native means the warehouse node participates on the same mesh as `robotos` CLI and your Python. Mock is for demos when no student code is required.
 
-## Acceptance smoke (instructor)
+## Quick smoke check
 
-1. Start graph (pack `robotos` tooling as documented in SETUP).  
-2. Start **robotos-sim** (Tauri), Warehouse, External, Native, Connect.  
-3. `robotos topic pub` / Python SDK: `linear.x = 0.2` for ~5 s → ~1 m on odom.  
+1. Follow [`SETUP.md`](../SETUP.md) (PATH + `.venv`).  
+2. Start **robotos-sim**, Warehouse → **External** → **Native** → **Connect**.  
+3. Publish `linear.x = 0.2` for ~5 s → about 1 m on odom.  
 4. Echo odom + scan while moving; front range drops near walls.
-
-Full detail: sim doc linked above.

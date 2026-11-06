@@ -5,8 +5,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT/online-docs"
 if [[ ! -f index.html ]]; then
-  echo "online-docs/index.html missing."
-  echo "Instructors: rebuild with robotos-workshop-tools/scripts/ship-docs.sh"
+  echo "online-docs/index.html missing from this pack."
+  echo "Use https://drsanti.github.io/robotos-workshop-docs/ or ask your instructor."
   exit 1
 fi
 echo

@@ -1,11 +1,10 @@
 # Curriculum — content map (theory + practice)
 
-Timing and day splits are left to the instructor. This doc is the **what**, not the **when**.
+Map of concepts → reading → labs. Your instructor sets the day-by-day schedule.
 
 **Rule:** every concept has a **theory note** and a **practice lab** (except TF / QoS, which are theory + CLI/discussion until a dedicated exercise is added).
 
-Theory cards index (instructor lecture notes vs ebook): [`theory/README.md`](theory/README.md).  
-Coverage vs nd3: [`coverage.md`](coverage.md). Warehouse wire contract: [`p0-contract.md`](p0-contract.md).
+Ebook chapters: [`ebook/chapters/`](ebook/chapters/). Warehouse topics: [`p0-contract.md`](p0-contract.md).
 
 ---
 

@@ -17,8 +17,8 @@ After this chapter you can:
 - About 2 GB free disk space  
 - Administrator rights only if your school PC blocks installing Python or running unsigned apps — ask a TA if unsure  
 
-You do **not** need to clone private GitHub source repos for the student labs.
-Clone/unzip **robotos-workshop** only — it already includes `code/` packs.
+You only need **this** workshop folder. Clone or unzip **robotos-workshop** —
+it already includes the `code/` tools for your OS.
 
 ---
 

@@ -4,8 +4,8 @@ rem Port 5510 — avoid 5500 (Cursor/VS Code Live Preview default = workspace ro
 setlocal
 cd /d "%~dp0..\online-docs"
 if not exist "index.html" (
-  echo online-docs\index.html missing.
-  echo Instructors: rebuild with robotos-workshop-tools\scripts\ship-docs.sh
+  echo online-docs\index.html missing from this pack.
+  echo Use https://drsanti.github.io/robotos-workshop-docs/ or ask your instructor.
   pause
   exit /b 1
 )

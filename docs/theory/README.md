@@ -1,16 +1,16 @@
-# Instructor theory cards
+# Theory notes (short)
 
-**Role:** `docs/theory/*` are **short live-lecture cards** for instructors (outcomes, talking points, sketch, check Qs).  
-**Not** full student chapters — that depth lives in [`docs/ebook/chapters/`](../ebook/chapters/).  
-Labs remain the step-by-step procedures under [`labs/`](../../labs/).
+Short concept cards that pair with the labs. For full reading, use the ebook
+chapters under [`docs/ebook/chapters/`](../ebook/chapters/). Lab procedures stay
+under [`labs/`](../../labs/).
 
-| Layer | Audience | Expectation |
-|-------|----------|-------------|
-| `docs/theory/` | Instructor | ~1 page; speak from the card |
-| `docs/ebook/chapters/` | Student | Canonical reading (1.5k–3.5k words) |
-| `labs/**/README.md` | Student | Hands-on procedure |
+| Layer | What it’s for |
+|-------|----------------|
+| `docs/theory/` | One-page concept notes |
+| `docs/ebook/chapters/` | Longer reading |
+| `labs/**/README.md` | Hands-on steps |
 
-Numbering is **legacy lecture order** (01–14); ebook chapter numbers do not always match (e.g. theory 04 → ebook Ch.5). Prefer the links below over guessing.
+Card numbers (01–14) do not always match ebook chapter numbers (e.g. theory 04 → ebook Ch.5). Prefer the links below.
 
 ## Index
 
@@ -31,9 +31,9 @@ Numbering is **legacy lecture order** (01–14); ebook chapter numbers do not al
 | [13-digital-twin](13-digital-twin.md) | Twin consumes same contracts; MW-06 → WH scale | [ch11](../ebook/chapters/ch11-digital-twin.md) | [mw-06](../../labs/mw/mw-06-mini-twin/) |
 | [14-board-on-graph](14-board-on-graph.md) | Bridge LISTEN vs CONNECT; sys/board; caps; dialout | [ch04](../ebook/chapters/ch04-board-on-graph.md) | [hw-00](../../labs/hw/hw-00-board-connect/), [hw-01](../../labs/hw/hw-01-caps-probe/) |
 
-## Suggested lecture order
+## Suggested reading order
 
-Day 1 WH/MW open: **01 → 02 → 03 → 04** (+ **07**, **08** with MW).  
-Day 2 autonomy + evidence: **05 → 06** (+ **09**, **10**, **11**).  
-Concept bridges: **12**, **13**.  
+WH/MW start: **01 → 02 → 03 → 04** (+ **07**, **08** with MW).  
+Autonomy + bags: **05 → 06** (+ **09**, **10**, **11**).  
+Extra concepts: **12**, **13**.  
 HW track: **14** before HW-00 (bags on board reuse **06**).
