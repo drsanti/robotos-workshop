@@ -1,13 +1,15 @@
 robotos-workshop pack
 =====================
-Date:       2026-11-03
+Date:       2026-11-06
 OS/arch:    macos-arm64
 robotos:    v0.3.0
 robotos-sim: code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
 serial-bridge: code/robotos-v0.3.0-macos-arm64/bin/serial-bridge (--port auto)
+workshop-host: code/robotos-v0.3.0-macos-arm64/bin/workshop-host
 Contract:   P0 warehouse Phase 2 polish + HW board labs
 
 Prefer helpers under scripts/. Full SETUP: SETUP.md · Ebook: docs/ebook/chapters/ch00-setup-your-machine.md
+Interactive docs: https://drsanti.github.io/robotos-workshop-docs/ (Connect: ./scripts/start-host.sh)
 
 ---------------------------------------------------------------------------
 A) Fast path (recommended)
@@ -19,6 +21,8 @@ A) Fast path (recommended)
      ./scripts/run wh-01
 3) Board labs: ./scripts/start-bridge.sh in a second Terminal, then
      ./scripts/run hw-01
+4) Optional interactive docs: ./scripts/start-host.sh, open the printed URL
+   (or the Pages site + paste token)
 
 List labs:  ./scripts/run list
 

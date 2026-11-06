@@ -127,13 +127,14 @@ Each concept has a short theory note and a practice lab
 
 | Path | For students |
 |------|----------------|
-| [`scripts/`](scripts/) | `start-here` / `start-bridge` / `run` — all student helpers |
+| [`scripts/`](scripts/) | `start-here` / `start-bridge` / `start-host` / `run` — student helpers |
 | [`SETUP.md`](SETUP.md) | PATH, wheel, sim, serial-bridge (full manual) |
 | [`docs/ebook/`](docs/ebook/) | Ebook chapters (start at Ch.0) |
 | [`labs/mw/`](labs/mw/), [`labs/wh/`](labs/wh/), [`labs/hw/`](labs/hw/) | Lab sheets + starters |
 | [`code/`](code/) | Prebuilt CLI, wheels, sim |
 | [`docs/lab-outline.md`](docs/lab-outline.md) | Concept → theory → lab map |
 | [`docs/p0-contract.md`](docs/p0-contract.md) | Warehouse topic names |
+| Interactive docs (optional) | https://drsanti.github.io/robotos-workshop-docs/ |
 
 Instructor talking points (optional): [`docs/theory/`](docs/theory/).
 
@@ -146,9 +147,10 @@ Instructor talking points (optional): [`docs/theory/`](docs/theory/).
 - Smoke log: [`packs/SMOKE.md`](packs/SMOKE.md).
 - Rebuild CLI/sim only from the private source repos when you have that
   monorepo checkout — students never need those links.
-- Interactive docs + local host live in a **private** sibling tools tree
-  (`robotos-workshop-tools/`), not in this student pack. Ship only built
-  `dist/` / host binaries into class drops when ready.
+- Interactive docs **source** + `workshop-host` source live in private
+  `robotos-workshop-tools/`. Students get the public Pages site and/or a
+  prebuilt `workshop-host` under `code/robotos-v*/bin/` (see tools
+  `PUBLISH.md`).
 
 ## License
 

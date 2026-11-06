@@ -12,6 +12,7 @@ Open this folder in **VS Code**. Prefer helpers under scripts\ (not Git Bash —
 it rewrites /robot/... paths).
 
 Full SETUP: SETUP.md · Ebook: docs/ebook/chapters/ch00-setup-your-machine.md
+Interactive docs (Copy-only until workshop-host.exe ships): https://drsanti.github.io/robotos-workshop-docs/
 
 ---------------------------------------------------------------------------
 A) Fast path (recommended)

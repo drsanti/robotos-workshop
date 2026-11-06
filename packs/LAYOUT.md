@@ -78,8 +78,10 @@ Zip tools (especially on Windows) often strip the Unix execute bit. After studen
 ```bash
 chmod +x code/robotos-v*/bin/robotos \
          code/robotos-v*/bin/serial-bridge \
+         code/robotos-v*/bin/workshop-host \
          code/robotos-sim-v*/robotos-sim 2>/dev/null || true
 ```
+
 
 `assemble.sh` restores `+x` while staging; students may still need the commands above after re-zip. Documented in SETUP troubleshooting and per-OS NOTES.
 
