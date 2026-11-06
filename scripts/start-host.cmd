@@ -12,11 +12,12 @@ if not exist "%ROBOTOS_BIN%\workshop-host.exe" (
   exit /b 1
 )
 set "PATH=%ROBOTOS_BIN%;%PATH%"
+if not defined RUST_LOG set "RUST_LOG=workshop_host=info,robotos=warn,zenoh=warn"
 echo.
 echo  robotos-workshop — workshop-host (interactive docs)
 echo  -------------------------------------------------
-echo  Open the URL printed below. Site: https://drsanti.github.io/robotos-workshop-docs/
-echo  Leave this window open.
+echo  Leave this window open. Look for the yellow Bearer token in the cyan box.
+echo  Site: https://drsanti.github.io/robotos-workshop-docs/
 echo.
-"%ROBOTOS_BIN%\workshop-host.exe" --workshop-root "%ROOT%" --api-only
+"%ROBOTOS_BIN%\workshop-host.exe" --workshop-root "%ROOT%" --api-only --docs-origin "https://drsanti.github.io/robotos-workshop-docs"
 pause

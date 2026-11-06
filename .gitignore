@@ -33,8 +33,10 @@ Thumbs.db
 *.log
 *.rbag
 
-# Host Run() temp scripts
+# Host Run() temp scripts / local token
 .workshop-host-runs/
+.host-token
+**/.host-token
 
 # Local IDE / agent scratch (do not commit)
 .cursor/

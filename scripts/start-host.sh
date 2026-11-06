@@ -26,9 +26,17 @@ fi
 echo
 echo " robotos-workshop — workshop-host (interactive docs)"
 echo " -------------------------------------------------"
-echo " Open the Vite/Pages URL printed below (hostToken + hostBase)."
+echo " Leave this window open."
+echo " Look for the yellow Bearer token in the cyan box below"
+echo " (printed again after Zenoh settles)."
 echo " Site: https://drsanti.github.io/robotos-workshop-docs/"
-echo " Leave this window open. Labs/bridge: start-here / start-bridge as usual."
+echo " Labs/bridge: start-here / start-bridge as usual."
 echo
 
-exec workshop-host --workshop-root "$ROOT" --api-only
+# Quiet Zenoh so the token banner stays readable.
+export RUST_LOG="${RUST_LOG:-workshop_host=info,robotos=warn,zenoh=warn}"
+
+exec workshop-host \
+  --workshop-root "$ROOT" \
+  --api-only \
+  --docs-origin "https://drsanti.github.io/robotos-workshop-docs"

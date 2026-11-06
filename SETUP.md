@@ -1,6 +1,10 @@
 # SETUP — student machine
 
-Interactive follow-along (optional): https://drsanti.github.io/robotos-workshop-docs/ — Copy works from the site alone; Connect (terminals / Live) needs the local companion: Windows `scripts\start-host.cmd`, macOS `./scripts/start-host.sh`.
+Interactive follow-along (optional): https://drsanti.github.io/robotos-workshop-docs/
+
+1. Open **Your setup** → set **OS** + **Workshop folder** (path to this pack).
+2. For Run / terminals / Live: run `./scripts/start-host.sh` (Windows: `scripts\start-host.cmd`), paste the **Bearer token** from that window, then **Connect**.
+3. Copy-only still works without the host.
 
 Follow **one** section and stop at the end of it.
 
