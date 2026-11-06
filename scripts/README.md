@@ -10,6 +10,7 @@ Details: [`../SETUP.md`](../SETUP.md) · ebook Ch.0.
 |--------|----------------|
 | [`start-here.cmd`](start-here.cmd) | First time: `.venv`, wheel, sim, and a ready window |
 | [`start-bridge.cmd`](start-bridge.cmd) | Second window: `serial-bridge` for HW labs |
+| [`start-host.cmd`](start-host.cmd) | Interactive docs Connect (`workshop-host.exe` on `:7420`) |
 | [`run.cmd`](run.cmd) | Run a lab: `scripts\run.cmd wh-01` |
 | [`wifi-cfg.cmd`](wifi-cfg.cmd) | Optional: push SSID/password. Needs the bridge |
 
@@ -18,6 +19,7 @@ Details: [`../SETUP.md`](../SETUP.md) · ebook Ch.0.
 3. Every new window starts blank. Paste the lab README's whole block.
 4. WH / MW: that block ends with `scripts\run.cmd wh-01`.
 5. HW: close the sim, start `scripts\start-bridge.cmd`, then paste the HW lab block in a second window.
+6. Optional docs Connect: `scripts\start-host.cmd` → yellow Bearer token → paste at https://drsanti.github.io/robotos-workshop-docs/
 
 ---
 
@@ -27,6 +29,7 @@ Details: [`../SETUP.md`](../SETUP.md) · ebook Ch.0.
 |--------|----------------|
 | [`start-here.sh`](start-here.sh) / [`start-here.command`](start-here.command) | First time: `.venv`, wheel, and the sim |
 | [`start-bridge.sh`](start-bridge.sh) | Board bridge |
+| [`start-host.sh`](start-host.sh) / [`start-host.command`](start-host.command) | Interactive docs Connect (`workshop-host` on `:7420`) |
 | [`run`](run) | Run a lab: `./scripts/run wh-01` |
 
 1. Open the workshop root in Terminal.
@@ -34,6 +37,7 @@ Details: [`../SETUP.md`](../SETUP.md) · ebook Ch.0.
 3. Every new window starts blank. Paste the lab README's whole block.
 4. WH / MW: that block ends with `./scripts/run wh-01`.
 5. HW: close the sim, run `./scripts/start-bridge.sh`, then paste the HW lab block in a second window.
+6. Optional docs Connect: `./scripts/start-host.sh` → yellow Bearer token → paste at https://drsanti.github.io/robotos-workshop-docs/
 
 ---
 

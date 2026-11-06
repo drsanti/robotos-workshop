@@ -26,8 +26,9 @@ A) Fast path (recommended)
      scripts\run.cmd wh-01
 4) Board labs: double-click scripts\start-bridge.cmd (leave open), then
      scripts\run.cmd hw-01
-5) Optional interactive docs: scripts\start-host.cmd, open the printed URL
-   (or the Pages site + paste token)
+5) Optional interactive docs: scripts\start-host.cmd — copy the yellow
+   Bearer token from the cyan box, then Connect on
+   https://drsanti.github.io/robotos-workshop-docs/
 
 List labs:  scripts\run.cmd list
 

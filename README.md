@@ -150,7 +150,8 @@ Instructor talking points (optional): [`docs/theory/`](docs/theory/).
 - Interactive docs **source** + `workshop-host` source live in private
   `robotos-workshop-tools/`. Students get the public Pages site and/or a
   prebuilt `workshop-host` under `code/robotos-v*/bin/` (see tools
-  `PUBLISH.md`).
+  `PUBLISH.md`). Rebuild Windows `.exe` on a Windows host:
+  tools `WINDOWS-SHIP.md` → `.\scripts\ship-host.ps1`.
 
 ## License
 
