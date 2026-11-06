@@ -22,7 +22,8 @@ A) Fast path (recommended)
 3) Board labs: ./scripts/start-bridge.sh in a second Terminal, then
      ./scripts/run hw-01
 4) Optional interactive docs: ./scripts/start-host.sh, open the printed URL
-   (or the Pages site + paste token)
+   (or the Pages site + paste token). After Connect, pin a serial device under
+   Your setup → Serial port if Auto misses the board.
 
 List labs:  ./scripts/run list
 

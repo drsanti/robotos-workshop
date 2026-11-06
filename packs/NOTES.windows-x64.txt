@@ -29,6 +29,8 @@ A) Fast path (recommended)
 5) Optional interactive docs: scripts\start-host.cmd — copy the yellow
    Bearer token from the cyan box, then Connect on
    https://drsanti.github.io/robotos-workshop-docs/
+   After Connect, pin a COM port under Your setup → Serial port if Auto
+   misses the board (needs a host binary that includes /api/serial/ports).
 
 List labs:  scripts\run.cmd list
 

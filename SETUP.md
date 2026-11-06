@@ -4,7 +4,8 @@ Interactive follow-along (optional): https://drsanti.github.io/robotos-workshop-
 
 1. Open **Your setup** → set **OS** + **Workshop folder** (path to this pack).
 2. For Run / terminals / Live: run `./scripts/start-host.sh` (Windows: `scripts\start-host.cmd`), paste the **Bearer token** from that window, then **Connect**.
-3. Copy-only still works without the host.
+3. After Connect, optional: **Your setup → Serial port** — leave **Auto**, or pin a COM/`cu.*` device if auto-detect misses the board (Copy/Run rewrites `--port auto`).
+4. Copy-only still works without the host.
 
 Follow **one** section and stop at the end of it.
 
@@ -129,7 +130,7 @@ $env:ROBOTOS_LISTEN = "tcp/0.0.0.0:7447"
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-If auto-detect misses the USB port, add `--probe-settle-ms 2000 --probe-ms 5000`, or set `--port COM17` to the COM port shown in **Device Manager**. `serial-bridge.exe` is next to `robotos.exe`.
+If auto-detect misses the USB port, pin it under **Your setup → Serial port** (with host Connected), or add `--probe-settle-ms 2000 --probe-ms 5000` / `--port COM17` from **Device Manager**. `serial-bridge.exe` is next to `robotos.exe`.
 
 **Window B — labs.** A second PowerShell. Do not reuse window A.
 
@@ -158,7 +159,7 @@ Run HW-01 before LED or IMU labs. Follow the caps it prints.
 | HW-01 waits forever | Close the sim. Start window A again |
 | `CONNECTION_TO_SELF` | Window B must run `Remove-Item Env:ROBOTOS_LISTEN`. Do not listen and connect in one window |
 | Git Bash breaks `/robot/...` | Use **PowerShell** |
-| Board silent / port busy | Check USB, close other serial programs, set `--port COMx` |
+| Board silent / port busy | Check USB, close other serial programs, pin **Your setup → Serial port** or set `--port COMx` |
 | LED lab does nothing | That board has no LED. Use the other board, or a non-LED lab |
 | IMU timeout | That board has no IMU. Use `board_watch` |
 | `ModuleNotFoundError: labs` | The window is not in the workshop folder |
@@ -234,7 +235,7 @@ chmod +x code/robotos-v0.3.0-macos-arm64/bin/serial-bridge 2>/dev/null || true
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-Auto-detect can skip `/dev/cu.usbmodem*` (`no workshop frame`) and select `/dev/tty.usbmodem…`. Pin the path from the line `[auto] selected`. On the class Mac that path was `/dev/tty.usbmodem101`.
+Auto-detect can skip `/dev/cu.usbmodem*` (`no workshop frame`) and select `/dev/tty.usbmodem…`. Prefer pinning under **Your setup → Serial port** (host Connected), or use the path from `[auto] selected`. On the class Mac that path was `/dev/tty.usbmodem101`.
 
 **Window B — labs.** A second terminal.
 
@@ -263,8 +264,8 @@ Run HW-01 before LED or IMU labs. A `ws28p` board prints `caps=0x3c`.
 | Robot does not move | In the sim: **External**, then **Native**. Keep publishing |
 | HW-01 waits forever | Close the sim. Start window A again |
 | `CONNECTION_TO_SELF` | Window B must `unset ROBOTOS_LISTEN` |
-| Auto skips `cu.usbmodem` | Use the `/dev/tty.usbmodem…` path from `[auto] selected` |
-| Board silent / port busy | USB, close other serial programs |
+| Auto skips `cu.usbmodem` | Pin **Your setup → Serial port**, or use `/dev/tty.usbmodem…` from `[auto] selected` |
+| Board silent / port busy | USB, close other serial programs; pin Serial port if needed |
 | LED lab does nothing | That board has no LED |
 | IMU timeout | That board has no IMU. Use `board_watch` |
 | `ModuleNotFoundError: labs` | The terminal is not in the workshop folder |
@@ -347,7 +348,7 @@ chmod +x code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2>/dev/null || true
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-If auto-detect misses the board, add `--port /dev/ttyACM0`.
+If auto-detect misses the board, pin it under **Your setup → Serial port** (host Connected), or add `--port /dev/ttyACM0`.
 
 **Window B — labs.** A second terminal.
 
@@ -375,7 +376,7 @@ Run HW-01 before LED or IMU labs.
 | `no topics announced` | Sim not connected, or the bridge is down |
 | HW-01 waits forever | Close the sim. Start window A again |
 | `CONNECTION_TO_SELF` | Window B must `unset ROBOTOS_LISTEN` |
-| Board silent / port busy | USB, close other serial programs, `--port /dev/ttyACM0` |
+| Board silent / port busy | USB, close other serial programs; pin **Your setup → Serial port** or `--port /dev/ttyACM0` |
 | `ModuleNotFoundError: labs` | The terminal is not in the workshop folder |
 
 End of the Linux section.
