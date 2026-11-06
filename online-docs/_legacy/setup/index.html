@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>robotos · Setup guide</title>
+  <script>
+    try {
+      var t = localStorage.getItem('robotos-setup-guide-theme');
+      if (t !== 'light' && t !== 'dark')
+        t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      var os = (location.hash || '').replace(/^#/, '');
+      if (os === 'windows') os = 'os-win';
+      if (os === 'macos') os = 'os-mac';
+      if (os === 'linux') os = 'os-linux';
+      if (os !== 'os-win' && os !== 'os-mac' && os !== 'os-linux') {
+        var savedOs = localStorage.getItem('robotos-setup-guide-os');
+        os = savedOs === 'mac' ? 'os-mac' : savedOs === 'linux' ? 'os-linux' : 'os-win';
+      }
+      document.documentElement.setAttribute('data-boot-os', os);
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/highlight.js"></script>
+  <script defer src="../assets/app.js"></script>
+</head>
+<body class="os-chosen">
+  <a class="skip" href="#guide" data-ui="skip">Skip to guide</a>
+  <header class="top">
+    <div class="top-toolbar">
+      <div class="top-inner top-toolbar-inner">
+        <div class="top-brand-block">
+          <a class="brand" href="../index.html"><span class="mark">r/</span> robotos <span class="quiet" data-ui="brandQuiet">setup guide</span></a>
+        </div>
+        <div class="top-actions">
+          <button type="button" id="theme-toggle" aria-label="Theme: Light (D to switch)" title="Theme: Light · D to switch">Light</button>
+          <button type="button" id="lang-toggle" aria-label="Language EN (L to switch)" title="Language: EN · L to switch">EN</button>
+        </div>
+      </div>
+    </div>
+    <div class="top-config">
+      <div class="top-inner top-config-inner">
+        <section class="config-card" id="config-card" data-open="true">
+          <button type="button" class="config-card-toggle" id="config-toggle"
+            aria-expanded="true" aria-controls="config-card-body">
+            <span class="config-card-title" data-ui="configHeading">Your setup</span>
+            <span class="config-card-summary" id="config-summary"></span>
+            <span class="config-card-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="config-card-body" id="config-card-body">
+            <div class="config-grid">
+              <div class="config-field">
+                <span class="config-label" data-ui="osPicker">Your computer</span>
+                <nav class="os-picker" aria-label="Your computer" data-ui-aria="osPicker">
+                  <button type="button" data-os="win" aria-pressed="true">Windows</button>
+                  <button type="button" data-os="mac" aria-pressed="false">macOS</button>
+                  <button type="button" data-os="linux" aria-pressed="false">Linux</button>
+                </nav>
+              </div>
+              <div class="config-field">
+                <label class="workshop-dir" for="workshop-dir">
+                  <span class="config-label" data-ui="workshopDir">Workshop folder</span>
+                  <input id="workshop-dir" type="text" spellcheck="false" autocomplete="off"
+                    placeholder="/Users/you/robotos-workshop">
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="track-progress" id="track-progress" hidden>
+          <div class="track-progress-meta">
+            <span class="track-progress-label" data-ui="progressLabel">Track progress</span>
+            <span class="track-progress-count" id="track-progress-count">0 / 5</span>
+          </div>
+          <div class="track-progress-bar" id="track-progress-bar" role="progressbar"
+            aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-labelledby="track-progress-count">
+            <span class="track-progress-fill" id="track-progress-fill"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="guide" class="guide">
+    <section class="shared" id="shared">
+      <h1 data-lang="en">SETUP — student machine</h1>
+      <h1 data-lang="th" hidden>SETUP — เครื่องของนักเรียน</h1>
+      <p data-lang="en">Follow <strong>one</strong> section and stop at the end of it.</p><p data-lang="th" hidden>ทำตาม<strong>เพียงหนึ่ง</strong>ส่วนแล้วหยุดเมื่อจบส่วนนั้น</p>
+<div class="table-wrap"><table><thead><tr><th><span data-lang="en">Your computer</span><span data-lang="th" hidden>คอมพิวเตอร์ของคุณ</span></th><th><span data-lang="en">Read only this</span><span data-lang="th" hidden>อ่านเฉพาะส่วนนี้</span></th></tr></thead><tbody><tr><td>Windows</td><td><a href="#os-win">Windows</a></td></tr><tr><td>macOS</td><td><a href="#os-mac">macOS</a></td></tr><tr><td>Linux</td><td><a href="#os-linux">Linux</a></td></tr></tbody></table></div>
+<p data-lang="en"><code>YOUR_WORKSHOP_DIR</code> is the folder that contains this file, <code>code/</code>, and <code>labs/</code>. Use a short path without spaces.</p><p data-lang="th" hidden><code>YOUR_WORKSHOP_DIR</code> คือโฟลเดอร์ที่มีไฟล์นี้ รวมถึง <code>code/</code> และ <code>labs/</code> ใช้ path สั้นและไม่มีช่องว่าง</p>
+<p data-lang="en">Unzip so you see:</p><p data-lang="th" hidden>แตกไฟล์แล้วควรเห็นโครงสร้างแบบนี้:</p>
+<div class="code-block" data-fence="text" data-template="robotos-workshop/
+  SETUP.md
+  scripts/
+  labs/
+  code/
+    robotos-v0.3.0-&lt;os&gt;-&lt;arch&gt;/
+    robotos-0.3.0-*.whl
+    robotos-sim-v&lt;ver&gt;-&lt;os&gt;-&lt;arch&gt;/
+    NOTES.txt"><div class="code-meta"><span>text</span><button type="button" class="copy" data-copy="robotos-workshop/
+  SETUP.md
+  scripts/
+  labs/
+  code/
+    robotos-v0.3.0-&lt;os&gt;-&lt;arch&gt;/
+    robotos-0.3.0-*.whl
+    robotos-sim-v&lt;ver&gt;-&lt;os&gt;-&lt;arch&gt;/
+    NOTES.txt"><span data-ui="copy">Copy</span></button></div><pre><code>robotos-workshop/
+  SETUP.md
+  scripts/
+  labs/
+  code/
+    robotos-v0.3.0-&lt;os&gt;-&lt;arch&gt;/
+    robotos-0.3.0-*.whl
+    robotos-sim-v&lt;ver&gt;-&lt;os&gt;-&lt;arch&gt;/
+    NOTES.txt</code></pre></div>
+<ul><li><span data-lang="en"><strong>MW</strong> labs use the CLI and Python. The sim is optional.</span><span data-lang="th" hidden>แล็บ <strong>MW</strong> ใช้ CLI และ Python — sim เป็นตัวเลือก</span></li><li><span data-lang="en"><strong>WH</strong> labs need the warehouse sim when your pack includes it.</span><span data-lang="th" hidden>แล็บ <strong>WH</strong> ต้องใช้ warehouse sim เมื่อแพ็กมีไฟล์นั้น</span></li><li><span data-lang="en"><strong>HW</strong> labs need the board and <code>serial-bridge</code>. Close the sim first. The sim and the bridge both use port <code>7447</code>.</span><span data-lang="th" hidden>แล็บ <strong>HW</strong> ต้องมีบอร์ดและ <code>serial-bridge</code> ปิด sim ก่อน — sim กับ bridge ใช้พอร์ต <code>7447</code> ร่วมกัน</span></li></ul>
+<p data-lang="en">Two boards. Flash the matching folder. Run HW-01 and follow the caps it prints.</p><p data-lang="th" hidden>มีบอร์ดสองรุ่น แฟลชโฟลเดอร์ที่ตรงรุ่น รัน HW-01 แล้วทำตามค่า caps ที่พิมพ์ออกมา</p>
+<div class="table-wrap"><table><thead><tr><th><span data-lang="en">Board</span><span data-lang="th" hidden>บอร์ด</span></th><th><span data-lang="en">Firmware</span><span data-lang="th" hidden>เฟิร์มแวร์</span></th><th><span data-lang="en">Typical caps</span><span data-lang="th" hidden>caps โดยทั่วไป</span></th><th><span data-lang="en">Notes</span><span data-lang="th" hidden>หมายเหตุ</span></th></tr></thead><tbody><tr><td><code>es3c28p</code></td><td><code>hardware-interface-workshop/firmware-prebuilt/es3c28p/</code></td><td><code>≈ 0x33</code></td><td><span data-lang="en">LED + mic</span><span data-lang="th" hidden>มี LED + mic</span></td></tr><tr><td><code>ws28p</code></td><td><code>hardware-interface-workshop/firmware-prebuilt/ws28p/</code></td><td><code>≈ 0x3c</code></td><td><span data-lang="en">IMU + RTC; no LED/mic</span><span data-lang="th" hidden>มี IMU + RTC; ไม่มี LED/mic</span></td></tr></tbody></table></div>
+<p data-lang="en">Each lab sheet repeats the setup lines, because a new window forgets them.</p><p data-lang="th" hidden>แผ่นแล็บแต่ละอันจะทวนบรรทัด setup อีกครั้ง เพราะหน้าต่างใหม่จะลืมค่าเหล่านี้</p>
+<p data-lang="en"><code>robotos</code> is a file in <code>code/…/bin</code>. It is not installed on the computer. Paste each block in full. A new window needs the block again.</p><p data-lang="th" hidden><code>robotos</code> เป็นไฟล์ใน <code>code/…/bin</code> ไม่ได้ติดตั้งทั้งระบบ วางคำสั่งทั้งบล็อก หน้าต่างใหม่ต้องวางบล็อกเดิมอีกครั้ง</p>
+    </section>
+
+    <div id="os-panels">
+      <section class="os-panel" data-os="win" id="os-win">
+<header class="os-head"><h2>Windows</h2>
+<p class="shell-tag" data-lang="en">Use <strong>PowerShell</strong>. Stay in this track until the end.</p>
+<p class="shell-tag" data-lang="th" hidden>ใช้ <strong>PowerShell</strong> อยู่กับแทร็กนี้จนจบ</p>
+</header>
+<div class="os-lead"><p data-lang="en">Use <strong>PowerShell</strong>. Press the <code>Win</code> key, type <code>PowerShell</code>, and press Enter. Stay in this section until you are done.</p><p data-lang="th" hidden>ใช้ <strong>PowerShell</strong> กดปุ่ม <code>Win</code> พิมพ์ <code>PowerShell</code> แล้วกด Enter อยู่กับส่วนนี้จนจบ</p></div>
+<article class="step" id="win-step-1" data-step="1"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="win-step-1"><span class="step-num">1</span><h3 data-lang="en">1. Check <code>robotos</code></h3><h3 data-lang="th" hidden>1. ตรวจ <code>robotos</code></h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><div class="code-block" data-fence="powershell" data-template="cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+Get-Command robotos
+robotos version"><div class="code-meta"><span>powershell</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+Get-Command robotos
+robotos version"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+Get-Command robotos
+robotos version</code></pre></div>
+<p data-lang="en">Expect <code>robotos 0.3.0</code> (any <code>0.3.x</code> is fine).</p><p data-lang="th" hidden>ควรได้ <code>robotos 0.3.0</code> (เวอร์ชัน <code>0.3.x</code> ก็ใช้ได้)</p>
+<p data-lang="en">Once per machine you can double-click <code>scripts/start-here.cmd</code>. That creates <code>.venv</code>, installs the wheel, and starts the sim. The next PowerShell window is still blank. Paste the blocks below again.</p><p data-lang="th" hidden>ครั้งแรกต่อเครื่อง สามารถดับเบิลคลิก <code>scripts/start-here.cmd</code> ได้ จะสร้าง <code>.venv</code> ติดตั้ง wheel และเปิด sim แต่ PowerShell หน้าต่างถัดไปยังว่างอยู่ ต้องวางบล็อกด้านล่างอีกครั้ง</p></div></article>
+<article class="step" id="win-step-2" data-step="2"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="win-step-2"><span class="step-num">2</span><h3 data-lang="en">2. Python</h3><h3 data-lang="th" hidden>2. Python</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">Python 3.10 or newer, from python.org. Tick <strong>Add python.exe to PATH</strong> during install.</p><p data-lang="th" hidden>ใช้ Python 3.10 ขึ้นไป จาก python.org ตอนติดตั้งให้ติ๊ก <strong>Add python.exe to PATH</strong></p>
+<div class="code-block" data-fence="powershell" data-template="cd YOUR_WORKSHOP_DIR
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -U pip
+python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;"><div class="code-meta"><span>powershell</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -U pip
+python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -U pip
+python -m pip install .\code\robotos-0.3.0-py3-none-win_amd64.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;</code></pre></div>
+<p data-lang="en">If <code>.venv</code> already exists, start at <code>.\.venv\Scripts\Activate.ps1</code>. The prompt should show <code>(.venv)</code>.</p><p data-lang="th" hidden>ถ้ามี <code>.venv</code> อยู่แล้ว ให้เริ่มที่ <code>.\.venv\Scripts\Activate.ps1</code> พรอมต์ควรขึ้น <code>(.venv)</code></p>
+<p data-lang="en">If <code>Activate.ps1</code> is blocked, run this once, then activate again:</p><p data-lang="th" hidden>ถ้า <code>Activate.ps1</code> ถูกบล็อก ให้รันคำสั่งนี้ครั้งเดียว แล้ว activate อีกครั้ง:</p>
+<div class="code-block" data-fence="powershell" data-template="Set-ExecutionPolicy -Scope CurrentUser RemoteSigned"><div class="code-meta"><span>powershell</span><button type="button" class="copy" data-copy="Set-ExecutionPolicy -Scope CurrentUser RemoteSigned"><span data-ui="copy">Copy</span></button></div><pre><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre></div>
+<p data-lang="en">If the wheel name differs, run <code>Get-ChildItem .\code\*.whl</code> and install that file. Use the <code>win_amd64</code> wheel.</p><p data-lang="th" hidden>ถ้าชื่อ wheel ไม่ตรง ให้รัน <code>Get-ChildItem .\code\*.whl</code> แล้วติดตั้งไฟล์นั้น ใช้ wheel แบบ <code>win_amd64</code></p></div></article>
+<article class="step" id="win-step-3" data-step="3"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="win-step-3"><span class="step-num">3</span><h3 data-lang="en">3. Warehouse sim</h3><h3 data-lang="th" hidden>3. Warehouse sim</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">WH labs need the sim. MW and HW do not.</p><p data-lang="th" hidden>แล็บ WH ต้องใช้ sim ส่วน MW และ HW ไม่จำเป็น</p>
+<div class="code-block" data-fence="powershell" data-template="cd YOUR_WORKSHOP_DIR
+Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe"><div class="code-meta"><span>powershell</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+Start-Process .\code\robotos-sim-v0.1.0-windows-x64\robotos-sim.exe</code></pre></div>
+<p data-lang="en">Or double-click <code>robotos-sim.exe</code> in that folder. Confirm the window says connected / <strong>NATIVE</strong>. If it does not: <strong>Warehouse → Native → External → Connect</strong>. Graded WH labs use Native, not Mock. Do not restart the sim every time you open PowerShell.</p><p data-lang="th" hidden>หรือดับเบิลคลิก <code>robotos-sim.exe</code> ในโฟลเดอร์นั้น ตรวจว่าหน้าต่างขึ้น connected / <strong>NATIVE</strong> ถ้าไม่ใช่: <strong>Warehouse → Native → External → Connect</strong> แล็บ WH ที่ให้คะแนนใช้ Native ไม่ใช่ Mock อย่ารีสตาร์ท sim ทุกครั้งที่เปิด PowerShell</p></div></article>
+<article class="step" id="win-step-4" data-step="4"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="win-step-4"><span class="step-num">4</span><h3 data-lang="en">4. Smoke test</h3><h3 data-lang="th" hidden>4. ทดสอบเบื้องต้น</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">The sim must already be connected.</p><p data-lang="th" hidden>sim ต้องเชื่อมต่อไว้แล้ว</p>
+<div class="code-block" data-fence="powershell" data-template="cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+.\.venv\Scripts\Activate.ps1
+robotos topic list
+scripts\run.cmd wh-01"><div class="code-meta"><span>powershell</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+.\.venv\Scripts\Activate.ps1
+robotos topic list
+scripts\run.cmd wh-01"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+.\.venv\Scripts\Activate.ps1
+robotos topic list
+scripts\run.cmd wh-01</code></pre></div>
+<p data-lang="en"><code>topic list</code> shows <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, and <code>/robot/01/scan</code>. WH-01 moves the robot about 1 m. Use PowerShell for these commands. Git Bash rewrites paths that start with <code>/robot/</code>.</p><p data-lang="th" hidden><code>topic list</code> ควรเห็น <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code> และ <code>/robot/01/scan</code> WH-01 จะขยับหุ่นยนต์ประมาณ 1 ม. ใช้ PowerShell สำหรับคำสั่งเหล่านี้ Git Bash จะแปลง path ที่ขึ้นต้นด้วย <code>/robot/</code></p>
+<p data-lang="en">Optional, same window:</p><p data-lang="th" hidden>ทางเลือก ใช้หน้าต่างเดิม:</p>
+<div class="code-block" data-fence="powershell" data-template="robotos topic echo /robot/01/odom --count 5"><div class="code-meta"><span>powershell</span><button type="button" class="copy" data-copy="robotos topic echo /robot/01/odom --count 5"><span data-ui="copy">Copy</span></button></div><pre><code>robotos topic echo /robot/01/odom --count 5</code></pre></div></div></article>
+<article class="step" id="win-step-5" data-step="5"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="win-step-5"><span class="step-num">5</span><h3 data-lang="en">5. Board (HW labs)</h3><h3 data-lang="th" hidden>5. บอร์ด (แล็บ HW)</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">Close the sim first. Two windows.</p><p data-lang="th" hidden>ปิด sim ก่อน ใช้สองหน้าต่าง</p>
+<p class="callout" data-lang="en"><strong>Window A — bridge.</strong> Leave it open. Or double-click <code>scripts/start-bridge.cmd</code>.</p><p class="callout" data-lang="th" hidden><strong>หน้าต่าง A — bridge</strong> เปิดค้างไว้ หรือดับเบิลคลิก <code>scripts/start-bridge.cmd</code></p>
+<div class="code-block" data-fence="powershell" data-template="cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+$env:ROBOTOS_LISTEN = &quot;tcp/0.0.0.0:7447&quot;
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all"><div class="code-meta"><span>powershell</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+$env:ROBOTOS_LISTEN = &quot;tcp/0.0.0.0:7447&quot;
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+$env:ROBOTOS_LISTEN = &quot;tcp/0.0.0.0:7447&quot;
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all</code></pre></div>
+<p data-lang="en">If auto-detect misses the USB port, add <code>--probe-settle-ms 2000 --probe-ms 5000</code>, or set <code>--port COM17</code> to the COM port shown in Device Manager. <code>serial-bridge.exe</code> is next to <code>robotos.exe</code>.</p><p data-lang="th" hidden>ถ้า auto-detect พลาดพอร์ต USB ให้เพิ่ม <code>--probe-settle-ms 2000 --probe-ms 5000</code> หรือตั้ง <code>--port COM17</code> ตาม COM ใน Device Manager <code>serial-bridge.exe</code> อยู่ข้าง <code>robotos.exe</code></p>
+<p class="callout" data-lang="en"><strong>Window B — labs.</strong> A second PowerShell. Do not reuse window A.</p><p class="callout" data-lang="th" hidden><strong>หน้าต่าง B — แล็บ</strong> เปิด PowerShell ใหม่ อย่าใช้หน้าต่าง A ซ้ำ</p>
+<div class="code-block" data-fence="powershell" data-template="cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+Remove-Item Env:ROBOTOS_LISTEN -ErrorAction SilentlyContinue
+$env:ROBOTOS_CONNECT = &quot;tcp/127.0.0.1:7447&quot;
+.\.venv\Scripts\Activate.ps1
+robotos topic echo /robot/01/sys/board --count 3
+scripts\run.cmd hw-01"><div class="code-meta"><span>powershell</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+Remove-Item Env:ROBOTOS_LISTEN -ErrorAction SilentlyContinue
+$env:ROBOTOS_CONNECT = &quot;tcp/127.0.0.1:7447&quot;
+.\.venv\Scripts\Activate.ps1
+robotos topic echo /robot/01/sys/board --count 3
+scripts\run.cmd hw-01"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+$env:PATH = &quot;$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH&quot;
+Remove-Item Env:ROBOTOS_LISTEN -ErrorAction SilentlyContinue
+$env:ROBOTOS_CONNECT = &quot;tcp/127.0.0.1:7447&quot;
+.\.venv\Scripts\Activate.ps1
+robotos topic echo /robot/01/sys/board --count 3
+scripts\run.cmd hw-01</code></pre></div>
+<p data-lang="en">Run HW-01 before LED or IMU labs. Follow the caps it prints.</p><p data-lang="th" hidden>รัน HW-01 ก่อนแล็บ LED หรือ IMU แล้วทำตาม caps ที่พิมพ์ออกมา</p></div></article>
+<section class="failures" id="win-failures"><h3 data-lang="en">If something fails</h3><h3 data-lang="th" hidden>ถ้ามีปัญหา</h3>
+<div class="table-wrap"><table><thead><tr><th><span data-lang="en">What you see</span><span data-lang="th" hidden>สิ่งที่เห็น</span></th><th><span data-lang="en">What to do</span><span data-lang="th" hidden>วิธีแก้</span></th></tr></thead><tbody><tr><td><span data-lang="en"><code>robotos</code> not found</span><span data-lang="th" hidden>หา <code>robotos</code> ไม่เจอ</span></td><td><span data-lang="en">Paste section 1 again in <strong>this</strong> window</span><span data-lang="th" hidden>วางส่วนที่ 1 อีกครั้งในหน้าต่าง<strong>นี้</strong></span></td></tr><tr><td><span data-lang="en"><code>Activate.ps1</code> blocked</span><span data-lang="th" hidden><code>Activate.ps1</code> ถูกบล็อก</span></td><td><span data-lang="en"><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code>, then activate again</span><span data-lang="th" hidden>รัน <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code> แล้ว activate อีกครั้ง</span></td></tr><tr><td><span data-lang="en">Wheel “not supported”</span><span data-lang="th" hidden>wheel “not supported”</span></td><td><span data-lang="en">Install <code>code\robotos-0.3.0-py3-none-win_amd64.whl</code></span><span data-lang="th" hidden>ติดตั้ง <code>code\robotos-0.3.0-py3-none-win_amd64.whl</code></span></td></tr><tr><td><span data-lang="en"><code>scripts\run.cmd</code> fails</span><span data-lang="th" hidden><code>scripts\run.cmd</code> ล้มเหลว</span></td><td><span data-lang="en"><code>cd</code> to the folder that contains <code>SETUP.md</code>, then activate <code>.venv</code></span><span data-lang="th" hidden><code>cd</code> ไปโฟลเดอร์ที่มี <code>SETUP.md</code> แล้ว activate <code>.venv</code></span></td></tr><tr><td><span data-lang="en"><code>no topics announced</code></span><span data-lang="th" hidden><code>no topics announced</code></span></td><td><span data-lang="en">Sim not connected, or the bridge is down</span><span data-lang="th" hidden>sim ยังไม่เชื่อมต่อ หรือ bridge ดับ</span></td></tr><tr><td><span data-lang="en">Robot does not move</span><span data-lang="th" hidden>หุ่นยนต์ไม่ขยับ</span></td><td><span data-lang="en">In the sim: <strong>External</strong>, then <strong>Native</strong>. Keep publishing</span><span data-lang="th" hidden>ใน sim: เลือก <strong>External</strong> แล้ว <strong>Native</strong> แล้วค่อย publish ต่อ</span></td></tr><tr><td><span data-lang="en">HW-01 waits forever</span><span data-lang="th" hidden>HW-01 รอค้าง</span></td><td><span data-lang="en">Close the sim. Start window A again</span><span data-lang="th" hidden>ปิด sim แล้วเริ่มหน้าต่าง A ใหม่</span></td></tr><tr><td><span data-lang="en"><code>CONNECTION_TO_SELF</code></span><span data-lang="th" hidden><code>CONNECTION_TO_SELF</code></span></td><td><span data-lang="en">Window B must run <code>Remove-Item Env:ROBOTOS_LISTEN</code>. Do not listen and connect in one window</span><span data-lang="th" hidden>หน้าต่าง B ต้องรัน <code>Remove-Item Env:ROBOTOS_LISTEN</code> อย่า listen และ connect ในหน้าต่างเดียว</span></td></tr><tr><td><span data-lang="en">Git Bash breaks <code>/robot/...</code></span><span data-lang="th" hidden>Git Bash ทำให้ <code>/robot/...</code> พัง</span></td><td><span data-lang="en">Use PowerShell</span><span data-lang="th" hidden>ใช้ PowerShell</span></td></tr><tr><td><span data-lang="en">Board silent / port busy</span><span data-lang="th" hidden>บอร์ดเงียบ / พอร์ตไม่ว่าง</span></td><td><span data-lang="en">Check USB, close other serial programs, set <code>--port COMx</code></span><span data-lang="th" hidden>เช็ก USB ปิดโปรแกรม serial อื่น ตั้ง <code>--port COMx</code></span></td></tr><tr><td><span data-lang="en">LED lab does nothing</span><span data-lang="th" hidden>แล็บ LED ไม่ทำอะไร</span></td><td><span data-lang="en">That board has no LED. Use the other board, or a non-LED lab</span><span data-lang="th" hidden>บอร์ดนี้ไม่มี LED ใช้บอร์ดอีกตัว หรือแล็บที่ไม่ใช้ LED</span></td></tr><tr><td><span data-lang="en">IMU timeout</span><span data-lang="th" hidden>IMU timeout</span></td><td><span data-lang="en">That board has no IMU. Use <code>board_watch</code></span><span data-lang="th" hidden>บอร์ดนี้ไม่มี IMU ใช้ <code>board_watch</code></span></td></tr><tr><td><span data-lang="en"><code>ModuleNotFoundError: labs</code></span><span data-lang="th" hidden><code>ModuleNotFoundError: labs</code></span></td><td><span data-lang="en">The window is not in the workshop folder</span><span data-lang="th" hidden>หน้าต่างนี้ไม่ได้อยู่ในโฟลเดอร์เวิร์กช็อป</span></td></tr></tbody></table></div>
+<p class="section-end" data-lang="en">End of the Windows section.</p><p class="section-end" data-lang="th" hidden>จบส่วน Windows</p></section>
+</section>
+<section class="os-panel" data-os="mac" id="os-mac" hidden>
+<header class="os-head"><h2>macOS</h2>
+<p class="shell-tag" data-lang="en">Use <strong>Terminal</strong>. Stay in this track until the end.</p>
+<p class="shell-tag" data-lang="th" hidden>ใช้ <strong>Terminal</strong> อยู่กับแทร็กนี้จนจบ</p>
+</header>
+<div class="os-lead"><p data-lang="en">Use <strong>Terminal</strong> on Apple Silicon (zsh or bash). Stay in this section until you are done.</p><p data-lang="th" hidden>ใช้ <strong>Terminal</strong> บน Apple Silicon (zsh หรือ bash) อยู่กับส่วนนี้จนจบ</p></div>
+<article class="step" id="mac-step-1" data-step="1"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="mac-step-1"><span class="step-num">1</span><h3 data-lang="en">1. Check <code>robotos</code></h3><h3 data-lang="th" hidden>1. ตรวจ <code>robotos</code></h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/* 2&gt;/dev/null || true
+robotos version"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/* 2&gt;/dev/null || true
+robotos version"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/* 2&gt;/dev/null || true
+robotos version</code></pre></div>
+<p data-lang="en">Expect <code>robotos 0.3.0</code> (any <code>0.3.x</code> is fine). A new terminal needs this block again.</p><p data-lang="th" hidden>ควรได้ <code>robotos 0.3.0</code> (เวอร์ชัน <code>0.3.x</code> ก็ใช้ได้) เทอร์มินัลใหม่ต้องวางบล็อกนี้อีกครั้ง</p>
+<p data-lang="en">Once per machine you can double-click <code>scripts/start-here.command</code>, or run <code>./scripts/start-here.sh</code> from this folder. That creates <code>.venv</code>, installs the wheel, and opens the sim. The next terminal is still blank. Paste the blocks below again.</p><p data-lang="th" hidden>ครั้งแรกต่อเครื่อง สามารถดับเบิลคลิก <code>scripts/start-here.command</code> หรือรัน <code>./scripts/start-here.sh</code> จากโฟลเดอร์นี้ จะสร้าง <code>.venv</code> ติดตั้ง wheel และเปิด sim เทอร์มินัลถัดไปยังว่าง ต้องวางบล็อกด้านล่างอีกครั้ง</p></div></article>
+<article class="step" id="mac-step-2" data-step="2"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="mac-step-2"><span class="step-num">2</span><h3 data-lang="en">2. Python</h3><h3 data-lang="th" hidden>2. Python</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">Python 3.10 or newer.</p><p data-lang="th" hidden>ใช้ Python 3.10 ขึ้นไป</p>
+<div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;</code></pre></div>
+<p data-lang="en">If <code>.venv</code> already exists, start at <code>source .venv/bin/activate</code>. Do not install the <code>win_amd64</code> wheel.</p><p data-lang="th" hidden>ถ้ามี <code>.venv</code> อยู่แล้ว ให้เริ่มที่ <code>source .venv/bin/activate</code> อย่าติดตั้ง wheel แบบ <code>win_amd64</code></p></div></article>
+<article class="step" id="mac-step-3" data-step="3"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="mac-step-3"><span class="step-num">3</span><h3 data-lang="en">3. Warehouse sim</h3><h3 data-lang="th" hidden>3. Warehouse sim</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app</code></pre></div>
+<p data-lang="en">The first launch may say the app cannot be opened. In Finder, right-click the app and choose <strong>Open</strong>, or allow it under System Settings → Privacy &amp; Security. Confirm connected / <strong>NATIVE</strong>. If not: <strong>Warehouse → Native → External → Connect</strong>. Do not restart the sim every time you open Terminal.</p><p data-lang="th" hidden>ครั้งแรกอาจขึ้นว่าเปิดแอปไม่ได้ ใน Finder ให้คลิกขวาแล้วเลือก <strong>Open</strong> หรืออนุญาตใน System Settings → Privacy &amp; Security ตรวจว่า connected / <strong>NATIVE</strong> ถ้าไม่ใช่: <strong>Warehouse → Native → External → Connect</strong> อย่ารีสตาร์ท sim ทุกครั้งที่เปิด Terminal</p></div></article>
+<article class="step" id="mac-step-4" data-step="4"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="mac-step-4"><span class="step-num">4</span><h3 data-lang="en">4. Smoke test</h3><h3 data-lang="th" hidden>4. ทดสอบเบื้องต้น</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01</code></pre></div>
+<p data-lang="en"><code>topic list</code> shows <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, and <code>/robot/01/scan</code>. WH-01 moves the robot about 1 m.</p><p data-lang="th" hidden><code>topic list</code> ควรเห็น <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code> และ <code>/robot/01/scan</code> WH-01 จะขยับหุ่นยนต์ประมาณ 1 ม.</p></div></article>
+<article class="step" id="mac-step-5" data-step="5"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="mac-step-5"><span class="step-num">5</span><h3 data-lang="en">5. Board (HW labs)</h3><h3 data-lang="th" hidden>5. บอร์ด (แล็บ HW)</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">Close the sim first. Two windows.</p><p data-lang="th" hidden>ปิด sim ก่อน ใช้สองหน้าต่าง</p>
+<p class="callout" data-lang="en"><strong>Window A — bridge.</strong> Leave it open. Or run <code>./scripts/start-bridge.sh</code> from this folder.</p><p class="callout" data-lang="th" hidden><strong>หน้าต่าง A — bridge</strong> เปิดค้างไว้ หรือรัน <code>./scripts/start-bridge.sh</code> จากโฟลเดอร์นี้</p>
+<div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/serial-bridge 2&gt;/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/serial-bridge 2&gt;/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v0.3.0-macos-arm64/bin/serial-bridge 2&gt;/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all</code></pre></div>
+<p data-lang="en">Auto-detect can skip <code>/dev/cu.usbmodem*</code> (<code>no workshop frame</code>) and select <code>/dev/tty.usbmodem…</code>. Pin the path from the line <code>[auto] selected</code>. On the class Mac that path was <code>/dev/tty.usbmodem101</code>.</p><p data-lang="th" hidden>auto-detect อาจข้าม <code>/dev/cu.usbmodem*</code> (<code>no workshop frame</code>) แล้วเลือก <code>/dev/tty.usbmodem…</code> ให้จำ path จากบรรทัด <code>[auto] selected</code> บน Mac ในชั้นเรียนเคยเป็น <code>/dev/tty.usbmodem101</code></p>
+<p class="callout" data-lang="en"><strong>Window B — labs.</strong> A second terminal.</p><p class="callout" data-lang="th" hidden><strong>หน้าต่าง B — แล็บ</strong> เปิดเทอร์มินัลที่สอง</p>
+<div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+unset ROBOTOS_LISTEN
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+source .venv/bin/activate
+robotos topic echo /robot/01/sys/board --count 3
+./scripts/run hw-01"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+unset ROBOTOS_LISTEN
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+source .venv/bin/activate
+robotos topic echo /robot/01/sys/board --count 3
+./scripts/run hw-01"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH&quot;
+unset ROBOTOS_LISTEN
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+source .venv/bin/activate
+robotos topic echo /robot/01/sys/board --count 3
+./scripts/run hw-01</code></pre></div>
+<p data-lang="en">Run HW-01 before LED or IMU labs. A <code>ws28p</code> board prints <code>caps=0x3c</code>.</p><p data-lang="th" hidden>รัน HW-01 ก่อนแล็บ LED หรือ IMU บอร์ด <code>ws28p</code> จะพิมพ์ <code>caps=0x3c</code></p></div></article>
+<section class="failures" id="mac-failures"><h3 data-lang="en">If something fails</h3><h3 data-lang="th" hidden>ถ้ามีปัญหา</h3>
+<div class="table-wrap"><table><thead><tr><th><span data-lang="en">What you see</span><span data-lang="th" hidden>สิ่งที่เห็น</span></th><th><span data-lang="en">What to do</span><span data-lang="th" hidden>วิธีแก้</span></th></tr></thead><tbody><tr><td><span data-lang="en"><code>robotos</code> not found</span><span data-lang="th" hidden>หา <code>robotos</code> ไม่เจอ</span></td><td><span data-lang="en">Paste section 1 again in <strong>this</strong> terminal</span><span data-lang="th" hidden>วางส่วนที่ 1 อีกครั้งในเทอร์มินัล<strong>นี้</strong></span></td></tr><tr><td><span data-lang="en"><code>python</code> not found</span><span data-lang="th" hidden>หา <code>python</code> ไม่เจอ</span></td><td><span data-lang="en">Use <code>python3</code>, then <code>source .venv/bin/activate</code></span><span data-lang="th" hidden>ใช้ <code>python3</code> แล้ว <code>source .venv/bin/activate</code></span></td></tr><tr><td><span data-lang="en">Wheel “not supported”</span><span data-lang="th" hidden>wheel “not supported”</span></td><td><span data-lang="en">Install <code>code/robotos-0.3.0-py3-none-any.whl</code></span><span data-lang="th" hidden>ติดตั้ง <code>code/robotos-0.3.0-py3-none-any.whl</code></span></td></tr><tr><td><span data-lang="en"><code>./scripts/run</code> fails</span><span data-lang="th" hidden><code>./scripts/run</code> ล้มเหลว</span></td><td><span data-lang="en"><code>cd</code> to the folder that contains <code>SETUP.md</code>, then activate <code>.venv</code></span><span data-lang="th" hidden><code>cd</code> ไปโฟลเดอร์ที่มี <code>SETUP.md</code> แล้ว activate <code>.venv</code></span></td></tr><tr><td><span data-lang="en">“cannot be opened”</span><span data-lang="th" hidden>“cannot be opened”</span></td><td><span data-lang="en">Privacy &amp; Security → allow <code>robotos-sim</code></span><span data-lang="th" hidden>Privacy &amp; Security → อนุญาต <code>robotos-sim</code></span></td></tr><tr><td><span data-lang="en"><code>no topics announced</code></span><span data-lang="th" hidden><code>no topics announced</code></span></td><td><span data-lang="en">Sim not connected, or the bridge is down</span><span data-lang="th" hidden>sim ยังไม่เชื่อมต่อ หรือ bridge ดับ</span></td></tr><tr><td><span data-lang="en">Robot does not move</span><span data-lang="th" hidden>หุ่นยนต์ไม่ขยับ</span></td><td><span data-lang="en">In the sim: <strong>External</strong>, then <strong>Native</strong>. Keep publishing</span><span data-lang="th" hidden>ใน sim: เลือก <strong>External</strong> แล้ว <strong>Native</strong> แล้วค่อย publish ต่อ</span></td></tr><tr><td><span data-lang="en">HW-01 waits forever</span><span data-lang="th" hidden>HW-01 รอค้าง</span></td><td><span data-lang="en">Close the sim. Start window A again</span><span data-lang="th" hidden>ปิด sim แล้วเริ่มหน้าต่าง A ใหม่</span></td></tr><tr><td><span data-lang="en"><code>CONNECTION_TO_SELF</code></span><span data-lang="th" hidden><code>CONNECTION_TO_SELF</code></span></td><td><span data-lang="en">Window B must <code>unset ROBOTOS_LISTEN</code></span><span data-lang="th" hidden>หน้าต่าง B ต้อง <code>unset ROBOTOS_LISTEN</code></span></td></tr><tr><td><span data-lang="en">Auto skips <code>cu.usbmodem</code></span><span data-lang="th" hidden>auto ข้าม <code>cu.usbmodem</code></span></td><td><span data-lang="en">Use the <code>/dev/tty.usbmodem…</code> path from <code>[auto] selected</code></span><span data-lang="th" hidden>ใช้ path <code>/dev/tty.usbmodem…</code> จาก <code>[auto] selected</code></span></td></tr><tr><td><span data-lang="en">Board silent / port busy</span><span data-lang="th" hidden>บอร์ดเงียบ / พอร์ตไม่ว่าง</span></td><td><span data-lang="en">USB, close other serial programs</span><span data-lang="th" hidden>เช็ก USB ปิดโปรแกรม serial อื่น</span></td></tr><tr><td><span data-lang="en">LED lab does nothing</span><span data-lang="th" hidden>แล็บ LED ไม่ทำอะไร</span></td><td><span data-lang="en">That board has no LED</span><span data-lang="th" hidden>บอร์ดนี้ไม่มี LED</span></td></tr><tr><td><span data-lang="en">IMU timeout</span><span data-lang="th" hidden>IMU timeout</span></td><td><span data-lang="en">That board has no IMU. Use <code>board_watch</code></span><span data-lang="th" hidden>บอร์ดนี้ไม่มี IMU ใช้ <code>board_watch</code></span></td></tr><tr><td><span data-lang="en"><code>ModuleNotFoundError: labs</code></span><span data-lang="th" hidden><code>ModuleNotFoundError: labs</code></span></td><td><span data-lang="en">The terminal is not in the workshop folder</span><span data-lang="th" hidden>เทอร์มินัลไม่ได้อยู่ในโฟลเดอร์เวิร์กช็อป</span></td></tr></tbody></table></div>
+<p class="section-end" data-lang="en">End of the macOS section.</p><p class="section-end" data-lang="th" hidden>จบส่วน macOS</p></section>
+</section>
+<section class="os-panel" data-os="linux" id="os-linux" hidden>
+<header class="os-head"><h2>Linux</h2>
+<p class="shell-tag" data-lang="en">Use <strong>bash</strong>. Stay in this track until the end.</p>
+<p class="shell-tag" data-lang="th" hidden>ใช้ <strong>bash</strong> อยู่กับแทร็กนี้จนจบ</p>
+</header>
+<div class="os-lead"><p data-lang="en">Use <strong>bash</strong>. Stay in this section until you are done. This class drop often has no <code>code/robotos-v0.3.0-linux-x64</code> folder. If <code>ls code</code> does not show it, this section does not apply.</p><p data-lang="th" hidden>ใช้ <strong>bash</strong> อยู่กับส่วนนี้จนจบ แพ็กชั้นเรียนมักไม่มีโฟลเดอร์ <code>code/robotos-v0.3.0-linux-x64</code> ถ้า <code>ls code</code> ไม่เห็นโฟลเดอร์นี้ ให้ข้ามส่วนนี้</p></div>
+<article class="step" id="linux-step-1" data-step="1"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="linux-step-1"><span class="step-num">1</span><h3 data-lang="en">1. Check <code>robotos</code></h3><h3 data-lang="th" hidden>1. ตรวจ <code>robotos</code></h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+chmod +x code/robotos-v0.3.0-linux-x64/bin/* 2&gt;/dev/null || true
+robotos version"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+chmod +x code/robotos-v0.3.0-linux-x64/bin/* 2&gt;/dev/null || true
+robotos version"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+chmod +x code/robotos-v0.3.0-linux-x64/bin/* 2&gt;/dev/null || true
+robotos version</code></pre></div>
+<p data-lang="en">Expect <code>robotos 0.3.0</code> (any <code>0.3.x</code> is fine). A new terminal needs this block again.</p><p data-lang="th" hidden>ควรได้ <code>robotos 0.3.0</code> (เวอร์ชัน <code>0.3.x</code> ก็ใช้ได้) เทอร์มินัลใหม่ต้องวางบล็อกนี้อีกครั้ง</p></div></article>
+<article class="step" id="linux-step-2" data-step="2"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="linux-step-2"><span class="step-num">2</span><h3 data-lang="en">2. Python</h3><h3 data-lang="th" hidden>2. Python</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">Python 3.10 or newer. On Ubuntu: <code>sudo apt install python3 python3-venv</code>.</p><p data-lang="th" hidden>ใช้ Python 3.10 ขึ้นไป บน Ubuntu: <code>sudo apt install python3 python3-venv</code></p>
+<div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install code/robotos-0.3.0-py3-none-any.whl
+python -c &quot;import robotos; print(robotos.Node.version())&quot;</code></pre></div>
+<p data-lang="en">If <code>.venv</code> already exists, start at <code>source .venv/bin/activate</code>. Do not install the <code>win_amd64</code> wheel.</p><p data-lang="th" hidden>ถ้ามี <code>.venv</code> อยู่แล้ว ให้เริ่มที่ <code>source .venv/bin/activate</code> อย่าติดตั้ง wheel แบบ <code>win_amd64</code></p></div></article>
+<article class="step" id="linux-step-3" data-step="3"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="linux-step-3"><span class="step-num">3</span><h3 data-lang="en">3. Warehouse sim</h3><h3 data-lang="th" hidden>3. Warehouse sim</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">WH labs need a sim binary. This class drop ships Windows and macOS sims. If <code>code/robotos-sim-v0.1.0-linux-x64</code> is missing, skip WH and do MW or HW.</p><p data-lang="th" hidden>แล็บ WH ต้องมีไฟล์ sim แพ็กชั้นเรียนมี sim ของ Windows และ macOS ถ้าไม่มี <code>code/robotos-sim-v0.1.0-linux-x64</code> ให้ข้าม WH ไปทำ MW หรือ HW</p>
+<div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
+./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &amp;"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
+./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &amp;"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+chmod +x code/robotos-sim-v0.1.0-linux-x64/robotos-sim
+./code/robotos-sim-v0.1.0-linux-x64/robotos-sim &amp;</code></pre></div>
+<p data-lang="en">Confirm connected / <strong>NATIVE</strong>. If not: <strong>Warehouse → Native → External → Connect</strong>.</p><p data-lang="th" hidden>ตรวจว่า connected / <strong>NATIVE</strong> ถ้าไม่ใช่: <strong>Warehouse → Native → External → Connect</strong></p></div></article>
+<article class="step" id="linux-step-4" data-step="4"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="linux-step-4"><span class="step-num">4</span><h3 data-lang="en">4. Smoke test</h3><h3 data-lang="th" hidden>4. ทดสอบเบื้องต้น</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+source .venv/bin/activate
+robotos topic list
+./scripts/run wh-01</code></pre></div>
+<p data-lang="en"><code>topic list</code> shows <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code>, and <code>/robot/01/scan</code>. WH-01 moves the robot about 1 m.</p><p data-lang="th" hidden><code>topic list</code> ควรเห็น <code>/robot/01/cmd_vel</code>, <code>/robot/01/odom</code> และ <code>/robot/01/scan</code> WH-01 จะขยับหุ่นยนต์ประมาณ 1 ม.</p></div></article>
+<article class="step" id="linux-step-5" data-step="5"><div class="step-head"><label class="step-check"><input type="checkbox" data-check="linux-step-5"><span class="step-num">5</span><h3 data-lang="en">5. Board (HW labs)</h3><h3 data-lang="th" hidden>5. บอร์ด (แล็บ HW)</h3></label><time class="step-done-at" hidden datetime=""></time></div><div class="step-body"><p data-lang="en">Close the sim first. Serial access needs the <code>dialout</code> group. Run this once, then log out and back in:</p><p data-lang="th" hidden>ปิด sim ก่อน การใช้ serial ต้องอยู่ในกลุ่ม <code>dialout</code> รันครั้งเดียว แล้วออกจากระบบแล้วเข้าใหม่:</p>
+<div class="code-block" data-fence="bash" data-template="sudo usermod -aG dialout $USER"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="sudo usermod -aG dialout $USER"><span data-ui="copy">Copy</span></button></div><pre><code>sudo usermod -aG dialout $USER</code></pre></div>
+<p data-lang="en">Check with <code>groups | grep dialout</code> and <code>ls -l /dev/ttyACM*</code>. Do not use <code>sudo serial-bridge</code> in place of that.</p><p data-lang="th" hidden>ตรวจด้วย <code>groups | grep dialout</code> และ <code>ls -l /dev/ttyACM*</code> อย่าใช้ <code>sudo serial-bridge</code> แทนการเข้ากลุ่ม</p>
+<p class="callout" data-lang="en"><strong>Window A — bridge.</strong> Leave it open.</p><p class="callout" data-lang="th" hidden><strong>หน้าต่าง A — bridge</strong> เปิดค้างไว้</p>
+<div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2&gt;/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2&gt;/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+chmod +x code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2&gt;/dev/null || true
+serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all</code></pre></div>
+<p data-lang="en">If auto-detect misses the board, add <code>--port /dev/ttyACM0</code>.</p><p data-lang="th" hidden>ถ้า auto-detect พลาดบอร์ด ให้เพิ่ม <code>--port /dev/ttyACM0</code></p>
+<p class="callout" data-lang="en"><strong>Window B — labs.</strong> A second terminal.</p><p class="callout" data-lang="th" hidden><strong>หน้าต่าง B — แล็บ</strong> เปิดเทอร์มินัลที่สอง</p>
+<div class="code-block" data-fence="bash" data-template="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+unset ROBOTOS_LISTEN
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+source .venv/bin/activate
+robotos topic echo /robot/01/sys/board --count 3
+./scripts/run hw-01"><div class="code-meta"><span>bash</span><button type="button" class="copy" data-copy="cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+unset ROBOTOS_LISTEN
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+source .venv/bin/activate
+robotos topic echo /robot/01/sys/board --count 3
+./scripts/run hw-01"><span data-ui="copy">Copy</span></button></div><pre><code>cd YOUR_WORKSHOP_DIR
+export PATH=&quot;$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH&quot;
+unset ROBOTOS_LISTEN
+export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
+source .venv/bin/activate
+robotos topic echo /robot/01/sys/board --count 3
+./scripts/run hw-01</code></pre></div>
+<p data-lang="en">Run HW-01 before LED or IMU labs.</p><p data-lang="th" hidden>รัน HW-01 ก่อนแล็บ LED หรือ IMU</p></div></article>
+<section class="failures" id="linux-failures"><h3 data-lang="en">If something fails</h3><h3 data-lang="th" hidden>ถ้ามีปัญหา</h3>
+<div class="table-wrap"><table><thead><tr><th><span data-lang="en">What you see</span><span data-lang="th" hidden>สิ่งที่เห็น</span></th><th><span data-lang="en">What to do</span><span data-lang="th" hidden>วิธีแก้</span></th></tr></thead><tbody><tr><td><span data-lang="en"><code>robotos</code> not found</span><span data-lang="th" hidden>หา <code>robotos</code> ไม่เจอ</span></td><td><span data-lang="en">Paste section 1 again in <strong>this</strong> terminal. <code>chmod +x</code> the files in <code>code/robotos-v0.3.0-linux-x64/bin</code></span><span data-lang="th" hidden>วางส่วนที่ 1 อีกครั้งในเทอร์มินัล<strong>นี้</strong> แล้ว <code>chmod +x</code> ไฟล์ใน <code>code/robotos-v0.3.0-linux-x64/bin</code></span></td></tr><tr><td><span data-lang="en"><code>python</code> not found</span><span data-lang="th" hidden>หา <code>python</code> ไม่เจอ</span></td><td><span data-lang="en">Use <code>python3</code>, then <code>source .venv/bin/activate</code></span><span data-lang="th" hidden>ใช้ <code>python3</code> แล้ว <code>source .venv/bin/activate</code></span></td></tr><tr><td><span data-lang="en">Wheel “not supported”</span><span data-lang="th" hidden>wheel “not supported”</span></td><td><span data-lang="en">Install <code>code/robotos-0.3.0-py3-none-any.whl</code></span><span data-lang="th" hidden>ติดตั้ง <code>code/robotos-0.3.0-py3-none-any.whl</code></span></td></tr><tr><td><span data-lang="en"><code>./scripts/run</code> fails</span><span data-lang="th" hidden><code>./scripts/run</code> ล้มเหลว</span></td><td><span data-lang="en"><code>cd</code> to the folder that contains <code>SETUP.md</code>, then activate <code>.venv</code></span><span data-lang="th" hidden><code>cd</code> ไปโฟลเดอร์ที่มี <code>SETUP.md</code> แล้ว activate <code>.venv</code></span></td></tr><tr><td><span data-lang="en">Permission denied on <code>/dev/ttyACM*</code></span><span data-lang="th" hidden>Permission denied บน <code>/dev/ttyACM*</code></span></td><td><span data-lang="en"><code>dialout</code> group, then log out and back in</span><span data-lang="th" hidden>เข้ากลุ่ม <code>dialout</code> แล้วออกจากระบบแล้วเข้าใหม่</span></td></tr><tr><td><span data-lang="en"><code>no topics announced</code></span><span data-lang="th" hidden><code>no topics announced</code></span></td><td><span data-lang="en">Sim not connected, or the bridge is down</span><span data-lang="th" hidden>sim ยังไม่เชื่อมต่อ หรือ bridge ดับ</span></td></tr><tr><td><span data-lang="en">HW-01 waits forever</span><span data-lang="th" hidden>HW-01 รอค้าง</span></td><td><span data-lang="en">Close the sim. Start window A again</span><span data-lang="th" hidden>ปิด sim แล้วเริ่มหน้าต่าง A ใหม่</span></td></tr><tr><td><span data-lang="en"><code>CONNECTION_TO_SELF</code></span><span data-lang="th" hidden><code>CONNECTION_TO_SELF</code></span></td><td><span data-lang="en">Window B must <code>unset ROBOTOS_LISTEN</code></span><span data-lang="th" hidden>หน้าต่าง B ต้อง <code>unset ROBOTOS_LISTEN</code></span></td></tr><tr><td><span data-lang="en">Board silent / port busy</span><span data-lang="th" hidden>บอร์ดเงียบ / พอร์ตไม่ว่าง</span></td><td><span data-lang="en">USB, close other serial programs, <code>--port /dev/ttyACM0</code></span><span data-lang="th" hidden>เช็ก USB ปิดโปรแกรม serial อื่น ใช้ <code>--port /dev/ttyACM0</code></span></td></tr><tr><td><span data-lang="en"><code>ModuleNotFoundError: labs</code></span><span data-lang="th" hidden><code>ModuleNotFoundError: labs</code></span></td><td><span data-lang="en">The terminal is not in the workshop folder</span><span data-lang="th" hidden>เทอร์มินัลไม่ได้อยู่ในโฟลเดอร์เวิร์กช็อป</span></td></tr></tbody></table></div>
+<p class="section-end" data-lang="en">End of the Linux section.</p><p class="section-end" data-lang="th" hidden>จบส่วน Linux</p></section>
+</section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p data-lang="en">Workshop root is the folder that contains this guide’s matching workshop files (<code>code/</code>, <code>labs/</code>, <code>scripts/</code>). Replace <code>YOUR_WORKSHOP_DIR</code> with that path, or <code>cd</code> there first.</p>
+    <p data-lang="th" hidden>รากเวิร์กช็อปคือโฟลเดอร์ที่มีไฟล์เวิร์กช็อปคู่กับคู่มือนี้ (<code>code/</code>, <code>labs/</code>, <code>scripts/</code>) ให้แทน <code>YOUR_WORKSHOP_DIR</code> ด้วย path นั้น หรือ <code>cd</code> ไปที่โฟลเดอร์ก่อน</p>
+  </footer>
+</body>
+</html>

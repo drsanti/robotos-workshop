@@ -1,0 +1,87 @@
+.brand {
+  text-decoration: none;
+}
+.brand:hover .quiet { color: var(--ink); }
+
+.hub {
+  max-width: calc(var(--max) + 5rem);
+  margin: 0 auto;
+  padding: 2.25rem var(--pad) 3rem;
+}
+.hub-hero {
+  margin-bottom: 1.75rem;
+  max-width: 36rem;
+}
+.hub-kicker {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hub-hero h1 {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.7rem, 3vw, 2.15rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  font-weight: 750;
+}
+.hub-lede {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+.hub-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .hub-grid { grid-template-columns: 1fr 1fr; }
+}
+.hub-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.15rem 1.2rem 1.25rem;
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+a.hub-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  transform: translateY(-1px);
+}
+.hub-card.is-soon {
+  opacity: 0.72;
+  background: color-mix(in srgb, var(--bg-accent) 55%, var(--surface));
+}
+.hub-card-kicker {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.hub-card.is-soon .hub-card-kicker { color: var(--muted); }
+.hub-card h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+.hub-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.hub-foot {
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+}

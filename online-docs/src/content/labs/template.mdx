@@ -1,0 +1,50 @@
+import { Callout } from '../../components/Callout'
+import { CodeBlock } from '../../components/CodeBlock'
+import { Step } from '../../components/Step'
+import { T } from '../../components/LangText'
+
+# Lab live-doc template
+
+<p>
+  <T
+    en="Use this sheet as the pattern for MW / WH / HW labs. Shared shell, Lucide icons, GSAP progress, and copyable blocks."
+    th="ใช้แผ่นนี้เป็นแพทเทิร์นสำหรับแล็บ MW / WH / HW ใช้เชลล์ร่วม ไอคอน Lucide ความคืบหน้า GSAP และบล็อกคัดลอกได้"
+  />
+</p>
+
+<Callout>
+  <T
+    en="Set your workshop folder in the config card so `YOUR_WORKSHOP_DIR` is substituted in commands."
+    th="ตั้งโฟลเดอร์เวิร์กช็อปในการ์ดตั้งค่า เพื่อให้ `YOUR_WORKSHOP_DIR` ถูกแทนในคำสั่ง"
+  />
+</Callout>
+
+<Step id="lab-template-step-1" num={1} titleEn="1. Open the workshop folder" titleTh="1. เปิดโฟลเดอร์เวิร์กช็อป">
+  <CodeBlock
+    fence="bash"
+    template={`cd YOUR_WORKSHOP_DIR
+pwd`}
+  />
+</Step>
+
+<Step id="lab-template-step-2" num={2} titleEn="2. Activate the environment" titleTh="2. เปิดใช้งาน environment">
+  <p>
+    <T
+      en="Reuse the `PATH` / venv block from Machine setup for your OS."
+      th="ใช้บล็อก `PATH` / venv จาก Machine setup ตาม OS ของคุณ"
+    />
+  </p>
+  <CodeBlock
+    fence="bash"
+    template={`cd YOUR_WORKSHOP_DIR
+source .venv/bin/activate`}
+  />
+</Step>
+
+<Step id="lab-template-step-3" num={3} titleEn="3. Run the lab entrypoint" titleTh="3. รันจุดเข้าแล็บ">
+  <CodeBlock
+    fence="bash"
+    template={`cd YOUR_WORKSHOP_DIR
+./scripts/run mw-00`}
+  />
+</Step>

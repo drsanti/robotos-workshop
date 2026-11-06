@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>robotos · Online docs</title>
+  <script>
+    try {
+      var t = localStorage.getItem('robotos-setup-guide-theme');
+      if (t !== 'light' && t !== 'dark')
+        t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/hub.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="top-toolbar">
+      <div class="top-inner top-toolbar-inner">
+        <div class="top-brand-block">
+          <p class="brand"><span class="mark">r/</span> robotos <span class="quiet">online docs</span></p>
+        </div>
+        <div class="top-actions">
+          <button type="button" id="theme-toggle" title="Theme · D">Light</button>
+          <button type="button" id="lang-toggle" title="Language · L">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="hub">
+    <header class="hub-hero">
+      <p class="hub-kicker" data-ui="kicker">Follow-along guides</p>
+      <h1 data-ui="title">robotos workshop docs</h1>
+      <p class="hub-lede" data-ui="lede">Student HTML guides with copyable commands, OS tracks, and progress. Shared styling across setup and labs.</p>
+    </header>
+
+    <section class="hub-grid" aria-label="Guides">
+      <a class="hub-card" href="setup/index.html">
+        <span class="hub-card-kicker" data-ui="setupKicker">Start here</span>
+        <h2 data-ui="setupTitle">Machine setup</h2>
+        <p data-ui="setupBody">Install CLI, Python wheel, sim, and board bridge — one OS track at a time.</p>
+      </a>
+      <div class="hub-card is-soon" aria-disabled="true">
+        <span class="hub-card-kicker" data-ui="labsKicker">Coming next</span>
+        <h2 data-ui="labsTitle">Labs</h2>
+        <p data-ui="labsBody">MW / WH / HW sheets in the same follow-along style, sharing this site’s CSS and JS.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot hub-foot">
+    <p data-ui="foot">Built for GitHub Pages. Markdown sources stay in the workshop repo; this folder is the published HTML.</p>
+  </footer>
+
+  <script src="assets/hub.js"></script>
+</body>
+</html>
