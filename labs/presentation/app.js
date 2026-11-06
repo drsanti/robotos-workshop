@@ -41,7 +41,14 @@
   window.onhashchange=()=>{const s=slides.find(x=>x.slug===location.hash.slice(1));if(s){if(track!=='all'&&track!==s.track){track='all';document.querySelectorAll('.tracks button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.track==='all')));}go(s);}};
   async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.body.requestFullscreen();}catch{toggle('#notes','#notes-toggle',true);}}
   $('#fullscreen').onclick=fullscreen;
-  document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select')&&e.key!=='Escape')return;if(e.key===' '&&e.target.closest('button,a'))return;if(e.ctrlKey||e.metaKey||e.altKey)return;switch(e.key){case 'ArrowRight':case 'PageDown':case ' ':e.preventDefault();step(1);break;case 'ArrowLeft':case 'PageUp':e.preventDefault();step(-1);break;case 'Home':e.preventDefault();go(filtered()[0]);break;case 'End':e.preventDefault();go(filtered().at(-1));break;case 'n':case 'N':toggle('#notes','#notes-toggle');break;case 'f':case 'F':fullscreen();break;case 'Escape':toggle('#outline','#outline-toggle',false);toggle('#notes','#notes-toggle',false);$('#pointer-panel').hidden=true;$('#pointer-toggle').setAttribute('aria-expanded','false');break;}});
+  function setLang(lang){
+    window.LAB_LANG=lang==='th'?'th':'en';
+    try{localStorage.setItem('robotos-lab-lang',window.LAB_LANG);}catch{}
+    applyChrome();
+    render();
+  }
+  function toggleLang(){setLang(window.LAB_LANG==='th'?'en':'th');}
+  document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select')&&e.key!=='Escape')return;if(e.key===' '&&e.target.closest('button,a'))return;if(e.ctrlKey||e.metaKey||e.altKey)return;switch(e.key){case 'ArrowRight':case 'PageDown':case ' ':e.preventDefault();step(1);break;case 'ArrowLeft':case 'PageUp':e.preventDefault();step(-1);break;case 'Home':e.preventDefault();go(filtered()[0]);break;case 'End':e.preventDefault();go(filtered().at(-1));break;case 'n':case 'N':toggle('#notes','#notes-toggle');break;case 'f':case 'F':fullscreen();break;case 'l':case 'L':e.preventDefault();toggleLang();break;case 'Escape':toggle('#outline','#outline-toggle',false);toggle('#notes','#notes-toggle',false);$('#pointer-panel').hidden=true;$('#pointer-toggle').setAttribute('aria-expanded','false');break;}});
   $('#export-svg').onclick=()=>{const holder=document.createElement('div');holder.innerHTML=window.labDiagram(i18n.view(current));const svg=holder.firstElementChild;const c=colors[current.track];let xml=new XMLSerializer().serializeToString(svg);for(const [key,value] of Object.entries(c))xml=xml.replaceAll(`var(--${key})`,value);xml=xml.replace(/<defs>/,`<rect width="1280" height="350" fill="${c.base}"/><defs>`);const url=URL.createObjectURL(new Blob([xml],{type:'image/svg+xml'}));const a=document.createElement('a');a.href=url;a.download=current.slug+'.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
   function preparePrint(){document.querySelector('.print-only')?.remove();const deck=document.createElement('div');deck.className='print-only';deck.innerHTML=filtered().map(slideHTML).join('');$('#main').append(deck);}
   window.addEventListener('beforeprint',preparePrint);
@@ -64,7 +71,11 @@
     $('#notes h2').textContent=ui('presenterNotes');
     $('#notes-close').setAttribute('aria-label',ui('closeNotes'));
     $('.shortcuts').innerHTML=ui('shortcuts');
-    document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===window.LAB_LANG)));
+    const langBtn=$('#lang-toggle');
+    const langCode=window.LAB_LANG==='th'?'TH':'EN';
+    langBtn.innerHTML=`${langCode} <kbd>L</kbd>`;
+    langBtn.setAttribute('aria-label',`${ui('language')} ${langCode} (${ui('languageSwitch')})`);
+    langBtn.title=`${ui('language')} (L)`;
     $('#pointer-toggle').firstChild && ($('#pointer-toggle').textContent=ui('pointer'));
     $('#pointer-title').textContent=ui('pointer');
     $('#pointer-color-name').textContent=ui('pointerColor');
@@ -103,12 +114,7 @@
   $('#comet-size').oninput=()=>setComet({size:+$('#comet-size').value});
   $('#comet-length').oninput=()=>setComet({length:+$('#comet-length').value});
   $('#comet-life').oninput=()=>setComet({life:+$('#comet-life').value});
-  document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{
-    window.LAB_LANG=b.dataset.lang==='th'?'th':'en';
-    try{localStorage.setItem('robotos-lab-lang',window.LAB_LANG);}catch{}
-    applyChrome();
-    render();
-  });
+  $('#lang-toggle').onclick=()=>toggleLang();
   applyChrome();
   startComet();
   render();

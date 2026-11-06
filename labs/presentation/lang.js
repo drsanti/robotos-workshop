@@ -4,11 +4,12 @@
   const ui = {
     en: {
       all: 'All', read: 'Read', labs: 'Labs', notes: 'Notes', present: 'Present', pointer: 'Pointer',
+      language: 'Language', languageSwitch: 'L to switch',
       pointerColor: 'Color', pointerTrack: 'Track', pointerSize: 'Size', pointerLength: 'Tail length', pointerLife: 'Tail life',
       findLab: 'Find a lab', searchPlaceholder: 'Title, ID or topic…',
       exportSvg: 'Export diagram SVG', printDeck: 'Print deck',
       previous: 'Previous slide', next: 'Next slide',
-      shortcuts: '← → navigate <span>·</span> Home / End <span>·</span> N notes <span>·</span> F fullscreen <span>·</span> Esc close',
+      shortcuts: '← → navigate <span>·</span> Home / End <span>·</span> L language <span>·</span> N notes <span>·</span> F fullscreen <span>·</span> Esc close',
       objective: 'Objective', understand: 'Understand the lab', tryObserve: 'Try and observe',
       exampleHeading: 'Concrete example', practiceSequence: 'Practice sequence · full mechanism in student reading',
       evidence: 'Expected evidence', takeaway: 'Takeaway', illustrative: 'Illustrative overview',
@@ -28,11 +29,12 @@
     },
     th: {
       all: 'ทั้งหมด', read: 'อ่าน', labs: 'แล็บ', notes: 'โน้ต', present: 'นำเสนอ', pointer: 'ตัวชี้',
+      language: 'ภาษา', languageSwitch: 'กด L เพื่อสลับ',
       pointerColor: 'สี', pointerTrack: 'ตามสไลด์', pointerSize: 'ขนาด', pointerLength: 'ความยาวหาง', pointerLife: 'อายุหาง',
       findLab: 'ค้นหาแล็บ', searchPlaceholder: 'ชื่อ, ID หรือ topic…',
       exportSvg: 'ส่งออก SVG', printDeck: 'พิมพ์สไลด์',
       previous: 'สไลด์ก่อนหน้า', next: 'สไลด์ถัดไป',
-      shortcuts: '← → เปลี่ยนสไลด์ <span>·</span> Home / End <span>·</span> N โน้ต <span>·</span> F เต็มจอ <span>·</span> Esc ปิด',
+      shortcuts: '← → เปลี่ยนสไลด์ <span>·</span> Home / End <span>·</span> L ภาษา <span>·</span> N โน้ต <span>·</span> F เต็มจอ <span>·</span> Esc ปิด',
       objective: 'เป้าหมาย', understand: 'ทำความเข้าใจแล็บ', tryObserve: 'ลองทำและสังเกต',
       exampleHeading: 'ตัวอย่างจริง', practiceSequence: 'ลำดับฝึก · กลไกเต็มอยู่ในส่วนอ่าน',
       evidence: 'หลักฐานที่คาดไว้', takeaway: 'สิ่งที่ได้', illustrative: 'ภาพรวมเพื่อการสอน',

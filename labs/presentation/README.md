@@ -9,7 +9,7 @@ Every slide includes two explanatory paragraphs, three concrete practice steps, 
 ## Presenting
 
 - Use Left / Right, Page Up / Page Down, or Space to navigate; Home / End jump within the selected track.
-- Choose **EN** or **TH** to read the lesson in that language. Thai keeps technical words in English (CLI, topic, Twist, Imu, and the command lines). The choice is remembered in this browser.
+- Press **L** (or the single **EN**/**TH** toolbar button) to cycle reading language. Thai keeps technical words in English (CLI, topic, Twist, Imu, and the command lines). The choice is remembered in this browser.
 - Choose **Pointer** to set the comet color, size, tail length, and tail life. Track color follows the current slide. The choice is remembered in this browser.
 - Filter MW, WH or HW, or select All to present the complete workshop.
 - Choose **Read** to jump to the current lab's explanation, full diagram and run procedure.
