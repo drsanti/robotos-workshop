@@ -146,6 +146,9 @@ Instructor talking points (optional): [`docs/theory/`](docs/theory/).
 - Smoke log: [`packs/SMOKE.md`](packs/SMOKE.md).
 - Rebuild CLI/sim only from the private source repos when you have that
   monorepo checkout — students never need those links.
+- Interactive docs + local host live in a **private** sibling tools tree
+  (`robotos-workshop-tools/`), not in this student pack. Ship only built
+  `dist/` / host binaries into class drops when ready.
 
 ## License
 

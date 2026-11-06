@@ -41,7 +41,7 @@ Lab map: [`docs/lab-outline.md`](docs/lab-outline.md). Each lab sheet repeats th
 
 ## Windows
 
-Use **PowerShell**. Press the `Win` key, type `PowerShell`, and press Enter. Stay in this section until you are done.
+Use **PowerShell**. Press the `Win` key, type `PowerShell`, and press `Enter`. Stay in this section until you are done.
 
 ### 1. Check `robotos`
 
@@ -123,7 +123,7 @@ $env:ROBOTOS_LISTEN = "tcp/0.0.0.0:7447"
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-If auto-detect misses the USB port, add `--probe-settle-ms 2000 --probe-ms 5000`, or set `--port COM17` to the COM port shown in Device Manager. `serial-bridge.exe` is next to `robotos.exe`.
+If auto-detect misses the USB port, add `--probe-settle-ms 2000 --probe-ms 5000`, or set `--port COM17` to the COM port shown in **Device Manager**. `serial-bridge.exe` is next to `robotos.exe`.
 
 **Window B — labs.** A second PowerShell. Do not reuse window A.
 
@@ -151,7 +151,7 @@ Run HW-01 before LED or IMU labs. Follow the caps it prints.
 | Robot does not move | In the sim: **External**, then **Native**. Keep publishing |
 | HW-01 waits forever | Close the sim. Start window A again |
 | `CONNECTION_TO_SELF` | Window B must run `Remove-Item Env:ROBOTOS_LISTEN`. Do not listen and connect in one window |
-| Git Bash breaks `/robot/...` | Use PowerShell |
+| Git Bash breaks `/robot/...` | Use **PowerShell** |
 | Board silent / port busy | Check USB, close other serial programs, set `--port COMx` |
 | LED lab does nothing | That board has no LED. Use the other board, or a non-LED lab |
 | IMU timeout | That board has no IMU. Use `board_watch` |
@@ -200,7 +200,7 @@ cd YOUR_WORKSHOP_DIR
 open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
 ```
 
-The first launch may say the app cannot be opened. In Finder, right-click the app and choose **Open**, or allow it under System Settings → Privacy & Security. Confirm connected / **NATIVE**. If not: **Warehouse → Native → External → Connect**. Do not restart the sim every time you open Terminal.
+The first launch may say the app cannot be opened. In **Finder**, right-click the app and choose **Open**, or allow it under **System Settings → Privacy & Security**. Confirm connected / **NATIVE**. If not: **Warehouse → Native → External → Connect**. Do not restart the sim every time you open **Terminal**.
 
 ### 4. Smoke test
 
@@ -252,7 +252,7 @@ Run HW-01 before LED or IMU labs. A `ws28p` board prints `caps=0x3c`.
 | `python` not found | Use `python3`, then `source .venv/bin/activate` |
 | Wheel “not supported” | Install `code/robotos-0.3.0-py3-none-any.whl` |
 | `./scripts/run` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
-| “cannot be opened” | Privacy & Security → allow `robotos-sim` |
+| “cannot be opened” | **Privacy & Security** → allow `robotos-sim` |
 | `no topics announced` | Sim not connected, or the bridge is down |
 | Robot does not move | In the sim: **External**, then **Native**. Keep publishing |
 | HW-01 waits forever | Close the sim. Start window A again |
