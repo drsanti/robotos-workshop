@@ -13,7 +13,7 @@ venv/
 # Student `code/` packs ARE committed — clone must be self-contained
 # (windows-x64 + macos-arm64 today; add linux-x64 when built).
 
-# Native libs outside code/ (smoke leftovers, accidental copies)
+# Native libs outside code/ / fw/ (smoke leftovers, accidental copies)
 *.exe
 *.dylib
 *.so
@@ -24,6 +24,11 @@ venv/
 !/code/**/*.dll
 !/code/**/*.dylib
 !/code/**/*.so
+!/fw/
+!/fw/**
+!/fw/**/*.exe
+!/fw/rbdev/**/rbdev
+!/fw/rbdev/**/rbdev.exe
 
 # Python / OS
 __pycache__/

@@ -56,8 +56,8 @@ Host Python/CLI ↔ board on the robotos graph (serial-bridge / pack NOTES).
 Firmware is **preflashed**; students do not build IDF in these labs.
 
 **Board SKUs:** **`es3c28p`** (Ternion — LED+mic) and **`ws28p`** (Waveshare — IMU+RTC).  
-Prebuilt bins: `hardware-interface-workshop/firmware-prebuilt/es3c28p/` and
-`…/ws28p/`. Caps differ — see [`labs/hw/README.md`](../labs/hw/README.md).
+Prebuilt bins: [`fw/es3c28p/`](../fw/es3c28p/) and [`fw/ws28p/`](../fw/ws28p/)
+(see [`fw/README.md`](../fw/README.md)). Caps differ — see [`labs/hw/README.md`](../labs/hw/README.md).
 
 | Concept | Theory | Practice lab |
 |---------|--------|--------------|

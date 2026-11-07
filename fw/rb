@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Wrapper → fw/rbdev/<os>/rbdev (auto --dir for flash-bin under this folder)
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")" && pwd)"
+case "$(uname -s)" in
+  Darwin) EXE="$HERE/rbdev/mac/rbdev" ;;
+  Linux)  EXE="$HERE/rbdev/linux/rbdev" ;;
+  *)
+    echo "unsupported host $(uname -s) — use rbdev/windows/rbdev.exe on Windows" >&2
+    exit 1
+    ;;
+esac
+if [[ ! -x "$EXE" && -f "$EXE" ]]; then chmod +x "$EXE"; fi
+if [[ ! -f "$EXE" ]]; then
+  echo "missing $EXE — ask instructor or rebuild rbdev" >&2
+  exit 1
+fi
+
+# rbdev defaults to firmware-prebuilt/<board>/ under a sibling HI workshop.
+# In this pack, bins live next to this wrapper — inject --dir when needed.
+if [[ "${1:-}" == "flash-bin" ]]; then
+  has_dir=0
+  board="${RBDEV_BOARD:-}"
+  prev=""
+  for a in "$@"; do
+    case "$a" in
+      --dir|--dir=*) has_dir=1 ;;
+    esac
+    if [[ "$prev" == "--board" ]]; then board="$a"; fi
+    if [[ "$a" == --board=* ]]; then board="${a#--board=}"; fi
+    prev="$a"
+  done
+  if [[ "$has_dir" -eq 0 ]]; then
+    board="${board:-es3c28p}"
+    if [[ -f "$HERE/$board/flash_args" ]]; then
+      exec "$EXE" flash-bin --dir "$HERE/$board" "${@:2}"
+    fi
+  fi
+fi
+
+exec "$EXE" "$@"

@@ -36,8 +36,8 @@ boards):
 
 | `hw_model` | Prebuilt | Typical `caps` | Has |
 |------------|----------|----------------|-----|
-| **`es3c28p`** | `hardware-interface-workshop/firmware-prebuilt/es3c28p/` | `≈ 0x33` | LED + mic (+ keys/batt) |
-| **`ws28p`** | `hardware-interface-workshop/firmware-prebuilt/ws28p/` | `≈ 0x3c` | IMU + RTC (+ keys/batt; **no** LED/mic) |
+| **`es3c28p`** | `fw/es3c28p/` | `≈ 0x33` | LED + mic (+ keys/batt) |
+| **`ws28p`** | `fw/ws28p/` | `≈ 0x3c` | IMU + RTC (+ keys/batt; **no** LED/mic) |
 
 `BoardInfo.caps` is a bitfield — always probe with HW-01 before actuator labs:
 

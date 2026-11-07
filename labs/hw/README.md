@@ -8,8 +8,8 @@ Firmware images (instructor flash; students usually get a preflashed board):
 
 | `hw_model` | Product | Prebuilt bins | Typical `caps` | Strong at |
 |------------|---------|---------------|----------------|-----------|
-| **`es3c28p`** | Ternion ESP32-S3 | `hardware-interface-workshop/firmware-prebuilt/es3c28p/` | `≈ 0x33` | RGB LED + mic |
-| **`ws28p`** | Waveshare ESP32-S3-Touch-LCD-2.8 | `hardware-interface-workshop/firmware-prebuilt/ws28p/` | `≈ 0x3c` | IMU + RTC |
+| **`es3c28p`** | Ternion ESP32-S3 | [`fw/es3c28p/`](../../fw/es3c28p/) | `≈ 0x33` | RGB LED + mic |
+| **`ws28p`** | Waveshare ESP32-S3-Touch-LCD-2.8 | [`fw/ws28p/`](../../fw/ws28p/) | `≈ 0x3c` | IMU + RTC |
 
 | Feature | `es3c28p` | `ws28p` |
 |---------|-----------|---------|

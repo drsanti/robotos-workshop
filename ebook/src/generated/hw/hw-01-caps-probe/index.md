@@ -181,7 +181,7 @@ python labs/hw/hw-01-caps-probe/starter/caps_probe.py
 ## Expected output
 
 Class has **two** SKUs — flash
-`hardware-interface-workshop/firmware-prebuilt/{es3c28p|ws28p}/` to match the
+`fw/{es3c28p|ws28p}/` (see `fw/README.md`) to match the
 hardware (see [`labs/hw/README.md`](../README.md)).
 
 **`ws28p`** (IMU + RTC; no LED/mic) — example:
