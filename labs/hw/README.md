@@ -4,7 +4,9 @@ Host Python/CLI ↔ board on the robotos graph via `serial-bridge`.
 
 ## Two board variants
 
-Firmware images (instructor flash; students usually get a preflashed board):
+Firmware images live in this pack under [`fw/`](../../fw/) (students usually get a
+preflashed board). To reflash, prefer **esptool** — see [`fw/README.md`](../../fw/README.md)
+(`rb` / `rbdev` is optional and may be blocked on some machines):
 
 | `hw_model` | Product | Prebuilt bins | Typical `caps` | Strong at |
 |------------|---------|---------------|----------------|-----------|

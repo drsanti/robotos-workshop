@@ -118,6 +118,7 @@ scripts\run.cmd list          # Windows
 | [`SETUP.md`](SETUP.md) | Full setup (PATH, wheel, sim, bridge) |
 | [`scripts/`](scripts/) | `start-here`, `start-bridge`, `start-host`, `start-online-docs`, `run` |
 | [`labs/`](labs/) | Lab READMEs and starter code |
+| [`fw/`](fw/) | Prebuilt board firmware — flash with **esptool** (`fw/README.md`) |
 | [`code/`](code/) | Prebuilt `robotos`, wheel, warehouse sim |
 | [`online-docs/`](online-docs/) | Offline interactive guide (same as the website) |
 | [`docs/ebook/`](docs/ebook/) | Ebook chapters (start at Ch.0) |

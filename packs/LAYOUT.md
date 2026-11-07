@@ -19,7 +19,7 @@ robotos-workshop/          # zip root OR git checkout + code/ filled
   online-docs/             # optional offline interactive site (built dist/, not source)
   labs/
     mw/  wh/  hw/
-  fw/                      # prebuilt board bins + rb/rbdev flash helpers
+  fw/                      # prebuilt bins; flash with esptool (rb/rbdev optional)
     es3c28p/  ws28p/  rbdev/
   code/
     NOTES.txt                 # from packs/NOTES.<os-arch>.txt

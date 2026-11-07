@@ -30,9 +30,9 @@ Do **not** set both `ROBOTOS_LISTEN` and `ROBOTOS_CONNECT` to the same endpoint 
 
 ### 2.2 Two board SKUs + capabilities (`caps`)
 
-This workshop supports **two** ESP32-S3 products. Firmware bins live in the
-sibling hardware-interface drop (instructors flash; students get preflashed
-boards):
+This workshop supports **two** ESP32-S3 products. Firmware bins ship in-pack
+under `fw/` (students usually get a preflashed board; reflash with **esptool** —
+see `fw/README.md`):
 
 | `hw_model` | Prebuilt | Typical `caps` | Has |
 |------------|----------|----------------|-----|

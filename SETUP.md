@@ -55,14 +55,28 @@ robotos-workshop/
 - **WH** labs need the warehouse sim when your pack includes it.
 - **HW** labs need the board and `serial-bridge`. Close the sim first. The sim and the bridge both use port `7447`.
 
-Two boards. Flash the matching folder. Run HW-01 and follow the caps it prints.
+Two boards. Flash the matching folder if your board is blank or wrong SKU. Run HW-01 and follow the caps it prints.
 
 | Board | Firmware | Typical caps | Notes |
 |-------|----------|--------------|-------|
 | `es3c28p` | [`fw/es3c28p/`](fw/es3c28p/) | `≈ 0x33` | LED + mic |
 | `ws28p` | [`fw/ws28p/`](fw/ws28p/) | `≈ 0x3c` | IMU + RTC; no LED/mic |
 
-Flash (no ESP-IDF): see [`fw/README.md`](fw/README.md) — prefer `python -m esptool … write-flash "@flash_args"` from `fw/es3c28p/` or `fw/ws28p/` (`rb` / `rbdev` is optional).
+**Flash (default — no ESP-IDF):** install `esptool`, then from the board folder run `write-flash "@flash_args"`. Full steps: [`fw/README.md`](fw/README.md). Example (macOS/Linux; use your port and board folder):
+
+```bash
+python3 -m pip install --user esptool
+cd YOUR_WORKSHOP_DIR/fw/es3c28p   # or: fw/ws28p
+python3 -m esptool --chip esp32s3 -p /dev/cu.usbmodemXXXX write-flash "@flash_args"
+```
+
+```powershell
+python -m pip install --user esptool
+cd YOUR_WORKSHOP_DIR\fw\es3c28p   # or: fw\ws28p
+python -m esptool --chip esp32s3 -p COM17 write-flash "@flash_args"
+```
+
+Optional helpers `fw/rb` / `fw/rbdev` may be blocked on some PCs — use esptool instead.
 
 Lab map: [`docs/lab-outline.md`](docs/lab-outline.md). Each lab sheet repeats the setup lines, because a new window forgets them.
 

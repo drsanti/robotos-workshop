@@ -22,7 +22,9 @@ Or clone the GitHub repo (already includes `code/` packs for Win + Mac).
 | **`es3c28p`** (Ternion) | `fw/es3c28p/` | `≈ 0x33` | LED + mic (+ keys/batt/wave) |
 | **`ws28p`** (Waveshare) | `fw/ws28p/` | `≈ 0x3c` | IMU + RTC (+ keys/batt/wave; **no** LED/mic) |
 
-Students run **HW-01** and follow caps. LED labs need `es3c28p`. IMU labs need `ws28p`. Details: [`labs/hw/README.md`](../labs/hw/README.md).
+Reflash with **esptool** (`fw/README.md`) — prefer that over `rb`/`rbdev` on
+locked-down PCs. Students run **HW-01** and follow caps. LED labs need
+`es3c28p`. IMU labs need `ws28p`. Details: [`labs/hw/README.md`](../labs/hw/README.md).
 
 ## Windows
 
