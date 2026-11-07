@@ -17,19 +17,10 @@ the matching folder below. Run HW-01 and follow the caps it prints.
 ```
 fw/
   README.md
-  rb / rb.cmd              # wrappers → rbdev/<os>/ (Windows: rb.cmd)
-  rbdev/
-    windows/rbdev.exe
-    mac/rbdev
-    linux/rbdev
-  es3c28p/
-    bootloader.bin
-    partition-table.bin
-    robotos_board.bin
-    flash_args
-    flasher_args.json
+  es3c28p/                 # bins + flash_args
   ws28p/
-    … (same filenames)
+  rb / rb.cmd              # optional wrappers → rbdev/<os>/
+  rbdev/                   # optional OS flash CLI (may be blocked by Gatekeeper / SmartScreen)
 ```
 
 ## Serial port names
@@ -45,55 +36,40 @@ Replace `PORT` below with your board’s USB-Serial/JTAG device:
 Quit any serial monitor or IDE monitor before flashing. With workshop-host
 Connected, you can also pin the port under **Your setup → Serial port**.
 
-## Flash (students — no ESP-IDF required)
+## Flash (students — default: `esptool`)
 
-### Preferred: `rb` / `rb.cmd` → `flash-bin`
+**Use this path first.** It only needs Python + `esptool` — no unsigned
+binaries, no Gatekeeper / SmartScreen fights.
 
-Needs Python + `esptool` only. From the **workshop root** (folder with
-`SETUP.md`):
-
-```powershell
-# Once per PowerShell window (avoids "not digitally signed"):
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-
-# once per PC
-python -m pip install --user esptool
-
-cd YOUR_WORKSHOP_DIR\fw
-.\rb config --port COMx --board es3c28p   # or ws28p — YOUR port
-.\rb flash-bin
-```
+Install once:
 
 ```bash
 # macOS / Linux
 python3 -m pip install --user esptool
-cd YOUR_WORKSHOP_DIR/fw
-chmod +x rbdev/mac/rbdev rbdev/linux/rbdev rb 2>/dev/null || true
-./rb config --port /dev/cu.usbmodemXXXX --board es3c28p
-./rb flash-bin
-```
-
-The wrappers inject `--dir` so bins are taken from `fw/<board>/` in this pack
-(even though stock `rbdev` looks for `firmware-prebuilt/` under other workshops).
-
-`flash-bin` does **not** build firmware; it runs `esptool` against
-`es3c28p/` or `ws28p/` `flash_args`.
-
-### Manual: `esptool` only
-
-```bash
-python3 -m pip install --user esptool
-cd YOUR_WORKSHOP_DIR/fw/es3c28p   # or: ws28p
-python3 -m esptool --chip esp32s3 -p PORT write-flash "@flash_args"
 ```
 
 ```powershell
-cd YOUR_WORKSHOP_DIR\fw\es3c28p   # or: ws28p
+# Windows PowerShell
 python -m pip install --user esptool
+```
+
+Flash (from the workshop root — folder with `SETUP.md`). Use `es3c28p` or
+`ws28p` to match your board:
+
+```bash
+# macOS / Linux — example port; use yours
+cd YOUR_WORKSHOP_DIR/fw/es3c28p
+python3 -m esptool --chip esp32s3 -p /dev/cu.usbmodemXXXX write-flash "@flash_args"
+```
+
+```powershell
+# Windows — example COM port; use yours from Device Manager
+cd YOUR_WORKSHOP_DIR\fw\es3c28p
 python -m esptool --chip esp32s3 -p COM17 write-flash "@flash_args"
 ```
 
-Explicit offsets (same layout in either folder):
+`@flash_args` reads offsets from the file in that folder. Equivalent explicit
+form (same layout in either board folder):
 
 ```bash
 python3 -m esptool --chip esp32s3 -p PORT -b 460800 \
@@ -103,6 +79,33 @@ python3 -m esptool --chip esp32s3 -p PORT -b 460800 \
   0x8000 partition-table.bin \
   0x10000 robotos_board.bin
 ```
+
+## Optional: `rb` / `rbdev`
+
+Convenience only. On some machines the prebuilt `rbdev` binary is blocked
+(macOS Gatekeeper, Windows SmartScreen / execution policy). If that happens,
+**go back to esptool above** — do not spend class time fighting the helper.
+
+```bash
+cd YOUR_WORKSHOP_DIR/fw
+./rb config --port /dev/cu.usbmodemXXXX --board es3c28p
+./rb flash-bin
+```
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+cd YOUR_WORKSHOP_DIR\fw
+.\rb config --port COMx --board es3c28p
+.\rb flash-bin
+```
+
+Or call the OS binary with an explicit board folder:
+
+```bash
+./rbdev/mac/rbdev flash-bin --dir es3c28p -p /dev/cu.usbmodemXXXX
+```
+
+Details: [`rbdev/README.md`](rbdev/README.md).
 
 ## Instructors / rebuild
 

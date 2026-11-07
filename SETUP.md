@@ -62,7 +62,7 @@ Two boards. Flash the matching folder. Run HW-01 and follow the caps it prints.
 | `es3c28p` | [`fw/es3c28p/`](fw/es3c28p/) | `≈ 0x33` | LED + mic |
 | `ws28p` | [`fw/ws28p/`](fw/ws28p/) | `≈ 0x3c` | IMU + RTC; no LED/mic |
 
-Flash (no ESP-IDF): see [`fw/README.md`](fw/README.md) — `cd fw` then `./rb flash-bin` (Windows: `.\rb flash-bin`).
+Flash (no ESP-IDF): see [`fw/README.md`](fw/README.md) — prefer `python -m esptool … write-flash "@flash_args"` from `fw/es3c28p/` or `fw/ws28p/` (`rb` / `rbdev` is optional).
 
 Lab map: [`docs/lab-outline.md`](docs/lab-outline.md). Each lab sheet repeats the setup lines, because a new window forgets them.
 
