@@ -10,7 +10,7 @@ Details: [`../SETUP.md`](../SETUP.md) · ebook Ch.0.
 |--------|----------------|
 | [`start-here.cmd`](start-here.cmd) | First time: `.venv`, wheel, sim, and a ready window |
 | [`start-bridge.cmd`](start-bridge.cmd) | Second window: `serial-bridge` for HW labs |
-| [`start-host.cmd`](start-host.cmd) | Interactive docs Connect (`workshop-host.exe` on `:7420`) |
+| [`start-host.cmd`](start-host.cmd) | Docs companion Connect (`workshop-host.exe` on `:7420`; Studio uses `:7421`) |
 | [`start-online-docs.cmd`](start-online-docs.cmd) | Offline docs at http://127.0.0.1:5510 (serves `online-docs/`) |
 | [`run.cmd`](run.cmd) | Run a lab: `scripts\run.cmd wh-01` |
 | [`wifi-cfg.cmd`](wifi-cfg.cmd) | Optional: push SSID/password. Needs the bridge |
@@ -30,7 +30,7 @@ Details: [`../SETUP.md`](../SETUP.md) · ebook Ch.0.
 |--------|----------------|
 | [`start-here.sh`](start-here.sh) / [`start-here.command`](start-here.command) | First time: `.venv`, wheel, and the sim |
 | [`start-bridge.sh`](start-bridge.sh) | Board bridge |
-| [`start-host.sh`](start-host.sh) / [`start-host.command`](start-host.command) | Interactive docs Connect (`workshop-host` on `:7420`) |
+| [`start-host.sh`](start-host.sh) / [`start-host.command`](start-host.command) | Docs companion Connect (`workshop-host` on `:7420`; Studio uses `:7421`) |
 | [`start-online-docs.sh`](start-online-docs.sh) | Offline docs at http://127.0.0.1:5510 (serves `online-docs/`) |
 | [`run`](run) | Run a lab: `./scripts/run wh-01` |
 

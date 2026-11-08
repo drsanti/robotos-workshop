@@ -19,8 +19,6 @@ fw/
   README.md
   es3c28p/                 # bins + flash_args
   ws28p/
-  rb / rb.cmd              # optional wrappers → rbdev/<os>/
-  rbdev/                   # optional OS flash CLI (may be blocked by Gatekeeper / SmartScreen)
 ```
 
 ## Serial port names
@@ -79,33 +77,6 @@ python3 -m esptool --chip esp32s3 -p PORT -b 460800 \
   0x8000 partition-table.bin \
   0x10000 robotos_board.bin
 ```
-
-## Optional: `rb` / `rbdev`
-
-Convenience only. On some machines the prebuilt `rbdev` binary is blocked
-(macOS Gatekeeper, Windows SmartScreen / execution policy). If that happens,
-**go back to esptool above** — do not spend class time fighting the helper.
-
-```bash
-cd YOUR_WORKSHOP_DIR/fw
-./rb config --port /dev/cu.usbmodemXXXX --board es3c28p
-./rb flash-bin
-```
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-cd YOUR_WORKSHOP_DIR\fw
-.\rb config --port COMx --board es3c28p
-.\rb flash-bin
-```
-
-Or call the OS binary with an explicit board folder:
-
-```bash
-./rbdev/mac/rbdev flash-bin --dir es3c28p -p /dev/cu.usbmodemXXXX
-```
-
-Details: [`rbdev/README.md`](rbdev/README.md).
 
 ## Instructors / rebuild
 

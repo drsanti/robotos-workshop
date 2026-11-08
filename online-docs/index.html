@@ -12,13 +12,44 @@
         document.documentElement.setAttribute('data-theme', t);
         var lang = localStorage.getItem('robotos-setup-guide-lang');
         if (lang === 'th' || lang === 'en') document.documentElement.lang = lang;
-      } catch (e) {}
+        var appearance = localStorage.getItem('robotos-setup-guide-appearance');
+        if (appearance) {
+          var a = JSON.parse(appearance);
+          var font = a.fontFamily;
+          if (
+            font === 'plex' ||
+            font === 'plex-looped' ||
+            font === 'sarabun' ||
+            font === 'noto' ||
+            font === 'system'
+          ) {
+            document.documentElement.setAttribute('data-font', font);
+          }
+          if (a.textSize === 'default' || a.textSize === 'comfortable' || a.textSize === 'large') {
+            document.documentElement.setAttribute('data-text-size', a.textSize);
+          }
+          if (a.textWeight === 'regular' || a.textWeight === 'medium') {
+            document.documentElement.setAttribute('data-text-weight', a.textWeight);
+          }
+        } else {
+          document.documentElement.setAttribute('data-font', 'plex');
+          document.documentElement.setAttribute('data-text-size', 'default');
+          document.documentElement.setAttribute('data-text-weight', 'regular');
+        }
+      } catch (e) {
+        document.documentElement.setAttribute('data-font', 'plex');
+        document.documentElement.setAttribute('data-text-size', 'default');
+        document.documentElement.setAttribute('data-text-weight', 'regular');
+      }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="./assets/index-dlT5Fejo.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Cejvf9w9.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="./assets/index-8Iafwacp.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DlPBIwph.css">
   </head>
   <body>
     <div id="root"></div>

@@ -9,5 +9,6 @@
     "PATH": "${workspaceFolder}/code/robotos-v0.3.0-linux-x64/bin:${env:PATH}"
   },
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
-  "python.terminal.activateEnvironment": true
+  "python.terminal.activateEnvironment": true,
+  "liveServer.settings.port": 5501
 }
