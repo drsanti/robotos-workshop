@@ -50,6 +50,10 @@ Python:
   python -m pip install code/robotos-0.3.0-py3-none-any.whl
 
 Smoke:
+  # Sim must LISTEN on :7447 (UI “connected” alone is not enough):
+  #   export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
+  #   open code/robotos-sim-v0.1.0-macos-arm64/robotos-sim.app
+  # Labs window: unset ROBOTOS_LISTEN; export ROBOTOS_CONNECT=tcp/127.0.0.1:7447
   robotos topic list
   ./scripts/run wh-01
 

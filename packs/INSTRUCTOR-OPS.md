@@ -43,8 +43,21 @@ Busy coach offers **Stop bridge** or **Run in labs** — follow that, don’t in
 | Busy / 409 | Stop that tab, or re-run in **labs** |
 | No BoardInfo / empty topics | Bridge still up? USB? Companion → board + serial pin |
 | Blank board / flash | Setup flash mini-flow or `fw/<sku>/` — **ws28p** ≠ **es3c28p** bins |
+| WH odom=`?` / robot idle | Sim must **LISTEN** `:7447` (see WH/HW port below). Labs: `unset ROBOTOS_LISTEN` + `ROBOTOS_CONNECT=tcp/127.0.0.1:7447` |
+| HW waits forever / only WH topics | **Quit sim** before `start-bridge` — both claim `:7447` |
 | TTY blank, host OK | **Reconnect terminal** — do not restart companion first |
 | Pack vs SPA drift | Prefer Pages/#/setup; pack SETUP for offline only |
+
+## WH / HW port (`:7447`)
+
+Sim and `serial-bridge` both own Zenoh **`:7447`** — only one at a time.
+
+| Mode | Who listens | Student shell |
+|------|-------------|---------------|
+| **WH** | Sim (`ROBOTOS_LISTEN=tcp/0.0.0.0:7447`) | `unset ROBOTOS_LISTEN` · `ROBOTOS_CONNECT=tcp/127.0.0.1:7447` |
+| **HW** | `serial-bridge` (same LISTEN) | Same CONNECT; **`run hw-*` auto-unsets leaked LISTEN** |
+
+If the sim window says NATIVE · connected but `lsof -iTCP:7447` shows nothing, relaunch with LISTEN set (macOS: `launchctl setenv ROBOTOS_LISTEN 'tcp/0.0.0.0:7447'` then `open …/robotos-sim.app`, or run the binary from a shell that exports LISTEN). Badge-only “connected” without TCP LISTEN → odom stays `?`.
 
 ## HW serial (this room)
 

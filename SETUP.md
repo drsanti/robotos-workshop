@@ -192,7 +192,8 @@ Run HW-01 before LED or IMU labs. Follow the caps it prints.
 | Wheel “not supported” | Install `code\robotos-0.3.0-py3-none-win_amd64.whl` |
 | `scripts\run.cmd` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
 | `no topics announced` | Sim not connected, or the bridge is down |
-| Robot does not move | In the sim: **External**, then **Native**. Keep publishing |
+| Robot does not move | In the sim: **External**, then **Native**. Keep publishing. Confirm TCP LISTEN on `:7447` (`lsof` / Resource Monitor) — badge “connected” alone is not enough |
+| WH `odom=?` / empty echo | Relaunch sim with `ROBOTOS_LISTEN=tcp/0.0.0.0:7447`; labs use CONNECT only. Quit `serial-bridge` first |
 | HW-01 waits forever | Close the sim. Start window A again |
 | `CONNECTION_TO_SELF` | Window B must run `Remove-Item Env:ROBOTOS_LISTEN`. Do not listen and connect in one window |
 | Git Bash breaks `/robot/...` | Use **PowerShell** |
@@ -299,7 +300,8 @@ Run HW-01 before LED or IMU labs. A `ws28p` board prints `caps=0x3c`.
 | `./scripts/run` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
 | “cannot be opened” | **Privacy & Security** → allow `robotos-sim` |
 | `no topics announced` | Sim not connected, or the bridge is down |
-| Robot does not move | In the sim: **External**, then **Native**. Keep publishing |
+| Robot does not move | In the sim: **External**, then **Native**. Keep publishing. Confirm TCP LISTEN on `:7447` (`lsof` / Resource Monitor) — badge “connected” alone is not enough |
+| WH `odom=?` / empty echo | Relaunch sim with `ROBOTOS_LISTEN=tcp/0.0.0.0:7447`; labs use CONNECT only. Quit `serial-bridge` first |
 | HW-01 waits forever | Close the sim. Start window A again |
 | `CONNECTION_TO_SELF` | Window B must `unset ROBOTOS_LISTEN` |
 | Auto skips `cu.usbmodem` | Pin **Your setup → Serial port**, or use `/dev/tty.usbmodem…` from `[auto] selected` |
@@ -412,7 +414,8 @@ Run HW-01 before LED or IMU labs.
 | Wheel “not supported” | Install `code/robotos-0.3.0-py3-none-any.whl` |
 | `./scripts/run` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
 | Permission denied on `/dev/ttyACM*` | `dialout` group, then log out and back in |
-| `no topics announced` | Sim not connected, or the bridge is down |
+| `no topics announced` | Sim not connected, or the bridge is down. Confirm TCP LISTEN on `:7447` |
+| WH `odom=?` / empty echo | Relaunch sim with `ROBOTOS_LISTEN=tcp/0.0.0.0:7447`; labs use CONNECT only |
 | HW-01 waits forever | Close the sim. Start window A again |
 | `CONNECTION_TO_SELF` | Window B must `unset ROBOTOS_LISTEN` |
 | Board silent / port busy | USB, close other serial programs; pin **Your setup → Serial port** or `--port /dev/ttyACM0` |

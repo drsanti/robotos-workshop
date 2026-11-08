@@ -34,10 +34,10 @@ Day 1:
 1. Unzip / clone → open the folder in VS Code.
 2. Double-click `scripts\start-here.cmd`.
 3. VS Code → **Terminal → New Terminal** (PowerShell).
-4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`.
+4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan` (sim must LISTEN on `:7447`).
 5. `scripts\run.cmd wh-01`
 
-Board labs. Close the sim and plug in USB. `run` sets `ROBOTOS_CONNECT` for `hw-*`.
+Board labs. **Quit the sim** (frees `:7447`) and plug in USB. `run` sets `ROBOTOS_CONNECT` for `hw-*`.
 
 1. `scripts\start-bridge.cmd` (leave open). If auto-detect misses the port: `serial-bridge --port COMx --baud 921600 --robot-id 01 --cmd-topic all`.
 2. Second window: `scripts\run.cmd hw-01`
@@ -60,10 +60,10 @@ Day 1:
 1. Unzip / clone → open the folder in VS Code.
 2. Double-click `scripts/start-here.command` (Gatekeeper: right-click → Open once).
 3. VS Code → **Terminal → New Terminal**.
-4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`.
+4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan` (sim must LISTEN on `:7447`).
 5. `./scripts/run wh-01`
 
-Board labs. Close the sim and plug in USB.
+Board labs. **Quit the sim** (frees `:7447`) and plug in USB.
 
 1. `./scripts/start-bridge.sh` (leave open). Pin the path from `[auto] selected` if auto-detect skips `cu.usbmodem`.
 2. Second window: `./scripts/run hw-01`

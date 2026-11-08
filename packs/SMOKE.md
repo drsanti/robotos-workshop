@@ -127,3 +127,16 @@ Host: Windows 11 · board **ws28p** on **COM17** · `serial-bridge --port COM17 
 | HW-01 `caps_probe.py` | **PASS** — `hw_model=ws28p` `fw=robotos-fw/0.3.0` `caps=0x3c` (IMU/RTC/BATT/BTN yes; LED/MIC no) |
 
 Notes: `--port auto` with default `probe_ms=2500` **skipped COM17** (“no workshop frame”); explicit `--port COM17 --settle-ms 3500` worked. Prefer COM path on this host or raise `--probe-ms` / `--probe-settle-ms` for auto.
+
+## 2026-11-08 macos-arm64 — HW then WH re-smoke
+
+Host: Apple Silicon · pack `code/` · board **ws28p** · companion `:7420`
+
+| Check | Result |
+|-------|--------|
+| HW-01 / HW-02 / HW-03 / HW-07 (bridge LISTEN `:7447`) | **PASS** — `ws28p` caps `0x3c`; IMU stream; wave on/off; tilt print (no LED) |
+| Quit bridge → sim with `ROBOTOS_LISTEN=tcp/0.0.0.0:7447` | **PASS** — `lsof` shows `*:7447`; log `LISTEN=… CONNECT=-` |
+| `open …/robotos-sim.app` without LISTEN env | **FAIL path** — UI can show NATIVE · connected but **no** TCP `:7447`; WH-02 stays `odom=?` |
+| WH-02 sense + WH-01 drive (`ROBOTOS_CONNECT=tcp/127.0.0.1:7447`) | **PASS** — aisle spawn `x=4.25 y=3.00` · scan `R=0.60 F=4 L=3`; drive y→~4.09 (~1.09 m) |
+
+Notes: Pack TA card + tools `instructor-ops.md` now call out WH LISTEN vs quit-sim-before-bridge. `run hw-*` already auto-unsets leaked `ROBOTOS_LISTEN`.
