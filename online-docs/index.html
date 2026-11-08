@@ -6,15 +6,33 @@
     <title>robotos · Online docs</title>
     <script>
       try {
-        var t = localStorage.getItem('robotos-setup-guide-theme');
-        if (t !== 'light' && t !== 'dark')
-          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', t);
+        var darkPresets = {
+          'dark-navy': 1,
+          'dark-charcoal': 1,
+          'dark-midnight': 1,
+          'dark-graphite': 1,
+          'dark-forest': 1,
+        };
+        var lightPresets = {
+          'light-slate': 1,
+          'light-paper': 1,
+          'light-mist': 1,
+          'light-sand': 1,
+          'light-mint': 1,
+        };
         var lang = localStorage.getItem('robotos-setup-guide-lang');
         if (lang === 'th' || lang === 'en') document.documentElement.lang = lang;
-        var appearance = localStorage.getItem('robotos-setup-guide-appearance');
-        if (appearance) {
-          var a = JSON.parse(appearance);
+        var appearanceRaw = localStorage.getItem('robotos-setup-guide-appearance');
+        var t = localStorage.getItem('robotos-setup-guide-theme');
+        var codeStyle = 'match';
+        if (appearanceRaw) {
+          var a = JSON.parse(appearanceRaw);
+          var preset = a.pagePreset;
+          if (darkPresets[preset] || lightPresets[preset]) {
+            document.documentElement.setAttribute('data-page-preset', preset);
+            t = darkPresets[preset] ? 'dark' : 'light';
+          }
+          if (typeof a.codeBlockStyle === 'string') codeStyle = a.codeBlockStyle;
           var font = a.fontFamily;
           if (
             font === 'plex' ||
@@ -36,20 +54,39 @@
           document.documentElement.setAttribute('data-text-size', 'default');
           document.documentElement.setAttribute('data-text-weight', 'regular');
         }
+        if (t !== 'light' && t !== 'dark')
+          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        // Code blocks: Match page (or align github/solarized pairs) before React boots.
+        var codeAttr = 'github-light';
+        if (codeStyle === 'match' || codeStyle === 'github-light' || codeStyle === 'github-dark') {
+          codeAttr = t === 'dark' ? 'github-dark' : 'github-light';
+        } else if (codeStyle === 'solarized-light' || codeStyle === 'solarized-dark') {
+          codeAttr = t === 'dark' ? 'solarized-dark' : 'solarized-light';
+        } else if (
+          codeStyle === 'monokai' ||
+          codeStyle === 'dracula' ||
+          codeStyle === 'nord' ||
+          codeStyle === 'one-dark'
+        ) {
+          codeAttr = codeStyle;
+        }
+        document.documentElement.setAttribute('data-code-block', codeAttr);
       } catch (e) {
         document.documentElement.setAttribute('data-font', 'plex');
         document.documentElement.setAttribute('data-text-size', 'default');
         document.documentElement.setAttribute('data-text-weight', 'regular');
+        document.documentElement.setAttribute('data-code-block', 'github-light');
       }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="./assets/index-8Iafwacp.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DlPBIwph.css">
+    <script type="module" crossorigin src="./assets/index-Dye12SWC.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C64j6zFI.css">
   </head>
   <body>
     <div id="root"></div>
