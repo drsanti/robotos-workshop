@@ -23,9 +23,9 @@ python -m http.server 5510
 Then open http://127.0.0.1:5510/#/setup (Connect still uses `scripts/start-host.cmd` / `start-host.sh`). Avoid port **5500** — Live Preview often steals it for the workspace root.
 
 1. Open **Your setup** → set **OS** + **Workshop folder** (path to this pack).
-2. For Run / terminals / Live: run `./scripts/start-host.sh` (Windows: `scripts\start-host.cmd`), paste the **Bearer token** from that window, then **Connect**.
-3. After Connect, optional: **Your setup → Serial port** — leave **Auto**, or pin a COM/`cu.*` device if auto-detect misses the board (Copy/Run rewrites `--port auto`).
-4. Copy-only still works without the host.
+2. For Run / terminals / Live: run `./scripts/start-host.sh` (Windows: `scripts\start-host.cmd`) to start the **docs companion**, paste the **Bearer token** into the site **Companion** panel, then **Connect**. Machine install (this file) is separate from Companion Connect.
+3. After Connect, optional: **Companion → Serial port** — leave **Auto**, or pin a COM/`cu.*` device if auto-detect misses the board (Copy/Run rewrites `--port auto`).
+4. Copy-only still works without the companion.
 
 Follow **one** section and stop at the end of it.
 
@@ -162,11 +162,12 @@ Close the sim first. Two windows.
 ```powershell
 cd YOUR_WORKSHOP_DIR
 $env:PATH = "$PWD\code\robotos-v0.3.0-windows-x64\bin;$env:PATH"
+Remove-Item Env:ROBOTOS_CONNECT -ErrorAction SilentlyContinue
 $env:ROBOTOS_LISTEN = "tcp/0.0.0.0:7447"
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-If auto-detect misses the USB port, pin it under **Your setup → Serial port** (with host Connected), or add `--probe-settle-ms 2000 --probe-ms 5000` / `--port COM17` from **Device Manager**. `serial-bridge.exe` is next to `robotos.exe`.
+If auto-detect misses the USB port, pin it under **Companion → Serial port** (with docs companion Connected), or add `--probe-settle-ms 2000 --probe-ms 5000` / `--port COM17` from **Device Manager**. `serial-bridge.exe` is next to `robotos.exe`.
 
 **Window B — labs.** A second PowerShell. Do not reuse window A.
 
@@ -266,12 +267,13 @@ Close the sim first. Two windows.
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
+unset ROBOTOS_CONNECT || true
 export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
 chmod +x code/robotos-v0.3.0-macos-arm64/bin/serial-bridge 2>/dev/null || true
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-Auto-detect can skip `/dev/cu.usbmodem*` (`no workshop frame`) and select `/dev/tty.usbmodem…`. Prefer pinning under **Your setup → Serial port** (host Connected), or use the path from `[auto] selected`. On the class Mac that path was `/dev/tty.usbmodem101`.
+Auto-detect can skip `/dev/cu.usbmodem*` (`no workshop frame`) and select `/dev/tty.usbmodem…`. Prefer pinning under **Companion → Serial port** (docs companion Connected), or use the path from `[auto] selected` (often `/dev/tty.usbmodem*` — check your machine).
 
 **Window B — labs.** A second terminal.
 
@@ -379,12 +381,13 @@ Check with `groups | grep dialout` and `ls -l /dev/ttyACM*`. Do not use `sudo se
 ```bash
 cd YOUR_WORKSHOP_DIR
 export PATH="$PWD/code/robotos-v0.3.0-linux-x64/bin:$PATH"
+unset ROBOTOS_CONNECT || true
 export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
 chmod +x code/robotos-v0.3.0-linux-x64/bin/serial-bridge 2>/dev/null || true
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
 ```
 
-If auto-detect misses the board, pin it under **Your setup → Serial port** (host Connected), or add `--port /dev/ttyACM0`.
+If auto-detect misses the board, pin it under **Companion → Serial port** (docs companion Connected), or add `--port /dev/ttyACM0`. Or use `./scripts/start-bridge.sh` / `./scripts/start-host.sh` for the companion.
 
 **Window B — labs.** A second terminal.
 
