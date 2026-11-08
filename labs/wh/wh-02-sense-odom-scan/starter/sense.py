@@ -25,6 +25,7 @@ import robotos
 from robotos.messages.robotos.nav.v1.nav_pb2 import Odometry
 from robotos.messages.robotos.sensor.v1.laser_pb2 import LaserScan
 
+from labs.common.node_util import settle
 from labs.common.odom import yaw_from_quat
 
 TOPIC_ODOM = "/robot/01/odom"
@@ -49,6 +50,7 @@ def main() -> None:
 
         odom_sub.on_message(on_odom)
         scan_sub.on_message(on_scan)
+        settle()  # discovery settle (labs.common) — same as other WH starters
         print("listening odom+scan — Ctrl-C to stop")
         try:
             while True:
