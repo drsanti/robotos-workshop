@@ -13,7 +13,7 @@
 
 Or clone the GitHub repo (already includes `code/` packs for Win + Mac).
 
-**TA recovery (ports, token, Stop vs Kill, labs/bridge):** [`INSTRUCTOR-OPS.md`](./INSTRUCTOR-OPS.md).
+**TA recovery card (ports, token, labs/bridge, Stop→Reconnect→Kill):** [`INSTRUCTOR-OPS.md`](./INSTRUCTOR-OPS.md) — print one per table.
 
 ## Boards
 

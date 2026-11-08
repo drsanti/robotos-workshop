@@ -1,76 +1,70 @@
-# Instructor ops — docs companion recovery
+# TA recovery card — print one per table
 
-One page for TAs during a timed workshop. Students use interactive docs + local **docs companion** (`workshop-host`).
+Students: interactive docs + local **docs companion** (`workshop-host`).  
+Site: https://drsanti.github.io/robotos-workshop-docs/
 
-## Ports (do not mix)
+## 30-second map
 
-| Product | Default | Binary |
-|---------|---------|--------|
-| Workshop docs companion | **`:7420`** | `workshop-host` via `./scripts/start-host.sh` |
-| Robotos Studio host | **`:7421`** | `studio-host` |
+| Thing | Means |
+|-------|--------|
+| **Machine install** | SETUP / `#/setup` — PATH, venv, flash |
+| **Companion** | Gear panel — token Connect for Run / dock / Live |
+| Dock **bridge** | Terminal A — `serial-bridge` (persistent) |
+| Dock **labs** | Terminal B — CLI / Python oneshots |
+| Companion port | **`:7420`** only (Studio is **`:7421`** — do not mix) |
 
-If start-host says port in use: something else owns **7420**. Studio on 7421 is fine alongside the companion. Check: `lsof -nP -iTCP:7420 -sTCP:LISTEN` (Windows: `netstat -ano | findstr :7420`).
+Run chips say **→ labs** / **→ bridge**. “Run did nothing” → open the matching tab.
 
-## Start / token
+## First ask (in order)
 
-1. Student opens pack root (folder with `SETUP.md`).
-2. Run `./scripts/start-host.sh` (Windows: `scripts\start-host.cmd`). Leave the window open.
-3. Copy the **Bearer** token from the cyan box (or `.host-token` next to the binary).
-4. In docs: **Your setup → Connect companion** → paste token → Connect. URL should be `http://127.0.0.1:7420`.
+1. **Connected?** Dock strip / Companion green. Else: pack root → `./scripts/start-host.sh` (Win: `scripts\start-host.cmd`) → paste Bearer → Connect `http://127.0.0.1:7420`.
+2. **Workshop folder set?** Literal `YOUR_WORKSHOP_DIR` in a command → Companion → Folder.
+3. **Wrong tab?** Bridge fences need **bridge**; CLI needs **labs**.
+4. **Busy yellow?** Prefer **Stop** (interrupt). **Reconnect** if the pane dropped but the host PTY lives. **Kill** last (wipes scrollback).
 
-Token rejected → new token from that host window (restart companion if needed). Wrong port / Studio URL → graph/Connect will fail.
+## Recovery ladder
 
-## Dual windows: `labs` vs `bridge`
+| Action | When |
+|--------|------|
+| **Stop** | Job still running; oneshot blocked; yellow busy |
+| **Reconnect** | “Terminal disconnected” strip; companion still Connected |
+| **Kill / Reset** | Shell wedged after Stop failed |
 
-| Tab | Role |
-|-----|------|
-| **labs** | One-shot checks, Python labs, `robotos` CLI |
-| **bridge** | Long-running `serial-bridge` (and similar) |
-
-Code blocks show **→ labs** / **→ bridge**. If Run seems to do nothing, check the matching tab (it pulses on Run).
-
-## Stop vs Kill
-
-| Action | Effect |
-|--------|--------|
-| **Stop** | Ctrl+C in the active tab; clears “busy” so oneshot Run can proceed |
-| **Kill** | Destroys that PTY and recreates `labs` / `bridge` |
-
-Prefer **Stop** first. Use **Kill** only if the shell is wedged.
-
-Busy yellow dot on a tab = persistent job (usually bridge). Oneshot Run into that tab is rejected with coaching: **Stop bridge** or **Run in labs**.
-
-## TTY dropped
-
-Dock shows **Reconnect terminal** — reattaches to the same host PTY (scrollback/ring kept). Do not restart the companion unless Connect itself failed.
+Busy coach offers **Stop bridge** or **Run in labs** — follow that, don’t invent Kill first.
 
 ## Quick triage
 
-| Symptom | Try |
-|---------|-----|
-| No Run / dock says connect | start-host on **:7420**, paste token |
-| Port busy on start-host | free 7420; Studio should be on 7421 |
-| “Run did nothing” | open dock → correct **labs/bridge** tab |
-| Busy / 409 | Stop that tab, or Run in labs |
-| Wrong board / no Live | bridge up + peer “graph up”; Your setup → board/serial |
-| Inject noise / weird `%` | rebuild companion; short relative inject is current host |
+| See | Do |
+|-----|-----|
+| Grey Run / not connected | start-host **:7420** + token (not Studio :7421) |
+| Token rejected | Fresh Bearer from host window / `.host-token` |
+| Port in use on start-host | Free **7420**; Studio may stay on 7421 |
+| Wrong tab / “did nothing” | Dock → **labs** or **bridge** matching the chip |
+| Busy / 409 | Stop that tab, or re-run in **labs** |
+| No BoardInfo / empty topics | Bridge still up? USB? Companion → board + serial pin |
+| Blank board / flash | Setup flash mini-flow or `fw/<sku>/` — **ws28p** ≠ **es3c28p** bins |
+| TTY blank, host OK | **Reconnect terminal** — do not restart companion first |
+| Pack vs SPA drift | Prefer Pages/#/setup; pack SETUP for offline only |
 
-## Class URL flags (docs SPA)
+## HW serial (this room)
 
-Append to the Pages URL (saved in localStorage after first load):
+- Prefer **Companion → Serial port** so Copy/Run rewrite `--port`.
+- Or use the path from bridge **`[auto] selected`** — differs by machine (do not memorize one `usbmodem*` example).
+- **ws28p** ≈ caps `0x3c` (IMU; no LED). **es3c28p** ≈ `0x33` (LED). Caps decide which HW labs apply.
+
+## Class URL flags
 
 | Query | Effect |
 |-------|--------|
-| `?classLock=1` | Lock appearance + terminal font/prompt (classroom defaults) |
-| `?projector=1` | Higher contrast + larger type for projectors |
+| `?classLock=1` | Lock appearance + terminal font/prompt |
+| `?projector=1` | Higher contrast / larger type |
 | `?screenReader=1` | xterm accessible buffer |
 
-Turn off with `=0`, or Appearance → **Class mode** checkboxes. Students can still Stop/Kill/Run.
+## Measure the room
 
-Run scripts always `cd` to the workshop root before executing (cwd drift from hand-typed `cd` no longer breaks relative inject). Dock **⋯ → cd workshop root** resets the interactive shell the same way.
+Print **[hand-raise tally](https://github.com/drsanti/robotos-workshop-tools/blob/main/docs/hand-raise-tally.md)** (or copy from tools `docs/`). One tick per blocked hand-raise: T token · F folder · W wrong tab · B busy · S serial · X flash · R reconnect · P pack · O other.
 
 ## Links
 
-- Student site: https://drsanti.github.io/robotos-workshop-docs/
-- Companion design notes: [workshop-host.md](./workshop-host.md)
-- Terminal backlog: [Better workshop terminal](../reports/Better%20workshop%20terminal.md)
+- Tools instructor ops (long form): https://github.com/drsanti/robotos-workshop-tools/blob/main/docs/instructor-ops.md  
+- Class handout: [`CLASS-HANDOUT.md`](./CLASS-HANDOUT.md) · Board flash: `fw/README.md`
