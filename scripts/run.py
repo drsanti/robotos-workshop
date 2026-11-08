@@ -136,13 +136,19 @@ def main(argv: list[str]) -> int:
 
     # HW labs talk to serial-bridge (LISTEN :7447). Students should not have to
     # type ROBOTOS_CONNECT every time — set a default if unset.
-    if short.startswith("hw-") and not env.get("ROBOTOS_CONNECT"):
-        env["ROBOTOS_CONNECT"] = "tcp/127.0.0.1:7447"
-        print(
-            "(auto) ROBOTOS_CONNECT=tcp/127.0.0.1:7447  "
-            "— leave scripts/start-bridge running; close warehouse sim first",
-            flush=True,
-        )
+    # Never keep ROBOTOS_LISTEN in this process: if both are set (or LISTEN alone
+    # leaked from a bridge paste into labs), node_create tries to bind :7447 and
+    # fails with Address already in use while the bridge is correctly listening.
+    if short.startswith("hw-"):
+        if env.pop("ROBOTOS_LISTEN", None) is not None:
+            print("(auto) unset ROBOTOS_LISTEN  — labs is CONNECT-only; bridge owns LISTEN", flush=True)
+        if not env.get("ROBOTOS_CONNECT"):
+            env["ROBOTOS_CONNECT"] = "tcp/127.0.0.1:7447"
+            print(
+                "(auto) ROBOTOS_CONNECT=tcp/127.0.0.1:7447  "
+                "— leave scripts/start-bridge running; close warehouse sim first",
+                flush=True,
+            )
 
     return subprocess.call(cmd, cwd=str(root), env=env)
 
