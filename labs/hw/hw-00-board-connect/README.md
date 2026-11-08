@@ -103,8 +103,8 @@ export PATH="$PWD/code/robotos-v0.3.0-macos-arm64/bin:$PATH"
 export ROBOTOS_LISTEN=tcp/0.0.0.0:7447
 chmod +x code/robotos-v*/bin/serial-bridge 2>/dev/null || true
 serial-bridge --port auto --baud 921600 --robot-id 01 --cmd-topic all
-# If auto skips /dev/cu.usbmodem* , pin the "[auto] selected" path.
-# This Mac selected /dev/tty.usbmodem101.
+# If auto skips /dev/cu.usbmodem*, pin Companion → Serial port
+# or the path from the "[auto] selected" line (differs by machine).
 ```
 
 ### Practice (terminal B)
