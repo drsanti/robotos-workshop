@@ -52,8 +52,19 @@ robotos-workshop/
 ```
 
 - **MW** labs use the CLI and Python. The sim is optional.
-- **WH** labs need the warehouse sim when your pack includes it.
-- **HW** labs need the board and `serial-bridge`. Close the sim first. The sim and the bridge both use port `7447`.
+- **WH** labs need the warehouse sim when your pack includes it. Companion → Mesh mode → **WH** (sim LISTENs on `:7447`).
+- **HW** labs need the board and `serial-bridge`. Companion → Mesh mode → **HW** (bridge LISTENs on `:7447`; stop the sim).
+- **Twin** (advanced): Companion → Mesh mode → **Twin** — sim LISTENs; bridge CONNECTs so board and sim share topics.
+
+**Twin topic map** (after Start sim, then Start bridge):
+
+| Direction | Example topics | Use |
+|-----------|----------------|-----|
+| Board → mesh | `/robot/01/sensor/imu`, `/robot/01/sys/board` | Drive / observe twin from hardware |
+| Sim → mesh | `/robot/01/odom`, `/robot/01/scan`, `/robot/01/cmd_vel` | LCD / lab scripts |
+| Labs | same `/robot/01/*` | CONNECT only |
+
+Twin only shares the graph — apps must still subscribe/publish those topics.
 
 Two boards. Flash the matching folder if your board is blank or wrong SKU. Run HW-01 and follow the caps it prints.
 
@@ -62,16 +73,25 @@ Two boards. Flash the matching folder if your board is blank or wrong SKU. Run H
 | `es3c28p` | [`fw/es3c28p/`](fw/es3c28p/) | `≈ 0x33` | LED + mic |
 | `ws28p` | [`fw/ws28p/`](fw/ws28p/) | `≈ 0x3c` | IMU + RTC; no LED/mic |
 
-**Flash (default — no ESP-IDF):** install `esptool`, then from the board folder run `write-flash "@flash_args"`. Full steps: [`fw/README.md`](fw/README.md). Example (macOS/Linux; use your port and board folder):
+**Flash (default — no ESP-IDF):** install `esptool` into the workshop `.venv`, then from the board folder run `write-flash "@flash_args"`. Full steps: [`fw/README.md`](fw/README.md). **Do not use `pip install --user`** inside `.venv` / Companion dock (fails on macOS, Windows, and Linux).
 
 ```bash
-python3 -m pip install --user esptool
+# macOS — after: source .venv/bin/activate
+python3 -m pip install esptool
 cd YOUR_WORKSHOP_DIR/fw/es3c28p   # or: fw/ws28p
 python3 -m esptool --chip esp32s3 -p /dev/cu.usbmodemXXXX write-flash "@flash_args"
 ```
 
+```bash
+# Linux — after: source .venv/bin/activate  (port often ttyACM0; may need dialout)
+python3 -m pip install esptool
+cd YOUR_WORKSHOP_DIR/fw/es3c28p   # or: fw/ws28p
+python3 -m esptool --chip esp32s3 -p /dev/ttyACM0 write-flash "@flash_args"
+```
+
 ```powershell
-python -m pip install --user esptool
+# Windows — after: .\.venv\Scripts\Activate.ps1  (use python, not python3)
+python -m pip install esptool
 cd YOUR_WORKSHOP_DIR\fw\es3c28p   # or: fw\ws28p
 python -m esptool --chip esp32s3 -p COM17 write-flash "@flash_args"
 ```
@@ -155,7 +175,7 @@ robotos topic echo /robot/01/odom --count 5
 
 ### 5. Board (HW labs)
 
-Close the sim first. Two windows.
+Companion → Mesh mode → **HW** (or stop the warehouse sim). Two windows.
 
 **Window A — bridge.** Leave it open. Or double-click [`scripts/start-bridge.cmd`](scripts/start-bridge.cmd).
 
@@ -193,8 +213,8 @@ Run HW-01 before LED or IMU labs. Follow the caps it prints.
 | `scripts\run.cmd` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
 | `no topics announced` | Sim not connected, or the bridge is down |
 | Robot does not move | In the sim: **External**, then **Native**. Keep publishing. Confirm TCP LISTEN on `:7447` (`lsof` / Resource Monitor) — badge “connected” alone is not enough |
-| WH `odom=?` / empty echo | Relaunch sim with `ROBOTOS_LISTEN=tcp/0.0.0.0:7447`; labs use CONNECT only. Quit `serial-bridge` first |
-| HW-01 waits forever | Close the sim. Start window A again |
+| WH `odom=?` / empty echo | Companion → **WH** + Start sim (LISTEN); labs CONNECT only. Stop bridge if it was LISTENing |
+| HW-01 waits forever | Companion → **HW** (or Stop sim). Start bridge again |
 | `CONNECTION_TO_SELF` | Window B must run `Remove-Item Env:ROBOTOS_LISTEN`. Do not listen and connect in one window |
 | Git Bash breaks `/robot/...` | Use **PowerShell** |
 | Board silent / port busy | Check USB, close other serial programs, pin **Your setup → Serial port** or set `--port COMx` |
@@ -261,7 +281,7 @@ robotos topic list
 
 ### 5. Board (HW labs)
 
-Close the sim first. Two windows.
+Companion → Mesh mode → **HW** (or stop the warehouse sim). Two windows.
 
 **Window A — bridge.** Leave it open. Or run `./scripts/start-bridge.sh` from this folder.
 
@@ -301,8 +321,8 @@ Run HW-01 before LED or IMU labs. A `ws28p` board prints `caps=0x3c`.
 | “cannot be opened” | **Privacy & Security** → allow `robotos-sim` |
 | `no topics announced` | Sim not connected, or the bridge is down |
 | Robot does not move | In the sim: **External**, then **Native**. Keep publishing. Confirm TCP LISTEN on `:7447` (`lsof` / Resource Monitor) — badge “connected” alone is not enough |
-| WH `odom=?` / empty echo | Relaunch sim with `ROBOTOS_LISTEN=tcp/0.0.0.0:7447`; labs use CONNECT only. Quit `serial-bridge` first |
-| HW-01 waits forever | Close the sim. Start window A again |
+| WH `odom=?` / empty echo | Companion → **WH** + Start sim (LISTEN); labs CONNECT only. Stop bridge if it was LISTENing |
+| HW-01 waits forever | Companion → **HW** (or Stop sim). Start bridge again |
 | `CONNECTION_TO_SELF` | Window B must `unset ROBOTOS_LISTEN` |
 | Auto skips `cu.usbmodem` | Pin **Your setup → Serial port**, or use `/dev/tty.usbmodem…` from `[auto] selected` |
 | Board silent / port busy | USB, close other serial programs; pin Serial port if needed |
@@ -370,7 +390,7 @@ robotos topic list
 
 ### 5. Board (HW labs)
 
-Close the sim first. Serial access needs the `dialout` group. Run this once, then log out and back in:
+Companion → Mesh mode → **HW** (or stop the warehouse sim). Serial access needs the `dialout` group. Run this once, then log out and back in:
 
 ```bash
 sudo usermod -aG dialout $USER
@@ -415,8 +435,8 @@ Run HW-01 before LED or IMU labs.
 | `./scripts/run` fails | `cd` to the folder that contains `SETUP.md`, then activate `.venv` |
 | Permission denied on `/dev/ttyACM*` | `dialout` group, then log out and back in |
 | `no topics announced` | Sim not connected, or the bridge is down. Confirm TCP LISTEN on `:7447` |
-| WH `odom=?` / empty echo | Relaunch sim with `ROBOTOS_LISTEN=tcp/0.0.0.0:7447`; labs use CONNECT only |
-| HW-01 waits forever | Close the sim. Start window A again |
+| WH `odom=?` / empty echo | Companion → **WH** + Start sim (LISTEN); labs CONNECT only. Stop bridge if it was LISTENing |
+| HW-01 waits forever | Companion → **HW** (or Stop sim). Start bridge again |
 | `CONNECTION_TO_SELF` | Window B must `unset ROBOTOS_LISTEN` |
 | Board silent / port busy | USB, close other serial programs; pin **Your setup → Serial port** or `--port /dev/ttyACM0` |
 | `ModuleNotFoundError: labs` | The terminal is not in the workshop folder |

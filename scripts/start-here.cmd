@@ -43,6 +43,8 @@ if not exist ".venv\Scripts\python.exe" (
     pause
     exit /b 1
   )
+  rem Flash tool for Setup / Companion Run (no --user — must live in .venv).
+  python -m pip install esptool
   echo  .venv ready.
   echo.
 ) else (

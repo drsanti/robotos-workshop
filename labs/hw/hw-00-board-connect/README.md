@@ -27,6 +27,8 @@ Every command block on this page begins with the lines for your computer. Paste 
 - ESP32-S3 workshop board + USB; firmware preflashed  
 - [`code/NOTES.txt`](../../../code/NOTES.txt) section B / B2  
 - [`SETUP.md`](../../../SETUP.md) §7  
+- Companion → Mesh mode → **HW** (or stop warehouse sim) so bridge can LISTEN on `:7447`  
+  - Advanced **Twin**: Mesh **Twin**, Start sim first, then bridge CONNECT (not LISTEN)
 
 ## Architecture
 
@@ -61,7 +63,7 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 
 ### Bridge (terminal A)
 
-Leave this terminal open.
+Leave this terminal open. Prefer Companion **Mesh HW → Start bridge** when Connected.
 
 > **Preferred:** double-click `scripts\start-bridge.cmd`. Manual commands below if a TA asks.
 
@@ -95,7 +97,7 @@ Use **Terminal** on Apple Silicon (zsh or bash). Follow this section from the fi
 
 Leave this terminal open.
 
-> **Preferred:** run `./scripts/start-bridge.sh` from this folder. Manual commands below if a TA asks.
+> **Preferred:** Companion **Mesh HW → Start bridge**, or run `./scripts/start-bridge.sh`. Manual commands below if a TA asks.
 
 ```bash
 cd YOUR_WORKSHOP_DIR
@@ -129,7 +131,7 @@ Use **bash**. Follow this section from the first block to the last. Skip it when
 
 Leave this terminal open.
 
-> **Preferred:** run `./scripts/start-bridge.sh` from this folder. Manual commands below if a TA asks.
+> **Preferred:** Companion **Mesh HW → Start bridge**, or run `./scripts/start-bridge.sh`. Manual commands below if a TA asks.
 
 ```bash
 cd YOUR_WORKSHOP_DIR

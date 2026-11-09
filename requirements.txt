@@ -3,3 +3,6 @@
 #
 # Direct dependency of that wheel:
 protobuf>=5.27
+#
+# Board flash (Companion Setup Run / fw/README) — install into .venv, never --user:
+esptool>=4.7

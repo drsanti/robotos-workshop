@@ -34,12 +34,12 @@ Day 1:
 1. Unzip / clone → open the folder in VS Code.
 2. Double-click `scripts\start-here.cmd`.
 3. VS Code → **Terminal → New Terminal** (PowerShell).
-4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan` (sim must LISTEN on `:7447`).
+4. Companion → Mesh mode → **WH** (or Start sim with LISTEN). `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`.
 5. `scripts\run.cmd wh-01`
 
-Board labs. **Quit the sim** (frees `:7447`) and plug in USB. `run` sets `ROBOTOS_CONNECT` for `hw-*`.
+Board labs. Companion → Mesh mode → **HW** (stops / frees sim LISTEN) and plug in USB. `run` sets `ROBOTOS_CONNECT` for `hw-*`.
 
-1. `scripts\start-bridge.cmd` (leave open). If auto-detect misses the port: `serial-bridge --port COMx --baud 921600 --robot-id 01 --cmd-topic all`.
+1. `scripts\start-bridge.cmd` (leave open) — or Companion **Start bridge**. If auto-detect misses the port: `serial-bridge --port COMx --baud 921600 --robot-id 01 --cmd-topic all`.
 2. Second window: `scripts\run.cmd hw-01`
 
 Optional Wi-Fi (not graded). Bridge already running. Use the PC LAN IP from `ipconfig`, and set the Wi-Fi profile to **Private** if `zenoh` stays false.
@@ -60,12 +60,12 @@ Day 1:
 1. Unzip / clone → open the folder in VS Code.
 2. Double-click `scripts/start-here.command` (Gatekeeper: right-click → Open once).
 3. VS Code → **Terminal → New Terminal**.
-4. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan` (sim must LISTEN on `:7447`).
+4. Companion → Mesh mode → **WH** (or Start sim with LISTEN). `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`.
 5. `./scripts/run wh-01`
 
-Board labs. **Quit the sim** (frees `:7447`) and plug in USB.
+Board labs. Companion → Mesh mode → **HW** and plug in USB.
 
-1. `./scripts/start-bridge.sh` (leave open). Pin the path from `[auto] selected` if auto-detect skips `cu.usbmodem`.
+1. `./scripts/start-bridge.sh` (leave open) — or Companion **Start bridge**. Pin the path from `[auto] selected` if auto-detect skips `cu.usbmodem`.
 2. Second window: `./scripts/run hw-01`
 
 ---
@@ -80,9 +80,9 @@ Day 1:
 2. `robotos topic list` → expect `/robot/01/cmd_vel`, `odom`, `scan`.
 3. `./scripts/run wh-01`
 
-Board labs. Close the sim and plug in USB.
+Board labs. Companion → Mesh mode → **HW** and plug in USB.
 
-1. `./scripts/start-bridge.sh` (leave open). If auto-detect misses the board, add `--port /dev/ttyACM0`.
+1. `./scripts/start-bridge.sh` (leave open) — or Companion **Start bridge**. If auto-detect misses the board, add `--port /dev/ttyACM0`.
 2. Second window: `./scripts/run hw-01`
 
 ---
@@ -101,4 +101,6 @@ Board labs. Close the sim and plug in USB.
 
 ## Instructor smoke (re-check before class)
 
-See [`SMOKE.md`](SMOKE.md). Quick Windows path: start-here → `run wh-01` → close sim → start-bridge → `run hw-01`.
+See [`SMOKE.md`](SMOKE.md). Quick path: start-here → Mesh **WH** → `run wh-01` → Mesh **HW** → start-bridge → `run hw-01`.
+
+Optional **Twin** (digital twin): Mesh **Twin** → Start sim → Start bridge (CONNECT). Shared topics e.g. `/robot/01/sensor/imu` (board→mesh) and `/robot/01/odom` `/robot/01/scan` (sim→mesh). See `SETUP.md` Twin topic map.

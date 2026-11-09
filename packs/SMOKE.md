@@ -98,7 +98,7 @@ Handout: [`CLASS-HANDOUT.md`](CLASS-HANDOUT.md).
 | `scripts\run.cmd wh-01` | **PASS** (100 cmds + zero) |
 | HW: bridge on **COM17** + `ROBOTOS_CONNECT` + `scripts\run.cmd hw-01` | **PASS** (`ws28p` caps=`0x3c`) after **closing sim** |
 
-Notes: With warehouse sim still bound on `:7447`, `ROBOTOS_CONNECT=tcp/127.0.0.1:7447` can hit the **sim** instead of the bridge — topic list shows only WH topics and `hw-01` waits forever. Class tip: **close sim before start-bridge** (handout). `--port auto` still flaky on this host; pin `COM17` when needed.
+Notes: With warehouse sim still bound on `:7447` in **HW** mode, `ROBOTOS_CONNECT` hits the **sim** instead of a LISTEN bridge — topic list shows only WH topics and `hw-01` waits forever. Class tip: Companion → Mesh **HW** (or Stop sim) before Start bridge. **Twin** mode is intentional (sim LISTEN + bridge CONNECT). `--port auto` still flaky on this host; pin `COM17` when needed.
 
 ## 2026-11-02 — wifi-cfg in Windows pack
 
@@ -139,4 +139,4 @@ Host: Apple Silicon · pack `code/` · board **ws28p** · companion `:7420`
 | `open …/robotos-sim.app` without LISTEN env | **FAIL path** — UI can show NATIVE · connected but **no** TCP `:7447`; WH-02 stays `odom=?` |
 | WH-02 sense + WH-01 drive (`ROBOTOS_CONNECT=tcp/127.0.0.1:7447`) | **PASS** — aisle spawn `x=4.25 y=3.00` · scan `R=0.60 F=4 L=3`; drive y→~4.09 (~1.09 m) |
 
-Notes: Pack TA card + tools `instructor-ops.md` now call out WH LISTEN vs quit-sim-before-bridge. `run hw-*` already auto-unsets leaked `ROBOTOS_LISTEN`.
+Notes: Pack TA card + tools `instructor-ops.md` call out Mesh **WH / HW / Twin**. `run hw-*` already auto-unsets leaked `ROBOTOS_LISTEN`.

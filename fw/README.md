@@ -39,29 +39,38 @@ Connected, you can also pin the port under **Your setup → Serial port**.
 **Use this path first.** It only needs Python + `esptool` — no unsigned
 binaries, no Gatekeeper / SmartScreen fights.
 
-Install once:
+Install once (prefer the workshop `.venv` so Companion **Run** works):
 
 ```bash
-# macOS / Linux
-python3 -m pip install --user esptool
+# macOS / Linux — from workshop root after `source .venv/bin/activate`
+python3 -m pip install esptool
+# Outside a venv only: python3 -m pip install --user esptool
 ```
 
 ```powershell
-# Windows PowerShell
-python -m pip install --user esptool
+# Windows PowerShell — after `.\.venv\Scripts\Activate.ps1`
+python -m pip install esptool
+# Outside a venv only: python -m pip install --user esptool
 ```
 
 Flash (from the workshop root — folder with `SETUP.md`). Use `es3c28p` or
-`ws28p` to match your board:
+`ws28p` to match your board. **Same rule on every OS:** activate `.venv` first;
+do not use `pip install --user` inside the Companion dock.
 
 ```bash
-# macOS / Linux — example port; use yours
+# macOS — example port; use yours (or pin Companion → Serial port)
 cd YOUR_WORKSHOP_DIR/fw/es3c28p
 python3 -m esptool --chip esp32s3 -p /dev/cu.usbmodemXXXX write-flash "@flash_args"
 ```
 
+```bash
+# Linux — often ttyACM0 / ttyUSB0; user may need dialout/uucp
+cd YOUR_WORKSHOP_DIR/fw/es3c28p
+python3 -m esptool --chip esp32s3 -p /dev/ttyACM0 write-flash "@flash_args"
+```
+
 ```powershell
-# Windows — example COM port; use yours from Device Manager
+# Windows PowerShell — COM from Device Manager (python, not python3)
 cd YOUR_WORKSHOP_DIR\fw\es3c28p
 python -m esptool --chip esp32s3 -p COM17 write-flash "@flash_args"
 ```

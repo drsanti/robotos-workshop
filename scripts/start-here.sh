@@ -36,6 +36,8 @@ if [[ ! -x .venv/bin/python ]]; then
   source .venv/bin/activate
   python -m pip install -U pip
   python -m pip install "${WHEEL[0]}"
+  # Flash tool for Setup / Companion Run (no --user — must live in .venv).
+  python -m pip install esptool
   echo " .venv ready."
   echo
 else
