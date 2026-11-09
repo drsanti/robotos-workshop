@@ -79,6 +79,10 @@ If the sim window says NATIVE · connected but `lsof -iTCP:7447` shows nothing, 
 
 Print **[hand-raise tally](https://github.com/drsanti/robotos-workshop-tools/blob/main/docs/hand-raise-tally.md)** (or copy from tools `docs/`). One tick per blocked hand-raise: T token · F folder · W wrong tab · B busy · S serial · X flash · R reconnect · P pack · O other.
 
+## Maintainer / Windows agent
+
+If Companion on Windows lacks Mesh **Twin** / Start sim / ready coach: the pack `.exe` is stale. On a Windows machine follow private tools **`WINDOWS-SHIP.md`** / **`AGENTS.md`** (`ship-host.ps1`), then commit the new `workshop-host.exe` here.
+
 ## Links
 
 - Tools instructor ops (long form): https://github.com/drsanti/robotos-workshop-tools/blob/main/docs/instructor-ops.md  
