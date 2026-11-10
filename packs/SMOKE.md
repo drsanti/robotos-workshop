@@ -140,3 +140,19 @@ Host: Apple Silicon · pack `code/` · board **ws28p** · companion `:7420`
 | WH-02 sense + WH-01 drive (`ROBOTOS_CONNECT=tcp/127.0.0.1:7447`) | **PASS** — aisle spawn `x=4.25 y=3.00` · scan `R=0.60 F=4 L=3`; drive y→~4.09 (~1.09 m) |
 
 Notes: Pack TA card + tools `instructor-ops.md` call out Mesh **WH / HW / Twin**. `run hw-*` already auto-unsets leaked `ROBOTOS_LISTEN`.
+
+## 2026-11-10 macos-arm64 — Y-up (ADR-0006) rebuild
+
+Host: Apple Silicon · `robotos-sim` `dbeed03` · staged `.app` (DMG `hdiutil` Resource busy — same as 2026-11-02; ship `.app`)
+
+| Check | Result |
+|-------|--------|
+| Sync siblings + `npm run tauri:build` | **PASS** (`.app` + binary; DMG failed busy disk) |
+| Stage → `code/robotos-sim-v0.1.0-macos-arm64/` | **PASS** (~28 MB) |
+| Auto External + Native; topics `cmd_vel|odom|scan` | **PASS** |
+| Spawn wire odom | **PASS** — `x=4.250 y=3.000 yaw=1.571` (sim z=−3 → ROS y=3) |
+| Scan at spawn | **PASS** — `R=0.60 F=4.00 L=3.00` |
+| WH-01 `drive_forward.py --vx 0.2 --seconds 2` | **PASS** |
+| WH-05 `wall_follow.py --side right --target 0.7 --k 0.6` (~15 s) | **PASS** — status `follow`; R tracked ~0.60→0.71 toward target |
+
+Notes: HUD shows **x / z / yaw** (Y-up SoT). Windows pack rebuild deferred to Windows host.
